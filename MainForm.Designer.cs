@@ -23,20 +23,38 @@
         /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
         /// </summary>
         private void InitializeComponent() {
+            this.cvColumns = new Trail.Controls.ColumnView();
             this.SuspendLayout();
             // 
-            // frmTrail
+            // cvColumns
+            // 
+            this.cvColumns.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cvColumns.Location = new System.Drawing.Point(0, 0);
+            this.cvColumns.Name = "cvColumns";
+            this.cvColumns.Size = new System.Drawing.Size(741, 382);
+            this.cvColumns.TabIndex = 0;
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(903, 388);
-            this.Name = "frmTrail";
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(741, 382);
+            this.Controls.Add(this.cvColumns);
+            this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Name = "MainForm";
             this.Text = "Trail";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private Controls.ColumnView cvColumns;
+
+
     }
 }
 
