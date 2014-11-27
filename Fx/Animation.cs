@@ -8,7 +8,7 @@ namespace Trail.Fx {
     public class Animation : Timer {
         private int timeCounter;
 
-        public int Duration { get; private set; }
+        public int Duration { get; set; }
         public Func<double, double> AnimationFunction { get; set; }
 
         public new event EventHandler<AnimationValueEventArgs<double>> Tick;
@@ -18,16 +18,14 @@ namespace Trail.Fx {
         public Animation(int duration) {
             this.AnimationFunction = (t) => Math.Pow(Math.Sin(Math.PI / 2 * t), 3);
 
-            if (duration <= 0) throw new ArgumentException();
             this.Duration = duration;
-
             this.Enabled = false;
             this.Interval = 1;
             base.Tick += new EventHandler(Animation_Tick);
         }
 
         private void Animation_Tick(object sender, EventArgs e) {
-            if (Duration == 0) {
+            if (Duration <= 0) {
                 Complete(this, new EventArgs());
                 return;
             }

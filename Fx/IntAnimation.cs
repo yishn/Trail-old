@@ -10,7 +10,10 @@ namespace Trail.Fx {
 
         public new event EventHandler<AnimationValueEventArgs<int>> Tick;
 
-        public IntAnimation() {
+        public IntAnimation() : base() {
+            base.Tick += IntAnimation_Tick;
+        }
+        public IntAnimation(int duration) : base(duration) {
             base.Tick += IntAnimation_Tick;
         }
 
@@ -23,6 +26,7 @@ namespace Trail.Fx {
         public IntAnimation Start(int start, int end) {
             this.start = start;
             this.end = end;
+            base.Start();
 
             return this;
         }
