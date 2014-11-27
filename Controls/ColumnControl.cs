@@ -25,5 +25,10 @@ namespace Trail.Controls {
         private void ColumnControl_ClientSizeChanged(object sender, EventArgs e) {
             colHeader.Width = lvList.ClientSize.Width;
         }
+
+        private void lvList_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e) {
+            int padding = this.Width - lvList.ClientSize.Width;
+            this.Width = e.NewWidth + padding;
+        }
     }
 }

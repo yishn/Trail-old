@@ -28,6 +28,7 @@
             // 
             // cvColumns
             // 
+            this.cvColumns.DefaultColumnWidth = 200;
             this.cvColumns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cvColumns.Location = new System.Drawing.Point(0, 0);
             this.cvColumns.Name = "cvColumns";
@@ -46,6 +47,7 @@
             this.Name = "MainForm";
             this.Text = "Trail";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.ResumeLayout(false);
 
         }
