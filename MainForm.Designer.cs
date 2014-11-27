@@ -25,8 +25,16 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Bookmarks");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Drives");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Documents");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Bookmarks", new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("System");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Data");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("DVD");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Drives", new System.Windows.Forms.TreeNode[] {
+            treeNode3,
+            treeNode4,
+            treeNode5});
             this.pnlSplit = new System.Windows.Forms.SplitContainer();
             this.ilSide = new System.Windows.Forms.ImageList(this.components);
             this.tvSide = new Trail.Controls.TreeViewModern();
@@ -59,34 +67,52 @@
             this.ilSide.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilSide.ImageStream")));
             this.ilSide.TransparentColor = System.Drawing.Color.Transparent;
             this.ilSide.Images.SetKeyName(0, "folder");
-            this.ilSide.Images.SetKeyName(1, "bookmark");
-            this.ilSide.Images.SetKeyName(2, "drive");
+            this.ilSide.Images.SetKeyName(1, "star");
+            this.ilSide.Images.SetKeyName(2, "bookmark");
             this.ilSide.Images.SetKeyName(3, "computer");
-            this.ilSide.Images.SetKeyName(4, "star");
+            this.ilSide.Images.SetKeyName(4, "drive");
+            this.ilSide.Images.SetKeyName(5, "disc");
+            this.ilSide.Images.SetKeyName(6, "network");
+            this.ilSide.Images.SetKeyName(7, "removable");
             // 
             // tvSide
             // 
+            this.tvSide.BackColor = System.Drawing.SystemColors.Control;
             this.tvSide.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tvSide.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvSide.FullRowSelect = true;
             this.tvSide.HideSelection = false;
+            this.tvSide.HotTracking = true;
             this.tvSide.ImageIndex = 0;
             this.tvSide.ImageList = this.ilSide;
             this.tvSide.Indent = 19;
-            this.tvSide.ItemHeight = 25;
+            this.tvSide.ItemHeight = 22;
             this.tvSide.Location = new System.Drawing.Point(0, 0);
             this.tvSide.Name = "tvSide";
-            treeNode1.ImageKey = "bookmark";
-            treeNode1.Name = "nodeBookmarks";
-            treeNode1.SelectedImageKey = "bookmark";
-            treeNode1.Text = "Bookmarks";
-            treeNode2.ImageKey = "computer";
-            treeNode2.Name = "nodeDrives";
-            treeNode2.SelectedImageKey = "computer";
-            treeNode2.Text = "Drives";
+            treeNode1.Name = "Knoten0";
+            treeNode1.Text = "Documents";
+            treeNode2.ImageKey = "bookmark";
+            treeNode2.Name = "nodeBookmarks";
+            treeNode2.SelectedImageKey = "bookmark";
+            treeNode2.Text = "Bookmarks";
+            treeNode3.ImageKey = "drive";
+            treeNode3.Name = "Knoten0";
+            treeNode3.SelectedImageKey = "drive";
+            treeNode3.Text = "System";
+            treeNode4.ImageKey = "drive";
+            treeNode4.Name = "Knoten2";
+            treeNode4.SelectedImageKey = "drive";
+            treeNode4.Text = "Data";
+            treeNode5.ImageKey = "disc";
+            treeNode5.Name = "Knoten4";
+            treeNode5.SelectedImageKey = "disc";
+            treeNode5.Text = "DVD";
+            treeNode6.ImageKey = "computer";
+            treeNode6.Name = "nodeDrives";
+            treeNode6.SelectedImageKey = "computer";
+            treeNode6.Text = "Drives";
             this.tvSide.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
+            treeNode2,
+            treeNode6});
             this.tvSide.SelectedImageIndex = 0;
             this.tvSide.ShowLines = false;
             this.tvSide.ShowNodeToolTips = true;

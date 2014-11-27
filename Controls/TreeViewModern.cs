@@ -15,6 +15,10 @@ namespace Trail.Controls {
         [DllImport("user32.dll")]
         public extern static int SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
+        public TreeViewModern() {
+            this.HotTracking = true;
+        }
+
         protected override void CreateHandle() {
             base.CreateHandle();
             SetWindowTheme(this.Handle, "explorer", null);
