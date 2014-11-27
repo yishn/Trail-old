@@ -74,6 +74,7 @@
             this.ilSide.Images.SetKeyName(5, "disc");
             this.ilSide.Images.SetKeyName(6, "network");
             this.ilSide.Images.SetKeyName(7, "removable");
+            this.ilSide.Images.SetKeyName(8, "unknown");
             // 
             // tvSide
             // 
