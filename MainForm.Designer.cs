@@ -85,7 +85,8 @@
             // 
             this.ilItems.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilItems.ImageStream")));
             this.ilItems.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilItems.Images.SetKeyName(0, ".folder");
+            this.ilItems.Images.SetKeyName(0, ".file");
+            this.ilItems.Images.SetKeyName(1, ".folder");
             // 
             // tvSide
             // 

@@ -22,8 +22,12 @@ namespace Trail {
             }
 
             foreach (ColumnControl c in cvColumns.Columns) {
+                c.ListViewControl.SmallImageList = ilItems;
+
                 for (int i = 0; i < 10; i++) {
-                    c.Items.Add(new ListViewItem("blah " + i));
+                    c.ListViewControl.Items.Add(new ListViewItem("blah " + i) { 
+                        ImageKey = ".file"
+                    });
                 }
             }
 

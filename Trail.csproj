@@ -56,6 +56,9 @@
     <Compile Include="Controls\ColumnView.Designer.cs">
       <DependentUpon>ColumnView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FolderColumn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ItemsColumn.cs">
       <SubType>UserControl</SubType>
     </Compile>

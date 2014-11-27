@@ -23,25 +23,26 @@
         /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
         /// </summary>
         private void InitializeComponent() {
-            this.lvList = new Trail.Controls.ListViewModern();
+            this.ListViewControl = new Trail.Controls.ListViewModern();
             this.colHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
-            // lvList
+            // ListViewControl
             // 
-            this.lvList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lvList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ListViewControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ListViewControl.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colHeader});
-            this.lvList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvList.FullRowSelect = true;
-            this.lvList.HideSelection = false;
-            this.lvList.Location = new System.Drawing.Point(0, 0);
-            this.lvList.Name = "lvList";
-            this.lvList.Size = new System.Drawing.Size(290, 381);
-            this.lvList.TabIndex = 0;
-            this.lvList.UseCompatibleStateImageBehavior = false;
-            this.lvList.View = System.Windows.Forms.View.Details;
-            this.lvList.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.lvList_ColumnWidthChanging);
+            this.ListViewControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListViewControl.FullRowSelect = true;
+            this.ListViewControl.HideSelection = false;
+            this.ListViewControl.Location = new System.Drawing.Point(0, 0);
+            this.ListViewControl.Name = "ListViewControl";
+            this.ListViewControl.ShowItemToolTips = true;
+            this.ListViewControl.Size = new System.Drawing.Size(290, 381);
+            this.ListViewControl.TabIndex = 0;
+            this.ListViewControl.UseCompatibleStateImageBehavior = false;
+            this.ListViewControl.View = System.Windows.Forms.View.Details;
+            this.ListViewControl.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.lvList_ColumnWidthChanging);
             // 
             // colHeader
             // 
@@ -53,7 +54,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.lvList);
+            this.Controls.Add(this.ListViewControl);
             this.Name = "ColumnControl";
             this.Size = new System.Drawing.Size(290, 381);
             this.ClientSizeChanged += new System.EventHandler(this.ColumnControl_ClientSizeChanged);
@@ -64,6 +65,6 @@
         #endregion
 
         private System.Windows.Forms.ColumnHeader colHeader;
-        private ListViewModern lvList;
+        public ListViewModern ListViewControl;
     }
 }
