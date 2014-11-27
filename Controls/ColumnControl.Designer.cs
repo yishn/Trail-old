@@ -33,7 +33,6 @@
             this.lvList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colHeader});
             this.lvList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvList.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.lvList.FullRowSelect = true;
             this.lvList.HideSelection = false;
             this.lvList.Location = new System.Drawing.Point(0, 0);

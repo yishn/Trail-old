@@ -59,6 +59,9 @@
     <Compile Include="Controls\ListViewModern.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\TreeViewModern.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Fx\Animation.cs">
       <SubType>Component</SubType>
     </Compile>

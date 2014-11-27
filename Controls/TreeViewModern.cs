@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Trail.Controls {
-    public class ListViewModern : ListView {
+    public class TreeViewModern : TreeView {
         [DllImport("uxtheme.dll", CharSet = CharSet.Unicode)]
         private extern static int SetWindowTheme(IntPtr hWnd, string pszSubAppName, string pszSubIdList);
         [DllImport("user32.dll")]
@@ -20,8 +20,8 @@ namespace Trail.Controls {
             SetWindowTheme(this.Handle, "explorer", null);
         }
 
-        protected override void OnSelectedIndexChanged(EventArgs e) {
-            base.OnSelectedIndexChanged(e);
+        protected override void OnAfterSelect(TreeViewEventArgs e) {
+            base.OnAfterSelect(e);
             SendMessage(Handle, 0x127, 0x10001, 0);
         }
 
