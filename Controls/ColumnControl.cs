@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 namespace Trail.Controls {
     public partial class ColumnControl : UserControl {
         public string HeaderText { get { return colHeader.Text; } set { colHeader.Text = value; } }
+        public ImageList ImageList { get { return lvList.SmallImageList; } set { lvList.SmallImageList = value; } }
         public ListView.ListViewItemCollection Items { get { return lvList.Items; } }
 
         public ColumnControl() {
