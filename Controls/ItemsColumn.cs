@@ -11,8 +11,12 @@ namespace Trail.Controls {
         private BackgroundWorker worker;
 
         public ItemsColumn() {
-            this.RefreshItems();
+            this.Load += ItemsColumn_Load;
             this.ListViewControl.ColumnClick += ListViewControl_ColumnClick;
+        }
+
+        private void ItemsColumn_Load(object sender, EventArgs e) {
+            this.RefreshItems();
         }
 
         private void ListViewControl_ColumnClick(object sender, ColumnClickEventArgs e) {
@@ -23,6 +27,7 @@ namespace Trail.Controls {
 
             ListViewControl.Items.Clear();
             ListViewControl.Items.AddRange(items.ToArray());
+            UpdateColumnWidth();
         }
 
         public abstract List<ListViewItem> LoadData();
@@ -34,6 +39,14 @@ namespace Trail.Controls {
             worker = new BackgroundWorker() { WorkerSupportsCancellation = true };
             worker.DoWork += worker_DoWork;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            worker.RunWorkerAsync();
+        }
+
+        public void UpdateColumnWidth() {
+            ListViewControl.BeginUpdate();
+            ListViewControl.Width++;
+            ListViewControl.Width--;
+            ListViewControl.EndUpdate();
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
@@ -45,6 +58,7 @@ namespace Trail.Controls {
 
             ListViewControl.Items.Clear();
             ListViewControl.Items.AddRange(result.ToArray());
+            UpdateColumnWidth();
         }
 
         private void worker_DoWork(object sender, DoWorkEventArgs e) {

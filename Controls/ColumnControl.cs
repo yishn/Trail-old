@@ -17,13 +17,13 @@ namespace Trail.Controls {
             InitializeComponent();
         }
 
-        private void ColumnControl_ClientSizeChanged(object sender, EventArgs e) {
-            colHeader.Width = ListViewControl.ClientSize.Width;
-        }
-
         private void lvList_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e) {
             int padding = this.Width - ListViewControl.ClientSize.Width;
             this.Width = e.NewWidth + padding;
+        }
+
+        private void ListViewControl_ClientSizeChanged(object sender, EventArgs e) {
+            colHeader.Width = ListViewControl.ClientSize.Width;
         }
     }
 }

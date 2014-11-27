@@ -43,6 +43,7 @@
             this.ListViewControl.UseCompatibleStateImageBehavior = false;
             this.ListViewControl.View = System.Windows.Forms.View.Details;
             this.ListViewControl.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.lvList_ColumnWidthChanging);
+            this.ListViewControl.ClientSizeChanged += new System.EventHandler(this.ListViewControl_ClientSizeChanged);
             // 
             // colHeader
             // 
@@ -57,7 +58,6 @@
             this.Controls.Add(this.ListViewControl);
             this.Name = "ColumnControl";
             this.Size = new System.Drawing.Size(290, 381);
-            this.ClientSizeChanged += new System.EventHandler(this.ColumnControl_ClientSizeChanged);
             this.ResumeLayout(false);
 
         }

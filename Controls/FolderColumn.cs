@@ -12,6 +12,7 @@ namespace Trail.Controls {
 
         public FolderColumn(DirectoryInfo directory) : base() {
             this.Directory = directory;
+            this.HeaderText = directory.Name;
         }
 
         public override List<ListViewItem> LoadData() {
@@ -37,8 +38,9 @@ namespace Trail.Controls {
         }
 
         public override int Compare(ListViewItem item1, ListViewItem item2) {
-            // TODO
-            return 0;
+            if (item1.Tag is DirectoryInfo && item2.Tag is FileInfo) return -1;
+            if (item1.Tag is FileInfo && item2.Tag is DirectoryInfo) return 1;
+            return item1.Text.CompareTo(item2.Text);
         }
     }
 }
