@@ -37,6 +37,7 @@
             treeNode5});
             this.pnlSplit = new System.Windows.Forms.SplitContainer();
             this.ilSide = new System.Windows.Forms.ImageList(this.components);
+            this.ilItems = new System.Windows.Forms.ImageList(this.components);
             this.tvSide = new Trail.Controls.TreeViewModern();
             this.cvColumns = new Trail.Controls.ColumnView();
             ((System.ComponentModel.ISupportInitialize)(this.pnlSplit)).BeginInit();
@@ -47,7 +48,9 @@
             // 
             // pnlSplit
             // 
+            this.pnlSplit.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnlSplit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSplit.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.pnlSplit.Location = new System.Drawing.Point(0, 0);
             this.pnlSplit.Name = "pnlSplit";
             // 
@@ -58,9 +61,11 @@
             // pnlSplit.Panel2
             // 
             this.pnlSplit.Panel2.Controls.Add(this.cvColumns);
-            this.pnlSplit.Size = new System.Drawing.Size(932, 382);
-            this.pnlSplit.SplitterDistance = 218;
+            this.pnlSplit.Size = new System.Drawing.Size(842, 382);
+            this.pnlSplit.SplitterDistance = 196;
+            this.pnlSplit.SplitterWidth = 2;
             this.pnlSplit.TabIndex = 1;
+            this.pnlSplit.TabStop = false;
             // 
             // ilSide
             // 
@@ -75,6 +80,12 @@
             this.ilSide.Images.SetKeyName(6, "network");
             this.ilSide.Images.SetKeyName(7, "removable");
             this.ilSide.Images.SetKeyName(8, "unknown");
+            // 
+            // ilItems
+            // 
+            this.ilItems.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilItems.ImageStream")));
+            this.ilItems.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilItems.Images.SetKeyName(0, ".folder");
             // 
             // tvSide
             // 
@@ -117,23 +128,24 @@
             this.tvSide.SelectedImageIndex = 0;
             this.tvSide.ShowLines = false;
             this.tvSide.ShowNodeToolTips = true;
-            this.tvSide.Size = new System.Drawing.Size(218, 382);
+            this.tvSide.Size = new System.Drawing.Size(196, 382);
             this.tvSide.TabIndex = 0;
             // 
             // cvColumns
             // 
+            this.cvColumns.BackColor = System.Drawing.Color.White;
             this.cvColumns.DefaultColumnWidth = 200;
             this.cvColumns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cvColumns.Location = new System.Drawing.Point(0, 0);
             this.cvColumns.Name = "cvColumns";
-            this.cvColumns.Size = new System.Drawing.Size(710, 382);
+            this.cvColumns.Size = new System.Drawing.Size(644, 382);
             this.cvColumns.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(932, 382);
+            this.ClientSize = new System.Drawing.Size(842, 382);
             this.Controls.Add(this.pnlSplit);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -155,6 +167,7 @@
         private Trail.Controls.TreeViewModern tvSide;
         private Controls.ColumnView cvColumns;
         private System.Windows.Forms.ImageList ilSide;
+        private System.Windows.Forms.ImageList ilItems;
 
 
 

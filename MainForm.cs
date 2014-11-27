@@ -44,7 +44,7 @@ namespace Trail {
                 TreeNode node = new TreeNode() {
                     Text = dI.VolumeLabel,
                     Tag = dI,
-                    ImageKey = dI.DriveType == DriveType.CDRom ? "disk" :
+                    ImageKey = dI.DriveType == DriveType.CDRom ? "disc" :
                         dI.DriveType == DriveType.Network ? "network" :
                         dI.DriveType == DriveType.Removable ? "removable" :
                         dI.DriveType == DriveType.Fixed ? "drive" : "unknown"
@@ -53,6 +53,8 @@ namespace Trail {
 
                 nodeDrives.Nodes.Add(node);
             }
+
+            nodeDrives.Expand();
         }
     }
 }
