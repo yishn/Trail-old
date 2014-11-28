@@ -93,6 +93,7 @@
             this.tvSide.BackColor = System.Drawing.SystemColors.Control;
             this.tvSide.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tvSide.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvSide.FullRowSelect = true;
             this.tvSide.HideSelection = false;
             this.tvSide.HotTracking = true;
             this.tvSide.ImageIndex = 0;
@@ -134,9 +135,11 @@
             // 
             // cvColumns
             // 
+            this.cvColumns.AutoScroll = true;
             this.cvColumns.BackColor = System.Drawing.Color.White;
             this.cvColumns.DefaultColumnWidth = 200;
             this.cvColumns.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cvColumns.ImageList = this.ilItems;
             this.cvColumns.Location = new System.Drawing.Point(0, 0);
             this.cvColumns.Name = "cvColumns";
             this.cvColumns.Size = new System.Drawing.Size(644, 382);

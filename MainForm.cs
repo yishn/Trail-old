@@ -17,11 +17,9 @@ namespace Trail {
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
-            for (int i = 0; i < 10; i++) {
-                FolderColumn c = new FolderColumn(new DirectoryInfo("C:\\Program Files"));
-                c.ListViewControl.SmallImageList = ilItems;
-                cvColumns.Columns.Add(c);
-            }
+            DirectoryColumn c = new DirectoryColumn(new DirectoryInfo("D:\\"));
+            cvColumns.Columns.Add(c);
+            c.RefreshItems();
 
             LoadDrives();
         }

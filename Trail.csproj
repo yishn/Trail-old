@@ -50,13 +50,14 @@
     <Compile Include="Controls\ColumnControl.Designer.cs">
       <DependentUpon>ColumnControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ColumnItem.cs" />
     <Compile Include="Controls\ColumnView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ColumnView.Designer.cs">
       <DependentUpon>ColumnView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FolderColumn.cs">
+    <Compile Include="Controls\DirectoryColumn.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ItemsColumn.cs">

@@ -16,6 +16,7 @@ namespace Trail.Controls {
         public ObservableCollection<ColumnControl> Columns { get; private set; }
         public int DefaultColumnWidth { get; set; }
         public IntAnimation ScrollAnimation { get; private set; }
+        public ImageList ImageList { get; set; }
 
         public ColumnView() {
             InitializeComponent();
@@ -27,9 +28,14 @@ namespace Trail.Controls {
             this.Columns.CollectionChanged += Columns_CollectionChanged;
         }
 
-        public void ScrollToEnd() {
+        public void ScrollToEnd(bool animation = true) {
             int start = pnlColumns.HorizontalScroll.Value;
-            int end = pnlColumns.HorizontalScroll.Maximum - pnlColumns.ClientSize.Width + 1;
+            int end = pnlColumns.HorizontalScroll.Maximum;
+
+            if (!animation) {
+                pnlColumns.HorizontalScroll.Value = end;
+                return;
+            }
 
             this.ScrollAnimation.Start(start, end).Tick += (s, e) => {
                 pnlColumns.HorizontalScroll.Value = e.Value;
@@ -42,9 +48,15 @@ namespace Trail.Controls {
         private void Columns_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             if (e.Action == NotifyCollectionChangedAction.Add) {
                 foreach (ColumnControl c in e.NewItems) {
-                    pnlColumns.Controls.Add(c);
                     c.Width = this.DefaultColumnWidth;
                     c.Dock = DockStyle.Left;
+
+                    c.ListViewControl.SmallImageList = this.ImageList;
+                    c.ListViewControl.SelectedIndexChanged += (_, evt) => {
+                        ListViewControl_SelectedIndexChanged(c, evt);
+                    };
+
+                    pnlColumns.Controls.Add(c);
                     c.BringToFront();
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Remove) {
@@ -54,6 +66,30 @@ namespace Trail.Controls {
             } else if (e.Action == NotifyCollectionChangedAction.Reset) {
                 pnlColumns.Controls.Clear();
             }
+        }
+
+        private void ListViewControl_SelectedIndexChanged(object sender, EventArgs e) {
+            ColumnControl c = sender as ColumnControl;
+            if (c.ListViewControl.SelectedIndices.Count != 1) return;
+            ColumnItem item = c.ListViewControl.SelectedItems[0] as ColumnItem;
+            if (item.SubColumn == null) return;
+
+            // Remove columns on the right
+            int i = this.Columns.IndexOf(c);
+            int residueCount = this.Columns.Count - i - 1;
+
+            pnlColumns.AutoScrollMinSize = pnlColumns.ClientSize;
+
+            this.pnlColumns.SuspendLayout();
+            for (int j = 0; j < residueCount; j++)
+                this.Columns.RemoveAt(i + 1);
+
+            // Add new column
+            this.Columns.Add(item.SubColumn);
+            item.SubColumn.RefreshItems();
+            this.pnlColumns.ResumeLayout();
+
+            this.ScrollToEnd(residueCount == 0);
         }
     }
 }

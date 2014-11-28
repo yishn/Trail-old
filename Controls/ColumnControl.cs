@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 namespace Trail.Controls {
     public partial class ColumnControl : UserControl {
         public string HeaderText { get { return colHeader.Text; } set { colHeader.Text = value; } }
+        public bool Disabled { get { return !ListViewControl.Visible; } set { ListViewControl.Visible = !value; } }
 
         public ColumnControl() {
             InitializeComponent();
