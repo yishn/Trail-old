@@ -18,7 +18,7 @@ namespace Trail.Fx {
         }
 
         private void IntAnimation_Tick(object sender, AnimationValueEventArgs<double> e) {
-            int value = (int)(e.Value * (end - start));
+            int value = start + (int)(e.Value * (end - start));
             if (Tick != null) Tick(this, new AnimationValueEventArgs<int>(value));
         }
 
