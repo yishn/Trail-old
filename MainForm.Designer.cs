@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Documents");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Bookmarks", new System.Windows.Forms.TreeNode[] {
             treeNode1});
@@ -34,12 +35,11 @@
             treeNode3,
             treeNode4,
             treeNode5});
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pnlSplit = new System.Windows.Forms.SplitContainer();
-            this.tvSide = new Trail.Controls.TreeViewModern();
             this.ilSide = new System.Windows.Forms.ImageList(this.components);
-            this.cvColumns = new Trail.Controls.ColumnView();
             this.ilItems = new System.Windows.Forms.ImageList(this.components);
+            this.tvSide = new Trail.Controls.TreeViewModern();
+            this.cvColumns = new Trail.Controls.ColumnView();
             ((System.ComponentModel.ISupportInitialize)(this.pnlSplit)).BeginInit();
             this.pnlSplit.Panel1.SuspendLayout();
             this.pnlSplit.Panel2.SuspendLayout();
@@ -66,6 +66,27 @@
             this.pnlSplit.SplitterWidth = 2;
             this.pnlSplit.TabIndex = 1;
             this.pnlSplit.TabStop = false;
+            // 
+            // ilSide
+            // 
+            this.ilSide.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilSide.ImageStream")));
+            this.ilSide.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilSide.Images.SetKeyName(0, "folder");
+            this.ilSide.Images.SetKeyName(1, "star");
+            this.ilSide.Images.SetKeyName(2, "bookmark");
+            this.ilSide.Images.SetKeyName(3, "computer");
+            this.ilSide.Images.SetKeyName(4, "drive");
+            this.ilSide.Images.SetKeyName(5, "disc");
+            this.ilSide.Images.SetKeyName(6, "network");
+            this.ilSide.Images.SetKeyName(7, "removable");
+            this.ilSide.Images.SetKeyName(8, "unknown");
+            // 
+            // ilItems
+            // 
+            this.ilItems.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilItems.ImageStream")));
+            this.ilItems.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilItems.Images.SetKeyName(0, ".folder");
+            this.ilItems.Images.SetKeyName(1, ".file");
             // 
             // tvSide
             // 
@@ -111,20 +132,6 @@
             this.tvSide.Size = new System.Drawing.Size(196, 382);
             this.tvSide.TabIndex = 0;
             // 
-            // ilSide
-            // 
-            this.ilSide.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilSide.ImageStream")));
-            this.ilSide.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilSide.Images.SetKeyName(0, "folder");
-            this.ilSide.Images.SetKeyName(1, "star");
-            this.ilSide.Images.SetKeyName(2, "bookmark");
-            this.ilSide.Images.SetKeyName(3, "computer");
-            this.ilSide.Images.SetKeyName(4, "drive");
-            this.ilSide.Images.SetKeyName(5, "disc");
-            this.ilSide.Images.SetKeyName(6, "network");
-            this.ilSide.Images.SetKeyName(7, "removable");
-            this.ilSide.Images.SetKeyName(8, "unknown");
-            // 
             // cvColumns
             // 
             this.cvColumns.BackColor = System.Drawing.Color.White;
@@ -134,13 +141,6 @@
             this.cvColumns.Name = "cvColumns";
             this.cvColumns.Size = new System.Drawing.Size(644, 382);
             this.cvColumns.TabIndex = 1;
-            // 
-            // ilItems
-            // 
-            this.ilItems.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilItems.ImageStream")));
-            this.ilItems.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilItems.Images.SetKeyName(0, ".file");
-            this.ilItems.Images.SetKeyName(1, ".folder");
             // 
             // MainForm
             // 
