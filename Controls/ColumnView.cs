@@ -74,7 +74,7 @@ namespace Trail.Controls {
 
         private void ColumnControl_SelectedIndexChanged(object sender, EventArgs e) {
             ColumnControl c = sender as ColumnControl;
-            if (c.ListViewControl.SelectedIndices.Count != 1) return;
+            if (c.ListViewControl.SelectedIndices.Count == 0) return;
             ColumnItem item = c.ListViewControl.SelectedItems[0] as ColumnItem;
             if (item.SubColumn == null) return;
 
@@ -85,14 +85,17 @@ namespace Trail.Controls {
             pnlColumns.AutoScrollMinSize = new Size(pnlColumns.HorizontalScroll.Maximum + 1, 0);
 
             this.pnlColumns.SuspendLayout();
-            for (int j = 0; j < residueCount; j++)
+            for (int j = 1; j <= residueCount; j++)
                 this.Columns.RemoveAt(i + 1);
 
-            // Add new column
-            this.Columns.Add(item.SubColumn);
-            this.pnlColumns.ResumeLayout();
-
-            if (SubColumnAdded != null) SubColumnAdded(this, new ColumnEventArgs(item.SubColumn));
+            if (c.ListViewControl.SelectedItems.Count == 1) {
+                // Add new column
+                this.Columns.Add(item.SubColumn);
+                this.pnlColumns.ResumeLayout();
+                if (SubColumnAdded != null) SubColumnAdded(this, new ColumnEventArgs(item.SubColumn));
+            } else {
+                this.pnlColumns.ResumeLayout();
+            }
         }
     }
 }

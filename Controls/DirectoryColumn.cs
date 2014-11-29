@@ -16,6 +16,7 @@ namespace Trail.Controls {
         public DirectoryColumn(DirectoryInfo directory) : base() {
             this.Directory = directory;
             this.HeaderText = directory.Name;
+            this.ListViewControl.LabelEdit = true;
         }
 
         public override List<ColumnItem> LoadData(DoWorkEventArgs e) {
