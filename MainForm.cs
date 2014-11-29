@@ -25,7 +25,7 @@ namespace Trail {
         }
 
         private void MainForm_Shown(object sender, EventArgs e) {
-            cvColumns.ScrollToEnd();
+            cvColumns.ScrollToColumn(cvColumns.Columns[cvColumns.Columns.Count - 1]);
         }
 
         public void LoadDrives() {

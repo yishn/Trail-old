@@ -23,25 +23,25 @@ namespace Trail.Controls {
 
             this.Columns = new ObservableCollection<ColumnControl>();
             this.DefaultColumnWidth = 200;
-            this.ScrollAnimation = new IntAnimation(20);
+            this.ScrollAnimation = new IntAnimation();
 
             this.Columns.CollectionChanged += Columns_CollectionChanged;
         }
 
-        public void ScrollToEnd(bool animation = true) {
+        public void ScrollToColumn(ColumnControl column) {
+            if (this.ScrollAnimation.Enabled) return;
+                
+            this.ScrollAnimation = new IntAnimation();
             int start = pnlColumns.HorizontalScroll.Value;
-            int end = pnlColumns.HorizontalScroll.Maximum;
+            int end = Math.Min(column.Right + pnlColumns.HorizontalScroll.Value - pnlColumns.Width, pnlColumns.HorizontalScroll.Maximum);
 
-            if (!animation) {
-                pnlColumns.HorizontalScroll.Value = end;
-                return;
-            }
+            if (start >= end) return;
 
             this.ScrollAnimation.Start(start, end).Tick += (s, e) => {
                 pnlColumns.HorizontalScroll.Value = e.Value;
             };
             this.ScrollAnimation.Complete += (s, e) => {
-                pnlColumns.Controls[0].Focus();
+                column.Focus();
             };
         }
 
@@ -78,7 +78,7 @@ namespace Trail.Controls {
             int i = this.Columns.IndexOf(c);
             int residueCount = this.Columns.Count - i - 1;
 
-            //pnlColumns.AutoScrollMinSize = pnlColumns;
+            pnlColumns.AutoScrollMinSize = new Size(pnlColumns.HorizontalScroll.Maximum + 1, 0);
 
             this.pnlColumns.SuspendLayout();
             for (int j = 0; j < residueCount; j++)
@@ -89,7 +89,7 @@ namespace Trail.Controls {
             item.SubColumn.RefreshItems();
             this.pnlColumns.ResumeLayout();
 
-            this.ScrollToEnd(residueCount == 0);
+            this.ScrollToColumn(item.SubColumn);
         }
     }
 }
