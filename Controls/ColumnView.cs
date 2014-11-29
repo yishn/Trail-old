@@ -78,13 +78,15 @@ namespace Trail.Controls {
             ColumnItem item = c.ListViewControl.SelectedItems[0] as ColumnItem;
             if (item.SubColumn == null) return;
 
-            // Remove columns on the right
             int i = this.Columns.IndexOf(c);
-            int residueCount = this.Columns.Count - i - 1;
-
             pnlColumns.AutoScrollMinSize = new Size(pnlColumns.HorizontalScroll.Maximum + 1, 0);
 
+            if (this.Columns.Count > i + 1 && this.Columns[i + 1] == item.SubColumn) return;
+
+            // Remove columns on the right
+            int residueCount = this.Columns.Count - i - 1;
             this.pnlColumns.SuspendLayout();
+
             for (int j = 1; j <= residueCount; j++)
                 this.Columns.RemoveAt(i + 1);
 
