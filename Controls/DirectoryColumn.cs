@@ -55,9 +55,5 @@ namespace Trail.Controls {
             if (item.Tag is DirectoryInfo) return;
             Process.Start((item.Tag as FileInfo).FullName);
         }
-
-        public override Image GetIcon(ColumnItem item) {
-            return null;
-        }
     }
 }

@@ -36,7 +36,6 @@ namespace Trail.Controls {
         public abstract List<ColumnItem> LoadData(DoWorkEventArgs e);
         public abstract int Compare(ColumnItem item1, ColumnItem item2);
         public abstract void ItemActivated(ColumnItem item);
-        public abstract Image GetIcon(ColumnItem item);
 
         public void RefreshItems() {
             if (worker != null && worker.IsBusy) return;
