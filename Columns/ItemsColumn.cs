@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Trail.Controls;
 
-namespace Trail.Controls {
+namespace Trail.Columns {
     public abstract class ItemsColumn : ColumnControl {
         private BackgroundWorker worker;
 

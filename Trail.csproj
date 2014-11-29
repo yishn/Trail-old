@@ -58,10 +58,10 @@
     <Compile Include="Controls\ColumnView.Designer.cs">
       <DependentUpon>ColumnView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DirectoryColumn.cs">
+    <Compile Include="Columns\DirectoryColumn.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ItemsColumn.cs">
+    <Compile Include="Columns\ItemsColumn.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ListViewModern.cs">

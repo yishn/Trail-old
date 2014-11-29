@@ -8,8 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Trail.Controls;
 
-namespace Trail.Controls {
+namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
         public DirectoryInfo Directory { get; set; }
 
