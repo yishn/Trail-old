@@ -54,8 +54,11 @@ namespace Trail.Columns {
         }
 
         public override void ItemActivated(ColumnItem item) {
-            if (item.Tag is DirectoryInfo) return;
-            Process.Start((item.Tag as FileInfo).FullName);
+            if (!(item.Tag is FileInfo)) return;
+
+            ProcessStartInfo info = new ProcessStartInfo((item.Tag as FileInfo).FullName);
+            info.WorkingDirectory = (item.Tag as FileInfo).DirectoryName;
+            Process.Start(info);
         }
     }
 }
