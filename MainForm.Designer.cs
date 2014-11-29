@@ -25,21 +25,11 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Documents");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Bookmarks", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("System");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Data");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("DVD");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Drives", new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode4,
-            treeNode5});
             this.pnlSplit = new System.Windows.Forms.SplitContainer();
             this.ilSide = new System.Windows.Forms.ImageList(this.components);
             this.ilItems = new System.Windows.Forms.ImageList(this.components);
-            this.tvSide = new Trail.Controls.TreeViewModern();
-            this.cvColumns = new Trail.Controls.ColumnView();
+            this.tvSidebar = new Trail.Modules.Sidebar();
+            this.cvColumns = new Trail.Modules.NavigatingColumnView();
             ((System.ComponentModel.ISupportInitialize)(this.pnlSplit)).BeginInit();
             this.pnlSplit.Panel1.SuspendLayout();
             this.pnlSplit.Panel2.SuspendLayout();
@@ -56,7 +46,7 @@
             // 
             // pnlSplit.Panel1
             // 
-            this.pnlSplit.Panel1.Controls.Add(this.tvSide);
+            this.pnlSplit.Panel1.Controls.Add(this.tvSidebar);
             // 
             // pnlSplit.Panel2
             // 
@@ -73,8 +63,8 @@
             this.ilSide.TransparentColor = System.Drawing.Color.Transparent;
             this.ilSide.Images.SetKeyName(0, "folder");
             this.ilSide.Images.SetKeyName(1, "star");
-            this.ilSide.Images.SetKeyName(2, "bookmark");
-            this.ilSide.Images.SetKeyName(3, "computer");
+            this.ilSide.Images.SetKeyName(2, "bookmarks");
+            this.ilSide.Images.SetKeyName(3, "drives");
             this.ilSide.Images.SetKeyName(4, "drive");
             this.ilSide.Images.SetKeyName(5, "disc");
             this.ilSide.Images.SetKeyName(6, "network");
@@ -88,50 +78,25 @@
             this.ilItems.Images.SetKeyName(0, ".folder");
             this.ilItems.Images.SetKeyName(1, ".file");
             // 
-            // tvSide
+            // tvSidebar
             // 
-            this.tvSide.BackColor = System.Drawing.SystemColors.Control;
-            this.tvSide.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tvSide.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvSide.FullRowSelect = true;
-            this.tvSide.HideSelection = false;
-            this.tvSide.HotTracking = true;
-            this.tvSide.ImageIndex = 0;
-            this.tvSide.ImageList = this.ilSide;
-            this.tvSide.Indent = 19;
-            this.tvSide.ItemHeight = 22;
-            this.tvSide.Location = new System.Drawing.Point(0, 0);
-            this.tvSide.Name = "tvSide";
-            treeNode1.Name = "Knoten0";
-            treeNode1.Text = "Documents";
-            treeNode2.ImageKey = "bookmark";
-            treeNode2.Name = "nodeBookmarks";
-            treeNode2.SelectedImageKey = "bookmark";
-            treeNode2.Text = "Bookmarks";
-            treeNode3.ImageKey = "drive";
-            treeNode3.Name = "Knoten0";
-            treeNode3.SelectedImageKey = "drive";
-            treeNode3.Text = "System";
-            treeNode4.ImageKey = "drive";
-            treeNode4.Name = "Knoten2";
-            treeNode4.SelectedImageKey = "drive";
-            treeNode4.Text = "Data";
-            treeNode5.ImageKey = "disc";
-            treeNode5.Name = "Knoten4";
-            treeNode5.SelectedImageKey = "disc";
-            treeNode5.Text = "DVD";
-            treeNode6.ImageKey = "computer";
-            treeNode6.Name = "nodeDrives";
-            treeNode6.SelectedImageKey = "computer";
-            treeNode6.Text = "Drives";
-            this.tvSide.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode6});
-            this.tvSide.SelectedImageIndex = 0;
-            this.tvSide.ShowLines = false;
-            this.tvSide.ShowNodeToolTips = true;
-            this.tvSide.Size = new System.Drawing.Size(196, 382);
-            this.tvSide.TabIndex = 0;
+            this.tvSidebar.BackColor = System.Drawing.SystemColors.Control;
+            this.tvSidebar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tvSidebar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvSidebar.FullRowSelect = true;
+            this.tvSidebar.HideSelection = false;
+            this.tvSidebar.HotTracking = true;
+            this.tvSidebar.ImageIndex = 0;
+            this.tvSidebar.ImageList = this.ilSide;
+            this.tvSidebar.Indent = 19;
+            this.tvSidebar.ItemHeight = 22;
+            this.tvSidebar.Location = new System.Drawing.Point(0, 0);
+            this.tvSidebar.Name = "tvSidebar";
+            this.tvSidebar.SelectedImageIndex = 0;
+            this.tvSidebar.ShowLines = false;
+            this.tvSidebar.ShowNodeToolTips = true;
+            this.tvSidebar.Size = new System.Drawing.Size(196, 382);
+            this.tvSidebar.TabIndex = 0;
             // 
             // cvColumns
             // 
@@ -144,7 +109,6 @@
             this.cvColumns.Name = "cvColumns";
             this.cvColumns.Size = new System.Drawing.Size(644, 382);
             this.cvColumns.TabIndex = 1;
-            this.cvColumns.SubColumnAdded += new System.EventHandler<Trail.Controls.ColumnEventArgs>(this.cvColumns_SubColumnAdded);
             // 
             // MainForm
             // 
@@ -169,10 +133,10 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer pnlSplit;
-        private Trail.Controls.TreeViewModern tvSide;
-        private Controls.ColumnView cvColumns;
         private System.Windows.Forms.ImageList ilSide;
         private System.Windows.Forms.ImageList ilItems;
+        private Modules.NavigatingColumnView cvColumns;
+        private Modules.Sidebar tvSidebar;
 
 
 

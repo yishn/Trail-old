@@ -22,40 +22,11 @@ namespace Trail {
             cvColumns.Columns.Add(c);
             c.LoadItems();
 
-            LoadDrives();
+            tvSidebar.LoadDrives();
         }
 
         private void MainForm_Shown(object sender, EventArgs e) {
             cvColumns.ScrollToLastColumn();
-        }
-
-        private void cvColumns_SubColumnAdded(object sender, ColumnEventArgs e) {
-            ItemsColumn column = e.Column as ItemsColumn;
-            column.LoadItems();
-            cvColumns.ScrollToLastColumn();
-        }
-
-        public void LoadDrives() {
-            TreeNode nodeDrives = tvSide.Nodes["nodeDrives"];
-            nodeDrives.Nodes.Clear();
-
-            foreach (DriveInfo dI in DriveInfo.GetDrives()) {
-                if (!dI.IsReady) continue;
-
-                TreeNode node = new TreeNode() {
-                    Text = dI.VolumeLabel,
-                    Tag = dI,
-                    ImageKey = dI.DriveType == DriveType.CDRom ? "disc" :
-                        dI.DriveType == DriveType.Network ? "network" :
-                        dI.DriveType == DriveType.Removable ? "removable" :
-                        dI.DriveType == DriveType.Fixed ? "drive" : "unknown"
-                };
-                node.SelectedImageKey = node.ImageKey;
-
-                nodeDrives.Nodes.Add(node);
-            }
-
-            nodeDrives.Expand();
         }
     }
 }
