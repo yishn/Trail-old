@@ -18,15 +18,20 @@ namespace Trail {
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
-            DirectoryColumn c = new DirectoryColumn(new DirectoryInfo("D:\\"));
-            cvColumns.Columns.Add(c);
-            c.LoadItems();
-
             tvSidebar.LoadDrives();
         }
 
         private void MainForm_Shown(object sender, EventArgs e) {
             cvColumns.ScrollToLastColumn();
+        }
+
+        private void tvSidebar_AfterSelect(object sender, TreeViewEventArgs e) {
+            ColumnTreeNode node = e.Node as ColumnTreeNode;
+            if (node.Column == null) return;
+
+            cvColumns.Columns.Clear();
+            cvColumns.Columns.Add(node.Column);
+            (node.Column as ItemsColumn).LoadItems();
         }
     }
 }

@@ -20,14 +20,14 @@ namespace Trail.Columns {
             //this.ListViewControl.LabelEdit = true;
         }
 
-        public override List<ColumnItem> LoadData(DoWorkEventArgs e) {
-            List<ColumnItem> result = new List<ColumnItem>();
+        public override List<ColumnListViewItem> LoadData(DoWorkEventArgs e) {
+            List<ColumnListViewItem> result = new List<ColumnListViewItem>();
 
             foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
                 if (e.Cancel) return null;
 
-                result.Add(new ColumnItem() {
-                    SubColumn = new DirectoryColumn(dI),
+                result.Add(new ColumnListViewItem() {
+                    Column = new DirectoryColumn(dI),
                     Text = dI.Name,
                     Tag = dI,
                     ImageKey = ".folder"
@@ -37,7 +37,7 @@ namespace Trail.Columns {
             foreach (FileInfo fI in this.Directory.GetFiles()) {
                 if (e.Cancel) return null;
 
-                result.Add(new ColumnItem() {
+                result.Add(new ColumnListViewItem() {
                     Text = fI.Name,
                     Tag = fI,
                     ImageKey = Path.GetExtension(fI.FullName)
@@ -47,13 +47,13 @@ namespace Trail.Columns {
             return result;
         }
 
-        public override int Compare(ColumnItem item1, ColumnItem item2) {
+        public override int Compare(ColumnListViewItem item1, ColumnListViewItem item2) {
             if (item1.Tag is DirectoryInfo && item2.Tag is FileInfo) return -1;
             if (item1.Tag is FileInfo && item2.Tag is DirectoryInfo) return 1;
             return item1.Text.CompareTo(item2.Text);
         }
 
-        public override void ItemActivated(ColumnItem item) {
+        public override void ItemActivated(ColumnListViewItem item) {
             if (!(item.Tag is FileInfo)) return;
 
             ProcessStartInfo info = new ProcessStartInfo((item.Tag as FileInfo).FullName);

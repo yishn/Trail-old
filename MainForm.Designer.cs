@@ -97,6 +97,7 @@
             this.tvSidebar.ShowNodeToolTips = true;
             this.tvSidebar.Size = new System.Drawing.Size(196, 382);
             this.tvSidebar.TabIndex = 0;
+            this.tvSidebar.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvSidebar_AfterSelect);
             // 
             // cvColumns
             // 

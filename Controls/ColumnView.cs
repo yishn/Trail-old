@@ -32,6 +32,7 @@ namespace Trail.Controls {
 
         public void ScrollToLastColumn() {
             if (this.ScrollAnimation.Enabled) return;
+            if (this.Columns.Count == 0) return;
                
             this.ScrollAnimation = new IntAnimation();
             ColumnControl column = this.Columns[this.Columns.Count - 1];
@@ -75,13 +76,13 @@ namespace Trail.Controls {
         private void ColumnControl_SelectedIndexChanged(object sender, EventArgs e) {
             ColumnControl c = sender as ColumnControl;
             if (c.ListViewControl.SelectedIndices.Count == 0) return;
-            ColumnItem item = c.ListViewControl.SelectedItems[0] as ColumnItem;
-            if (item.SubColumn == null) return;
+            ColumnListViewItem item = c.ListViewControl.SelectedItems[0] as ColumnListViewItem;
+            if (item.Column == null) return;
 
             int i = this.Columns.IndexOf(c);
             pnlColumns.AutoScrollMinSize = new Size(pnlColumns.HorizontalScroll.Maximum + 1, 0);
 
-            if (this.Columns.Count > i + 1 && this.Columns[i + 1] == item.SubColumn) return;
+            if (this.Columns.Count > i + 1 && this.Columns[i + 1] == item.Column) return;
 
             // Remove columns on the right
             int residueCount = this.Columns.Count - i - 1;
@@ -92,9 +93,9 @@ namespace Trail.Controls {
 
             if (c.ListViewControl.SelectedItems.Count == 1) {
                 // Add new column
-                this.Columns.Add(item.SubColumn);
+                this.Columns.Add(item.Column);
                 this.pnlColumns.ResumeLayout();
-                if (SubColumnAdded != null) SubColumnAdded(this, new ColumnEventArgs(item.SubColumn));
+                if (SubColumnAdded != null) SubColumnAdded(this, new ColumnEventArgs(item.Column));
             } else {
                 this.pnlColumns.ResumeLayout();
             }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Trail.Columns;
 using Trail.Controls;
 
 namespace Trail.Modules {
@@ -21,12 +22,14 @@ namespace Trail.Modules {
             this.ItemHeight = 22;
             this.Location = new Point(0, 0);
 
-            TreeNode node1 = new TreeNode("Bookmarks") { 
+            ColumnTreeNode node1 = new ColumnTreeNode() {
+                Text = "Bookmarks",
                 Name = "bookmarks",
                 ImageKey = "bookmarks",
                 SelectedImageKey = "bookmarks"
             };
-            TreeNode node2 = new TreeNode("Drives") { 
+            ColumnTreeNode node2 = new ColumnTreeNode() { 
+                Text = "Drives",
                 Name = "drives",
                 ImageKey = "drives",
                 SelectedImageKey = "drives"
@@ -50,9 +53,10 @@ namespace Trail.Modules {
             foreach (DriveInfo dI in DriveInfo.GetDrives()) {
                 if (!dI.IsReady) continue;
 
-                TreeNode node = new TreeNode() {
+                ColumnTreeNode node = new ColumnTreeNode() {
                     Text = dI.VolumeLabel,
                     Tag = dI,
+                    Column = new DirectoryColumn(dI.RootDirectory),
                     ImageKey = dI.DriveType == DriveType.CDRom ? "disc" :
                         dI.DriveType == DriveType.Network ? "network" :
                         dI.DriveType == DriveType.Removable ? "removable" :

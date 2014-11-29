@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Trail.Controls {
-    public class ColumnItem : ListViewItem {
-        public ColumnControl SubColumn { get; set; }
+    public class ColumnListViewItem : ListViewItem {
+        public ColumnControl Column { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace Trail.Columns {
         private void ListViewControl_ColumnClick(object sender, ColumnClickEventArgs e) {
             if (ListViewControl.Tag == null) return;
 
-            List<ColumnItem> items = ListViewControl.Tag as List<ColumnItem>;
+            List<ColumnListViewItem> items = ListViewControl.Tag as List<ColumnListViewItem>;
             items.Reverse();
 
             ListViewControl.Items.Clear();
@@ -31,12 +31,12 @@ namespace Trail.Columns {
         }
 
         private void ListViewControl_ItemActivate(object sender, EventArgs e) {
-            ItemActivated(ListViewControl.SelectedItems[0] as ColumnItem);
+            ItemActivated(ListViewControl.SelectedItems[0] as ColumnListViewItem);
         }
 
-        public abstract List<ColumnItem> LoadData(DoWorkEventArgs e);
-        public abstract int Compare(ColumnItem item1, ColumnItem item2);
-        public abstract void ItemActivated(ColumnItem item);
+        public abstract List<ColumnListViewItem> LoadData(DoWorkEventArgs e);
+        public abstract int Compare(ColumnListViewItem item1, ColumnListViewItem item2);
+        public abstract void ItemActivated(ColumnListViewItem item);
 
         public void LoadItems() {
             if (worker != null && worker.IsBusy) return;
@@ -50,7 +50,7 @@ namespace Trail.Columns {
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
             if (e.Cancelled) return;
 
-            List<ColumnItem> result = e.Result as List<ColumnItem>;
+            List<ColumnListViewItem> result = e.Result as List<ColumnListViewItem>;
             result.Sort((l1, l2) => Compare(l1, l2));
             ListViewControl.Tag = result;
 

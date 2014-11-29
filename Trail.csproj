@@ -51,7 +51,8 @@
       <DependentUpon>ColumnControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ColumnEventArgs.cs" />
-    <Compile Include="Controls\ColumnItem.cs" />
+    <Compile Include="Controls\ColumnListViewItem.cs" />
+    <Compile Include="Controls\ColumnTreeNode.cs" />
     <Compile Include="Controls\ColumnView.cs">
       <SubType>UserControl</SubType>
     </Compile>
