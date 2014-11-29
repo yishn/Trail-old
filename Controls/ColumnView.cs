@@ -78,7 +78,7 @@ namespace Trail.Controls {
             int i = this.Columns.IndexOf(c);
             int residueCount = this.Columns.Count - i - 1;
 
-            pnlColumns.AutoScrollMinSize = pnlColumns.ClientSize;
+            //pnlColumns.AutoScrollMinSize = pnlColumns;
 
             this.pnlColumns.SuspendLayout();
             for (int j = 0; j < residueCount; j++)

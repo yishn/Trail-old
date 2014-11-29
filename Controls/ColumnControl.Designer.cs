@@ -42,7 +42,7 @@
             this.ListViewControl.TabIndex = 0;
             this.ListViewControl.UseCompatibleStateImageBehavior = false;
             this.ListViewControl.View = System.Windows.Forms.View.Details;
-            this.ListViewControl.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.lvList_ColumnWidthChanging);
+            this.ListViewControl.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.ListViewControl_ColumnWidthChanging);
             this.ListViewControl.ClientSizeChanged += new System.EventHandler(this.ListViewControl_ClientSizeChanged);
             // 
             // colHeader

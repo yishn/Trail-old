@@ -46,15 +46,6 @@ namespace Trail.Controls {
             worker.RunWorkerAsync();
         }
 
-        public void UpdateColumnWidth() {
-            this.SuspendLayout();
-            ListViewControl.BeginUpdate();
-            ListViewControl.Width++;
-            ListViewControl.Width--;
-            ListViewControl.EndUpdate();
-            this.ResumeLayout();
-        }
-
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
             if (e.Cancelled) return;
 

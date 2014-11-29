@@ -18,13 +18,22 @@ namespace Trail.Controls {
             InitializeComponent();
         }
 
-        private void lvList_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e) {
+        private void ListViewControl_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e) {
             int padding = this.Width - ListViewControl.ClientSize.Width;
-            this.Width = e.NewWidth + padding;
+            this.Width = e.NewWidth + padding + 3;
         }
 
         private void ListViewControl_ClientSizeChanged(object sender, EventArgs e) {
-            colHeader.Width = ListViewControl.ClientSize.Width;
+            colHeader.Width = ListViewControl.ClientSize.Width - 3;
+        }
+
+        public void UpdateColumnWidth() {
+            this.SuspendLayout();
+            ListViewControl.BeginUpdate();
+            ListViewControl.Width++;
+            ListViewControl.Width--;
+            ListViewControl.EndUpdate();
+            this.ResumeLayout();
         }
     }
 }
