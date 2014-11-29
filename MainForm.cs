@@ -19,13 +19,19 @@ namespace Trail {
         private void MainForm_Load(object sender, EventArgs e) {
             DirectoryColumn c = new DirectoryColumn(new DirectoryInfo("D:\\"));
             cvColumns.Columns.Add(c);
-            c.RefreshItems();
+            c.LoadItems();
 
             LoadDrives();
         }
 
         private void MainForm_Shown(object sender, EventArgs e) {
-            cvColumns.ScrollToColumn(cvColumns.Columns[cvColumns.Columns.Count - 1]);
+            cvColumns.ScrollToLastColumn();
+        }
+
+        private void cvColumns_SubColumnAdded(object sender, ColumnEventArgs e) {
+            ItemsColumn column = e.Column as ItemsColumn;
+            column.LoadItems();
+            cvColumns.ScrollToLastColumn();
         }
 
         public void LoadDrives() {

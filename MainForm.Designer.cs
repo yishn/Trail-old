@@ -144,6 +144,7 @@
             this.cvColumns.Name = "cvColumns";
             this.cvColumns.Size = new System.Drawing.Size(644, 382);
             this.cvColumns.TabIndex = 1;
+            this.cvColumns.SubColumnAdded += new System.EventHandler<Trail.Controls.ColumnEventArgs>(this.cvColumns_SubColumnAdded);
             // 
             // MainForm
             // 

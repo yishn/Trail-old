@@ -7,6 +7,6 @@ using System.Windows.Forms;
 
 namespace Trail.Controls {
     public class ColumnItem : ListViewItem {
-        public ItemsColumn SubColumn { get; set; }
+        public ColumnControl SubColumn { get; set; }
     }
 }

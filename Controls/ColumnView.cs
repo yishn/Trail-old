@@ -18,6 +18,8 @@ namespace Trail.Controls {
         public IntAnimation ScrollAnimation { get; private set; }
         public ImageList ImageList { get; set; }
 
+        public event EventHandler<ColumnEventArgs> SubColumnAdded;
+
         public ColumnView() {
             InitializeComponent();
 
@@ -28,20 +30,22 @@ namespace Trail.Controls {
             this.Columns.CollectionChanged += Columns_CollectionChanged;
         }
 
-        public void ScrollToColumn(ColumnControl column) {
+        public void ScrollToLastColumn() {
             if (this.ScrollAnimation.Enabled) return;
-                
+               
             this.ScrollAnimation = new IntAnimation();
+            ColumnControl column = this.Columns[this.Columns.Count - 1];
             int start = pnlColumns.HorizontalScroll.Value;
             int end = Math.Min(column.Right + pnlColumns.HorizontalScroll.Value - pnlColumns.Width, pnlColumns.HorizontalScroll.Maximum);
 
             if (start >= end) return;
 
-            this.ScrollAnimation.Start(start, end).Tick += (s, e) => {
+            this.ScrollAnimation.Start(start, end).Tick += (_, e) => {
                 pnlColumns.HorizontalScroll.Value = e.Value;
             };
-            this.ScrollAnimation.Complete += (s, e) => {
+            this.ScrollAnimation.Complete += (_, e) => {
                 column.Focus();
+                pnlColumns.AutoScrollMinSize = new Size(0, 0);
             };
         }
 
@@ -53,7 +57,7 @@ namespace Trail.Controls {
 
                     c.ListViewControl.SmallImageList = this.ImageList;
                     c.ListViewControl.SelectedIndexChanged += (_, evt) => {
-                        ListViewControl_SelectedIndexChanged(c, evt);
+                        ColumnControl_SelectedIndexChanged(c, evt);
                     };
 
                     pnlColumns.Controls.Add(c);
@@ -68,7 +72,7 @@ namespace Trail.Controls {
             }
         }
 
-        private void ListViewControl_SelectedIndexChanged(object sender, EventArgs e) {
+        private void ColumnControl_SelectedIndexChanged(object sender, EventArgs e) {
             ColumnControl c = sender as ColumnControl;
             if (c.ListViewControl.SelectedIndices.Count != 1) return;
             ColumnItem item = c.ListViewControl.SelectedItems[0] as ColumnItem;
@@ -86,10 +90,9 @@ namespace Trail.Controls {
 
             // Add new column
             this.Columns.Add(item.SubColumn);
-            item.SubColumn.RefreshItems();
             this.pnlColumns.ResumeLayout();
 
-            this.ScrollToColumn(item.SubColumn);
+            if (SubColumnAdded != null) SubColumnAdded(this, new ColumnEventArgs(item.SubColumn));
         }
     }
 }

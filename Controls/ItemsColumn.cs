@@ -37,7 +37,7 @@ namespace Trail.Controls {
         public abstract int Compare(ColumnItem item1, ColumnItem item2);
         public abstract void ItemActivated(ColumnItem item);
 
-        public void RefreshItems() {
+        public void LoadItems() {
             if (worker != null && worker.IsBusy) return;
 
             worker = new BackgroundWorker() { WorkerSupportsCancellation = true };
