@@ -56,7 +56,7 @@ namespace Trail.Modules {
                 ColumnTreeNode node = new ColumnTreeNode() {
                     Text = dI.VolumeLabel,
                     Tag = dI,
-                    Column = new DirectoryColumn(dI.RootDirectory),
+                    SubColumn = new DirectoryColumn(dI.RootDirectory),
                     ImageKey = dI.DriveType == DriveType.CDRom ? "disc" :
                         dI.DriveType == DriveType.Network ? "network" :
                         dI.DriveType == DriveType.Removable ? "removable" :
