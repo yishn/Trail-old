@@ -23,10 +23,10 @@ namespace Trail.Modules {
             this.Location = new Point(0, 0);
 
             ColumnTreeNode node1 = new ColumnTreeNode() {
-                Text = "Bookmarks",
-                Name = "bookmarks",
-                ImageKey = "bookmarks",
-                SelectedImageKey = "bookmarks"
+                Text = "Favorites",
+                Name = "favorites",
+                ImageKey = "favorites",
+                SelectedImageKey = "favorites"
             };
             ColumnTreeNode node2 = new ColumnTreeNode() { 
                 Text = "Drives",

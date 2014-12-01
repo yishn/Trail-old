@@ -84,14 +84,14 @@
             this.ilSide.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilSide.ImageStream")));
             this.ilSide.TransparentColor = System.Drawing.Color.Transparent;
             this.ilSide.Images.SetKeyName(0, "folder");
-            this.ilSide.Images.SetKeyName(1, "star");
-            this.ilSide.Images.SetKeyName(2, "bookmarks");
-            this.ilSide.Images.SetKeyName(3, "drives");
-            this.ilSide.Images.SetKeyName(4, "drive");
-            this.ilSide.Images.SetKeyName(5, "disc");
-            this.ilSide.Images.SetKeyName(6, "network");
-            this.ilSide.Images.SetKeyName(7, "removable");
-            this.ilSide.Images.SetKeyName(8, "unknown");
+            this.ilSide.Images.SetKeyName(1, "bookmarks");
+            this.ilSide.Images.SetKeyName(2, "drives");
+            this.ilSide.Images.SetKeyName(3, "drive");
+            this.ilSide.Images.SetKeyName(4, "disc");
+            this.ilSide.Images.SetKeyName(5, "network");
+            this.ilSide.Images.SetKeyName(6, "removable");
+            this.ilSide.Images.SetKeyName(7, "unknown");
+            this.ilSide.Images.SetKeyName(8, "favorites");
             // 
             // columnView
             // 
