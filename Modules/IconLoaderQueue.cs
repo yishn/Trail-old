@@ -39,8 +39,7 @@ namespace Trail.Modules {
             Tuple<ColumnListViewItem, Image> tuple = e.UserState as Tuple<ColumnListViewItem, Image>;
             if (ImageList != null) ImageList.Images.Add(tuple.Item1.ImageKey, tuple.Item2);
 
-            tuple.Item1.ListView.SmallImageList = null;
-            tuple.Item1.ListView.SmallImageList = this.ImageList;
+            tuple.Item1.ImageKey = tuple.Item1.ImageKey;
         }
 
         private void IconLoaderQueue_DoWork(object sender, DoWorkEventArgs e) {
