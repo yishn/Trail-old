@@ -36,11 +36,12 @@ namespace Trail.Columns {
 
             foreach (FileInfo fI in this.Directory.GetFiles()) {
                 if (e.Cancel) return null;
+                string ext = Path.GetExtension(fI.FullName);
 
                 result.Add(new ColumnListViewItem() {
                     Text = fI.Name,
                     Tag = fI,
-                    ImageKey = Path.GetExtension(fI.FullName)
+                    ImageKey = ext == "" ? ".file" : ext
                 });
             }
 
