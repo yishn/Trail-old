@@ -22,16 +22,30 @@ namespace Trail {
         }
 
         private void MainForm_Shown(object sender, EventArgs e) {
-            cvColumns.ScrollToLastColumn();
+            columnView.ScrollToLastColumn();
         }
 
         private void tvSidebar_AfterSelect(object sender, TreeViewEventArgs e) {
             ColumnTreeNode node = e.Node as ColumnTreeNode;
-            if (node.Column == null) return;
+            if (node.SubColumn == null) return;
 
-            cvColumns.Columns.Clear();
-            cvColumns.Columns.Add(node.Column);
-            (node.Column as ItemsColumn).LoadItems();
+            columnView.Columns.Clear();
+            columnView.Columns.Add(node.SubColumn);
+
+            ItemsColumn c = node.SubColumn as ItemsColumn;
+            c.LoadingCompleted += Column_LoadingCompleted;
+            c.LoadItems();
+
+            columnView.ScrollToLastColumn();
+        }
+
+        private void cvColumns_SubColumnAdded(object sender, ColumnEventArgs e) {
+            (e.Column as ItemsColumn).LoadingCompleted += Column_LoadingCompleted;
+        }
+
+        private void Column_LoadingCompleted(object sender, RunWorkerCompletedEventArgs e) {
+            ItemsColumn c = sender as ItemsColumn;
+            iconLoaderQueue.Enqueue(c);
         }
     }
 }

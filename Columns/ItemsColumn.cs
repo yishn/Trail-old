@@ -10,7 +10,7 @@ using Trail.Controls;
 
 namespace Trail.Columns {
     public abstract class ItemsColumn : ColumnControl {
-        private BackgroundWorker worker;
+        private BackgroundWorker _worker;
 
         public event RunWorkerCompletedEventHandler LoadingCompleted;
 
@@ -44,12 +44,12 @@ namespace Trail.Columns {
         }
 
         public void LoadItems() {
-            if (worker != null && worker.IsBusy) return;
+            if (_worker != null && _worker.IsBusy) return;
 
-            worker = new BackgroundWorker() { WorkerSupportsCancellation = true };
-            worker.DoWork += worker_DoWork;
-            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-            worker.RunWorkerAsync();
+            _worker = new BackgroundWorker() { WorkerSupportsCancellation = true };
+            _worker.DoWork += worker_DoWork;
+            _worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            _worker.RunWorkerAsync();
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {

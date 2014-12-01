@@ -26,10 +26,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pnlSplit = new System.Windows.Forms.SplitContainer();
-            this.ilSide = new System.Windows.Forms.ImageList(this.components);
-            this.ilItems = new System.Windows.Forms.ImageList(this.components);
             this.tvSidebar = new Trail.Modules.Sidebar();
-            this.cvColumns = new Trail.Modules.NavigatingColumnView();
+            this.ilSide = new System.Windows.Forms.ImageList(this.components);
+            this.columnView = new Trail.Modules.NavigatingColumnView();
+            this.ilItems = new System.Windows.Forms.ImageList(this.components);
+            this.iconLoaderQueue = new Trail.Modules.IconLoaderQueue();
             ((System.ComponentModel.ISupportInitialize)(this.pnlSplit)).BeginInit();
             this.pnlSplit.Panel1.SuspendLayout();
             this.pnlSplit.Panel2.SuspendLayout();
@@ -50,33 +51,12 @@
             // 
             // pnlSplit.Panel2
             // 
-            this.pnlSplit.Panel2.Controls.Add(this.cvColumns);
+            this.pnlSplit.Panel2.Controls.Add(this.columnView);
             this.pnlSplit.Size = new System.Drawing.Size(842, 382);
             this.pnlSplit.SplitterDistance = 196;
             this.pnlSplit.SplitterWidth = 2;
             this.pnlSplit.TabIndex = 1;
             this.pnlSplit.TabStop = false;
-            // 
-            // ilSide
-            // 
-            this.ilSide.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilSide.ImageStream")));
-            this.ilSide.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilSide.Images.SetKeyName(0, "folder");
-            this.ilSide.Images.SetKeyName(1, "star");
-            this.ilSide.Images.SetKeyName(2, "bookmarks");
-            this.ilSide.Images.SetKeyName(3, "drives");
-            this.ilSide.Images.SetKeyName(4, "drive");
-            this.ilSide.Images.SetKeyName(5, "disc");
-            this.ilSide.Images.SetKeyName(6, "network");
-            this.ilSide.Images.SetKeyName(7, "removable");
-            this.ilSide.Images.SetKeyName(8, "unknown");
-            // 
-            // ilItems
-            // 
-            this.ilItems.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilItems.ImageStream")));
-            this.ilItems.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilItems.Images.SetKeyName(0, ".folder");
-            this.ilItems.Images.SetKeyName(1, ".file");
             // 
             // tvSidebar
             // 
@@ -99,17 +79,44 @@
             this.tvSidebar.TabIndex = 0;
             this.tvSidebar.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvSidebar_AfterSelect);
             // 
-            // cvColumns
+            // ilSide
             // 
-            this.cvColumns.AutoScroll = true;
-            this.cvColumns.BackColor = System.Drawing.Color.White;
-            this.cvColumns.DefaultColumnWidth = 200;
-            this.cvColumns.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cvColumns.ImageList = this.ilItems;
-            this.cvColumns.Location = new System.Drawing.Point(0, 0);
-            this.cvColumns.Name = "cvColumns";
-            this.cvColumns.Size = new System.Drawing.Size(644, 382);
-            this.cvColumns.TabIndex = 1;
+            this.ilSide.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilSide.ImageStream")));
+            this.ilSide.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilSide.Images.SetKeyName(0, "folder");
+            this.ilSide.Images.SetKeyName(1, "star");
+            this.ilSide.Images.SetKeyName(2, "bookmarks");
+            this.ilSide.Images.SetKeyName(3, "drives");
+            this.ilSide.Images.SetKeyName(4, "drive");
+            this.ilSide.Images.SetKeyName(5, "disc");
+            this.ilSide.Images.SetKeyName(6, "network");
+            this.ilSide.Images.SetKeyName(7, "removable");
+            this.ilSide.Images.SetKeyName(8, "unknown");
+            // 
+            // columnView
+            // 
+            this.columnView.AutoScroll = true;
+            this.columnView.BackColor = System.Drawing.Color.White;
+            this.columnView.DefaultColumnWidth = 200;
+            this.columnView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.columnView.ImageList = this.ilItems;
+            this.columnView.Location = new System.Drawing.Point(0, 0);
+            this.columnView.Name = "columnView";
+            this.columnView.Size = new System.Drawing.Size(644, 382);
+            this.columnView.TabIndex = 1;
+            this.columnView.SubColumnAdded += new System.EventHandler<Trail.Controls.ColumnEventArgs>(this.cvColumns_SubColumnAdded);
+            // 
+            // ilItems
+            // 
+            this.ilItems.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilItems.ImageStream")));
+            this.ilItems.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilItems.Images.SetKeyName(0, ".folder");
+            this.ilItems.Images.SetKeyName(1, ".file");
+            // 
+            // iconLoaderQueue
+            // 
+            this.iconLoaderQueue.ImageList = this.ilItems;
+            this.iconLoaderQueue.WorkerReportsProgress = true;
             // 
             // MainForm
             // 
@@ -136,8 +143,9 @@
         private System.Windows.Forms.SplitContainer pnlSplit;
         private System.Windows.Forms.ImageList ilSide;
         private System.Windows.Forms.ImageList ilItems;
-        private Modules.NavigatingColumnView cvColumns;
+        private Modules.NavigatingColumnView columnView;
         private Modules.Sidebar tvSidebar;
+        private Modules.IconLoaderQueue iconLoaderQueue;
 
 
 
