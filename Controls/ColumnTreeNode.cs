@@ -7,6 +7,6 @@ using System.Windows.Forms;
 
 namespace Trail.Controls {
     public class ColumnTreeNode : TreeNode {
-        public ColumnControl Column { get; set; }
+        public ColumnControl SubColumn { get; set; }
     }
 }

@@ -78,12 +78,15 @@
     <Compile Include="Fx\IntAnimation.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Helper\IconHelper.cs" />
+    <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\IconLoaderQueue.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Modules\NavigatingColumnView.cs">
       <SubType>UserControl</SubType>
