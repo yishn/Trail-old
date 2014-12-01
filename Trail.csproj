@@ -78,6 +78,7 @@
     <Compile Include="Fx\IntAnimation.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Helper\IconHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

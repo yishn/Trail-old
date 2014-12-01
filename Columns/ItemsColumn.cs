@@ -38,6 +38,11 @@ namespace Trail.Columns {
         public abstract int Compare(ColumnListViewItem item1, ColumnListViewItem item2);
         public abstract void ItemActivated(ColumnListViewItem item);
 
+        public virtual Image GetIcon(ColumnListViewItem item) {
+            Icon i = Etier.IconHelper.IconReader.GetFileIcon(item.Text, Etier.IconHelper.IconReader.IconSize.Small, false);
+            return i.ToBitmap();
+        }
+
         public void LoadItems() {
             if (worker != null && worker.IsBusy) return;
 
