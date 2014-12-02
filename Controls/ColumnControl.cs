@@ -21,6 +21,7 @@ namespace Trail.Controls {
         private void ListViewControl_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e) {
             int padding = this.Width - ListViewControl.ClientSize.Width;
             this.Width = e.NewWidth + padding + 3;
+            (this.Parent.Parent as ColumnView).EnlargeScrollMinSize();
         }
 
         private void ListViewControl_ClientSizeChanged(object sender, EventArgs e) {

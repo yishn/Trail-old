@@ -46,8 +46,17 @@ namespace Trail.Controls {
             };
             this.ScrollAnimation.Complete += (_, e) => {
                 column.Focus();
-                pnlColumns.AutoScrollMinSize = new Size(0, 0);
+                UpdateScrollMinSize();
             };
+        }
+
+        public void UpdateScrollMinSize() {
+            pnlColumns.AutoScrollMinSize = new Size(0, 0);
+            EnlargeScrollMinSize();
+        }
+
+        public void EnlargeScrollMinSize() {
+            pnlColumns.AutoScrollMinSize = new Size(pnlColumns.HorizontalScroll.Maximum + 1, 0);
         }
 
         private void Columns_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
@@ -80,13 +89,13 @@ namespace Trail.Controls {
             if (item.Column == null) return;
 
             int i = this.Columns.IndexOf(c);
-            pnlColumns.AutoScrollMinSize = new Size(pnlColumns.HorizontalScroll.Maximum + 1, 0);
-
             if (this.Columns.Count > i + 1 && this.Columns[i + 1] == item.Column) return;
 
             // Remove columns on the right
             int residueCount = this.Columns.Count - i - 1;
             this.pnlColumns.SuspendLayout();
+
+            UpdateScrollMinSize();
 
             for (int j = 1; j <= residueCount; j++)
                 this.Columns.RemoveAt(i + 1);
