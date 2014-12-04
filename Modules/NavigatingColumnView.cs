@@ -37,6 +37,7 @@ namespace Trail.Modules {
 
             // Remove columns on the right
             int residueCount = this.Columns.Count - i - 1;
+            int width = residueCount > 0 ? this.Columns[i + 1].Width : this.DefaultColumnWidth;
             this.ScrollPanel.SuspendLayout();
 
             UpdateScrollMinSize();
@@ -47,6 +48,7 @@ namespace Trail.Modules {
             if (c.ListViewControl.SelectedItems.Count == 1) {
                 // Add new column
                 this.Columns.Add(item.Column);
+                item.Column.Width = width;
                 this.ScrollPanel.ResumeLayout();
                 if (SubColumnAdded != null) SubColumnAdded(this, new ColumnEventArgs(item.Column));
             } else {
