@@ -23,23 +23,23 @@
         /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
         /// </summary>
         private void InitializeComponent() {
-            this.pnlColumns = new System.Windows.Forms.Panel();
+            this.ScrollPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // pnlColumns
+            // ScrollPanel
             // 
-            this.pnlColumns.AutoScroll = true;
-            this.pnlColumns.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlColumns.Location = new System.Drawing.Point(0, 0);
-            this.pnlColumns.Name = "pnlColumns";
-            this.pnlColumns.Size = new System.Drawing.Size(871, 388);
-            this.pnlColumns.TabIndex = 0;
+            this.ScrollPanel.AutoScroll = true;
+            this.ScrollPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ScrollPanel.Location = new System.Drawing.Point(0, 0);
+            this.ScrollPanel.Name = "ScrollPanel";
+            this.ScrollPanel.Size = new System.Drawing.Size(871, 388);
+            this.ScrollPanel.TabIndex = 0;
             // 
             // ColumnView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pnlColumns);
+            this.Controls.Add(this.ScrollPanel);
             this.Name = "ColumnView";
             this.Size = new System.Drawing.Size(871, 388);
             this.ResumeLayout(false);
@@ -48,6 +48,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlColumns;
+        public System.Windows.Forms.Panel ScrollPanel;
+
     }
 }
