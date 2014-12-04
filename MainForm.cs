@@ -36,7 +36,7 @@ namespace Trail {
             c.LoadingCompleted += Column_LoadingCompleted;
             c.LoadItems();
 
-            columnView.ScrollToLastColumn();
+            columnView.ScrollToFirstColumn();
         }
 
         private void cvColumns_SubColumnAdded(object sender, ColumnEventArgs e) {

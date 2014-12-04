@@ -36,16 +36,33 @@ namespace Trail.Controls {
                
             this.ScrollAnimation = new IntAnimation();
             ColumnControl column = this.Columns[this.Columns.Count - 1];
-            int start = pnlColumns.HorizontalScroll.Value;
-            int end = Math.Min(column.Right + pnlColumns.HorizontalScroll.Value - pnlColumns.Width, pnlColumns.HorizontalScroll.Maximum);
 
-            if (start >= end) return;
+            int start = pnlColumns.HorizontalScroll.Value;
+            int end = column.Right + pnlColumns.HorizontalScroll.Value - pnlColumns.Width;
+            end = Math.Max(Math.Min(end, pnlColumns.HorizontalScroll.Maximum), start);
 
             this.ScrollAnimation.Start(start, end).Tick += (_, e) => {
                 pnlColumns.HorizontalScroll.Value = e.Value;
             };
             this.ScrollAnimation.Complete += (_, e) => {
                 column.Focus();
+                if(end != start) UpdateScrollMinSize();
+            };
+        }
+
+        public void ScrollToFirstColumn() {
+            if (this.ScrollAnimation.Enabled) return;
+            if (this.Columns.Count == 0) return;
+
+            this.ScrollAnimation = new IntAnimation();
+            int start = pnlColumns.HorizontalScroll.Value;
+            int end = 0;
+
+            this.ScrollAnimation.Start(start, end).Tick += (_, e) => {
+                pnlColumns.HorizontalScroll.Value = e.Value;
+            };
+            this.ScrollAnimation.Complete += (_, e) => {
+                this.Columns[0].Focus();
                 UpdateScrollMinSize();
             };
         }
