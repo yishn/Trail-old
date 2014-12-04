@@ -15,19 +15,7 @@ namespace Trail.Columns {
         public event RunWorkerCompletedEventHandler LoadingCompleted;
 
         public ItemsColumn() {
-            this.ListViewControl.ColumnClick += ListViewControl_ColumnClick;
             this.ListViewControl.ItemActivate += ListViewControl_ItemActivate;
-        }
-
-        private void ListViewControl_ColumnClick(object sender, ColumnClickEventArgs e) {
-            if (ListViewControl.Tag == null) return;
-
-            List<ColumnListViewItem> items = ListViewControl.Tag as List<ColumnListViewItem>;
-            items.Reverse();
-
-            ListViewControl.Items.Clear();
-            ListViewControl.Items.AddRange(items.ToArray());
-            UpdateColumnWidth();
         }
 
         private void ListViewControl_ItemActivate(object sender, EventArgs e) {
@@ -57,7 +45,6 @@ namespace Trail.Columns {
 
             List<ColumnListViewItem> result = e.Result as List<ColumnListViewItem>;
             result.Sort((l1, l2) => Compare(l1, l2));
-            ListViewControl.Tag = result;
 
             ListViewControl.Items.Clear();
             ListViewControl.Items.AddRange(result.ToArray());
