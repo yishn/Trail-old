@@ -48,8 +48,10 @@ namespace Trail.Columns {
 
             ColumnListViewItem item = new ColumnListViewItem() {
                 Text = e.Name,
-                ImageKey = isDir ? ".folder" : ".file"
+                Tag = isDir ? new DirectoryInfo(e.FullPath) as object : new FileInfo(e.FullPath) as object
             };
+            item.ImageKey = getImageKey(item);
+            if (isDir) item.Column = new DirectoryColumn(item.Tag as DirectoryInfo);
 
             ListViewControl.Items.Add(item);
             ListViewControl.Sort();
@@ -62,6 +64,7 @@ namespace Trail.Columns {
                 if (item.Text != e.Name) continue;
                 item.Text = e.Name;
                 item.Tag = File.Exists(e.FullPath) ? new FileInfo(e.FullPath) as object : new DirectoryInfo(e.FullPath) as object;
+                item.ImageKey = getImageKey(item);
 
                 if (WatcherObserved != null) WatcherObserved(this, item);
                 break;
@@ -69,6 +72,16 @@ namespace Trail.Columns {
         }
 
         #endregion
+
+        private string getImageKey(ColumnListViewItem item) {
+            if (item.Tag is DirectoryInfo) return ".folder";
+
+            FileInfo fI = item.Tag as FileInfo;
+            string ext = Path.GetExtension(fI.Name);
+
+            if (ext == ".exe" || ext == ".lnk") return fI.FullName;
+            return ext == "" ? ".file" : ext;
+        }
 
         public override List<ColumnListViewItem> LoadData(DoWorkEventArgs e) {
             _watcher.EnableRaisingEvents = true;
@@ -92,9 +105,8 @@ namespace Trail.Columns {
                 ColumnListViewItem item = new ColumnListViewItem() {
                     Text = fI.Name,
                     Tag = fI,
-                    ImageKey = ext == "" ? ".file" : ext
                 };
-                if (ext == ".exe" || ext == ".lnk") item.ImageKey = fI.FullName;
+                item.ImageKey = getImageKey(item);
                 result.Add(item);
             }
 
