@@ -88,12 +88,14 @@ namespace Trail.Columns {
             foreach (FileInfo fI in this.Directory.GetFiles()) {
                 if (e.Cancel) return null;
                 string ext = Path.GetExtension(fI.FullName);
-
-                result.Add(new ColumnListViewItem() {
+                
+                ColumnListViewItem item = new ColumnListViewItem() {
                     Text = fI.Name,
                     Tag = fI,
                     ImageKey = ext == "" ? ".file" : ext
-                });
+                };
+                if (ext == ".exe" || ext == ".lnk") item.ImageKey = fI.FullName;
+                result.Add(item);
             }
 
             return result;
@@ -105,6 +107,16 @@ namespace Trail.Columns {
             ProcessStartInfo info = new ProcessStartInfo((item.Tag as FileInfo).FullName);
             info.WorkingDirectory = (item.Tag as FileInfo).DirectoryName;
             Process.Start(info);
+        }
+
+        public override Image GetIcon(ColumnListViewItem item) {
+            if (item.Tag is DirectoryInfo) return base.GetIcon(item);
+            
+            FileInfo fI = item.Tag as FileInfo;
+            string ext = Path.GetExtension(fI.Name);
+            
+            if (ext != ".exe" && ext != ".lnk") return base.GetIcon(item);
+            return Etier.IconHelper.IconReader.GetFileIcon(fI.FullName, Etier.IconHelper.IconReader.IconSize.Small, false).ToBitmap();
         }
     }
 }
