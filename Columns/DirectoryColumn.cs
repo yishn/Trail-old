@@ -48,12 +48,6 @@ namespace Trail.Columns {
             return result;
         }
 
-        public override int Compare(ColumnListViewItem item1, ColumnListViewItem item2) {
-            if (item1.Tag is DirectoryInfo && item2.Tag is FileInfo) return -1;
-            if (item1.Tag is FileInfo && item2.Tag is DirectoryInfo) return 1;
-            return item1.Text.CompareTo(item2.Text);
-        }
-
         public override void ItemActivated(ColumnListViewItem item) {
             if (!(item.Tag is FileInfo)) return;
 
