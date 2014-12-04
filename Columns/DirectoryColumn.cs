@@ -12,15 +12,66 @@ using Trail.Controls;
 
 namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
+        private FileSystemWatcher _watcher;
+
         public DirectoryInfo Directory { get; set; }
 
+        public event EventHandler<ColumnListViewItem> WatcherObserved;
+
         public DirectoryColumn(DirectoryInfo directory) : base() {
+            _watcher = new FileSystemWatcher(directory.FullName) {
+                IncludeSubdirectories = false,
+                EnableRaisingEvents = false,
+                SynchronizingObject = ListViewControl
+            };
+            _watcher.Created += _watcher_Created;
+            _watcher.Deleted += _watcher_Deleted;
+            _watcher.Renamed += _watcher_Renamed;
+
             this.Directory = directory;
             this.HeaderText = directory.Name;
-            //this.ListViewControl.LabelEdit = true;
         }
 
+        #region FileSystemWatcher methods
+
+        private void _watcher_Deleted(object sender, FileSystemEventArgs e) {
+            foreach (ColumnListViewItem item in ListViewControl.Items) {
+                if (item.Text != e.Name) continue;
+                item.Remove();
+                if (WatcherObserved != null) WatcherObserved(this, null);
+                break;
+            }
+        }
+
+        private void _watcher_Created(object sender, FileSystemEventArgs e) {
+            bool isDir = !File.Exists(e.FullPath);
+
+            ColumnListViewItem item = new ColumnListViewItem() {
+                Text = e.Name,
+                ImageKey = isDir ? ".folder" : ".file"
+            };
+
+            ListViewControl.Items.Add(item);
+            ListViewControl.Sort();
+
+            if (WatcherObserved != null) WatcherObserved(this, item);
+        }
+
+        private void _watcher_Renamed(object sender, RenamedEventArgs e) {
+            foreach (ColumnListViewItem item in ListViewControl.Items) {
+                if (item.Text != e.Name) continue;
+                item.Text = e.Name;
+                item.Tag = File.Exists(e.FullPath) ? new FileInfo(e.FullPath) as object : new DirectoryInfo(e.FullPath) as object;
+
+                if (WatcherObserved != null) WatcherObserved(this, item);
+                break;
+            }
+        }
+
+        #endregion
+
         public override List<ColumnListViewItem> LoadData(DoWorkEventArgs e) {
+            _watcher.EnableRaisingEvents = true;
             List<ColumnListViewItem> result = new List<ColumnListViewItem>();
 
             foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
