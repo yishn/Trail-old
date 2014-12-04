@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Controls;
+using Trail.Modules;
 
 namespace Trail.Columns {
     public abstract class ItemsColumn : ColumnControl {
@@ -16,6 +18,7 @@ namespace Trail.Columns {
 
         public ItemsColumn() {
             this.ListViewControl.ItemActivate += ListViewControl_ItemActivate;
+            this.ListViewControl.ListViewItemSorter = new ItemsColumnListComparer();
         }
 
         private void ListViewControl_ItemActivate(object sender, EventArgs e) {
@@ -23,7 +26,6 @@ namespace Trail.Columns {
         }
 
         public abstract List<ColumnListViewItem> LoadData(DoWorkEventArgs e);
-        public abstract int Compare(ColumnListViewItem item1, ColumnListViewItem item2);
         public abstract void ItemActivated(ColumnListViewItem item);
 
         public virtual Image GetIcon(ColumnListViewItem item) {
@@ -42,12 +44,11 @@ namespace Trail.Columns {
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
             if (e.Cancelled) return;
-
             List<ColumnListViewItem> result = e.Result as List<ColumnListViewItem>;
-            result.Sort((l1, l2) => Compare(l1, l2));
 
             ListViewControl.Items.Clear();
             ListViewControl.Items.AddRange(result.ToArray());
+            ListViewControl.Sort();
             UpdateColumnWidth();
 
             if (LoadingCompleted != null) LoadingCompleted(this, e);

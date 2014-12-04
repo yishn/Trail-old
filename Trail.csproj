@@ -65,6 +65,7 @@
     <Compile Include="Columns\ItemsColumn.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\ItemsColumnListComparer.cs" />
     <Compile Include="Controls\ListViewModern.cs">
       <SubType>Component</SubType>
     </Compile>
