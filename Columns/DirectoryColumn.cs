@@ -60,15 +60,8 @@ namespace Trail.Columns {
         }
 
         private void _watcher_Renamed(object sender, RenamedEventArgs e) {
-            foreach (ColumnListViewItem item in ListViewControl.Items) {
-                if (item.Text != e.Name) continue;
-                item.Text = e.Name;
-                item.Tag = File.Exists(e.FullPath) ? new FileInfo(e.FullPath) as object : new DirectoryInfo(e.FullPath) as object;
-                item.ImageKey = getImageKey(item);
-
-                if (WatcherObserved != null) WatcherObserved(this, item);
-                break;
-            }
+            _watcher_Deleted(sender, new FileSystemEventArgs(WatcherChangeTypes.Deleted, Directory.FullName, e.OldName));
+            _watcher_Created(sender, new FileSystemEventArgs(WatcherChangeTypes.Created, Directory.FullName, e.Name));
         }
 
         #endregion
@@ -79,8 +72,8 @@ namespace Trail.Columns {
             FileInfo fI = item.Tag as FileInfo;
             string ext = Path.GetExtension(fI.Name);
 
-            if (ext == ".exe" || ext == ".lnk") return fI.FullName;
-            return ext == "" ? ".file" : ext;
+            if (ext == "" || ext == ".exe" || ext == ".lnk" || ext == ".ico") return fI.FullName;
+            return ext;
         }
 
         public override List<ColumnListViewItem> LoadData(DoWorkEventArgs e) {
@@ -123,11 +116,7 @@ namespace Trail.Columns {
 
         public override Image GetIcon(ColumnListViewItem item) {
             if (item.Tag is DirectoryInfo) return base.GetIcon(item);
-            
             FileInfo fI = item.Tag as FileInfo;
-            string ext = Path.GetExtension(fI.Name);
-            
-            if (ext != ".exe" && ext != ".lnk") return base.GetIcon(item);
             return Etier.IconHelper.IconReader.GetFileIcon(fI.FullName, Etier.IconHelper.IconReader.IconSize.Small, false).ToBitmap();
         }
     }
