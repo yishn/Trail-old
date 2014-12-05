@@ -29,19 +29,21 @@ namespace Trail.Modules {
         }
 
         public void NavigateTo(DirectoryInfo directory) {
-            List<DirectoryInfo> trail = new List<DirectoryInfo>();
+            List<ItemsColumn> trail = new List<ItemsColumn>();
             DirectoryInfo current = directory;
-            this.Columns.Clear();
 
             while (current.Root.FullName != current.FullName) {
-                trail.Add(current);
+                trail.Add(new DirectoryColumn(current));
                 current = current.Parent;
             }
 
             trail.Reverse();
+            this.NavigateTo(trail);
+        }
+        public void NavigateTo(List<ItemsColumn> trail) {
+            this.Columns.Clear();
 
-            foreach (DirectoryInfo dI in trail) {
-                DirectoryColumn c = new DirectoryColumn(dI);
+            foreach (ItemsColumn c in trail) {
                 this.Columns.Add(c);
                 c.LoadItems();
             }
