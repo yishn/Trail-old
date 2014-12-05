@@ -30,7 +30,6 @@
             this.ilSide = new System.Windows.Forms.ImageList(this.components);
             this.columnView = new Trail.Modules.NavigatingColumnView();
             this.ilItems = new System.Windows.Forms.ImageList(this.components);
-            this.iconLoaderQueue = new Trail.Modules.IconLoaderQueue();
             ((System.ComponentModel.ISupportInitialize)(this.pnlSplit)).BeginInit();
             this.pnlSplit.Panel1.SuspendLayout();
             this.pnlSplit.Panel2.SuspendLayout();
@@ -104,7 +103,6 @@
             this.columnView.Name = "columnView";
             this.columnView.Size = new System.Drawing.Size(644, 382);
             this.columnView.TabIndex = 1;
-            this.columnView.SubColumnAdded += new System.EventHandler<Trail.Controls.ColumnEventArgs>(this.cvColumns_SubColumnAdded);
             // 
             // ilItems
             // 
@@ -112,11 +110,6 @@
             this.ilItems.TransparentColor = System.Drawing.Color.Transparent;
             this.ilItems.Images.SetKeyName(0, ".folder");
             this.ilItems.Images.SetKeyName(1, ".file");
-            // 
-            // iconLoaderQueue
-            // 
-            this.iconLoaderQueue.ImageList = this.ilItems;
-            this.iconLoaderQueue.WorkerReportsProgress = true;
             // 
             // MainForm
             // 
@@ -145,7 +138,6 @@
         private System.Windows.Forms.ImageList ilItems;
         private Modules.NavigatingColumnView columnView;
         private Modules.Sidebar tvSidebar;
-        private Modules.IconLoaderQueue iconLoaderQueue;
 
 
 

@@ -33,19 +33,9 @@ namespace Trail {
             columnView.Columns.Add(node.SubColumn);
 
             ItemsColumn c = node.SubColumn as ItemsColumn;
-            c.LoadingCompleted += Column_LoadingCompleted;
             c.LoadItems();
 
             columnView.ScrollToFirstColumn();
-        }
-
-        private void cvColumns_SubColumnAdded(object sender, ColumnEventArgs e) {
-            (e.Column as ItemsColumn).LoadingCompleted += Column_LoadingCompleted;
-        }
-
-        private void Column_LoadingCompleted(object sender, RunWorkerCompletedEventArgs e) {
-            ItemsColumn c = sender as ItemsColumn;
-            iconLoaderQueue.Enqueue(c);
         }
     }
 }
