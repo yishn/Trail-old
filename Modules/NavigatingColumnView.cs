@@ -48,13 +48,13 @@ namespace Trail.Modules {
         }
 
         private void Columns_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-            if (e.Action == NotifyCollectionChangedAction.Add) {
-                foreach (ItemsColumn c in e.NewItems) {
-                    c.LoadingCompleted += ItemsColumn_LoadingCompleted;
-                    c.ListViewControl.SelectedIndexChanged += (_, evt) => {
-                        ItemsColumn_SelectedIndexChanged(c, evt);
-                    };
-                }
+            if (e.Action != NotifyCollectionChangedAction.Add) return;
+            
+            foreach (ItemsColumn c in e.NewItems) {
+                c.LoadingCompleted += ItemsColumn_LoadingCompleted;
+                c.ListViewControl.SelectedIndexChanged += (_, evt) => {
+                    ItemsColumn_SelectedIndexChanged(c, evt);
+                };
             }
         }
 
