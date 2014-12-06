@@ -51,7 +51,7 @@ namespace Trail.Columns {
                 Tag = isDir ? new DirectoryInfo(e.FullPath) as object : new FileInfo(e.FullPath) as object
             };
             item.ImageKey = getImageKey(item);
-            if (isDir) item.Column = new DirectoryColumn(item.Tag as DirectoryInfo);
+            if (isDir) item.SubColumn = new DirectoryColumn(item.Tag as DirectoryInfo);
 
             ListViewControl.Items.Add(item);
             ListViewControl.Sort();
@@ -84,7 +84,7 @@ namespace Trail.Columns {
                 if (e.Cancel) return null;
 
                 result.Add(new ColumnListViewItem() {
-                    Column = new DirectoryColumn(dI),
+                    SubColumn = new DirectoryColumn(dI),
                     Text = dI.Name,
                     Tag = dI,
                     ImageKey = ".folder"

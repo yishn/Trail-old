@@ -73,10 +73,10 @@ namespace Trail.Modules {
             ColumnControl c = sender as ColumnControl;
             if (c.ListViewControl.SelectedIndices.Count == 0) return;
             ColumnListViewItem item = c.ListViewControl.SelectedItems[0] as ColumnListViewItem;
-            if (item.Column == null) return;
+            if (item.SubColumn == null) return;
 
             int i = this.Columns.IndexOf(c);
-            if (this.Columns.Count > i + 1 && this.Columns[i + 1] == item.Column) return;
+            if (this.Columns.Count > i + 1 && this.Columns[i + 1] == item.SubColumn) return;
 
             // Remove columns on the right
             int residueCount = this.Columns.Count - i - 1;
@@ -90,7 +90,7 @@ namespace Trail.Modules {
 
             if (c.ListViewControl.SelectedItems.Count == 1) {
                 // Add new column
-                ItemsColumn column = (item.Column as ItemsColumn).Duplicate();
+                ItemsColumn column = (item.SubColumn as ItemsColumn).Duplicate();
 
                 this.Columns.Add(column);
                 column.Width = width;
