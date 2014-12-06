@@ -27,6 +27,7 @@ namespace Trail.Controls {
             }
         }
         public bool ShowNewTabButton { get { return btnAdd.Visible; } set { btnAdd.Visible = value; } }
+        public bool AllowNoTabs { get; set; }
 
         public event EventHandler CurrentTabChanged;
         public event EventHandler AddButtonClicked;
@@ -35,6 +36,7 @@ namespace Trail.Controls {
         public TabBar() {
             InitializeComponent();
 
+            this.AllowNoTabs = false;
             this.Tabs = new ObservableCollection<Tab>();
             this.AccentColor = Color.FromArgb(0, 122, 204);
             btnAdd.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 0, 0, 0);
@@ -71,6 +73,40 @@ namespace Trail.Controls {
             this.ResumeLayout();
         }
 
+        public void CloseTab(Tab tab) {
+            if (!AllowNoTabs && this.Tabs.Count == 1) return;
+            if (_animation == null || !_animation.Enabled) _animation = new Animation();
+            else return;
+
+            int i = this.Tabs.IndexOf(tab);
+            if (i == -1) return;
+
+            if (this.Tabs.Count == 0) this.CurrentTab = null;
+            else if (this.CurrentTab == tab) this.CurrentTab = this.Tabs[Math.Max(i - 1, 0)];
+
+            // Animation
+            this.Tabs[i].BringToFront();
+            int width = pnlTabs.Width;
+            _animation.Tick += (_, value) => {
+                this.Tabs[i].Top = (int)(value * this.Tabs[i].Height);
+
+                if (i + 1 < this.Tabs.Count)
+                    this.Tabs[i + 1].Left = this.Tabs[i].Right - (int)(value * this.Tabs[i].Width);
+
+                for (int j = i + 2; j < this.Tabs.Count; j++) {
+                    this.Tabs[j].Left = this.Tabs[j - 1].Right;
+                }
+
+                pnlTabs.Width = width - (int)(value * this.Tabs[i].Width);
+                btnAdd.Left = pnlTabs.Right;
+            };
+            _animation.Complete += (_, evt) => {
+                this.Tabs.RemoveAt(i);
+                if (TabClosed != null) TabClosed(this, tab);
+            };
+            _animation.Start();
+        }
+
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             if (e.Action == NotifyCollectionChangedAction.Add) {
                 foreach (Tab t in e.NewItems) {
@@ -94,38 +130,12 @@ namespace Trail.Controls {
         }
 
         private void Tab_CloseButtonClick(object sender, EventArgs e) {
-            if (_animation == null || !_animation.Enabled) _animation = new Animation();
-            else return;
-
-            int i = this.Tabs.IndexOf(sender as Tab);
-            if (this.Tabs.Count == 0) this.CurrentTab = null;
-            else if (this.CurrentTab == sender as Tab) this.CurrentTab = this.Tabs[Math.Max(i - 1, 0)];
-
-            // Animation
-            this.Tabs[i].BringToFront();
-            int width = pnlTabs.Width;
-            _animation.Tick += (_, value) => {
-                this.Tabs[i].Top = (int)(value * this.Tabs[i].Height);
-                
-                if (i + 1 < this.Tabs.Count)
-                    this.Tabs[i + 1].Left = this.Tabs[i].Right - (int)(value * this.Tabs[i].Width);
-                
-                for (int j = i + 2; j < this.Tabs.Count; j++) {
-                    this.Tabs[j].Left = this.Tabs[j - 1].Right;
-                }
-
-                pnlTabs.Width = width - (int)(value * this.Tabs[i].Width);
-                btnAdd.Left = pnlTabs.Right;
-            };
-            _animation.Complete += (_, evt) => {
-                this.Tabs.RemoveAt(i);
-                if (TabClosed != null) TabClosed(this, sender as Tab);
-            };
-            _animation.Start();
+            CloseTab(sender as Tab);
         }
 
         private void Tab_MouseClick(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) this.CurrentTab = sender as Tab;
+            if (e.Button == MouseButtons.Middle) CloseTab(sender as Tab);
         }
 
         private void Tab_SizeChanged(object sender, EventArgs e) {
