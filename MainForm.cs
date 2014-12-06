@@ -40,8 +40,13 @@ namespace Trail {
 
             ItemsColumn c = node.SubColumn as ItemsColumn;
             c.LoadItems();
+            tabBar1.CurrentTab.Text = c.HeaderText;
 
             columnView.ScrollToFirstColumn();
+        }
+
+        private void columnView_SubColumnAdded(object sender, ColumnEventArgs e) {
+            tabBar1.CurrentTab.Text = e.Column.HeaderText;
         }
     }
 }

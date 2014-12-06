@@ -106,6 +106,7 @@
             this.columnView.Name = "columnView";
             this.columnView.Size = new System.Drawing.Size(644, 358);
             this.columnView.TabIndex = 1;
+            this.columnView.SubColumnAdded += new System.EventHandler<Trail.Controls.ColumnEventArgs>(this.columnView_SubColumnAdded);
             // 
             // ilItems
             // 

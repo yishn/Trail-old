@@ -12,7 +12,13 @@ namespace Trail.Controls {
     public partial class Tab : UserControl {
         private bool _autoHideClose = true;
 
-        public override string Text { get { return lblText.Text; } set { lblText.Text = value; } }
+        public override string Text { 
+            get { return lblText.Text; }
+            set { 
+                lblText.Text = value;
+                OnTextChanged(new EventArgs());
+            } 
+        }
         public bool AutoHideClose {
             get { return _autoHideClose; }
             set {
@@ -28,15 +34,14 @@ namespace Trail.Controls {
 
             btnClose.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 255, 255, 255);
             btnClose.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);
+
+            this.TextChanged += Tab_TextChanged;
         }
 
-        private void Tab_Load(object sender, EventArgs e) {
-            lblText_SizeChanged(sender, e);
-        }
-
-        private void lblText_SizeChanged(object sender, EventArgs e) {
-            this.Width = lblText.Width + btnClose.Width + 10;
-            btnClose.Left = lblText.Right + 5;
+        private void Tab_TextChanged(object sender, EventArgs e) {
+            this.Width = lblText.PreferredWidth + btnClose.Width + 10;
+            lblText.Width = this.Width - btnClose.Width - 3;
+            btnClose.Left = this.Width - btnClose.Width - 3;
         }
 
         #region Mouse Enter & Leave
@@ -49,20 +54,20 @@ namespace Trail.Controls {
             }
         }
 
-        private void btnClose_MouseLeave(object sender, EventArgs e) {
-            OnMouseLeave(e);
-        }
-
-        private void btnClose_MouseEnter(object sender, EventArgs e) {
-            OnMouseEnter(e);
-        }
-
         private void Tab_MouseEnter(object sender, EventArgs e) {
             btnClose.Visible = true;
         }
 
         private void Tab_MouseLeave(object sender, EventArgs e) {
             if (AutoHideClose) btnClose.Visible = false;
+        }
+
+        private void Control_MouseEnter(object sender, EventArgs e) {
+            OnMouseEnter(e);
+        }
+
+        private void Control_MouseLeave(object sender, EventArgs e) {
+            OnMouseLeave(e);
         }
 
         #endregion

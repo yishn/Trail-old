@@ -25,12 +25,15 @@ namespace Trail.Controls {
             }
         }
         public bool ShowNewTabButton { get { return btnAdd.Visible; } set { btnAdd.Visible = value; } }
+        public bool AllowNoTabs { get; set; }
 
         public event EventHandler CurrentTabChanged;
         public event EventHandler AddButtonClicked;
 
         public TabBar() {
             InitializeComponent();
+
+            this.AllowNoTabs = false;
             this.Tabs = new ObservableCollection<Tab>();
             this.AccentColor = Color.FromArgb(0, 122, 204);
             btnAdd.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 0, 0, 0);
@@ -40,6 +43,7 @@ namespace Trail.Controls {
         }
 
         public void RearrangeTabs() {
+            this.SuspendLayout();
             int left = 0;
 
             foreach (Tab t in this.Tabs) {
@@ -51,14 +55,19 @@ namespace Trail.Controls {
 
             pnlTabs.Width = left;
             btnAdd.Left = left;
+            this.ResumeLayout();
         }
 
         public void RecolorTabs() {
+            this.SuspendLayout();
+
             foreach (Tab t in this.Tabs) {
                 t.BackColor = t == CurrentTab ? this.AccentColor : this.BackColor;
                 t.ForeColor = t == CurrentTab ? Color.White : this.ForeColor;
                 t.AutoHideClose = t != CurrentTab;
             }
+
+            this.ResumeLayout();
         }
 
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
@@ -84,6 +93,8 @@ namespace Trail.Controls {
         }
 
         private void Tab_CloseButtonClick(object sender, EventArgs e) {
+            if (this.Tabs.Count == 1) return;
+
             int i = this.Tabs.IndexOf(sender as Tab);
             this.Tabs.RemoveAt(i);
 
@@ -109,7 +120,7 @@ namespace Trail.Controls {
         private void Tab_MouseEnter(object sender, EventArgs e) {
             Tab t = sender as Tab;
             if (this.CurrentTab == t) return;
-            t.BackColor = Color.FromArgb(180, this.AccentColor);
+            t.BackColor = Color.FromArgb(200, this.AccentColor);
             t.ForeColor = Color.White;
         }
 
