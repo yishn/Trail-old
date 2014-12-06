@@ -33,7 +33,7 @@
             this.pnlTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlTabs.Location = new System.Drawing.Point(0, 2);
             this.pnlTabs.Name = "pnlTabs";
-            this.pnlTabs.Size = new System.Drawing.Size(200, 20);
+            this.pnlTabs.Size = new System.Drawing.Size(0, 20);
             this.pnlTabs.TabIndex = 0;
             // 
             // pnlAccent
@@ -51,7 +51,7 @@
             this.btnAdd.FlatAppearance.BorderSize = 0;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(197, 2);
+            this.btnAdd.Location = new System.Drawing.Point(0, 2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(25, 20);
             this.btnAdd.TabIndex = 2;

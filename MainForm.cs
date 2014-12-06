@@ -10,17 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Columns;
 using Trail.Controls;
+using Trail.Modules;
 
 namespace Trail {
     public partial class MainForm : Form {
         public MainForm() {
             InitializeComponent();
 
-            tabBar1.Tabs.Add(new Tab() { Text = "System" });
-            tabBar1.Tabs.Add(new Tab() { Text = "Data" });
-            tabBar1.Tabs.Add(new Tab() { Text = "USB Drive" });
-            tabBar1.Tabs.Add(new Tab() { Text = "CD-Rom" });
-            tabBar1.CurrentTab = tabBar1.Tabs[1];
+            tabBar1_AddButtonClicked(tabBar1, EventArgs.Empty);
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
@@ -28,21 +25,20 @@ namespace Trail {
         }
 
         private void MainForm_Shown(object sender, EventArgs e) {
-            columnView.ScrollToLastColumn();
+            tabBar1.CurrentTab.ColumnView.ScrollToLastColumn();
         }
 
         private void tvSidebar_AfterSelect(object sender, TreeViewEventArgs e) {
             ColumnTreeNode node = e.Node as ColumnTreeNode;
             if (node.SubColumn == null) return;
 
-            columnView.Columns.Clear();
-            columnView.Columns.Add(node.SubColumn);
-
-            ItemsColumn c = node.SubColumn as ItemsColumn;
+            ItemsColumn c = (node.SubColumn as ItemsColumn).Duplicate();
+            tabBar1.CurrentTab.ColumnView.Columns.Clear();
+            tabBar1.CurrentTab.ColumnView.Columns.Add(c);
             c.LoadItems();
             tabBar1.CurrentTab.Text = c.HeaderText;
 
-            columnView.ScrollToFirstColumn();
+            tabBar1.CurrentTab.ColumnView.ScrollToFirstColumn();
         }
 
         private void columnView_SubColumnAdded(object sender, ItemsColumn column) {
@@ -50,7 +46,18 @@ namespace Trail {
         }
 
         private void tabBar1_AddButtonClicked(object sender, EventArgs e) {
-            Tab t = new Tab() { Text = tabBar1.CurrentTab.Text };
+            NavigatingColumnView columnView = new NavigatingColumnView() {
+                Dock = DockStyle.Fill,
+                ImageList = ilItems
+            };
+            columnView.SubColumnAdded += columnView_SubColumnAdded;
+            pnlSplit.Panel2.Controls.Add(columnView);
+            columnView.BringToFront();
+
+            NavigatingTab t = new NavigatingTab() { 
+                Text = "New Tab",
+                ColumnView = columnView
+            };
             tabBar1.AddTab(t);
             tabBar1.CurrentTab = t;
         }

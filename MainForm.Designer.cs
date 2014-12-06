@@ -28,9 +28,8 @@
             this.pnlSplit = new System.Windows.Forms.SplitContainer();
             this.tvSidebar = new Trail.Modules.Sidebar();
             this.ilSide = new System.Windows.Forms.ImageList(this.components);
-            this.columnView = new Trail.Modules.NavigatingColumnView();
             this.ilItems = new System.Windows.Forms.ImageList(this.components);
-            this.tabBar1 = new Trail.Controls.TabBar();
+            this.tabBar1 = new Trail.Modules.NavigatingTabBar();
             ((System.ComponentModel.ISupportInitialize)(this.pnlSplit)).BeginInit();
             this.pnlSplit.Panel1.SuspendLayout();
             this.pnlSplit.Panel2.SuspendLayout();
@@ -52,7 +51,6 @@
             // pnlSplit.Panel2
             // 
             this.pnlSplit.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlSplit.Panel2.Controls.Add(this.columnView);
             this.pnlSplit.Panel2.Controls.Add(this.tabBar1);
             this.pnlSplit.Size = new System.Drawing.Size(842, 382);
             this.pnlSplit.SplitterDistance = 196;
@@ -94,19 +92,6 @@
             this.ilSide.Images.SetKeyName(6, "removable");
             this.ilSide.Images.SetKeyName(7, "unknown");
             this.ilSide.Images.SetKeyName(8, "favorites");
-            // 
-            // columnView
-            // 
-            this.columnView.AutoScroll = true;
-            this.columnView.BackColor = System.Drawing.Color.White;
-            this.columnView.DefaultColumnWidth = 200;
-            this.columnView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.columnView.ImageList = this.ilItems;
-            this.columnView.Location = new System.Drawing.Point(0, 22);
-            this.columnView.Name = "columnView";
-            this.columnView.Size = new System.Drawing.Size(644, 360);
-            this.columnView.TabIndex = 1;
-            this.columnView.SubColumnAdded += new System.EventHandler<Trail.Columns.ItemsColumn>(this.columnView_SubColumnAdded);
             // 
             // ilItems
             // 
@@ -153,12 +138,8 @@
         private System.Windows.Forms.SplitContainer pnlSplit;
         private System.Windows.Forms.ImageList ilSide;
         private System.Windows.Forms.ImageList ilItems;
-        private Modules.NavigatingColumnView columnView;
         private Modules.Sidebar tvSidebar;
-        private Controls.TabBar tabBar1;
-
-
-
+        private Trail.Modules.NavigatingTabBar tabBar1;
     }
 }
 

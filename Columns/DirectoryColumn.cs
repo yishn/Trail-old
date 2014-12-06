@@ -119,5 +119,9 @@ namespace Trail.Columns {
             FileInfo fI = item.Tag as FileInfo;
             return Etier.IconHelper.IconReader.GetFileIcon(fI.FullName, Etier.IconHelper.IconReader.IconSize.Small, false).ToBitmap();
         }
+
+        public override ItemsColumn Duplicate() {
+            return new DirectoryColumn(this.Directory);
+        }
     }
 }

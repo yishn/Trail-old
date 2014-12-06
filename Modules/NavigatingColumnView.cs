@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,8 @@ namespace Trail.Modules {
         public event EventHandler<ItemsColumn> SubColumnAdded;
         
         public NavigatingColumnView() {
+            this.BackColor = Color.White;
+
             this.SubColumnAdded += NavigatingColumnView_SubColumnAdded;
             this.Columns.CollectionChanged += Columns_CollectionChanged;
         }
@@ -87,10 +90,12 @@ namespace Trail.Modules {
 
             if (c.ListViewControl.SelectedItems.Count == 1) {
                 // Add new column
-                this.Columns.Add(item.Column);
-                item.Column.Width = width;
+                ItemsColumn column = (item.Column as ItemsColumn).Duplicate();
+
+                this.Columns.Add(column);
+                column.Width = width;
                 this.ScrollPanel.ResumeLayout();
-                if (SubColumnAdded != null) SubColumnAdded(this, item.Column as ItemsColumn);
+                if (SubColumnAdded != null) SubColumnAdded(this, column);
             } else {
                 this.ScrollPanel.ResumeLayout();
             }

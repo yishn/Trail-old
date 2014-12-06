@@ -102,6 +102,12 @@
     <Compile Include="Modules\NavigatingColumnView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\NavigatingTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\NavigatingTabBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Modules\Sidebar.cs">
       <SubType>Component</SubType>
     </Compile>
