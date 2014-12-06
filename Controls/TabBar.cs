@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Trail.Fx;
+using System.Reflection;
 
 namespace Trail.Controls {
     public partial class TabBar : UserControl {
@@ -35,6 +36,9 @@ namespace Trail.Controls {
 
         public TabBar() {
             InitializeComponent();
+
+            var doubleBufferPropertyInfo = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            doubleBufferPropertyInfo.SetValue(this, true, null);
 
             this.AllowNoTabs = false;
             this.Tabs = new ObservableCollection<Tab>();

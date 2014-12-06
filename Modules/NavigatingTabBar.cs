@@ -20,6 +20,9 @@ namespace Trail.Modules {
 
             if (this.CurrentTab == null) return;
             this.CurrentTab.ColumnView.Visible = true;
+
+            if (this.CurrentTab.ColumnView.Columns.Count  != 0)
+                this.CurrentTab.ColumnView.Columns[this.CurrentTab.ColumnView.Columns.Count - 1].Focus();
         }
     }
 }
