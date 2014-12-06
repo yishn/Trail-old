@@ -1,0 +1,72 @@
+﻿namespace Trail.Controls {
+    partial class Tab {
+        /// <summary> 
+        /// Erforderliche Designervariable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Verwendete Ressourcen bereinigen.
+        /// </summary>
+        /// <param name="disposing">True, wenn verwaltete Ressourcen gelöscht werden sollen; andernfalls False.</param>
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Vom Komponenten-Designer generierter Code
+
+        /// <summary> 
+        /// Erforderliche Methode für die Designerunterstützung. 
+        /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
+        /// </summary>
+        private void InitializeComponent() {
+            this.lblText = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // lblText
+            // 
+            this.lblText.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblText.AutoSize = true;
+            this.lblText.Location = new System.Drawing.Point(3, 4);
+            this.lblText.Name = "lblText";
+            this.lblText.Size = new System.Drawing.Size(47, 13);
+            this.lblText.TabIndex = 0;
+            this.lblText.Text = "TabText";
+            this.lblText.SizeChanged += new System.EventHandler(this.lblText_SizeChanged);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(133, 0);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(20, 20);
+            this.btnClose.TabIndex = 1;
+            this.btnClose.Text = "";
+            this.btnClose.UseVisualStyleBackColor = false;
+            // 
+            // Tab
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.lblText);
+            this.Name = "Tab";
+            this.Size = new System.Drawing.Size(156, 20);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label lblText;
+        private System.Windows.Forms.Button btnClose;
+    }
+}

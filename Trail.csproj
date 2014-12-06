@@ -65,6 +65,18 @@
     <Compile Include="Columns\ItemsColumn.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\Tab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Tab.Designer.cs">
+      <DependentUpon>Tab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TabBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TabBar.Designer.cs">
+      <DependentUpon>TabBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\ItemsColumnListComparer.cs" />
     <Compile Include="Controls\ListViewModern.cs">
       <SubType>Component</SubType>
@@ -102,6 +114,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ColumnView.resx">
       <DependentUpon>ColumnView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Tab.resx">
+      <DependentUpon>Tab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TabBar.resx">
+      <DependentUpon>TabBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
