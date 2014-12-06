@@ -15,6 +15,10 @@ namespace Trail {
     public partial class MainForm : Form {
         public MainForm() {
             InitializeComponent();
+
+            tabBar1.Tabs.Add(new Tab() { Text = "System" });
+            tabBar1.Tabs.Add(new Tab() { Text = "Data" });
+            tabBar1.CurrentTab = tabBar1.Tabs[1];
         }
 
         private void MainForm_Load(object sender, EventArgs e) {

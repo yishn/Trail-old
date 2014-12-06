@@ -30,6 +30,7 @@
             this.ilSide = new System.Windows.Forms.ImageList(this.components);
             this.columnView = new Trail.Modules.NavigatingColumnView();
             this.ilItems = new System.Windows.Forms.ImageList(this.components);
+            this.tabBar1 = new Trail.Controls.TabBar();
             ((System.ComponentModel.ISupportInitialize)(this.pnlSplit)).BeginInit();
             this.pnlSplit.Panel1.SuspendLayout();
             this.pnlSplit.Panel2.SuspendLayout();
@@ -50,7 +51,9 @@
             // 
             // pnlSplit.Panel2
             // 
+            this.pnlSplit.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.pnlSplit.Panel2.Controls.Add(this.columnView);
+            this.pnlSplit.Panel2.Controls.Add(this.tabBar1);
             this.pnlSplit.Size = new System.Drawing.Size(842, 382);
             this.pnlSplit.SplitterDistance = 196;
             this.pnlSplit.SplitterWidth = 2;
@@ -99,9 +102,9 @@
             this.columnView.DefaultColumnWidth = 200;
             this.columnView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.columnView.ImageList = this.ilItems;
-            this.columnView.Location = new System.Drawing.Point(0, 0);
+            this.columnView.Location = new System.Drawing.Point(0, 24);
             this.columnView.Name = "columnView";
-            this.columnView.Size = new System.Drawing.Size(644, 382);
+            this.columnView.Size = new System.Drawing.Size(644, 358);
             this.columnView.TabIndex = 1;
             // 
             // ilItems
@@ -110,6 +113,16 @@
             this.ilItems.TransparentColor = System.Drawing.Color.Transparent;
             this.ilItems.Images.SetKeyName(0, ".folder");
             this.ilItems.Images.SetKeyName(1, ".file");
+            // 
+            // tabBar1
+            // 
+            this.tabBar1.AccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.tabBar1.CurrentTab = null;
+            this.tabBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tabBar1.Location = new System.Drawing.Point(0, 0);
+            this.tabBar1.Name = "tabBar1";
+            this.tabBar1.Size = new System.Drawing.Size(644, 24);
+            this.tabBar1.TabIndex = 2;
             // 
             // MainForm
             // 
@@ -138,6 +151,7 @@
         private System.Windows.Forms.ImageList ilItems;
         private Modules.NavigatingColumnView columnView;
         private Modules.Sidebar tvSidebar;
+        private Controls.TabBar tabBar1;
 
 
 
