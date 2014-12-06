@@ -41,8 +41,8 @@ namespace Trail.Controls {
 
             if (end == start) return;
 
-            this.ScrollAnimation.Start(start, end).Tick += (_, e) => {
-                ScrollPanel.HorizontalScroll.Value = e.Value;
+            this.ScrollAnimation.Start(start, end).Tick += (_, value) => {
+                ScrollPanel.HorizontalScroll.Value = value;
             };
             this.ScrollAnimation.Complete += (_, e) => {
                 column.Focus();
@@ -58,8 +58,8 @@ namespace Trail.Controls {
             int start = ScrollPanel.HorizontalScroll.Value;
             int end = 0;
 
-            this.ScrollAnimation.Start(start, end).Tick += (_, e) => {
-                ScrollPanel.HorizontalScroll.Value = e.Value;
+            this.ScrollAnimation.Start(start, end).Tick += (_, value) => {
+                ScrollPanel.HorizontalScroll.Value = value;
             };
             this.ScrollAnimation.Complete += (_, e) => {
                 this.Columns[0].Focus();

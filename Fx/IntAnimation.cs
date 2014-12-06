@@ -8,7 +8,7 @@ namespace Trail.Fx {
     public class IntAnimation : Animation {
         private int start, end;
 
-        public new event EventHandler<AnimationValueEventArgs<int>> Tick;
+        public new event EventHandler<int> Tick;
 
         public IntAnimation() : base() {
             base.Tick += IntAnimation_Tick;
@@ -17,9 +17,9 @@ namespace Trail.Fx {
             base.Tick += IntAnimation_Tick;
         }
 
-        private void IntAnimation_Tick(object sender, AnimationValueEventArgs<double> e) {
-            int value = start + (int)(e.Value * (end - start));
-            if (Tick != null) Tick(this, new AnimationValueEventArgs<int>(value));
+        private void IntAnimation_Tick(object sender, double e) {
+            int value = start + (int)(e * (end - start));
+            if (Tick != null) Tick(this, value);
         }
 
         public new IntAnimation Start() { return this.Start(0, 100); }

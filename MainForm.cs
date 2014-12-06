@@ -45,8 +45,8 @@ namespace Trail {
             columnView.ScrollToFirstColumn();
         }
 
-        private void columnView_SubColumnAdded(object sender, ColumnEventArgs e) {
-            tabBar1.CurrentTab.Text = e.Column.HeaderText;
+        private void columnView_SubColumnAdded(object sender, ItemsColumn column) {
+            tabBar1.CurrentTab.Text = column.HeaderText;
         }
     }
 }

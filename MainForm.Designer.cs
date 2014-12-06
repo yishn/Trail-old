@@ -106,7 +106,7 @@
             this.columnView.Name = "columnView";
             this.columnView.Size = new System.Drawing.Size(644, 358);
             this.columnView.TabIndex = 1;
-            this.columnView.SubColumnAdded += new System.EventHandler<Trail.Controls.ColumnEventArgs>(this.columnView_SubColumnAdded);
+            this.columnView.SubColumnAdded += new System.EventHandler<Trail.Columns.ItemsColumn>(this.columnView_SubColumnAdded);
             // 
             // ilItems
             // 
@@ -122,8 +122,7 @@
             this.tabBar1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabBar1.Location = new System.Drawing.Point(0, 0);
             this.tabBar1.Name = "tabBar1";
-            this.tabBar1.ShowNewTabButton = false;
-            this.tabBar1.Size = new System.Drawing.Size(644, 24);
+            this.tabBar1.Size = new System.Drawing.Size(644, 22);
             this.tabBar1.TabIndex = 2;
             // 
             // MainForm

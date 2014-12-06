@@ -11,7 +11,7 @@ namespace Trail.Fx {
         public int Duration { get; set; }
         public Func<double, double> AnimationFunction { get; set; }
 
-        public new event EventHandler<AnimationValueEventArgs<double>> Tick;
+        public new event EventHandler<double> Tick;
         public event EventHandler Complete;
 
         public Animation() : this(15) { }
@@ -32,7 +32,7 @@ namespace Trail.Fx {
 
             double time = 1.0 * timeCounter / Duration;
             double value = AnimationFunction(time);
-            if (Tick != null) Tick(this, new AnimationValueEventArgs<double>(value));
+            if (Tick != null) Tick(this, value);
 
             if (timeCounter == Duration) {
                 this.Enabled = false;

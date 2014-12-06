@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using Trail.Fx;
 
 namespace Trail.Controls {
     public partial class TabBar : UserControl {
         private Tab _currentTab = null;
+        private Animation _animation;
 
         public Color AccentColor { get { return pnlAccent.BackColor; } set { pnlAccent.BackColor = value; } }
         public ObservableCollection<Tab> Tabs { get; private set; }
@@ -25,15 +27,14 @@ namespace Trail.Controls {
             }
         }
         public bool ShowNewTabButton { get { return btnAdd.Visible; } set { btnAdd.Visible = value; } }
-        public bool AllowNoTabs { get; set; }
 
         public event EventHandler CurrentTabChanged;
         public event EventHandler AddButtonClicked;
+        public event EventHandler<Tab> TabClosed;
 
         public TabBar() {
             InitializeComponent();
 
-            this.AllowNoTabs = false;
             this.Tabs = new ObservableCollection<Tab>();
             this.AccentColor = Color.FromArgb(0, 122, 204);
             btnAdd.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 0, 0, 0);
@@ -93,13 +94,16 @@ namespace Trail.Controls {
         }
 
         private void Tab_CloseButtonClick(object sender, EventArgs e) {
-            if (this.Tabs.Count == 1) return;
+            if (_animation == null || !_animation.Enabled) _animation = new Animation();
+            else return;
 
             int i = this.Tabs.IndexOf(sender as Tab);
-            this.Tabs.RemoveAt(i);
-
             if (this.Tabs.Count == 0) this.CurrentTab = null;
             else if (this.CurrentTab == sender as Tab) this.CurrentTab = this.Tabs[Math.Max(i - 1, 0)];
+
+            this.Tabs.RemoveAt(i);
+
+            if (TabClosed != null) TabClosed(this, sender as Tab);
         }
 
         private void Tab_MouseClick(object sender, MouseEventArgs e) {

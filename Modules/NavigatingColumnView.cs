@@ -13,7 +13,7 @@ namespace Trail.Modules {
     public class NavigatingColumnView : ColumnView {
         private IconLoaderQueue _iconLoaderQueue = new IconLoaderQueue();
 
-        public event EventHandler<ColumnEventArgs> SubColumnAdded;
+        public event EventHandler<ItemsColumn> SubColumnAdded;
         
         public NavigatingColumnView() {
             this.SubColumnAdded += NavigatingColumnView_SubColumnAdded;
@@ -90,14 +90,13 @@ namespace Trail.Modules {
                 this.Columns.Add(item.Column);
                 item.Column.Width = width;
                 this.ScrollPanel.ResumeLayout();
-                if (SubColumnAdded != null) SubColumnAdded(this, new ColumnEventArgs(item.Column));
+                if (SubColumnAdded != null) SubColumnAdded(this, item.Column as ItemsColumn);
             } else {
                 this.ScrollPanel.ResumeLayout();
             }
         }
 
-        private void NavigatingColumnView_SubColumnAdded(object sender, ColumnEventArgs e) {
-            ItemsColumn column = e.Column as ItemsColumn;
+        private void NavigatingColumnView_SubColumnAdded(object sender, ItemsColumn column) {
             column.LoadItems();
             this.ScrollToLastColumn();
         }
