@@ -102,9 +102,9 @@
             this.columnView.DefaultColumnWidth = 200;
             this.columnView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.columnView.ImageList = this.ilItems;
-            this.columnView.Location = new System.Drawing.Point(0, 24);
+            this.columnView.Location = new System.Drawing.Point(0, 22);
             this.columnView.Name = "columnView";
-            this.columnView.Size = new System.Drawing.Size(644, 358);
+            this.columnView.Size = new System.Drawing.Size(644, 360);
             this.columnView.TabIndex = 1;
             this.columnView.SubColumnAdded += new System.EventHandler<Trail.Columns.ItemsColumn>(this.columnView_SubColumnAdded);
             // 
@@ -118,12 +118,15 @@
             // tabBar1
             // 
             this.tabBar1.AccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.tabBar1.AllowNoTabs = false;
             this.tabBar1.CurrentTab = null;
             this.tabBar1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabBar1.Location = new System.Drawing.Point(0, 0);
             this.tabBar1.Name = "tabBar1";
-            this.tabBar1.Size = new System.Drawing.Size(644, 22);
+            this.tabBar1.ShowNewTabButton = true;
+            this.tabBar1.Size = new System.Drawing.Size(644, 25);
             this.tabBar1.TabIndex = 2;
+            this.tabBar1.AddButtonClicked += new System.EventHandler(this.tabBar1_AddButtonClicked);
             // 
             // MainForm
             // 

@@ -86,6 +86,7 @@ namespace Trail.Controls {
 
             // Animation
             this.Tabs[i].BringToFront();
+            this.CurrentTab.BringToFront();
             int width = pnlTabs.Width;
             _animation.Tick += (_, value) => {
                 this.Tabs[i].Top = (int)(value * this.Tabs[i].Height);
@@ -103,6 +104,21 @@ namespace Trail.Controls {
             _animation.Complete += (_, evt) => {
                 this.Tabs.RemoveAt(i);
                 if (TabClosed != null) TabClosed(this, tab);
+            };
+            _animation.Start();
+        }
+
+        public void AddTab(Tab tab) {
+            if (_animation == null || !_animation.Enabled) _animation = new Animation();
+            else return;
+
+            int width = pnlTabs.Width;
+            this.Tabs.Add(tab);
+
+            _animation.Tick += (_, value) => {
+                pnlTabs.Width = width + (int)(value * tab.Width);
+                btnAdd.Left = pnlTabs.Width;
+                tab.Top = tab.Height - (int)(value * tab.Height);
             };
             _animation.Start();
         }
@@ -128,6 +144,8 @@ namespace Trail.Controls {
 
             RearrangeTabs();
         }
+
+        #region Tab functions
 
         private void Tab_CloseButtonClick(object sender, EventArgs e) {
             CloseTab(sender as Tab);
@@ -155,6 +173,8 @@ namespace Trail.Controls {
             t.BackColor = Color.FromArgb(200, this.AccentColor);
             t.ForeColor = Color.White;
         }
+
+        #endregion
 
         private void pnlAccent_MouseLeave(object sender, EventArgs e) {
             RecolorTabs();

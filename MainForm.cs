@@ -48,5 +48,11 @@ namespace Trail {
         private void columnView_SubColumnAdded(object sender, ItemsColumn column) {
             tabBar1.CurrentTab.Text = column.HeaderText;
         }
+
+        private void tabBar1_AddButtonClicked(object sender, EventArgs e) {
+            Tab t = new Tab() { Text = tabBar1.CurrentTab.Text };
+            tabBar1.AddTab(t);
+            tabBar1.CurrentTab = t;
+        }
     }
 }
