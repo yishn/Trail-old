@@ -16,8 +16,6 @@ namespace Trail.Columns {
 
         public DirectoryInfo Directory { get; set; }
 
-        public event EventHandler<ColumnListViewItem> WatcherObserved;
-
         public DirectoryColumn(DirectoryInfo directory) : base() {
             _watcher = new FileSystemWatcher(directory.FullName) {
                 IncludeSubdirectories = false,
@@ -38,7 +36,6 @@ namespace Trail.Columns {
             foreach (ColumnListViewItem item in ListViewControl.Items) {
                 if (item.Text != e.Name) continue;
                 item.Remove();
-                if (WatcherObserved != null) WatcherObserved(this, null);
                 break;
             }
         }
@@ -56,7 +53,7 @@ namespace Trail.Columns {
             ListViewControl.Items.Add(item);
             ListViewControl.Sort();
 
-            if (WatcherObserved != null) WatcherObserved(this, item);
+            OnLoadingCompleted(new RunWorkerCompletedEventArgs(null, null, false));
         }
 
         private void _watcher_Renamed(object sender, RenamedEventArgs e) {

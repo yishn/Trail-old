@@ -58,5 +58,9 @@ namespace Trail.Columns {
         private void worker_DoWork(object sender, DoWorkEventArgs e) {
             e.Result = LoadData(e);
         }
+
+        protected virtual void OnLoadingCompleted(RunWorkerCompletedEventArgs e) {
+            if (LoadingCompleted != null) LoadingCompleted(this, e);
+        }
     }
 }
