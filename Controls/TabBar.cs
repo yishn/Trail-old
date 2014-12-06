@@ -15,11 +15,14 @@ namespace Trail.Controls {
         public Color AccentColor { get { return pnlAccent.BackColor; } set { pnlAccent.BackColor = value; } }
         public ObservableCollection<Tab> Tabs { get; private set; }
         public Tab CurrentTab { get; set; }
+        public bool ShowNewTabButton { get { return btnAdd.Visible; } set { btnAdd.Visible = value; } }
 
         public TabBar() {
             InitializeComponent();
             this.Tabs = new ObservableCollection<Tab>();
             this.AccentColor = Color.FromArgb(0, 122, 204);
+            btnAdd.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 0, 0, 0);
+            btnAdd.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);
 
             this.Tabs.CollectionChanged += Tabs_CollectionChanged;
         }
@@ -38,6 +41,7 @@ namespace Trail.Controls {
             }
 
             pnlTabs.Width = left;
+            btnAdd.Left = left;
         }
 
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
@@ -46,6 +50,7 @@ namespace Trail.Controls {
                     pnlTabs.Controls.Add(t);
                     t.MouseEnter += Tab_MouseEnter;
                     t.MouseLeave += Tab_MouseLeave;
+                    t.SizeChanged += Tab_SizeChanged;
                 }
 
                 RearrangeTabs();
@@ -56,6 +61,10 @@ namespace Trail.Controls {
             } else if (e.Action == NotifyCollectionChangedAction.Reset) {
                 pnlTabs.Controls.Clear();
             }
+        }
+
+        private void Tab_SizeChanged(object sender, EventArgs e) {
+            RearrangeTabs();
         }
 
         private void Tab_MouseLeave(object sender, EventArgs e) {
