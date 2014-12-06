@@ -101,9 +101,27 @@ namespace Trail.Controls {
             if (this.Tabs.Count == 0) this.CurrentTab = null;
             else if (this.CurrentTab == sender as Tab) this.CurrentTab = this.Tabs[Math.Max(i - 1, 0)];
 
-            this.Tabs.RemoveAt(i);
+            // Animation
+            this.Tabs[i].BringToFront();
+            int width = pnlTabs.Width;
+            _animation.Tick += (_, value) => {
+                this.Tabs[i].Top = (int)(value * this.Tabs[i].Height);
+                
+                if (i + 1 < this.Tabs.Count)
+                    this.Tabs[i + 1].Left = this.Tabs[i].Right - (int)(value * this.Tabs[i].Width);
+                
+                for (int j = i + 2; j < this.Tabs.Count; j++) {
+                    this.Tabs[j].Left = this.Tabs[j - 1].Right;
+                }
 
-            if (TabClosed != null) TabClosed(this, sender as Tab);
+                pnlTabs.Width = width - (int)(value * this.Tabs[i].Width);
+                btnAdd.Left = pnlTabs.Right;
+            };
+            _animation.Complete += (_, evt) => {
+                this.Tabs.RemoveAt(i);
+                if (TabClosed != null) TabClosed(this, sender as Tab);
+            };
+            _animation.Start();
         }
 
         private void Tab_MouseClick(object sender, MouseEventArgs e) {
