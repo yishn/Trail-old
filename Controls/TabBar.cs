@@ -12,10 +12,21 @@ using System.Collections.Specialized;
 
 namespace Trail.Controls {
     public partial class TabBar : UserControl {
+        private Tab _currentTab = null;
+
         public Color AccentColor { get { return pnlAccent.BackColor; } set { pnlAccent.BackColor = value; } }
         public ObservableCollection<Tab> Tabs { get; private set; }
-        public Tab CurrentTab { get; set; }
+        public Tab CurrentTab {
+            get { return _currentTab; }
+            set {
+                _currentTab = value;
+                RecolorTabs();
+                if (CurrentTabChanged != null) CurrentTabChanged(this, new EventArgs());
+            }
+        }
         public bool ShowNewTabButton { get { return btnAdd.Visible; } set { btnAdd.Visible = value; } }
+
+        public event EventHandler CurrentTabChanged;
 
         public TabBar() {
             InitializeComponent();
@@ -33,15 +44,20 @@ namespace Trail.Controls {
             foreach (Tab t in this.Tabs) {
                 t.Top = 0;
                 t.Left = left;
-                t.BackColor = t == CurrentTab ? this.AccentColor : this.BackColor;
-                t.ForeColor = t == CurrentTab ? Color.White : this.ForeColor;
-                t.AutoHideClose = t != CurrentTab;
 
                 left += t.Width;
             }
 
             pnlTabs.Width = left;
             btnAdd.Left = left;
+        }
+
+        public void RecolorTabs() {
+            foreach (Tab t in this.Tabs) {
+                t.BackColor = t == CurrentTab ? this.AccentColor : this.BackColor;
+                t.ForeColor = t == CurrentTab ? Color.White : this.ForeColor;
+                t.AutoHideClose = t != CurrentTab;
+            }
         }
 
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
@@ -52,8 +68,6 @@ namespace Trail.Controls {
                     t.MouseLeave += Tab_MouseLeave;
                     t.SizeChanged += Tab_SizeChanged;
                 }
-
-                RearrangeTabs();
             } else if (e.Action == NotifyCollectionChangedAction.Remove) {
                 foreach (Tab t in e.OldItems) {
                     pnlTabs.Controls.Remove(t);
@@ -61,6 +75,8 @@ namespace Trail.Controls {
             } else if (e.Action == NotifyCollectionChangedAction.Reset) {
                 pnlTabs.Controls.Clear();
             }
+
+            RearrangeTabs();
         }
 
         private void Tab_SizeChanged(object sender, EventArgs e) {
@@ -79,6 +95,10 @@ namespace Trail.Controls {
             if (this.CurrentTab == t) return;
             t.BackColor = Color.FromArgb(180, this.AccentColor);
             t.ForeColor = Color.White;
+        }
+
+        private void pnlAccent_MouseLeave(object sender, EventArgs e) {
+            RecolorTabs();
         }
     }
 }

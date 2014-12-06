@@ -43,6 +43,7 @@
             this.pnlAccent.Name = "pnlAccent";
             this.pnlAccent.Size = new System.Drawing.Size(578, 2);
             this.pnlAccent.TabIndex = 1;
+            this.pnlAccent.MouseLeave += new System.EventHandler(this.pnlAccent_MouseLeave);
             // 
             // btnAdd
             // 

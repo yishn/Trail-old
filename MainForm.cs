@@ -21,7 +21,6 @@ namespace Trail {
             tabBar1.Tabs.Add(new Tab() { Text = "USB Drive" });
             tabBar1.Tabs.Add(new Tab() { Text = "CD-Rom" });
             tabBar1.CurrentTab = tabBar1.Tabs[1];
-            tabBar1.RearrangeTabs();
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
