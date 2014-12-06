@@ -31,6 +31,7 @@
             // 
             this.lblText.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblText.AutoSize = true;
+            this.lblText.BackColor = System.Drawing.Color.Transparent;
             this.lblText.Location = new System.Drawing.Point(3, 4);
             this.lblText.Name = "lblText";
             this.lblText.Size = new System.Drawing.Size(47, 13);
@@ -41,15 +42,20 @@
             // btnClose
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnClose.BackColor = System.Drawing.Color.Transparent;
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(133, 0);
+            this.btnClose.Location = new System.Drawing.Point(134, 0);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(20, 20);
             this.btnClose.TabIndex = 1;
             this.btnClose.Text = "";
             this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Visible = false;
+            this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
+            this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
             // 
             // Tab
             // 
@@ -59,6 +65,9 @@
             this.Controls.Add(this.lblText);
             this.Name = "Tab";
             this.Size = new System.Drawing.Size(156, 20);
+            this.Load += new System.EventHandler(this.Tab_Load);
+            this.MouseEnter += new System.EventHandler(this.Tab_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.Tab_MouseLeave);
             this.ResumeLayout(false);
             this.PerformLayout();
 

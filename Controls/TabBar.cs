@@ -28,19 +28,24 @@ namespace Trail.Controls {
             int left = 0;
 
             foreach (Tab t in this.Tabs) {
-                t.Top = 2;
+                t.Top = 0;
                 t.Left = left;
                 t.BackColor = t == CurrentTab ? this.AccentColor : this.BackColor;
                 t.ForeColor = t == CurrentTab ? Color.White : this.ForeColor;
+                t.AutoHideClose = t != CurrentTab;
 
                 left += t.Width;
             }
+
+            pnlTabs.Width = left;
         }
 
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             if (e.Action == NotifyCollectionChangedAction.Add) {
                 foreach (Tab t in e.NewItems) {
                     pnlTabs.Controls.Add(t);
+                    t.MouseEnter += Tab_MouseEnter;
+                    t.MouseLeave += Tab_MouseLeave;
                 }
 
                 RearrangeTabs();
@@ -53,8 +58,18 @@ namespace Trail.Controls {
             }
         }
 
-        private void TabBar_Resize(object sender, EventArgs e) {
-            RearrangeTabs();
+        private void Tab_MouseLeave(object sender, EventArgs e) {
+            Tab t = sender as Tab;
+            if (this.CurrentTab == t) return;
+            t.BackColor = this.BackColor;
+            t.ForeColor = this.ForeColor;
+        }
+
+        private void Tab_MouseEnter(object sender, EventArgs e) {
+            Tab t = sender as Tab;
+            if (this.CurrentTab == t) return;
+            t.BackColor = Color.FromArgb(180, this.AccentColor);
+            t.ForeColor = Color.White;
         }
     }
 }

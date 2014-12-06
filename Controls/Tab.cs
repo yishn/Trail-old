@@ -10,8 +10,16 @@ using System.Windows.Forms;
 
 namespace Trail.Controls {
     public partial class Tab : UserControl {
+        private bool _autoHideClose = true;
+
         public override string Text { get { return lblText.Text; } set { lblText.Text = value; } }
-        public bool Current { get; set; }
+        public bool AutoHideClose {
+            get { return _autoHideClose; }
+            set {
+                _autoHideClose = value;
+                btnClose.Visible = !_autoHideClose;
+            }
+        }
 
         public Tab() {
             InitializeComponent();
@@ -20,8 +28,41 @@ namespace Trail.Controls {
             btnClose.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);
         }
 
+        private void Tab_Load(object sender, EventArgs e) {
+            lblText_SizeChanged(sender, e);
+        }
+
         private void lblText_SizeChanged(object sender, EventArgs e) {
             this.Width = lblText.Width + btnClose.Width + 10;
+            btnClose.Left = lblText.Right + 5;
         }
+
+        #region Mouse Enter & Leave
+
+        protected override void OnMouseLeave(EventArgs e) {
+            if (this.ClientRectangle.Contains(this.PointToClient(Control.MousePosition)))
+                return;
+            else {
+                base.OnMouseLeave(e);
+            }
+        }
+
+        private void btnClose_MouseLeave(object sender, EventArgs e) {
+            OnMouseLeave(e);
+        }
+
+        private void btnClose_MouseEnter(object sender, EventArgs e) {
+            OnMouseEnter(e);
+        }
+
+        private void Tab_MouseEnter(object sender, EventArgs e) {
+            btnClose.Visible = true;
+        }
+
+        private void Tab_MouseLeave(object sender, EventArgs e) {
+            if (AutoHideClose) btnClose.Visible = false;
+        }
+
+        #endregion
     }
 }
