@@ -82,7 +82,7 @@ namespace Trail.Controls {
             if (i == -1) return;
 
             if (this.Tabs.Count == 0) this.CurrentTab = null;
-            else if (this.CurrentTab == tab) this.CurrentTab = this.Tabs[Math.Max(i - 1, 0)];
+            else if (this.CurrentTab == tab) this.CurrentTab = this.Tabs[i == 0 ? i + 1 : i - 1];
 
             // Animation
             this.Tabs[i].BringToFront();
