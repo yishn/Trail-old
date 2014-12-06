@@ -27,6 +27,7 @@ namespace Trail.Controls {
         public bool ShowNewTabButton { get { return btnAdd.Visible; } set { btnAdd.Visible = value; } }
 
         public event EventHandler CurrentTabChanged;
+        public event EventHandler AddButtonClicked;
 
         public TabBar() {
             InitializeComponent();
@@ -64,9 +65,12 @@ namespace Trail.Controls {
             if (e.Action == NotifyCollectionChangedAction.Add) {
                 foreach (Tab t in e.NewItems) {
                     pnlTabs.Controls.Add(t);
+
                     t.MouseEnter += Tab_MouseEnter;
                     t.MouseLeave += Tab_MouseLeave;
                     t.SizeChanged += Tab_SizeChanged;
+                    t.MouseClick += Tab_MouseClick;
+                    t.CloseButtonClick += Tab_CloseButtonClick;
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Remove) {
                 foreach (Tab t in e.OldItems) {
@@ -77,6 +81,18 @@ namespace Trail.Controls {
             }
 
             RearrangeTabs();
+        }
+
+        private void Tab_CloseButtonClick(object sender, EventArgs e) {
+            int i = this.Tabs.IndexOf(sender as Tab);
+            this.Tabs.RemoveAt(i);
+
+            if (this.Tabs.Count == 0) this.CurrentTab = null;
+            else if (this.CurrentTab == sender as Tab) this.CurrentTab = this.Tabs[Math.Max(i - 1, 0)];
+        }
+
+        private void Tab_MouseClick(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Left) this.CurrentTab = sender as Tab;
         }
 
         private void Tab_SizeChanged(object sender, EventArgs e) {
@@ -99,6 +115,10 @@ namespace Trail.Controls {
 
         private void pnlAccent_MouseLeave(object sender, EventArgs e) {
             RecolorTabs();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e) {
+            if (AddButtonClicked != null) AddButtonClicked(this, e);
         }
     }
 }

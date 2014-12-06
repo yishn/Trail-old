@@ -21,6 +21,8 @@ namespace Trail.Controls {
             }
         }
 
+        public event EventHandler CloseButtonClick;
+
         public Tab() {
             InitializeComponent();
 
@@ -64,5 +66,17 @@ namespace Trail.Controls {
         }
 
         #endregion
+
+        private void lblText_Click(object sender, EventArgs e) {
+            OnClick(e);
+        }
+
+        private void lblText_MouseClick(object sender, MouseEventArgs e) {
+            OnMouseClick(e);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e) {
+            if (CloseButtonClick != null) CloseButtonClick(this, e);
+        }
     }
 }

@@ -38,6 +38,8 @@
             this.lblText.TabIndex = 0;
             this.lblText.Text = "TabText";
             this.lblText.SizeChanged += new System.EventHandler(this.lblText_SizeChanged);
+            this.lblText.Click += new System.EventHandler(this.lblText_Click);
+            this.lblText.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblText_MouseClick);
             // 
             // btnClose
             // 
@@ -54,6 +56,7 @@
             this.btnClose.Text = "";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Visible = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
             this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
             // 

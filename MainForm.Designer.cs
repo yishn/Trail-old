@@ -121,6 +121,7 @@
             this.tabBar1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabBar1.Location = new System.Drawing.Point(0, 0);
             this.tabBar1.Name = "tabBar1";
+            this.tabBar1.ShowNewTabButton = false;
             this.tabBar1.Size = new System.Drawing.Size(644, 24);
             this.tabBar1.TabIndex = 2;
             // 
