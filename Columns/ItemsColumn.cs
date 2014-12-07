@@ -32,6 +32,10 @@ namespace Trail.Columns {
         public abstract void ItemActivated(ColumnListViewItem item);
         public abstract ItemsColumn Duplicate();
 
+        public virtual List<ItemsColumn> GetTrail() {
+            return new List<ItemsColumn>(new ItemsColumn[] { this });
+        }
+
         public virtual Image GetIcon(ColumnListViewItem item) {
             Icon i = Etier.IconHelper.IconReader.GetFileIcon(item.Text, Etier.IconHelper.IconReader.IconSize.Small, false);
             return i.ToBitmap();

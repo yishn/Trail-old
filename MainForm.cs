@@ -34,11 +34,9 @@ namespace Trail {
             if (node.SubColumn == null) return;
 
             ItemsColumn c = (node.SubColumn as ItemsColumn).Duplicate();
-            tabBar1.CurrentTab.ColumnView.Columns.Clear();
-            tabBar1.CurrentTab.ColumnView.Columns.Add(c);
-            c.LoadItems();
+            tabBar1.CurrentTab.ColumnView.NavigateTo(c.GetTrail());
             tabBar1.CurrentTab.Text = c.HeaderText;
-            tabBar1.CurrentTab.ColumnView.ScrollToFirstColumn();
+            tabBar1.CurrentTab.ColumnView.ScrollToLastColumn();
 
             tvSidebar.SelectedNode = null;
         }

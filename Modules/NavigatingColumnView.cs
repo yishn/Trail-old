@@ -76,6 +76,8 @@ namespace Trail.Modules {
             if (item.SubColumn == null) return;
 
             int i = this.Columns.IndexOf(c);
+            if (this.Columns.Count > i + 1 
+                && (this.Columns[i + 1] as ItemsColumn).ItemsPath == (item.SubColumn as ItemsColumn).ItemsPath) return;
 
             // Remove columns on the right
             int residueCount = this.Columns.Count - i - 1;

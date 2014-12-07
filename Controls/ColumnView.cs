@@ -39,14 +39,12 @@ namespace Trail.Controls {
             int end = column.Right + ScrollPanel.HorizontalScroll.Value - ScrollPanel.Width;
             end = Math.Max(Math.Min(end, ScrollPanel.HorizontalScroll.Maximum), start);
 
-            if (end == start) return;
-
             this.ScrollAnimation.Start(start, end).Tick += (_, value) => {
                 ScrollPanel.HorizontalScroll.Value = value;
             };
             this.ScrollAnimation.Complete += (_, e) => {
                 column.Focus();
-                UpdateScrollMinSize();
+                if (end != start) UpdateScrollMinSize();
             };
         }
 

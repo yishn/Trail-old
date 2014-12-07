@@ -118,6 +118,20 @@ namespace Trail.Columns {
             return Etier.IconHelper.IconReader.GetFileIcon(fI.FullName, Etier.IconHelper.IconReader.IconSize.Small, false).ToBitmap();
         }
 
+        public override List<ItemsColumn> GetTrail() {
+            DirectoryInfo current = this.Directory;
+            List<ItemsColumn> trail = new List<ItemsColumn>();
+            trail.Add(this);
+
+            while (current.Root.FullName != current.FullName) {
+                current = current.Parent;
+                trail.Add(new DirectoryColumn(current));
+            }
+
+            trail.Reverse();
+            return trail;
+        }
+
         public override ItemsColumn Duplicate() {
             return new DirectoryColumn(this.Directory);
         }
