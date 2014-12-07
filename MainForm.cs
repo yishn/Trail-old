@@ -22,7 +22,7 @@ namespace Trail {
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
-            tvSidebar.LoadDrives();
+            tvSidebar.Load();
         }
 
         private void MainForm_Shown(object sender, EventArgs e) {
@@ -38,8 +38,9 @@ namespace Trail {
             tabBar1.CurrentTab.ColumnView.Columns.Add(c);
             c.LoadItems();
             tabBar1.CurrentTab.Text = c.HeaderText;
-
             tabBar1.CurrentTab.ColumnView.ScrollToFirstColumn();
+
+            tvSidebar.SelectedNode = null;
         }
 
         private void columnView_SubColumnAdded(object sender, ItemsColumn column) {

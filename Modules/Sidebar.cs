@@ -21,34 +21,38 @@ namespace Trail.Modules {
             this.Indent = 19;
             this.ItemHeight = 22;
             this.Location = new Point(0, 0);
-
-            ColumnTreeNode node1 = new ColumnTreeNode() {
-                Text = "Favorites",
-                Name = "favorites",
-                ImageKey = "favorites",
-                SelectedImageKey = "favorites"
-            };
-            ColumnTreeNode node2 = new ColumnTreeNode() { 
-                Text = "Drives",
-                Name = "drives",
-                ImageKey = "drives",
-                SelectedImageKey = "drives"
-            };
-
-            this.Nodes.AddRange(new TreeNode[] {
-                node1,
-                node2
-            });
-
             this.SelectedImageIndex = 0;
             this.ShowLines = false;
             this.ShowNodeToolTips = true;
             this.Size = new Size(196, 382);
         }
 
+        public void Load() {
+            ColumnTreeNode node1 = new ColumnTreeNode() {
+                Text = "Favorites",
+                Name = "favorites",
+                ImageKey = "favorites",
+                SelectedImageKey = "favorites"
+            };
+            ColumnTreeNode node2 = new ColumnTreeNode() {
+                Text = "Drives",
+                Name = "drives",
+                ImageKey = "drives",
+                SelectedImageKey = "drives"
+            };
+
+            this.Nodes.Clear();
+            this.Nodes.AddRange(new TreeNode[] {
+                node1,
+                node2
+            });
+
+            LoadDrives();
+        }
+
         public void LoadDrives() {
-            TreeNode nodeDrives = this.Nodes["drives"];
-            nodeDrives.Nodes.Clear();
+            TreeNode drives = this.Nodes["drives"];
+            drives.Nodes.Clear();
 
             foreach (DriveInfo dI in DriveInfo.GetDrives()) {
                 if (!dI.IsReady) continue;
@@ -64,10 +68,15 @@ namespace Trail.Modules {
                 };
                 node.SelectedImageKey = node.ImageKey;
 
-                nodeDrives.Nodes.Add(node);
+                drives.Nodes.Add(node);
             }
 
-            nodeDrives.Expand();
+            drives.Expand();
+        }
+
+        public void LoadFavorites() {
+            TreeNode favorites = this.Nodes["favorites"];
+            favorites.Nodes.Clear();
         }
     }
 }
