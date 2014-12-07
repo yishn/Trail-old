@@ -33,7 +33,7 @@ namespace Trail {
             ColumnTreeNode node = e.Node as ColumnTreeNode;
             if (node.SubColumn == null) return;
 
-            ItemsColumn c = (node.SubColumn as ItemsColumn).Duplicate();
+            ItemsColumn c = node.SubColumn.Duplicate();
             tabBar1.CurrentTab.ColumnView.NavigateTo(c.GetTrail());
             tabBar1.CurrentTab.Text = c.HeaderText;
             tabBar1.CurrentTab.ColumnView.ScrollToLastColumn();

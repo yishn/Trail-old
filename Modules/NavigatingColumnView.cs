@@ -78,7 +78,7 @@ namespace Trail.Modules {
             // Don't add existing column
             int i = this.Columns.IndexOf(c);
             if (this.Columns.Count > i + 1 
-                && (this.Columns[i + 1] as ItemsColumn).ItemsPath == (item.SubColumn as ItemsColumn).ItemsPath) return;
+                && (this.Columns[i + 1] as ItemsColumn).ItemsPath == item.SubColumn.ItemsPath) return;
 
             // Remove columns on the right
             int residueCount = this.Columns.Count - i - 1;
@@ -92,7 +92,7 @@ namespace Trail.Modules {
 
             if (c.ListViewControl.SelectedItems.Count == 1) {
                 // Add new column
-                ItemsColumn column = (item.SubColumn as ItemsColumn).Duplicate();
+                ItemsColumn column = item.SubColumn.Duplicate();
 
                 this.Columns.Add(column);
                 column.Width = width;

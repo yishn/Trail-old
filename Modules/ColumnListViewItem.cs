@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Trail.Columns;
 
-namespace Trail.Controls {
+namespace Trail.Modules {
     public class ColumnListViewItem : ListViewItem {
-        public ColumnControl SubColumn { get; set; }
+        public ItemsColumn SubColumn { get; set; }
     }
 }

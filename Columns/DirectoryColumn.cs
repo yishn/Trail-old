@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Controls;
+using Trail.Modules;
 
 namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
