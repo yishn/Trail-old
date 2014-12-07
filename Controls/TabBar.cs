@@ -89,7 +89,7 @@ namespace Trail.Controls {
             else if (this.CurrentTab == tab) this.CurrentTab = this.Tabs[i == 0 ? i + 1 : i - 1];
 
             // Animation
-            this.Tabs[i].BringToFront();
+            this.Tabs[i].SendToBack();
             this.CurrentTab.BringToFront();
             int width = pnlTabs.Width;
 
@@ -138,6 +138,7 @@ namespace Trail.Controls {
                     t.MouseLeave += Tab_MouseLeave;
                     t.SizeChanged += Tab_SizeChanged;
                     t.MouseClick += Tab_MouseClick;
+                    t.MouseDown += Tab_MouseDown;
                     t.CloseButtonClick += Tab_CloseButtonClick;
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Remove) {
@@ -147,6 +148,10 @@ namespace Trail.Controls {
             } else if (e.Action == NotifyCollectionChangedAction.Reset) {
                 pnlTabs.Controls.Clear();
             }
+        }
+
+        private void Tab_MouseDown(object sender, MouseEventArgs e) {
+            throw new NotImplementedException();
         }
 
         #region Tab functions
