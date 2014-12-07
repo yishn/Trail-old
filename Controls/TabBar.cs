@@ -194,6 +194,8 @@ namespace Trail.Controls {
         }
 
         private void Tab_MouseUp(object sender, MouseEventArgs e) {
+            if (e.Button != MouseButtons.Left) return;
+
             Tab t = sender as Tab;
             int j = this.Tabs.IndexOf(t);
             int left = 0;
@@ -223,9 +225,7 @@ namespace Trail.Controls {
         }
 
         private void Tab_MouseClick(object sender, MouseEventArgs e) {
-            if (e.Button == MouseButtons.Left) {
-                if (this.CurrentTab != sender) this.CurrentTab = sender as Tab;
-            }
+            if (e.Button == MouseButtons.Left) this.CurrentTab = sender as Tab; 
             if (e.Button == MouseButtons.Middle) CloseTab(sender as Tab);
         }
 
