@@ -153,7 +153,7 @@ namespace Trail.Controls {
             }
         }
 
-        #region Tab rearrangement
+        #region Tab moving
 
         private int _mousePosLeft;
 
