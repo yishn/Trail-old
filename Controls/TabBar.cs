@@ -22,6 +22,7 @@ namespace Trail.Controls {
         public Tab CurrentTab {
             get { return _currentTab; }
             set {
+                if (_currentTab == value) return;
                 _currentTab = value;
                 RecolorTabs();
                 if (CurrentTabChanged != null) CurrentTabChanged(this, new EventArgs());
@@ -122,7 +123,7 @@ namespace Trail.Controls {
 
             _animation.Tick += (_, value) => {
                 pnlTabs.Width = width + (int)(value * tab.Width);
-                btnAdd.Left = pnlTabs.Width;
+                btnAdd.Left = pnlTabs.Right;
                 tab.Left = width;
                 tab.Top = tab.Height - (int)(value * tab.Height);
             };
@@ -139,6 +140,8 @@ namespace Trail.Controls {
                     t.SizeChanged += Tab_SizeChanged;
                     t.MouseClick += Tab_MouseClick;
                     t.MouseDown += Tab_MouseDown;
+                    t.MouseMove += Tab_MouseMove;
+                    t.MouseUp += Tab_MouseUp;
                     t.CloseButtonClick += Tab_CloseButtonClick;
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Remove) {
@@ -150,9 +153,68 @@ namespace Trail.Controls {
             }
         }
 
+        #region Tab rearrangement
+
+        private int _mousePosLeft;
+
         private void Tab_MouseDown(object sender, MouseEventArgs e) {
-            throw new NotImplementedException();
+            Tab t = sender as Tab;
+            t.BringToFront();
+            _mousePosLeft = Control.MousePosition.X;
         }
+
+        private void Tab_MouseMove(object sender, MouseEventArgs e) {
+            if (e.Button != MouseButtons.Left) return;
+
+            Tab t = sender as Tab;
+            t.Left = Math.Max(0, Math.Min(t.Left + Control.MousePosition.X - _mousePosLeft, pnlTabs.Width - t.Width));
+            _mousePosLeft = Control.MousePosition.X;
+
+            ObservableCollection<Tab> newTabs = new ObservableCollection<Tab>();
+
+            int left = 0;
+            bool currentAdded = false;
+            for (int i = 0; i < this.Tabs.Count; i++) {
+                if (this.Tabs[i] == t) continue;
+
+                if (!currentAdded && t.Left < left + this.Tabs[i].Width / 2) {
+                    left += t.Width;
+                    newTabs.Add(t);
+                    currentAdded = true;
+                }
+
+                newTabs.Add(this.Tabs[i]);
+                this.Tabs[i].Left = left;
+                left += this.Tabs[i].Width;
+            }
+            if (!currentAdded) newTabs.Add(t);
+
+            this.Tabs = newTabs;
+            newTabs.CollectionChanged += Tabs_CollectionChanged;
+        }
+
+        private void Tab_MouseUp(object sender, MouseEventArgs e) {
+            Tab t = sender as Tab;
+            int j = this.Tabs.IndexOf(t);
+            int left = 0;
+
+            for (int i = 0; i < j; i++) {
+                left += this.Tabs[i].Width;
+            }
+
+            _animation = new IntAnimation();
+            (_animation as IntAnimation).Tick += (_, value) => {
+                t.Left = value;
+            };
+            _animation.Complete += (_, evt) => {
+                RearrangeTabs();
+            };
+            (_animation as IntAnimation).Start(t.Left, left);
+
+            this.CurrentTab = t;
+        }
+
+        #endregion
 
         #region Tab functions
 
@@ -161,7 +223,9 @@ namespace Trail.Controls {
         }
 
         private void Tab_MouseClick(object sender, MouseEventArgs e) {
-            if (e.Button == MouseButtons.Left) this.CurrentTab = sender as Tab;
+            if (e.Button == MouseButtons.Left) {
+                if (this.CurrentTab != sender) this.CurrentTab = sender as Tab;
+            }
             if (e.Button == MouseButtons.Middle) CloseTab(sender as Tab);
         }
 

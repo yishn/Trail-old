@@ -39,8 +39,11 @@
             this.lblText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblText.Click += new System.EventHandler(this.lblText_Click);
             this.lblText.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblText_MouseClick);
+            this.lblText.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblText_MouseDown);
             this.lblText.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             this.lblText.MouseLeave += new System.EventHandler(this.Control_MouseLeave);
+            this.lblText.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lblText_MouseMove);
+            this.lblText.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lblText_MouseUp);
             // 
             // btnClose
             // 

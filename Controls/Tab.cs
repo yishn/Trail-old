@@ -76,6 +76,12 @@ namespace Trail.Controls {
 
         #endregion
 
+        private void btnClose_Click(object sender, EventArgs e) {
+            if (CloseButtonClick != null) CloseButtonClick(this, e);
+        }
+
+        #region Redirect events
+
         private void lblText_Click(object sender, EventArgs e) {
             OnClick(e);
         }
@@ -84,8 +90,18 @@ namespace Trail.Controls {
             OnMouseClick(e);
         }
 
-        private void btnClose_Click(object sender, EventArgs e) {
-            if (CloseButtonClick != null) CloseButtonClick(this, e);
+        private void lblText_MouseDown(object sender, MouseEventArgs e) {
+            OnMouseDown(e);
         }
+
+        private void lblText_MouseMove(object sender, MouseEventArgs e) {
+            OnMouseMove(e);
+        }
+
+        private void lblText_MouseUp(object sender, MouseEventArgs e) {
+            OnMouseUp(e);
+        }
+
+        #endregion
     }
 }
