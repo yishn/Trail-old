@@ -28,8 +28,8 @@
             this.pnlSplit = new System.Windows.Forms.SplitContainer();
             this.tvSidebar = new Trail.Modules.Sidebar();
             this.ilSide = new System.Windows.Forms.ImageList(this.components);
-            this.ilItems = new System.Windows.Forms.ImageList(this.components);
             this.tabBar1 = new Trail.Modules.NavigatingTabBar();
+            this.ilItems = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pnlSplit)).BeginInit();
             this.pnlSplit.Panel1.SuspendLayout();
             this.pnlSplit.Panel2.SuspendLayout();
@@ -93,13 +93,6 @@
             this.ilSide.Images.SetKeyName(7, "unknown");
             this.ilSide.Images.SetKeyName(8, "favorites");
             // 
-            // ilItems
-            // 
-            this.ilItems.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilItems.ImageStream")));
-            this.ilItems.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilItems.Images.SetKeyName(0, ".folder");
-            this.ilItems.Images.SetKeyName(1, ".file");
-            // 
             // tabBar1
             // 
             this.tabBar1.AccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
@@ -113,6 +106,13 @@
             this.tabBar1.TabIndex = 2;
             this.tabBar1.AddButtonClicked += new System.EventHandler(this.tabBar1_AddButtonClicked);
             // 
+            // ilItems
+            // 
+            this.ilItems.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilItems.ImageStream")));
+            this.ilItems.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilItems.Images.SetKeyName(0, ".folder");
+            this.ilItems.Images.SetKeyName(1, ".file");
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,6 +121,7 @@
             this.Controls.Add(this.pnlSplit);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Trail";
             this.Load += new System.EventHandler(this.MainForm_Load);
