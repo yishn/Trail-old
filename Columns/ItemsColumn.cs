@@ -14,9 +14,12 @@ namespace Trail.Columns {
     public abstract class ItemsColumn : ColumnControl {
         private BackgroundWorker _worker;
 
+        public string ItemsPath { get; private set; }
+
         public event RunWorkerCompletedEventHandler LoadingCompleted;
 
-        public ItemsColumn() {
+        public ItemsColumn(string itemsPath) {
+            this.ItemsPath = itemsPath;
             this.ListViewControl.ItemActivate += ListViewControl_ItemActivate;
             this.ListViewControl.ListViewItemSorter = new ItemsColumnListComparer();
         }

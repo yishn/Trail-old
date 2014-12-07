@@ -14,9 +14,10 @@ namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
         private FileSystemWatcher _watcher;
 
-        public DirectoryInfo Directory { get; set; }
+        public DirectoryInfo Directory { get; private set; }
 
-        public DirectoryColumn(DirectoryInfo directory) : base() {
+        public DirectoryColumn(string itemsPath) : this(new DirectoryInfo(itemsPath)) { }
+        public DirectoryColumn(DirectoryInfo directory) : base(directory.FullName) {
             _watcher = new FileSystemWatcher(directory.FullName) {
                 IncludeSubdirectories = false,
                 EnableRaisingEvents = false,
