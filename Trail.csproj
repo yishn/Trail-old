@@ -99,7 +99,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\IconLoaderQueue.cs">
+    <Compile Include="Modules\ItemsIconQueue.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Modules\NavigatingColumnView.cs">

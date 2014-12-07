@@ -75,6 +75,7 @@ namespace Trail.Modules {
             ColumnListViewItem item = c.ListViewControl.SelectedItems[0] as ColumnListViewItem;
             if (item.SubColumn == null) return;
 
+            // Don't add existing column
             int i = this.Columns.IndexOf(c);
             if (this.Columns.Count > i + 1 
                 && (this.Columns[i + 1] as ItemsColumn).ItemsPath == (item.SubColumn as ItemsColumn).ItemsPath) return;
