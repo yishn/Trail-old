@@ -10,12 +10,12 @@ using Trail.Columns;
 using Trail.Controls;
 
 namespace Trail.Modules {
-    public class IconLoaderQueue : BackgroundWorker {
+    public class ItemsIconQueue : BackgroundWorker {
         private Queue<ColumnListViewItem> _queue = new Queue<ColumnListViewItem>();
 
         public ImageList ImageList { get; set; }
 
-        public IconLoaderQueue() {
+        public ItemsIconQueue() {
             this.WorkerReportsProgress = true;
 
             this.DoWork += IconLoaderQueue_DoWork;
