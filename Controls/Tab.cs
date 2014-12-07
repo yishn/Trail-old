@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace Trail.Controls {
     public partial class Tab : UserControl {
@@ -31,6 +32,9 @@ namespace Trail.Controls {
 
         public Tab() {
             InitializeComponent();
+
+            var doubleBufferPropertyInfo = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            doubleBufferPropertyInfo.SetValue(this, true, null);
 
             btnClose.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 255, 255, 255);
             btnClose.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);

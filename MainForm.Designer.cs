@@ -109,7 +109,7 @@
             this.tabBar1.Location = new System.Drawing.Point(0, 0);
             this.tabBar1.Name = "tabBar1";
             this.tabBar1.ShowNewTabButton = true;
-            this.tabBar1.Size = new System.Drawing.Size(644, 25);
+            this.tabBar1.Size = new System.Drawing.Size(644, 22);
             this.tabBar1.TabIndex = 2;
             this.tabBar1.AddButtonClicked += new System.EventHandler(this.tabBar1_AddButtonClicked);
             // 

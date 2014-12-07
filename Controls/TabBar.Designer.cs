@@ -43,7 +43,6 @@
             this.pnlAccent.Name = "pnlAccent";
             this.pnlAccent.Size = new System.Drawing.Size(578, 2);
             this.pnlAccent.TabIndex = 1;
-            this.pnlAccent.MouseLeave += new System.EventHandler(this.pnlAccent_MouseLeave);
             // 
             // btnAdd
             // 
@@ -68,6 +67,7 @@
             this.Controls.Add(this.pnlAccent);
             this.Name = "TabBar";
             this.Size = new System.Drawing.Size(578, 24);
+            this.Load += new System.EventHandler(this.TabBar_Load);
             this.ResumeLayout(false);
 
         }

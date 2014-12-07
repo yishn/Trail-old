@@ -92,6 +92,7 @@ namespace Trail.Controls {
             this.Tabs[i].BringToFront();
             this.CurrentTab.BringToFront();
             int width = pnlTabs.Width;
+
             _animation.Tick += (_, value) => {
                 this.Tabs[i].Top = (int)(value * this.Tabs[i].Height);
 
@@ -122,6 +123,7 @@ namespace Trail.Controls {
             _animation.Tick += (_, value) => {
                 pnlTabs.Width = width + (int)(value * tab.Width);
                 btnAdd.Left = pnlTabs.Width;
+                tab.Left = width;
                 tab.Top = tab.Height - (int)(value * tab.Height);
             };
             _animation.Start();
@@ -145,8 +147,6 @@ namespace Trail.Controls {
             } else if (e.Action == NotifyCollectionChangedAction.Reset) {
                 pnlTabs.Controls.Clear();
             }
-
-            RearrangeTabs();
         }
 
         #region Tab functions
@@ -180,8 +180,8 @@ namespace Trail.Controls {
 
         #endregion
 
-        private void pnlAccent_MouseLeave(object sender, EventArgs e) {
-            RecolorTabs();
+        private void TabBar_Load(object sender, EventArgs e) {
+            RearrangeTabs();
         }
 
         private void btnAdd_Click(object sender, EventArgs e) {
