@@ -53,7 +53,7 @@ namespace Trail.Modules {
                 Image final = new Bitmap(20, 20);
                 Graphics g = Graphics.FromImage(final);
 
-                g.DrawImage(image, new Point(2, 2));
+                g.DrawImage(image, new Rectangle(2, 2, 16, 16));
                 this.ReportProgress(0, new Tuple<ColumnListViewItem, Image>(item, final));
 
                 g.Dispose();
