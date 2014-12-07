@@ -31,18 +31,6 @@ namespace Trail.Modules {
             }
         }
 
-        public void NavigateTo(DirectoryInfo directory) {
-            List<ItemsColumn> trail = new List<ItemsColumn>();
-            DirectoryInfo current = directory;
-
-            while (current.Root.FullName != current.FullName) {
-                trail.Add(new DirectoryColumn(current));
-                current = current.Parent;
-            }
-
-            trail.Reverse();
-            this.NavigateTo(trail);
-        }
         public void NavigateTo(List<ItemsColumn> trail) {
             this.Columns.Clear();
 
