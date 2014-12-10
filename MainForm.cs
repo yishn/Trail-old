@@ -15,6 +15,8 @@ using Trail.Modules;
 
 namespace Trail {
     public partial class MainForm : Form {
+        public static Persistence Persistence = new Persistence();
+
         public MainForm() {
             InitializeComponent();
 

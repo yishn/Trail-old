@@ -53,6 +53,7 @@
     <Compile Include="Controls\ColumnControl.Designer.cs">
       <DependentUpon>ColumnControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\JsonParser.cs" />
     <Compile Include="Modules\ColumnListViewItem.cs" />
     <Compile Include="Modules\ColumnTreeNode.cs" />
     <Compile Include="Controls\ColumnView.cs">
@@ -111,6 +112,7 @@
     <Compile Include="Modules\NavigatingTabBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\Persistence.cs" />
     <Compile Include="Modules\Sidebar.cs">
       <SubType>Component</SubType>
     </Compile>
