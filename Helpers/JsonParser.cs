@@ -413,12 +413,13 @@ namespace Json {
 
         internal static void SerializeObject(object item, StringBuilder sb) {
             var nested = (IDictionary<string, object>)item;
-            sb.Append("{");
+            sb.Append("{\n");
 
             var count = 0;
             foreach (var key in nested.Keys) {
+                sb.Append("    ");
                 SerializeString(sb, key.ToLower());
-                sb.Append(":");
+                sb.Append(": ");
 
                 var value = nested[key];
                 if (value is string) {
@@ -430,6 +431,7 @@ namespace Json {
                 if (count < nested.Keys.Count - 1) {
                     sb.Append(",");
                 }
+                sb.Append("\n");
                 count++;
             }
             sb.Append("}");
