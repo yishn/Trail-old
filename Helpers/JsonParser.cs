@@ -9,13 +9,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Json
-{
+namespace Json {
     /// <summary>
     /// Possible JSON tokens in parsed input.
     /// </summary>
-    public enum JsonToken
-    {
+    public enum JsonToken {
         Unknown,
         LeftBrace,
         RightBrace,
@@ -33,11 +31,9 @@ namespace Json
     /// <summary>
     /// Exception raised when <see cref="JsonParser" /> encounters an invalid token.
     /// </summary>
-    public class InvalidJsonException : Exception
-    {
+    public class InvalidJsonException : Exception {
         public InvalidJsonException(string message)
-            : base(message)
-        {
+            : base(message) {
 
         }
     }
@@ -126,8 +122,7 @@ namespace Json
     /// A parser for JSON.
     /// <seealso cref="http://json.org" />
     /// </summary>
-    public class JsonParser
-    {
+    public class JsonParser {
 #if !NETCF
         private const NumberStyles JsonNumbers = NumberStyles.Float;
 #endif
@@ -141,20 +136,17 @@ namespace Json
                                  'C', 'D', 'E', 'F'
                              };
 
-        static JsonParser()
-        {
+        static JsonParser() {
             _cache = new Dictionary<Type, PropertyInfo[]>(0);
         }
 
-        public static string Serialize<T>(T instance)
-        {
+        public static string Serialize<T>(T instance) {
             var bag = GetBagForObject(instance);
 
             return ToJson(bag);
         }
 
-        public static object Deserialize(string json, Type type)
-        {
+        public static object Deserialize(string json, Type type) {
             object instance;
             var map = PrepareInstance(out instance, type);
             var bag = FromJson(json);
@@ -163,8 +155,7 @@ namespace Json
             return instance;
         }
 
-        public static T Deserialize<T>(string json)
-        {
+        public static T Deserialize<T>(string json) {
             T instance;
             var map = PrepareInstance(out instance);
             var bag = FromJson(json);
@@ -198,39 +189,31 @@ namespace Json
 
         private static void DeserializeImpl(IEnumerable<PropertyInfo> map,
                                             IDictionary<string, object> bag,
-                                            object instance)
-        {
+                                            object instance) {
             DeserializeType(map, bag, instance);
         }
 
         private static void DeserializeImpl<T>(IEnumerable<PropertyInfo> map,
                                                IDictionary<string, object> bag,
-                                               T instance)
-        {
+                                               T instance) {
             DeserializeType(map, bag, instance);
         }
 
-        private static void DeserializeType(IEnumerable<PropertyInfo> map, IDictionary<string, object> bag, object instance)
-        {
-            foreach (var info in map)
-            {
+        private static void DeserializeType(IEnumerable<PropertyInfo> map, IDictionary<string, object> bag, object instance) {
+            foreach (var info in map) {
                 var key = info.Name;
-                if (!bag.ContainsKey(key))
-                {
+                if (!bag.ContainsKey(key)) {
                     key = info.Name.Replace("_", "");
-                    if (!bag.ContainsKey(key))
-                    {
+                    if (!bag.ContainsKey(key)) {
                         key = info.Name.Replace("-", "");
-                        if (!bag.ContainsKey(key))
-                        {
+                        if (!bag.ContainsKey(key)) {
                             continue;
                         }
                     }
                 }
 
                 var value = bag[key];
-                if (info.PropertyType == typeof(DateTime))
-                {
+                if (info.PropertyType == typeof(DateTime)) {
                     // Dates (Not part of spec, using lossy epoch convention)
                     var seconds = Int32.Parse(
                         value.ToString(), NumberStyles.Number, CultureInfo.InvariantCulture
@@ -239,24 +222,20 @@ namespace Json
                     value = time.AddSeconds(seconds);
                 }
 
-                if (info.PropertyType == typeof(byte[]))
-                {
+                if (info.PropertyType == typeof(byte[])) {
                     var bytes = (List<object>)value;
                     value = bytes.Select(Convert.ToByte).ToArray();
                 }
 
-                if (info.PropertyType == typeof(double))
-                {
+                if (info.PropertyType == typeof(double)) {
                     value = Convert.ToDouble(value);
                 }
 
-                if (info.PropertyType == typeof(int))
-                {
+                if (info.PropertyType == typeof(int)) {
                     value = Convert.ToInt32(value);
                 }
 
-                if (info.PropertyType == typeof(long))
-                {
+                if (info.PropertyType == typeof(long)) {
                     value = Convert.ToInt64(value);
                 }
 
@@ -264,14 +243,12 @@ namespace Json
             }
         }
 
-        public static IDictionary<string, object> FromJson(string json)
-        {
+        public static IDictionary<string, object> FromJson(string json) {
             JsonToken type;
 
             var result = FromJson(json, out type);
 
-            switch (type)
-            {
+            switch (type) {
                 case JsonToken.LeftBrace:
                     var @object = (IDictionary<string, object>)result.Single().Value;
                     return @object;
@@ -280,15 +257,13 @@ namespace Json
             return result;
         }
 
-        public static IDictionary<string, object> FromJson(string json, out JsonToken type)
-        {
+        public static IDictionary<string, object> FromJson(string json, out JsonToken type) {
             var data = json.ToCharArray();
             var index = 0;
 
             // Rewind index for first token
             var token = NextToken(data, ref index);
-            switch (token)
-            {
+            switch (token) {
                 case JsonToken.LeftBrace:   // Start Object
                 case JsonToken.LeftBracket: // Start Array
                     index--;
@@ -301,8 +276,7 @@ namespace Json
             return ParseObject(data, ref index);
         }
 
-        public static string ToJson(IDictionary<string, object> bag)
-        {
+        public static string ToJson(IDictionary<string, object> bag) {
             var sb = new StringBuilder(0);
 
             SerializeItem(sb, bag);
@@ -310,12 +284,10 @@ namespace Json
             return sb.ToString();
         }
 
-        internal static IDictionary<string, object> GetBagForObject(Type type, object instance)
-        {
+        internal static IDictionary<string, object> GetBagForObject(Type type, object instance) {
             CacheReflection(type);
 
-            if (type.FullName == null)
-            {
+            if (type.FullName == null) {
                 return null;
             }
 
@@ -323,11 +295,9 @@ namespace Json
             var map = _cache[type];
 
             IDictionary<string, object> bag = InitializeBag();
-            foreach (var info in map)
-            {
+            foreach (var info in map) {
                 var readWrite = (info.CanWrite && info.CanRead);
-                if (!readWrite && !anonymous)
-                {
+                if (!readWrite && !anonymous) {
                     continue;
                 }
                 var value = info.GetValue(instance, null);
@@ -337,20 +307,17 @@ namespace Json
             return bag;
         }
 
-        internal static IDictionary<string, object> GetBagForObject<T>(T instance)
-        {
+        internal static IDictionary<string, object> GetBagForObject<T>(T instance) {
             return GetBagForObject(typeof(T), instance);
         }
 
-        internal static Dictionary<string, object> InitializeBag()
-        {
+        internal static Dictionary<string, object> InitializeBag() {
             return new Dictionary<string, object>(
                 0, StringComparer.OrdinalIgnoreCase
                 );
         }
 
-        internal static IEnumerable<PropertyInfo> PrepareInstance(out object instance, Type type)
-        {
+        internal static IEnumerable<PropertyInfo> PrepareInstance(out object instance, Type type) {
             instance = Activator.CreateInstance(type);
 
             CacheReflection(type);
@@ -358,8 +325,7 @@ namespace Json
             return _cache[type];
         }
 
-        internal static IEnumerable<PropertyInfo> PrepareInstance<T>(out T instance)
-        {
+        internal static IEnumerable<PropertyInfo> PrepareInstance<T>(out T instance) {
             instance = Activator.CreateInstance<T>();
             var item = typeof(T);
 
@@ -368,10 +334,8 @@ namespace Json
             return _cache[item];
         }
 
-        internal static void CacheReflection(Type item)
-        {
-            if (_cache.ContainsKey(item))
-            {
+        internal static void CacheReflection(Type item) {
+            if (_cache.ContainsKey(item)) {
                 return;
             }
 
@@ -382,28 +346,23 @@ namespace Json
             _cache.Add(item, properties);
         }
 
-        internal static void SerializeItem(StringBuilder sb, object item)
-        {
-            if (item is IDictionary<string, object>)
-            {
+        internal static void SerializeItem(StringBuilder sb, object item) {
+            if (item is IDictionary<string, object>) {
                 SerializeObject(item, sb);
                 return;
             }
 
-            if (item is IEnumerable)
-            {
+            if (item is IEnumerable) {
                 SerializeArray(item, sb);
                 return;
             }
 
-            if (item is DateTime)
-            {
+            if (item is DateTime) {
                 SerializeDateTime(sb);
                 return;
             }
 
-            if (item is bool)
-            {
+            if (item is bool) {
                 sb.Append(((bool)item).ToString().ToLower());
                 return;
             }
@@ -416,14 +375,12 @@ namespace Json
                 sb.Append(number);
             }
 #else
-            if (double.TryParse(input, JsonNumbers, CultureInfo.InvariantCulture, out number))
-            {
+            if (double.TryParse(input, JsonNumbers, CultureInfo.InvariantCulture, out number)) {
                 sb.Append(number);
                 return;
             }
 #endif
-            if (item == null)
-            {
+            if (item == null) {
                 sb.Append("null");
                 return;
             }
@@ -432,55 +389,45 @@ namespace Json
             SerializeItem(sb, bag);
         }
 
-        internal static void SerializeDateTime(StringBuilder sb)
-        {
+        internal static void SerializeDateTime(StringBuilder sb) {
             var elapsed = DateTime.UtcNow - new DateTime(1970, 1, 1).ToUniversalTime();
             var epoch = (long)elapsed.TotalSeconds;
             SerializeString(sb, epoch);
         }
 
-        internal static void SerializeArray(object item, StringBuilder sb)
-        {
+        internal static void SerializeArray(object item, StringBuilder sb) {
             var array = (IEnumerable)item;
             sb.Append("[");
             var count = 0;
 
             var total = array.Cast<object>().Count();
-            foreach (var element in array)
-            {
+            foreach (var element in array) {
                 SerializeItem(sb, element);
                 count++;
-                if (count < total)
-                {
+                if (count < total) {
                     sb.Append(",");
                 }
             }
             sb.Append("]");
         }
 
-        internal static void SerializeObject(object item, StringBuilder sb)
-        {
+        internal static void SerializeObject(object item, StringBuilder sb) {
             var nested = (IDictionary<string, object>)item;
             sb.Append("{");
 
             var count = 0;
-            foreach (var key in nested.Keys)
-            {
+            foreach (var key in nested.Keys) {
                 SerializeString(sb, key.ToLower());
                 sb.Append(":");
 
                 var value = nested[key];
-                if (value is string)
-                {
+                if (value is string) {
                     SerializeString(sb, value);
-                }
-                else
-                {
+                } else {
                     SerializeItem(sb, nested[key]);
                 }
 
-                if (count < nested.Keys.Count - 1)
-                {
+                if (count < nested.Keys.Count - 1) {
                     sb.Append(",");
                 }
                 count++;
@@ -489,26 +436,22 @@ namespace Json
         }
 
 
-        internal static void SerializeString(StringBuilder sb, object item)
-        {
+        internal static void SerializeString(StringBuilder sb, object item) {
             sb.Append("\"");
             var symbols = item.ToString().ToCharArray();
-            
+
             var unicodes = symbols.Select(symbol => (int)symbol).Select(GetUnicode);
-            foreach (var unicode in unicodes)
-            {
+            foreach (var unicode in unicodes) {
                 sb.Append(unicode);
             }
 
             sb.Append("\"");
         }
 
-        internal static string GetUnicode(int code)
-        {
+        internal static string GetUnicode(int code) {
             // http://unicode.org/roadmaps/bmp/
             var basicLatin = code >= 32 && code <= 126;
-            if (basicLatin)
-            {
+            if (basicLatin) {
                 var value = (char)code;
                 return value == '"' ? @"\""" : new string(value, 1);
             }
@@ -517,23 +460,19 @@ namespace Json
             return string.Concat("\\u", unicode);
         }
 
-        internal static KeyValuePair<string, object> ParsePair(IList<char> data, ref int index)
-        {
+        internal static KeyValuePair<string, object> ParsePair(IList<char> data, ref int index) {
             var valid = true;
 
             var name = ParseString(data, ref index);
-            if (name == null)
-            {
+            if (name == null) {
                 valid = false;
             }
 
-            if (!ParseToken(JsonToken.Colon, data, ref index))
-            {
+            if (!ParseToken(JsonToken.Colon, data, ref index)) {
                 valid = false;
             }
 
-            if (!valid)
-            {
+            if (!valid) {
                 throw new InvalidJsonException(string.Format(
                             "Invalid JSON found while parsing a value pair at index {0}.", index
                             ));
@@ -544,34 +483,28 @@ namespace Json
             return new KeyValuePair<string, object>(name, value);
         }
 
-        internal static bool ParseToken(JsonToken token, IList<char> data, ref int index)
-        {
+        internal static bool ParseToken(JsonToken token, IList<char> data, ref int index) {
             var nextToken = NextToken(data, ref index);
             return token == nextToken;
         }
 
-        internal static string ParseString(IList<char> data, ref int index)
-        {
+        internal static string ParseString(IList<char> data, ref int index) {
             var symbol = data[index];
             IgnoreWhitespace(data, ref index, symbol);
             symbol = data[++index]; // Skip first quotation
 
             var sb = new StringBuilder();
-            while (true)
-            {
-                if (index >= data.Count - 1)
-                {
+            while (true) {
+                if (index >= data.Count - 1) {
                     return null;
                 }
-                switch (symbol)
-                {
+                switch (symbol) {
                     case '"':  // End String
                         index++;
                         return sb.ToString();
                     case '\\': // Control Character
                         symbol = data[++index];
-                        switch (symbol)
-                        {
+                        switch (symbol) {
                             case '/':
                                 sb.Append(symbol);
                                 break;
@@ -583,8 +516,7 @@ namespace Json
                             case 't':
                                 break;
                             case 'u': // Unicode literals
-                                if (index < data.Count - 5)
-                                {
+                                if (index < data.Count - 5) {
                                     var array = data.ToArray();
                                     var buffer = new char[4];
                                     Array.Copy(array, index + 1, buffer, 0, 4);
@@ -596,9 +528,7 @@ namespace Json
                                     var unicode = (char)Convert.ToInt32(hex, 16);
                                     sb.Append(unicode);
                                     index += 4;
-                                }
-                                else
-                                {
+                                } else {
                                     break;
                                 }
                                 break;
@@ -612,11 +542,9 @@ namespace Json
             }
         }
 
-        internal static object ParseValue(IList<char> data, ref int index)
-        {
+        internal static object ParseValue(IList<char> data, ref int index) {
             var token = NextToken(data, ref index);
-            switch (token)
-            {
+            switch (token) {
                 // End Tokens
                 case JsonToken.RightBracket:    // Bad Data
                 case JsonToken.RightBrace:
@@ -646,17 +574,14 @@ namespace Json
             }
         }
 
-        internal static IDictionary<string, object> ParseObject(IList<char> data, ref int index)
-        {
+        internal static IDictionary<string, object> ParseObject(IList<char> data, ref int index) {
             var result = InitializeBag();
 
             index++; // Skip first token
 
-            while (index < data.Count - 1)
-            {
+            while (index < data.Count - 1) {
                 var token = NextToken(data, ref index);
-                switch (token)
-                {
+                switch (token) {
                     // End Tokens
                     case JsonToken.Unknown:             // Bad Data
                     case JsonToken.True:
@@ -678,16 +603,14 @@ namespace Json
                     // Start Tokens
                     case JsonToken.LeftBrace:           // Start Object
                         var @object = ParseObject(data, ref index);
-                        if (@object != null)
-                        {
+                        if (@object != null) {
                             result.Add(string.Concat("object", result.Count), @object);
                         }
                         index++;
                         break;
                     case JsonToken.LeftBracket:         // Start Array
                         var @array = ParseArray(data, ref index);
-                        if (@array != null)
-                        {
+                        if (@array != null) {
                             result.Add(string.Concat("array", result.Count), @array);
                         }
                         index++;
@@ -704,16 +627,13 @@ namespace Json
             return result;
         }
 
-        internal static IEnumerable<object> ParseArray(IList<char> data, ref int index)
-        {
+        internal static IEnumerable<object> ParseArray(IList<char> data, ref int index) {
             var result = new List<object>();
 
             index++; // Skip first bracket
-            while (index < data.Count - 1)
-            {
+            while (index < data.Count - 1) {
                 var token = NextToken(data, ref index);
-                switch (token)
-                {
+                switch (token) {
                     // End Tokens
                     case JsonToken.Unknown:             // Bad Data
                         throw new InvalidJsonException(string.Format(
@@ -750,15 +670,13 @@ namespace Json
             return result;
         }
 
-        internal static object ParseNumber(IList<char> data, ref int index)
-        {
+        internal static object ParseNumber(IList<char> data, ref int index) {
             var symbol = data[index];
             IgnoreWhitespace(data, ref index, symbol);
 
             var start = index;
             var length = 0;
-            while (ParseToken(JsonToken.Number, data, ref index))
-            {
+            while (ParseToken(JsonToken.Number, data, ref index)) {
                 length++;
                 index++;
             }
@@ -776,8 +694,7 @@ namespace Json
                     );
             }
 #else
-            if (!double.TryParse(buffer, JsonNumbers, CultureInfo.InvariantCulture, out result))
-            {
+            if (!double.TryParse(buffer, JsonNumbers, CultureInfo.InvariantCulture, out result)) {
                 throw new InvalidJsonException(
                     string.Format("Value '{0}' was not a valid JSON number", buffer)
                     );
@@ -787,8 +704,7 @@ namespace Json
             return result;
         }
 
-        internal static JsonToken NextToken(IList<char> data, ref int index)
-        {
+        internal static JsonToken NextToken(IList<char> data, ref int index) {
             var symbol = data[index];
             var token = GetTokenFromSymbol(symbol);
             token = IgnoreWhitespace(data, ref index, ref token, symbol);
@@ -800,15 +716,12 @@ namespace Json
             return token;
         }
 
-        internal static JsonToken GetTokenFromSymbol(char symbol)
-        {
+        internal static JsonToken GetTokenFromSymbol(char symbol) {
             return GetTokenFromSymbol(symbol, JsonToken.Unknown);
         }
 
-        internal static JsonToken GetTokenFromSymbol(char symbol, JsonToken token)
-        {
-            switch (symbol)
-            {
+        internal static JsonToken GetTokenFromSymbol(char symbol, JsonToken token) {
+            switch (symbol) {
                 case '{':
                     token = JsonToken.LeftBrace;
                     break;
@@ -851,17 +764,14 @@ namespace Json
             return token;
         }
 
-        internal static void IgnoreWhitespace(IList<char> data, ref int index, char symbol)
-        {
+        internal static void IgnoreWhitespace(IList<char> data, ref int index, char symbol) {
             var token = JsonToken.Unknown;
             IgnoreWhitespace(data, ref index, ref token, symbol);
             return;
         }
 
-        internal static JsonToken IgnoreWhitespace(IList<char> data, ref int index, ref JsonToken token, char symbol)
-        {
-            switch (symbol)
-            {
+        internal static JsonToken IgnoreWhitespace(IList<char> data, ref int index, ref JsonToken token, char symbol) {
+            switch (symbol) {
                 case ' ':
                 case '\\':
                 case '/':
@@ -881,18 +791,14 @@ namespace Json
                                        JsonToken target,
                                        IList<char> data,
                                        ref int index,
-                                       ref JsonToken result)
-        {
+                                       ref JsonToken result) {
             var buffer = data.Count - index;
-            if (buffer < word.Length)
-            {
+            if (buffer < word.Length) {
                 return;
             }
 
-            for (var i = 0; i < word.Length; i++)
-            {
-                if (data[index + i] != word[i])
-                {
+            for (var i = 0; i < word.Length; i++) {
+                if (data[index + i] != word[i]) {
                     return;
                 }
             }
@@ -901,20 +807,17 @@ namespace Json
             index += word.Length;
         }
 
-        internal static string BaseConvert(int input, char[] charSet, int minLength)
-        {
+        internal static string BaseConvert(int input, char[] charSet, int minLength) {
             var sb = new StringBuilder();
             var @base = charSet.Length;
 
-            while (input > 0)
-            {
+            while (input > 0) {
                 var index = input % @base;
                 sb.Insert(0, new[] { charSet[index] });
                 input = input / @base;
             }
 
-            while (sb.Length < minLength)
-            {
+            while (sb.Length < minLength) {
                 sb.Insert(0, "0");
             }
 
