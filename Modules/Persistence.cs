@@ -29,19 +29,24 @@ namespace Trail.Modules {
                 reader.Close();
             }
 
-            Persistence.Preferences = new Dictionary<string, object>(Json.JsonParser.FromJson(json));
+            Preferences = new Dictionary<string, object>(Json.JsonParser.FromJson(json));
         }
 
         public static string GetPreference(string key) {
             return GetPreference<string>(key);
         }
         public static T GetPreference<T>(string key) {
-            return (T)Persistence.Preferences[key];
+            return (T)Preferences[key];
+        }
+
+        public static void SetPreference(string key, object value) {
+            Preferences[key] = value;
+            SaveData();
         }
 
         public static void CreatePreference(string key, object value) {
-            if (Persistence.Preferences.ContainsKey(key)) return;
-            Persistence.Preferences[key] = value;
+            if (Preferences.ContainsKey(key)) return;
+            Preferences[key] = value;
         }
     }
 }
