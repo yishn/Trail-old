@@ -17,17 +17,16 @@ namespace Trail {
     public partial class MainForm : Form {
         public MainForm() {
             InitializeComponent();
+            Persistence.LoadData();
 
-            tabBar1_AddButtonClicked(tabBar1, EventArgs.Empty);
+            tvSidebar.Load();
+
+            List<string> size = Persistence.GetPreferenceList("window.size");
+            this.Size = new Size(int.Parse(size[0]), int.Parse(size[1]));
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
-            tvSidebar.Load();
-            Persistence.LoadData();
-        }
-
-        private void MainForm_Shown(object sender, EventArgs e) {
-            tabBar1.CurrentTab.ColumnView.ScrollToLastColumn();
+            tabBar1_AddButtonClicked(tabBar1, EventArgs.Empty);
         }
 
         private void tvSidebar_AfterSelect(object sender, TreeViewEventArgs e) {

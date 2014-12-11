@@ -125,7 +125,6 @@
             this.Name = "MainForm";
             this.Text = "Trail";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.pnlSplit.Panel1.ResumeLayout(false);
             this.pnlSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlSplit)).EndInit();
