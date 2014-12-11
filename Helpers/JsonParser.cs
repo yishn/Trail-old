@@ -421,10 +421,13 @@ namespace Json {
 
         internal static void SerializeObject(object item, StringBuilder sb, int indent) {
             var nested = (IDictionary<string, object>)item;
+            var keys = nested.Keys.ToList();
+
             sb.Append("{\n");
+            keys.Sort();
 
             var count = 0;
-            foreach (var key in nested.Keys) {
+            foreach (var key in keys) {
                 for (int i = 1; i <= indent; i++) {
                     sb.Append("    ");
                 }
