@@ -59,8 +59,8 @@ namespace Trail.Modules {
             CreatePreference("column.file_exclude_patterns", new List<string>(new string[] { 
                 "desktop.ini", ".*"
             }));
-            CreatePreference("column.DirectoryColumn.individual_icon_files", new List<string>(new string[] { 
-                "*.exe", "*.ico"
+            CreatePreference("column.directorycolumn.individual_icon_files", new List<string>(new string[] { 
+                "*.exe", "*.ico", ".lnk"
             }));
             SaveData();
         }

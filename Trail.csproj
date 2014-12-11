@@ -53,6 +53,7 @@
     <Compile Include="Controls\ColumnControl.Designer.cs">
       <DependentUpon>ColumnControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\JsonParser.cs" />
     <Compile Include="Modules\ColumnListViewItem.cs" />
     <Compile Include="Modules\ColumnTreeNode.cs" />

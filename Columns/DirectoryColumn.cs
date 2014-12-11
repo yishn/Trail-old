@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Controls;
 using Trail.Modules;
+using Trail.Helpers;
 
 namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
@@ -71,7 +72,11 @@ namespace Trail.Columns {
             FileInfo fI = item.Tag as FileInfo;
             string ext = Path.GetExtension(fI.Name);
 
-            if (ext == "" || ext == ".exe" || ext == ".lnk" || ext == ".ico") return fI.FullName;
+            if (ext == "") return fI.FullName;
+            foreach (string pattern in Persistence.GetPreferenceList("column.directorycolumn.individual_icon_files")) {
+                if (ext.MatchesPattern(pattern)) return fI.FullName;
+            }
+
             return ext;
         }
 
