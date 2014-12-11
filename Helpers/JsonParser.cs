@@ -397,7 +397,7 @@ namespace Json {
 
         internal static void SerializeArray(object item, StringBuilder sb) {
             var array = (IEnumerable)item;
-            sb.Append("[");
+            sb.Append("[ ");
             var count = 0;
 
             var total = array.Cast<object>().Count();
@@ -405,10 +405,10 @@ namespace Json {
                 SerializeItem(sb, element);
                 count++;
                 if (count < total) {
-                    sb.Append(",");
+                    sb.Append(", ");
                 }
             }
-            sb.Append("]");
+            sb.Append(" ]");
         }
 
         internal static void SerializeObject(object item, StringBuilder sb) {
