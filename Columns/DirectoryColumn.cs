@@ -73,9 +73,9 @@ namespace Trail.Columns {
             string ext = Path.GetExtension(fI.Name);
 
             if (ext == "") return fI.FullName;
-            foreach (string pattern in Persistence.GetPreferenceList("column.directorycolumn.individual_icon_files")) {
-                if (ext.MatchesPattern(pattern)) return fI.FullName;
-            }
+
+            List<string> patterns = Persistence.GetPreferenceList("directorycolumn.individual_icon_files");
+            if (patterns.Any(x => fI.Name.MatchesPattern(x))) return fI.FullName;
 
             return ext;
         }
@@ -87,6 +87,9 @@ namespace Trail.Columns {
             foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
                 if (e.Cancel) return null;
 
+                List<string> patterns = Persistence.GetPreferenceList("directorycolumn.directory_exclude_patterns");
+                if (patterns.Any(x => dI.Name.MatchesPattern(x))) continue;
+
                 result.Add(new ColumnListViewItem() {
                     SubColumn = new DirectoryColumn(dI),
                     Text = dI.Name,
@@ -97,8 +100,10 @@ namespace Trail.Columns {
 
             foreach (FileInfo fI in this.Directory.GetFiles()) {
                 if (e.Cancel) return null;
-                string ext = Path.GetExtension(fI.FullName);
-                
+
+                List<string> patterns = Persistence.GetPreferenceList("directorycolumn.file_exclude_patterns");
+                if (patterns.Any(x => fI.Name.MatchesPattern(x))) continue;
+  
                 ColumnListViewItem item = new ColumnListViewItem() {
                     Text = fI.Name,
                     Tag = fI,
