@@ -15,8 +15,6 @@ using Trail.Modules;
 
 namespace Trail {
     public partial class MainForm : Form {
-        public static Persistence Persistence = new Persistence();
-
         public MainForm() {
             InitializeComponent();
 
@@ -25,6 +23,7 @@ namespace Trail {
 
         private void MainForm_Load(object sender, EventArgs e) {
             tvSidebar.Load();
+            Persistence.LoadData();
         }
 
         private void MainForm_Shown(object sender, EventArgs e) {
@@ -56,7 +55,7 @@ namespace Trail {
             pnlSplit.Panel2.Controls.Add(columnView);
             columnView.BringToFront();
 
-            NavigatingTab t = new NavigatingTab() { 
+            NavigatingTab t = new NavigatingTab() {
                 Text = "New Tab",
                 ColumnView = columnView
             };
