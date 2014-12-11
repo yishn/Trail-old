@@ -25,121 +25,121 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.pnlSplit = new System.Windows.Forms.SplitContainer();
-            this.tvSidebar = new Trail.Modules.Sidebar();
-            this.ilSide = new System.Windows.Forms.ImageList(this.components);
-            this.tabBar1 = new Trail.Modules.NavigatingTabBar();
-            this.ilItems = new System.Windows.Forms.ImageList(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.pnlSplit)).BeginInit();
-            this.pnlSplit.Panel1.SuspendLayout();
-            this.pnlSplit.Panel2.SuspendLayout();
-            this.pnlSplit.SuspendLayout();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.sidebar = new Trail.Modules.Sidebar();
+            this.sidebarImages = new System.Windows.Forms.ImageList(this.components);
+            this.tabBar = new Trail.Modules.NavigatingTabBar();
+            this.itemsImages = new System.Windows.Forms.ImageList(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
+            this.splitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlSplit
+            // splitContainer
             // 
-            this.pnlSplit.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pnlSplit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSplit.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.pnlSplit.Location = new System.Drawing.Point(0, 0);
-            this.pnlSplit.Name = "pnlSplit";
+            this.splitContainer.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer.Name = "splitContainer";
             // 
-            // pnlSplit.Panel1
+            // splitContainer.Panel1
             // 
-            this.pnlSplit.Panel1.Controls.Add(this.tvSidebar);
+            this.splitContainer.Panel1.Controls.Add(this.sidebar);
             // 
-            // pnlSplit.Panel2
+            // splitContainer.Panel2
             // 
-            this.pnlSplit.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlSplit.Panel2.Controls.Add(this.tabBar1);
-            this.pnlSplit.Size = new System.Drawing.Size(842, 382);
-            this.pnlSplit.SplitterDistance = 196;
-            this.pnlSplit.SplitterWidth = 2;
-            this.pnlSplit.TabIndex = 1;
-            this.pnlSplit.TabStop = false;
+            this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer.Panel2.Controls.Add(this.tabBar);
+            this.splitContainer.Size = new System.Drawing.Size(842, 382);
+            this.splitContainer.SplitterDistance = 196;
+            this.splitContainer.SplitterWidth = 2;
+            this.splitContainer.TabIndex = 1;
+            this.splitContainer.TabStop = false;
             // 
-            // tvSidebar
+            // sidebar
             // 
-            this.tvSidebar.BackColor = System.Drawing.SystemColors.Control;
-            this.tvSidebar.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tvSidebar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvSidebar.FullRowSelect = true;
-            this.tvSidebar.HideSelection = false;
-            this.tvSidebar.HotTracking = true;
-            this.tvSidebar.ImageIndex = 0;
-            this.tvSidebar.ImageList = this.ilSide;
-            this.tvSidebar.Indent = 19;
-            this.tvSidebar.ItemHeight = 22;
-            this.tvSidebar.Location = new System.Drawing.Point(0, 0);
-            this.tvSidebar.Name = "tvSidebar";
-            this.tvSidebar.SelectedImageIndex = 0;
-            this.tvSidebar.ShowLines = false;
-            this.tvSidebar.ShowNodeToolTips = true;
-            this.tvSidebar.Size = new System.Drawing.Size(196, 382);
-            this.tvSidebar.TabIndex = 0;
-            this.tvSidebar.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvSidebar_AfterSelect);
+            this.sidebar.BackColor = System.Drawing.SystemColors.Control;
+            this.sidebar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.sidebar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sidebar.FullRowSelect = true;
+            this.sidebar.HideSelection = false;
+            this.sidebar.HotTracking = true;
+            this.sidebar.ImageIndex = 0;
+            this.sidebar.ImageList = this.sidebarImages;
+            this.sidebar.Indent = 19;
+            this.sidebar.ItemHeight = 22;
+            this.sidebar.Location = new System.Drawing.Point(0, 0);
+            this.sidebar.Name = "sidebar";
+            this.sidebar.SelectedImageIndex = 0;
+            this.sidebar.ShowLines = false;
+            this.sidebar.ShowNodeToolTips = true;
+            this.sidebar.Size = new System.Drawing.Size(196, 382);
+            this.sidebar.TabIndex = 0;
+            this.sidebar.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvSidebar_AfterSelect);
             // 
-            // ilSide
+            // sidebarImages
             // 
-            this.ilSide.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilSide.ImageStream")));
-            this.ilSide.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilSide.Images.SetKeyName(0, "folder");
-            this.ilSide.Images.SetKeyName(1, "bookmarks");
-            this.ilSide.Images.SetKeyName(2, "drives");
-            this.ilSide.Images.SetKeyName(3, "drive");
-            this.ilSide.Images.SetKeyName(4, "disc");
-            this.ilSide.Images.SetKeyName(5, "network");
-            this.ilSide.Images.SetKeyName(6, "removable");
-            this.ilSide.Images.SetKeyName(7, "unknown");
-            this.ilSide.Images.SetKeyName(8, "favorites");
+            this.sidebarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("sidebarImages.ImageStream")));
+            this.sidebarImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.sidebarImages.Images.SetKeyName(0, "folder");
+            this.sidebarImages.Images.SetKeyName(1, "bookmarks");
+            this.sidebarImages.Images.SetKeyName(2, "drives");
+            this.sidebarImages.Images.SetKeyName(3, "drive");
+            this.sidebarImages.Images.SetKeyName(4, "disc");
+            this.sidebarImages.Images.SetKeyName(5, "network");
+            this.sidebarImages.Images.SetKeyName(6, "removable");
+            this.sidebarImages.Images.SetKeyName(7, "unknown");
+            this.sidebarImages.Images.SetKeyName(8, "favorites");
             // 
-            // tabBar1
+            // tabBar
             // 
-            this.tabBar1.AccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.tabBar1.AllowNoTabs = false;
-            this.tabBar1.CurrentTab = null;
-            this.tabBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tabBar1.Location = new System.Drawing.Point(0, 0);
-            this.tabBar1.Name = "tabBar1";
-            this.tabBar1.ShowNewTabButton = true;
-            this.tabBar1.Size = new System.Drawing.Size(644, 22);
-            this.tabBar1.TabIndex = 2;
-            this.tabBar1.AddButtonClicked += new System.EventHandler(this.tabBar1_AddButtonClicked);
+            this.tabBar.AccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.tabBar.AllowNoTabs = false;
+            this.tabBar.CurrentTab = null;
+            this.tabBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tabBar.Location = new System.Drawing.Point(0, 0);
+            this.tabBar.Name = "tabBar";
+            this.tabBar.ShowNewTabButton = true;
+            this.tabBar.Size = new System.Drawing.Size(644, 22);
+            this.tabBar.TabIndex = 2;
+            this.tabBar.AddButtonClicked += new System.EventHandler(this.tabBar1_AddButtonClicked);
             // 
-            // ilItems
+            // itemsImages
             // 
-            this.ilItems.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilItems.ImageStream")));
-            this.ilItems.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilItems.Images.SetKeyName(0, ".folder");
-            this.ilItems.Images.SetKeyName(1, ".file");
+            this.itemsImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("itemsImages.ImageStream")));
+            this.itemsImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.itemsImages.Images.SetKeyName(0, ".folder");
+            this.itemsImages.Images.SetKeyName(1, ".file");
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(842, 382);
-            this.Controls.Add(this.pnlSplit);
+            this.Controls.Add(this.splitContainer);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Trail";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.pnlSplit.Panel1.ResumeLayout(false);
-            this.pnlSplit.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pnlSplit)).EndInit();
-            this.pnlSplit.ResumeLayout(false);
+            this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
+            this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.SplitContainer pnlSplit;
-        private System.Windows.Forms.ImageList ilSide;
-        private System.Windows.Forms.ImageList ilItems;
-        private Modules.Sidebar tvSidebar;
-        private Trail.Modules.NavigatingTabBar tabBar1;
+        private System.Windows.Forms.SplitContainer splitContainer;
+        private System.Windows.Forms.ImageList sidebarImages;
+        private System.Windows.Forms.ImageList itemsImages;
+        private Modules.Sidebar sidebar;
+        private Trail.Modules.NavigatingTabBar tabBar;
     }
 }
 

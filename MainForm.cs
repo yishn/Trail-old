@@ -19,14 +19,14 @@ namespace Trail {
             InitializeComponent();
             Persistence.LoadData();
 
-            tvSidebar.Load();
+            sidebar.Load();
 
             List<string> size = Persistence.GetPreferenceList("window.size");
             this.Size = new Size(int.Parse(size[0]), int.Parse(size[1]));
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
-            tabBar1_AddButtonClicked(tabBar1, EventArgs.Empty);
+            tabBar1_AddButtonClicked(tabBar, EventArgs.Empty);
         }
 
         private void tvSidebar_AfterSelect(object sender, TreeViewEventArgs e) {
@@ -34,32 +34,32 @@ namespace Trail {
             if (node.SubColumn == null) return;
 
             ItemsColumn c = node.SubColumn.Duplicate();
-            tabBar1.CurrentTab.ColumnView.NavigateTo(c.GetTrail());
-            tabBar1.CurrentTab.Text = c.HeaderText;
-            tabBar1.CurrentTab.ColumnView.ScrollToLastColumn();
+            tabBar.CurrentTab.ColumnView.NavigateTo(c.GetTrail());
+            tabBar.CurrentTab.Text = c.HeaderText;
+            tabBar.CurrentTab.ColumnView.ScrollToLastColumn();
 
-            tvSidebar.SelectedNode = null;
+            sidebar.SelectedNode = null;
         }
 
         private void columnView_SubColumnAdded(object sender, ItemsColumn column) {
-            tabBar1.CurrentTab.Text = column.HeaderText;
+            tabBar.CurrentTab.Text = column.HeaderText;
         }
 
         private void tabBar1_AddButtonClicked(object sender, EventArgs e) {
             NavigatingColumnView columnView = new NavigatingColumnView() {
                 Dock = DockStyle.Fill,
-                ImageList = ilItems
+                ImageList = itemsImages
             };
             columnView.SubColumnAdded += columnView_SubColumnAdded;
-            pnlSplit.Panel2.Controls.Add(columnView);
+            splitContainer.Panel2.Controls.Add(columnView);
             columnView.BringToFront();
 
             NavigatingTab t = new NavigatingTab() {
                 Text = "New Tab",
                 ColumnView = columnView
             };
-            tabBar1.AddTab(t);
-            tabBar1.CurrentTab = t;
+            tabBar.AddTab(t);
+            tabBar.CurrentTab = t;
         }
     }
 }
