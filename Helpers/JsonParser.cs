@@ -349,7 +349,7 @@ namespace Json {
             _cache.Add(item, properties);
         }
 
-        internal static void SerializeItem(StringBuilder sb, object item) {
+        internal static void SerializeItem(StringBuilder sb, object item, int indent) {
             if (item is string) {
                 SerializeString(sb, item);
                 return;
