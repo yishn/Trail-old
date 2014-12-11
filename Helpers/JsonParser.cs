@@ -350,6 +350,11 @@ namespace Json {
         }
 
         internal static void SerializeItem(StringBuilder sb, object item) {
+            if (item is string) {
+                SerializeString(sb, item);
+                return;
+            }
+
             if (item is IDictionary<string, object>) {
                 SerializeObject(item, sb);
                 return;
