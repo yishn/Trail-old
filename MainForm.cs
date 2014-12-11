@@ -26,10 +26,10 @@ namespace Trail {
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
-            tabBar1_AddButtonClicked(tabBar, EventArgs.Empty);
+            tabBar_AddButtonClicked(tabBar, EventArgs.Empty);
         }
 
-        private void tvSidebar_AfterSelect(object sender, TreeViewEventArgs e) {
+        private void sidebar_AfterSelect(object sender, TreeViewEventArgs e) {
             ColumnTreeNode node = e.Node as ColumnTreeNode;
             if (node.SubColumn == null) return;
 
@@ -45,7 +45,7 @@ namespace Trail {
             tabBar.CurrentTab.Text = column.HeaderText;
         }
 
-        private void tabBar1_AddButtonClicked(object sender, EventArgs e) {
+        private void tabBar_AddButtonClicked(object sender, EventArgs e) {
             NavigatingColumnView columnView = new NavigatingColumnView() {
                 Dock = DockStyle.Fill,
                 ImageList = itemsImages
@@ -60,6 +60,10 @@ namespace Trail {
             };
             tabBar.AddTab(t);
             tabBar.CurrentTab = t;
+        }
+
+        private void MainForm_ResizeEnd(object sender, EventArgs e) {
+            Persistence.SetPreference("window.size", new List<object>(new object[] { this.Width, this.Height }));
         }
     }
 }
