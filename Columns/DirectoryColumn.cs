@@ -14,20 +14,20 @@ using Trail.Helpers;
 
 namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
-        private FileSystemWatcher _watcher;
+        private FileSystemWatcher watcher;
 
         public DirectoryInfo Directory { get; private set; }
 
         public DirectoryColumn(string itemsPath) : this(new DirectoryInfo(itemsPath)) { }
         public DirectoryColumn(DirectoryInfo directory) : base(directory.FullName) {
-            _watcher = new FileSystemWatcher(directory.FullName) {
+            watcher = new FileSystemWatcher(directory.FullName) {
                 IncludeSubdirectories = false,
                 EnableRaisingEvents = false,
                 SynchronizingObject = ListViewControl
             };
-            _watcher.Created += _watcher_Created;
-            _watcher.Deleted += _watcher_Deleted;
-            _watcher.Renamed += _watcher_Renamed;
+            watcher.Created += watcher_Created;
+            watcher.Deleted += watcher_Deleted;
+            watcher.Renamed += watcher_Renamed;
 
             this.Directory = directory;
             this.HeaderText = directory.Name;
@@ -35,7 +35,7 @@ namespace Trail.Columns {
 
         #region FileSystemWatcher methods
 
-        private void _watcher_Deleted(object sender, FileSystemEventArgs e) {
+        private void watcher_Deleted(object sender, FileSystemEventArgs e) {
             foreach (ColumnListViewItem item in ListViewControl.Items) {
                 if (item.Text != e.Name) continue;
                 item.Remove();
@@ -43,7 +43,7 @@ namespace Trail.Columns {
             }
         }
 
-        private void _watcher_Created(object sender, FileSystemEventArgs e) {
+        private void watcher_Created(object sender, FileSystemEventArgs e) {
             bool isDir = !File.Exists(e.FullPath);
 
             ColumnListViewItem item = new ColumnListViewItem() {
@@ -59,9 +59,9 @@ namespace Trail.Columns {
             OnLoadingCompleted(new RunWorkerCompletedEventArgs(null, null, false));
         }
 
-        private void _watcher_Renamed(object sender, RenamedEventArgs e) {
-            _watcher_Deleted(sender, new FileSystemEventArgs(WatcherChangeTypes.Deleted, Directory.FullName, e.OldName));
-            _watcher_Created(sender, new FileSystemEventArgs(WatcherChangeTypes.Created, Directory.FullName, e.Name));
+        private void watcher_Renamed(object sender, RenamedEventArgs e) {
+            watcher_Deleted(sender, new FileSystemEventArgs(WatcherChangeTypes.Deleted, Directory.FullName, e.OldName));
+            watcher_Created(sender, new FileSystemEventArgs(WatcherChangeTypes.Created, Directory.FullName, e.Name));
         }
 
         #endregion
@@ -81,7 +81,7 @@ namespace Trail.Columns {
         }
 
         protected override List<ColumnListViewItem> loadData(DoWorkEventArgs e) {
-            _watcher.EnableRaisingEvents = true;
+            watcher.EnableRaisingEvents = true;
             List<ColumnListViewItem> result = new List<ColumnListViewItem>();
 
             foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
