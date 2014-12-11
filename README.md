@@ -1,7 +1,11 @@
 Trail
 =====
 
+![Trail logo](logo.png)
+
 A column view file manager for Windows.
+
+![Trail screenshot](screenshot.png)
 
 Icons
 -----
