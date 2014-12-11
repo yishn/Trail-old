@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Trail.Modules {
     public class Persistence {
@@ -40,6 +41,18 @@ namespace Trail.Modules {
             }
 
             this.Preferences = new Dictionary<string, object>(Json.JsonParser.FromJson(json));
+        }
+
+        public string GetPreference(string key) {
+            return GetPreference<string>(key);
+        }
+        public T GetPreference<T>(string key) {
+            return (T)Preferences[key];
+        }
+
+        public void CreatePreference(string key, object value) {
+            if (Preferences.ContainsKey(key)) return;
+            Preferences[key] = value;
         }
     }
 }
