@@ -53,14 +53,14 @@ namespace Trail.Modules {
 
         private static void createDefaultData() {
             CreatePreference("window.size", new List<object>(new object[] { 850, 413 }));
-            CreatePreference("directorycolumn.directory_exclude_patterns", new List<string>(new string[] { 
+            CreatePreference("directorycolumn.directory_exclude_patterns", new List<object>(new object[] { 
                 "$RECYCLE.BIN", ".*", "System Volume Information"
             }));
-            CreatePreference("directorycolumn.file_exclude_patterns", new List<string>(new string[] { 
+            CreatePreference("directorycolumn.file_exclude_patterns", new List<object>(new object[] { 
                 "desktop.ini", ".*"
             }));
-            CreatePreference("directorycolumn.individual_icon_files", new List<string>(new string[] { 
-                "*.exe", "*.ico", ".lnk"
+            CreatePreference("directorycolumn.individual_icon_files", new List<object>(new object[] { 
+                "*.exe", "*.ico", "*.lnk", "*.msi"
             }));
             SaveData();
         }
