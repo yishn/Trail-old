@@ -17,12 +17,17 @@ namespace Trail {
     public partial class MainForm : Form {
         public MainForm() {
             InitializeComponent();
+
             Persistence.LoadData();
+            UpdatePreferences();
 
             sidebar.Load();
+        }
 
+        public void UpdatePreferences() {
             List<string> size = Persistence.GetPreferenceList("window.size");
             this.Size = new Size(int.Parse(size[0]), int.Parse(size[1]));
+            splitContainer.SplitterDistance = int.Parse(Persistence.GetPreferenceString("sidebar.width"));
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
@@ -64,6 +69,10 @@ namespace Trail {
 
         private void MainForm_ResizeEnd(object sender, EventArgs e) {
             Persistence.SetPreference("window.size", new List<object>(new object[] { this.Width, this.Height }));
+        }
+
+        private void splitContainer_SplitterMoved(object sender, SplitterEventArgs e) {
+            Persistence.SetPreference("sidebar.width", sidebar.Width);
         }
     }
 }

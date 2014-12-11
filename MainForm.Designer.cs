@@ -26,10 +26,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.sidebarImages = new System.Windows.Forms.ImageList(this.components);
-            this.itemsImages = new System.Windows.Forms.ImageList(this.components);
             this.sidebar = new Trail.Modules.Sidebar();
+            this.sidebarImages = new System.Windows.Forms.ImageList(this.components);
             this.tabBar = new Trail.Modules.NavigatingTabBar();
+            this.itemsImages = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -57,27 +57,7 @@
             this.splitContainer.SplitterWidth = 2;
             this.splitContainer.TabIndex = 1;
             this.splitContainer.TabStop = false;
-            // 
-            // sidebarImages
-            // 
-            this.sidebarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("sidebarImages.ImageStream")));
-            this.sidebarImages.TransparentColor = System.Drawing.Color.Transparent;
-            this.sidebarImages.Images.SetKeyName(0, "folder");
-            this.sidebarImages.Images.SetKeyName(1, "bookmarks");
-            this.sidebarImages.Images.SetKeyName(2, "drives");
-            this.sidebarImages.Images.SetKeyName(3, "drive");
-            this.sidebarImages.Images.SetKeyName(4, "disc");
-            this.sidebarImages.Images.SetKeyName(5, "network");
-            this.sidebarImages.Images.SetKeyName(6, "removable");
-            this.sidebarImages.Images.SetKeyName(7, "unknown");
-            this.sidebarImages.Images.SetKeyName(8, "favorites");
-            // 
-            // itemsImages
-            // 
-            this.itemsImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("itemsImages.ImageStream")));
-            this.itemsImages.TransparentColor = System.Drawing.Color.Transparent;
-            this.itemsImages.Images.SetKeyName(0, ".folder");
-            this.itemsImages.Images.SetKeyName(1, ".file");
+            this.splitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer_SplitterMoved);
             // 
             // sidebar
             // 
@@ -100,6 +80,20 @@
             this.sidebar.TabIndex = 0;
             this.sidebar.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.sidebar_AfterSelect);
             // 
+            // sidebarImages
+            // 
+            this.sidebarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("sidebarImages.ImageStream")));
+            this.sidebarImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.sidebarImages.Images.SetKeyName(0, "folder");
+            this.sidebarImages.Images.SetKeyName(1, "bookmarks");
+            this.sidebarImages.Images.SetKeyName(2, "drives");
+            this.sidebarImages.Images.SetKeyName(3, "drive");
+            this.sidebarImages.Images.SetKeyName(4, "disc");
+            this.sidebarImages.Images.SetKeyName(5, "network");
+            this.sidebarImages.Images.SetKeyName(6, "removable");
+            this.sidebarImages.Images.SetKeyName(7, "unknown");
+            this.sidebarImages.Images.SetKeyName(8, "favorites");
+            // 
             // tabBar
             // 
             this.tabBar.AccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
@@ -112,6 +106,13 @@
             this.tabBar.Size = new System.Drawing.Size(644, 22);
             this.tabBar.TabIndex = 2;
             this.tabBar.AddButtonClicked += new System.EventHandler(this.tabBar_AddButtonClicked);
+            // 
+            // itemsImages
+            // 
+            this.itemsImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("itemsImages.ImageStream")));
+            this.itemsImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.itemsImages.Images.SetKeyName(0, ".folder");
+            this.itemsImages.Images.SetKeyName(1, ".file");
             // 
             // MainForm
             // 
