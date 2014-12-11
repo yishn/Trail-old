@@ -282,7 +282,7 @@ namespace Json {
         public static string ToJson(IDictionary<string, object> bag) {
             var sb = new StringBuilder(0);
 
-            SerializeItem(sb, bag);
+            SerializeItem(sb, bag, 1);
 
             return sb.ToString();
         }
@@ -356,7 +356,7 @@ namespace Json {
             }
 
             if (item is IDictionary<string, object>) {
-                SerializeObject(item, sb);
+                SerializeObject(item, sb, indent);
                 return;
             }
 
@@ -394,7 +394,7 @@ namespace Json {
             }
 
             var bag = GetBagForObject(item.GetType(), item);
-            SerializeItem(sb, bag);
+            SerializeItem(sb, bag, indent + 1);
         }
 
         internal static void SerializeDateTime(StringBuilder sb) {
@@ -410,7 +410,7 @@ namespace Json {
 
             var total = array.Cast<object>().Count();
             foreach (var element in array) {
-                SerializeItem(sb, element);
+                SerializeItem(sb, element, 1);
                 count++;
                 if (count < total) {
                     sb.Append(", ");
@@ -419,13 +419,16 @@ namespace Json {
             sb.Append(" ]");
         }
 
-        internal static void SerializeObject(object item, StringBuilder sb) {
+        internal static void SerializeObject(object item, StringBuilder sb, int indent) {
             var nested = (IDictionary<string, object>)item;
             sb.Append("{\n");
 
             var count = 0;
             foreach (var key in nested.Keys) {
-                sb.Append("    ");
+                for (int i = 1; i <= indent; i++) {
+                    sb.Append("    ");
+                }
+                
                 SerializeString(sb, key.ToLower());
                 sb.Append(": ");
 
@@ -433,7 +436,7 @@ namespace Json {
                 if (value is string) {
                     SerializeString(sb, value);
                 } else {
-                    SerializeItem(sb, nested[key]);
+                    SerializeItem(sb, nested[key], 1);
                 }
 
                 if (count < nested.Keys.Count - 1) {
@@ -441,6 +444,10 @@ namespace Json {
                 }
                 sb.Append("\n");
                 count++;
+            }
+
+            for (int i = 1; i <= indent - 1; i++) {
+                sb.Append("    ");
             }
             sb.Append("}");
         }
