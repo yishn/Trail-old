@@ -28,7 +28,7 @@ namespace Trail.Columns {
             ItemActivated(ListViewControl.SelectedItems[0] as ColumnListViewItem);
         }
 
-        public abstract List<ColumnListViewItem> LoadData(DoWorkEventArgs e);
+        protected abstract List<ColumnListViewItem> loadData(DoWorkEventArgs e);
         public abstract void ItemActivated(ColumnListViewItem item);
         public abstract ItemsColumn Duplicate();
 
@@ -63,7 +63,7 @@ namespace Trail.Columns {
         }
 
         private void worker_DoWork(object sender, DoWorkEventArgs e) {
-            e.Result = LoadData(e);
+            e.Result = loadData(e);
         }
 
         protected virtual void OnLoadingCompleted(RunWorkerCompletedEventArgs e) {

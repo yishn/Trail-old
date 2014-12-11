@@ -75,7 +75,7 @@ namespace Trail.Columns {
             return ext;
         }
 
-        public override List<ColumnListViewItem> LoadData(DoWorkEventArgs e) {
+        protected override List<ColumnListViewItem> loadData(DoWorkEventArgs e) {
             _watcher.EnableRaisingEvents = true;
             List<ColumnListViewItem> result = new List<ColumnListViewItem>();
 
