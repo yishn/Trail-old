@@ -38,94 +38,12 @@ namespace Json {
         }
     }
 
-#if NET40
-    public interface IJson { }
-
-    public class JsonArray : DynamicObject, IEnumerable, IJson
-    {
-        private readonly List<IJson> _collection;
-
-        public JsonArray(ICollection<object> collection)
-        {
-            _collection = new List<IJson>(collection.Count);
-            foreach (var instance in collection.Cast<IDictionary<string, object>>())
-            {
-                _collection.Add(new JsonObject(instance));
-            }
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            return _collection.GetEnumerator();
-        }
-    }
-
-    public class JsonObject : DynamicObject, IJson
-    {
-        private readonly IDictionary<string, object> _hash = new Dictionary<string, object>();
-
-        public JsonObject(IDictionary<string, object> hash)
-        {
-            _hash = hash;
-        }
-
-        public override bool TrySetMember(SetMemberBinder binder, object value)
-        {
-            var name = Underscored(binder.Name);
-            _hash[name] = value;
-            return _hash[name] == value;
-        }
-
-        public override bool TryGetMember(GetMemberBinder binder, out object result)
-        {
-            var name = Underscored(binder.Name);
-            return YieldMember(name, out result);
-        }
-
-        private bool YieldMember(string name, out object result)
-        {
-            if (_hash.ContainsKey(name))
-            {
-                result = _hash[name];
-
-                if (result is IDictionary<string, object>)
-                {
-                    result = new JsonObject((IDictionary<string, object>)result);
-                    return true;
-                }
-
-                return _hash[name] == result;
-            }
-            result = null;
-            return false;
-        }
-
-        private static string Underscored(IEnumerable<char> pascalCase)
-        {
-            var sb = new StringBuilder();
-            var i = 0;
-            foreach (var c in pascalCase)
-            {
-                if (char.IsUpper(c) && i > 0)
-                {
-                    sb.Append("_");
-                }
-                sb.Append(c);
-                i++;
-            }
-            return sb.ToString().ToLowerInvariant();
-        }
-    }
-#endif
-
     /// <summary>
     /// A parser for JSON.
     /// <seealso cref="http://json.org" />
     /// </summary>
     public class JsonParser {
-#if !NETCF
         private const NumberStyles JsonNumbers = NumberStyles.Float;
-#endif
         private static readonly IDictionary<Type, PropertyInfo[]> _cache;
 
         private static readonly char[] _base16 = new[]
@@ -166,29 +84,6 @@ namespace Json {
             DeserializeImpl(map, bag, instance);
             return instance;
         }
-
-#if NET40
-        public static dynamic Deserialize(string json)
-        {
-            JsonToken type;
-            var inner = FromJson(json, out type);
-            dynamic instance = null;
-
-            switch (type)
-            {
-                case JsonToken.LeftBrace:
-                    var @object = (IDictionary<string, object>)inner.Single().Value;
-                    instance = new JsonObject(@object);
-                    break;
-                case JsonToken.LeftBracket:
-                    var @array = (IList<object>)inner.Single().Value;
-                    instance = new JsonArray(@array);
-                    break;
-            }
-
-            return instance;
-        }
-#endif
 
         private static void DeserializeImpl(IEnumerable<PropertyInfo> map,
                                             IDictionary<string, object> bag,
@@ -844,26 +739,5 @@ namespace Json {
             return sb.ToString();
         }
     }
-
-#if NETCF
-    public static class CompactExtensions
-    {
-        private const NumberStyles JsonNumbers = NumberStyles.Float;
-
-        public static bool TryParse(this string input, out double result)
-        {
-            try
-            {
-                result = double.Parse(input, JsonNumbers, CultureInfo.InvariantCulture);
-                return true;
-            }
-            catch (Exception)
-            {
-                result = 0;
-                return false;
-            }
-        }
-    }
-#endif
 }
 
