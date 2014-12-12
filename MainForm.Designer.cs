@@ -25,7 +25,7 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.splitContainer = new Trail.Controls.SplitContainerModern();
             this.sidebar = new Trail.Modules.Sidebar();
             this.sidebarImages = new System.Windows.Forms.ImageList(this.components);
             this.tabBar = new Trail.Modules.NavigatingTabBar();
@@ -137,7 +137,7 @@
 
         #endregion
 
-        private System.Windows.Forms.SplitContainer splitContainer;
+        private Trail.Controls.SplitContainerModern splitContainer;
         private System.Windows.Forms.ImageList sidebarImages;
         private System.Windows.Forms.ImageList itemsImages;
         private Modules.Sidebar sidebar;
