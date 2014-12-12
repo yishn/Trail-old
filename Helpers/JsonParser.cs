@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-#if NET40
-using System.Dynamic;
-#endif
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -595,20 +592,12 @@ namespace Json {
 
             double result;
             var buffer = new string(number);
-#if NETCF
-            if (!buffer.TryParse(out result))
-            {
-                throw new InvalidJsonException(
-                    string.Format("Value '{0}' was not a valid JSON number", buffer)
-                    );
-            }
-#else
+
             if (!double.TryParse(buffer, JsonNumbers, CultureInfo.InvariantCulture, out result)) {
                 throw new InvalidJsonException(
                     string.Format("Value '{0}' was not a valid JSON number", buffer)
                     );
             }
-#endif
 
             return result;
         }
