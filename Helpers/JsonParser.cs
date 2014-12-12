@@ -272,17 +272,11 @@ namespace Json {
 
             double number;
             var input = item != null ? item.ToString() : "";
-#if NETCF
-            if (input.TryParse(out number))
-            {
-                sb.Append(number);
-            }
-#else
             if (double.TryParse(input, JsonNumbers, CultureInfo.InvariantCulture, out number)) {
                 sb.Append(number);
                 return;
             }
-#endif
+
             if (item == null) {
                 sb.Append("null");
                 return;
