@@ -71,12 +71,9 @@ namespace Json {
         }
 
         public static T Deserialize<T>(string json) {
-            return Deserialize<T>(FromJson(json));
-        }
-
-        public static T Deserialize<T>(IDictionary<string, object> bag) {
             T instance;
             var map = PrepareInstance(out instance);
+            var bag = FromJson(json);
 
             DeserializeImpl(map, bag, instance);
             return instance;
