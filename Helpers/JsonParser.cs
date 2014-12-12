@@ -590,10 +590,10 @@ namespace Json {
             var number = new char[length];
             Array.Copy(data.ToArray(), start, number, 0, length);
 
-            double result;
+            int result;
             var buffer = new string(number);
 
-            if (!double.TryParse(buffer, JsonNumbers, CultureInfo.InvariantCulture, out result)) {
+            if (!int.TryParse(buffer, out result)) {
                 throw new InvalidJsonException(
                     string.Format("Value '{0}' was not a valid JSON number", buffer)
                     );
