@@ -56,7 +56,7 @@
     <Compile Include="Controls\SplitContainerModern.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DataTypes\FavoriteItem.cs" />
+    <Compile Include="DataTypes\ColumnData.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\JsonParser.cs" />
     <Compile Include="Modules\ColumnListViewItem.cs" />

@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Trail.DataTypes {
-    public class FavoriteItem {
+    public class ColumnData {
         public string ColumnType { get; set; }
         public string Path { get; set; }
 
-        public FavoriteItem() { }
+        public ColumnData() { }
 
-        public FavoriteItem(string columnType, string path) {
+        public ColumnData(string columnType, string path) {
             this.ColumnType = columnType;
             this.Path = path;
         }

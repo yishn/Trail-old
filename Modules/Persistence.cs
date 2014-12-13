@@ -17,8 +17,8 @@ namespace Trail.Modules {
             = new FileInfo(Path.Combine(PersistenceFolder.FullName, "session.json"));
 
         public static Dictionary<string, object> Preferences { get; private set; }
-        public static List<FavoriteItem> FavoriteItems { get; private set; }
-        public static List<FavoriteItem> Session { get; private set; }
+        public static List<ColumnData> FavoriteItems { get; private set; }
+        public static List<ColumnData> Session { get; private set; }
 
         public static void LoadData() {
             if (!PersistenceFolder.Exists) PersistenceFolder.Create();
@@ -37,7 +37,7 @@ namespace Trail.Modules {
                 json = reader.ReadToEnd();
                 reader.Close();
             }
-            FavoriteItems = Json.JsonParser.DeserializeList<FavoriteItem>(json);
+            FavoriteItems = Json.JsonParser.DeserializeList<ColumnData>(json);
 
             json = "[]";
             if (SessionFile.Exists) {
@@ -45,7 +45,7 @@ namespace Trail.Modules {
                 json = reader.ReadToEnd();
                 reader.Close();
             }
-            Session = Json.JsonParser.DeserializeList<FavoriteItem>(json);
+            Session = Json.JsonParser.DeserializeList<ColumnData>(json);
 
             createDefaultData();
         }
@@ -56,11 +56,11 @@ namespace Trail.Modules {
             writer.Close();
 
             writer = FavoritesFile.CreateText();
-            writer.Write(Json.JsonParser.SerializeList<FavoriteItem>(FavoriteItems));
+            writer.Write(Json.JsonParser.SerializeList<ColumnData>(FavoriteItems));
             writer.Close();
 
             writer = SessionFile.CreateText();
-            writer.Write(Json.JsonParser.SerializeList<FavoriteItem>(Session));
+            writer.Write(Json.JsonParser.SerializeList<ColumnData>(Session));
             writer.Close();
         }
 
