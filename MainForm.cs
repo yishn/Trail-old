@@ -19,15 +19,15 @@ namespace Trail {
             InitializeComponent();
 
             Persistence.LoadData();
-            UpdatePreferences();
+            LoadPreferences();
 
             sidebar.Load();
         }
 
-        public void UpdatePreferences() {
-            List<string> size = Persistence.GetPreferenceList("window.size");
-            this.Size = new Size(int.Parse(size[0]), int.Parse(size[1]));
-            splitContainer.SplitterDistance = int.Parse(Persistence.GetPreferenceString("sidebar.width"));
+        public void LoadPreferences() {
+            List<int> size = Persistence.GetPreferenceList<int>("window.size");
+            this.Size = new Size(size[0], size[1]);
+            splitContainer.SplitterDistance = Persistence.GetPreference<int>("sidebar.width");
         }
 
         private void MainForm_Load(object sender, EventArgs e) {

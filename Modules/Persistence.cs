@@ -54,12 +54,18 @@ namespace Trail.Modules {
             SaveData();
         }
 
-        public static string GetPreferenceString(string key) {
+        public static string GetPreference(string key) {
             return Preferences[key].ToString();
+        }
+        public static T GetPreference<T>(string key) {
+            return (T)Preferences[key];
         }
 
         public static List<string> GetPreferenceList(string key) {
             return (Preferences[key] as List<object>).Select(x => x.ToString()).ToList();
+        }
+        public static List<T> GetPreferenceList<T>(string key) {
+            return (Preferences[key] as List<object>).Select(x => (T)x).ToList();
         }
 
         public static void CreatePreference(string key, object value) {
