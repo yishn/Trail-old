@@ -57,7 +57,14 @@ namespace Json {
 
         public static string Serialize<T>(T instance) {
             var bag = GetBagForObject(instance);
+            return ToJson(bag);
+        }
 
+        public static string SerializeList<T>(IEnumerable<T> instance) {
+            var bag = new List<object>();
+            foreach (T item in instance) {
+                bag.Add(GetBagForObject(item));
+            }
             return ToJson(bag);
         }
 
@@ -168,10 +175,14 @@ namespace Json {
             return ParseObject(data, ref index);
         }
 
-        public static string ToJson(IDictionary<string, object> bag) {
+        public static string ToJson(object bag) {
             var sb = new StringBuilder(0);
 
-            SerializeItem(sb, bag, 1);
+            if (bag is IDictionary<string, object>) {
+                SerializeItem(sb, bag, 1);
+            } else if (bag is IEnumerable) {
+                SerializeArray(bag, sb);
+            }
 
             return sb.ToString();
         }
@@ -314,7 +325,7 @@ namespace Json {
                 for (int i = 1; i <= indent; i++) {
                     sb.Append("    ");
                 }
-                
+
                 SerializeString(sb, key.ToLower());
                 sb.Append(": ");
 
