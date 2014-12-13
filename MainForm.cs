@@ -68,10 +68,12 @@ namespace Trail {
         }
 
         private void MainForm_ResizeEnd(object sender, EventArgs e) {
+            if (!Persistence.GetPreference<bool>("window.remember_size")) return;
             Persistence.SetPreference("window.size", new List<object>(new object[] { this.Width, this.Height }));
         }
 
         private void splitContainer_SplitterMoved(object sender, SplitterEventArgs e) {
+            if (!Persistence.GetPreference<bool>("sidebar.remember_width")) return;
             Persistence.SetPreference("sidebar.width", sidebar.Width);
         }
     }

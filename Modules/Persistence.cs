@@ -74,7 +74,6 @@ namespace Trail.Modules {
         }
 
         private static void createDefaultData() {
-            CreatePreference("window.size", new List<object>(new object[] { 850, 413 }));
             CreatePreference("directorycolumn.directory_exclude_patterns", new List<object>(new object[] { 
                 "$RECYCLE.BIN", ".*", "System Volume Information"
             }));
@@ -85,6 +84,10 @@ namespace Trail.Modules {
                 "*.exe", "*.ico", "*.lnk", "*.msi"
             }));
             CreatePreference("sidebar.width", 196);
+            CreatePreference("sidebar.remember_width", true);
+            CreatePreference("tabbar.remember_session", true);
+            CreatePreference("window.size", new List<object>(new object[] { 850, 413 }));
+            CreatePreference("window.remember_size", false);
 
             SaveData();
         }
