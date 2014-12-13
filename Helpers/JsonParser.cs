@@ -380,7 +380,9 @@ namespace Json {
             var basicLatin = code >= 32 && code <= 126;
             if (basicLatin) {
                 var value = (char)code;
-                return value == '"' ? @"\""" : new string(value, 1);
+                if (value == '"') return @"\""";
+                if (value == '\\') return @"\\";
+                return new string(value, 1);
             }
 
             var unicode = BaseConvert(code, _base16, 4);
