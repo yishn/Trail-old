@@ -53,6 +53,10 @@
     <Compile Include="Controls\ColumnControl.Designer.cs">
       <DependentUpon>ColumnControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SplitContainerModern.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataTypes\FavoriteItem.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\JsonParser.cs" />
     <Compile Include="Modules\ColumnListViewItem.cs" />

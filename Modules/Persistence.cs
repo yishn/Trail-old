@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Trail.DataTypes;
 
 namespace Trail.Modules {
     public static class Persistence {
-        public static DirectoryInfo PersistenceFolder 
+        public static DirectoryInfo PersistenceFolder
             = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TrailApp"));
-        public static FileInfo PreferencesFile 
+        public static FileInfo PreferencesFile
             = new FileInfo(Path.Combine(PersistenceFolder.FullName, "preferences.json"));
+        public static FileInfo FavoritesFile
+            = new FileInfo(Path.Combine(PersistenceFolder.FullName, "favorites.json"));
 
         public static Dictionary<string, object> Preferences { get; private set; }
+        public static List<FavoriteItem> FavoriteItems { get; private set; }
 
         public static void LoadData() {
             if (!PersistenceFolder.Exists) PersistenceFolder.Create();
@@ -22,14 +26,26 @@ namespace Trail.Modules {
                 json = reader.ReadToEnd();
                 reader.Close();
             }
-
             Preferences = new Dictionary<string, object>(Json.JsonParser.FromJson(json));
+
+            json = "[]";
+            if (FavoritesFile.Exists) {
+                StreamReader reader = FavoritesFile.OpenText();
+                json = reader.ReadToEnd();
+                reader.Close();
+            }
+            FavoriteItems = Json.JsonParser.DeserializeList<FavoriteItem>(json);
+
             createDefaultData();
         }
 
         public static void SaveData() {
             StreamWriter writer = PreferencesFile.CreateText();
             writer.Write(Json.JsonParser.ToJson(Preferences));
+            writer.Close();
+
+            writer = FavoritesFile.CreateText();
+            writer.Write(Json.JsonParser.SerializeList<FavoriteItem>(FavoriteItems));
             writer.Close();
         }
 
