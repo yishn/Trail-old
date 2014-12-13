@@ -11,7 +11,7 @@ using System.Reflection;
 
 namespace Trail.Controls {
     public partial class Tab : UserControl {
-        private bool _autoHideClose = true;
+        private bool autoHideClose = true;
 
         public override string Text { 
             get { return lblText.Text; }
@@ -21,10 +21,10 @@ namespace Trail.Controls {
             } 
         }
         public bool AutoHideClose {
-            get { return _autoHideClose; }
+            get { return autoHideClose; }
             set {
-                _autoHideClose = value;
-                btnClose.Visible = !_autoHideClose;
+                autoHideClose = value;
+                btnClose.Visible = !autoHideClose;
             }
         }
 

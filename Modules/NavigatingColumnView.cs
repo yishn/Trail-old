@@ -12,7 +12,7 @@ using Trail.Controls;
 
 namespace Trail.Modules {
     public class NavigatingColumnView : ColumnView {
-        private ItemsIconQueue _iconQueue = new ItemsIconQueue();
+        private ItemsIconQueue iconQueue = new ItemsIconQueue();
 
         public event EventHandler<ItemsColumn> SubColumnAdded;
         
@@ -24,10 +24,10 @@ namespace Trail.Modules {
         }
 
         public void LoadIcons() {
-            _iconQueue.ImageList = this.ImageList;
+            iconQueue.ImageList = this.ImageList;
 
             foreach (ItemsColumn c in this.Columns) {
-                _iconQueue.Enqueue(c);
+                iconQueue.Enqueue(c);
             }
         }
 
@@ -53,8 +53,8 @@ namespace Trail.Modules {
 
         private void ItemsColumn_LoadingCompleted(object sender, RunWorkerCompletedEventArgs e) {
             // Load icons
-            _iconQueue.ImageList = this.ImageList;
-            _iconQueue.Enqueue(sender as ItemsColumn);
+            iconQueue.ImageList = this.ImageList;
+            iconQueue.Enqueue(sender as ItemsColumn);
         }
 
         private void ItemsColumn_SelectedIndexChanged(object sender, EventArgs e) {

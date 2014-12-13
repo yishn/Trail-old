@@ -14,16 +14,16 @@ using System.Reflection;
 
 namespace Trail.Controls {
     public partial class TabBar : UserControl {
-        private Tab _currentTab = null;
-        private Animation _animation;
+        private Tab currentTab = null;
+        private Animation animation;
 
         public Color AccentColor { get { return pnlAccent.BackColor; } set { pnlAccent.BackColor = value; } }
         public ObservableCollection<Tab> Tabs { get; private set; }
         public Tab CurrentTab {
-            get { return _currentTab; }
+            get { return currentTab; }
             set {
-                if (_currentTab == value) return;
-                _currentTab = value;
+                if (currentTab == value) return;
+                currentTab = value;
                 RecolorTabs();
                 if (CurrentTabChanged != null) CurrentTabChanged(this, new EventArgs());
             }
@@ -80,7 +80,7 @@ namespace Trail.Controls {
 
         public void CloseTab(Tab tab) {
             if (!AllowNoTabs && this.Tabs.Count == 1) return;
-            if (_animation == null || !_animation.Enabled) _animation = new Animation();
+            if (animation == null || !animation.Enabled) animation = new Animation();
             else return;
 
             int i = this.Tabs.IndexOf(tab);
@@ -94,7 +94,7 @@ namespace Trail.Controls {
             this.CurrentTab.BringToFront();
             int width = pnlTabs.Width;
 
-            _animation.Tick += (_, value) => {
+            animation.Tick += (_, value) => {
                 this.Tabs[i].Top = (int)(value * this.Tabs[i].Height);
 
                 if (i + 1 < this.Tabs.Count)
@@ -107,27 +107,27 @@ namespace Trail.Controls {
                 pnlTabs.Width = width - (int)(value * this.Tabs[i].Width);
                 btnAdd.Left = pnlTabs.Right;
             };
-            _animation.Complete += (_, evt) => {
+            animation.Complete += (_, evt) => {
                 this.Tabs.RemoveAt(i);
                 if (TabClosed != null) TabClosed(this, tab);
             };
-            _animation.Start();
+            animation.Start();
         }
 
         public void AddTab(Tab tab) {
-            if (_animation == null || !_animation.Enabled) _animation = new Animation();
+            if (animation == null || !animation.Enabled) animation = new Animation();
             else return;
 
             int width = pnlTabs.Width;
             this.Tabs.Add(tab);
 
-            _animation.Tick += (_, value) => {
+            animation.Tick += (_, value) => {
                 pnlTabs.Width = width + (int)(value * tab.Width);
                 btnAdd.Left = pnlTabs.Right;
                 tab.Left = width;
                 tab.Top = tab.Height - (int)(value * tab.Height);
             };
-            _animation.Start();
+            animation.Start();
         }
 
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
@@ -204,14 +204,14 @@ namespace Trail.Controls {
                 left += this.Tabs[i].Width;
             }
 
-            _animation = new IntAnimation();
-            (_animation as IntAnimation).Tick += (_, value) => {
+            animation = new IntAnimation();
+            (animation as IntAnimation).Tick += (_, value) => {
                 t.Left = value;
             };
-            _animation.Complete += (_, evt) => {
+            animation.Complete += (_, evt) => {
                 RearrangeTabs();
             };
-            (_animation as IntAnimation).Start(t.Left, left);
+            (animation as IntAnimation).Start(t.Left, left);
 
             this.CurrentTab = t;
         }

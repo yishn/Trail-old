@@ -11,7 +11,7 @@ using Trail.Controls;
 
 namespace Trail.Modules {
     public class ItemsIconQueue : BackgroundWorker {
-        private Queue<ColumnListViewItem> _queue = new Queue<ColumnListViewItem>();
+        private Queue<ColumnListViewItem> queue = new Queue<ColumnListViewItem>();
 
         public ImageList ImageList { get; set; }
 
@@ -25,7 +25,7 @@ namespace Trail.Modules {
         public void Enqueue(ColumnListViewItem item) {
             if (ImageList.Images.Keys.Contains(item.ImageKey)) return;
 
-            _queue.Enqueue(item);
+            queue.Enqueue(item);
             if (!this.IsBusy) this.RunWorkerAsync();
         }
 
@@ -43,8 +43,8 @@ namespace Trail.Modules {
         }
 
         private void IconLoaderQueue_DoWork(object sender, DoWorkEventArgs e) {
-            while (_queue.Count > 0) {
-                ColumnListViewItem item = _queue.Dequeue();
+            while (queue.Count > 0) {
+                ColumnListViewItem item = queue.Dequeue();
                 ListView listView = item.ListView;
                 ImageList images = listView.SmallImageList;
                 ItemsColumn column = listView.Parent as ItemsColumn;
