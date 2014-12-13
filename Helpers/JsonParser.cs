@@ -363,7 +363,6 @@ namespace Json {
             sb.Append("}");
         }
 
-
         internal static void SerializeString(StringBuilder sb, object item) {
             sb.Append("\"");
             var symbols = item.ToString().ToCharArray();
@@ -437,6 +436,8 @@ namespace Json {
                                 sb.Append(symbol);
                                 break;
                             case '\\':
+                                sb.Append(symbol);
+                                break;
                             case 'b':
                             case 'f':
                             case 'n':
