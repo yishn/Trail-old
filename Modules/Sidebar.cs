@@ -81,7 +81,8 @@ namespace Trail.Modules {
             favorites.Nodes.Clear();
 
             foreach (FavoriteItem item in Persistence.FavoriteItems) {
-                ItemsColumn c = Activator.CreateInstance(Type.GetType(item.ColumnType), item.Path) as ItemsColumn;
+                Type t = Type.GetType(item.ColumnType);
+                ItemsColumn c = Activator.CreateInstance(t, item.Path) as ItemsColumn;
 
                 ColumnTreeNode node = new ColumnTreeNode() {
                     Text = c.HeaderText,
