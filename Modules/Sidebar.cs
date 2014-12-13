@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Columns;
 using Trail.Controls;
+using Trail.DataTypes;
 
 namespace Trail.Modules {
     public class Sidebar : TreeViewModern {
@@ -48,6 +49,7 @@ namespace Trail.Modules {
             });
 
             LoadDrives();
+            LoadFavorites();
         }
 
         public void LoadDrives() {
@@ -77,6 +79,22 @@ namespace Trail.Modules {
         public void LoadFavorites() {
             TreeNode favorites = this.Nodes["favorites"];
             favorites.Nodes.Clear();
+
+            foreach (FavoriteItem item in Persistence.FavoriteItems) {
+                ItemsColumn c = Activator.CreateInstance(Type.GetType(item.ColumnType), item.Path) as ItemsColumn;
+
+                ColumnTreeNode node = new ColumnTreeNode() {
+                    Text = c.HeaderText,
+                    Tag = item,
+                    SubColumn = c,
+                    ImageKey = "folder",
+                    SelectedImageKey = "folder"
+                };
+
+                favorites.Nodes.Add(node);
+            }
+
+            favorites.Expand();
         }
     }
 }
