@@ -86,6 +86,20 @@ namespace Json {
             return instance;
         }
 
+        public static List<T> DeserializeList<T>(string json) {
+            var result = new List<T>();
+            var bag = FromJson(json).Single().Value as List<object>;
+
+            foreach (object item in bag) {
+                T instance;
+                var map = PrepareInstance(out instance);
+                DeserializeImpl(map, item as IDictionary<string, object>, instance);
+                result.Add(instance);
+            }
+
+            return result;
+        }
+
         private static void DeserializeImpl(IEnumerable<PropertyInfo> map,
                                             IDictionary<string, object> bag,
                                             object instance) {
