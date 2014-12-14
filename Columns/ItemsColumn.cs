@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Controls;
+using Trail.DataTypes;
 using Trail.Modules;
 
 namespace Trail.Columns {
@@ -48,6 +49,10 @@ namespace Trail.Columns {
             _worker.DoWork += worker_DoWork;
             _worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             _worker.RunWorkerAsync();
+        }
+
+        public ColumnData GetColumnData() {
+            return new ColumnData(this.GetType().FullName, this.Path);
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
