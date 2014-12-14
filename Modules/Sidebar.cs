@@ -81,13 +81,12 @@ namespace Trail.Modules {
             favorites.Nodes.Clear();
 
             foreach (ColumnData item in Persistence.FavoriteItems) {
-                Type t = Type.GetType(item.ColumnType);
-                ItemsColumn c = Activator.CreateInstance(t, item.Path) as ItemsColumn;
+                ItemsColumn column = item.Instantiation();
 
                 ColumnTreeNode node = new ColumnTreeNode() {
-                    Text = c.HeaderText,
+                    Text = column.HeaderText,
                     Tag = item,
-                    SubColumn = c,
+                    SubColumn = column,
                     ImageKey = "folder",
                     SelectedImageKey = "folder"
                 };
