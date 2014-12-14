@@ -18,6 +18,18 @@ namespace Trail.Modules {
             this.TabAdded += NavigatingTabBar_TabAddedClosedMoved;
             this.TabClosed += NavigatingTabBar_TabAddedClosedMoved;
             this.TabMoved += NavigatingTabBar_TabAddedClosedMoved;
+            this.Tabs.CollectionChanged += Tabs_CollectionChanged;
+        }
+
+        private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+            if (e.Action != NotifyCollectionChangedAction.Add) return;
+            foreach (Tab t in e.NewItems) {
+                (t as NavigatingTab).Navigated += NavigatingTabBar_Navigated;
+            }
+        }
+
+        private void NavigatingTabBar_Navigated(object sender, EventArgs e) {
+            this.SaveSession();
         }
 
         private void NavigatingTabBar_TabAddedClosedMoved(object sender, Tab e) {
@@ -29,14 +41,7 @@ namespace Trail.Modules {
 
             foreach (ColumnData data in Persistence.Session) {
                 ItemsColumn column = data.Instantiation();
-                NavigatingColumnView columnView = new NavigatingColumnView();
-                columnView.NavigateTo(column.GetTrail());
-
-                NavigatingTab tab = new NavigatingTab() {
-                    Text = column.HeaderText,
-                    ColumnView = columnView
-                };
-
+                NavigatingTab tab = new NavigatingTab(column);
                 this.Tabs.Add(tab);
             }
 

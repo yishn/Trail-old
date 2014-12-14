@@ -18,11 +18,11 @@ namespace Trail.Modules {
             } 
         }
 
-        private void ColumnView_Navigated(object sender, EventArgs e) {
-            throw new NotImplementedException();
-        }
-
         public event EventHandler Navigated;
+
+        private void ColumnView_Navigated(object sender, EventArgs e) {
+            if (Navigated != null) Navigated(this, EventArgs.Empty);
+        }
 
         public NavigatingTab() {
             this.ColumnView = new NavigatingColumnView();
