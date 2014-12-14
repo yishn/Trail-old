@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Trail.Columns;
 using Trail.Controls;
-using Trail.DataTypes;
 
 namespace Trail.Modules {
     public class NavigatingColumnView : ColumnView {
@@ -67,7 +66,7 @@ namespace Trail.Modules {
             // Don't add existing column
             int i = this.Columns.IndexOf(c);
             if (this.Columns.Count > i + 1 
-                && (this.Columns[i + 1] as ItemsColumn).Path == item.SubColumn.Path) return;
+                && (this.Columns[i + 1] as ItemsColumn).ItemsPath == item.SubColumn.ItemsPath) return;
 
             // Remove columns on the right
             int residueCount = this.Columns.Count - i - 1;
