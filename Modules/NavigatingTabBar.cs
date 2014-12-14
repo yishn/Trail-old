@@ -32,7 +32,9 @@ namespace Trail.Modules {
                 this.Tabs.Add(tab);
             }
 
-            base.CurrentTab = this.Tabs[0];
+            int index =  Persistence.GetPreference<int>("tabbar.tab_index");
+            index = Math.Min(Math.Max(0, index), this.Tabs.Count - 1);
+            base.CurrentTab = this.Tabs[index];
         }
 
         private void NavigatingTabBar_CurrentTabChanged(object sender, EventArgs e) {

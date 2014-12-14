@@ -108,6 +108,7 @@ namespace Trail.Modules {
             CreatePreference("sidebar.width", 196);
             CreatePreference("sidebar.remember_width", true);
             CreatePreference("tabbar.remember_session", true);
+            CreatePreference("tabbar.tab_index", 0);
             CreatePreference("window.size", new List<object>(new object[] { 850, 413 }));
             CreatePreference("window.remember_size", false);
 
