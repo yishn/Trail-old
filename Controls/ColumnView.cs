@@ -14,7 +14,7 @@ using Trail.Fx;
 namespace Trail.Controls {
     public partial class ColumnView : UserControl {
         public ObservableCollection<ColumnControl> Columns { get; private set; }
-        public ColumnControl LastColumn { get { return this.Columns[this.Columns.Count - 1]; } }
+        public ColumnControl LastColumn { get { return this.Columns.Count == 0 ? null : this.Columns[this.Columns.Count - 1]; } }
         public int DefaultColumnWidth { get; set; }
         public IntAnimation ScrollAnimation { get; private set; }
         public ImageList ImageList { get; set; }
@@ -24,7 +24,6 @@ namespace Trail.Controls {
 
             this.Columns = new ObservableCollection<ColumnControl>();
             this.DefaultColumnWidth = 200;
-            this.ScrollAnimation = new IntAnimation();
 
             this.Columns.CollectionChanged += Columns_CollectionChanged;
         }
