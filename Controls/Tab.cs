@@ -41,6 +41,7 @@ namespace Trail.Controls {
 
             this.TextChanged += Tab_TextChanged;
         }
+        public Tab(string text) : this() { this.Text = text; }
 
         private void Tab_TextChanged(object sender, EventArgs e) {
             this.Width = lblText.PreferredWidth + btnClose.Width + 10;
