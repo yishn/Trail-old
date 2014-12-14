@@ -17,6 +17,7 @@ namespace Trail.Modules {
         public new ItemsColumn LastColumn { get { return base.LastColumn as ItemsColumn; } }
 
         public event EventHandler<ItemsColumn> SubColumnAdded;
+        public event EventHandler Navigated;
         
         public NavigatingColumnView() {
             this.BackColor = Color.White;
@@ -40,6 +41,8 @@ namespace Trail.Modules {
                 this.Columns.Add(c);
                 c.LoadItems();
             }
+
+            if (Navigated != null) Navigated(this, EventArgs.Empty);
         }
 
         private void Columns_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
@@ -96,6 +99,7 @@ namespace Trail.Modules {
         private void NavigatingColumnView_SubColumnAdded(object sender, ItemsColumn column) {
             column.LoadItems();
             this.ScrollToLastColumn();
+            if (Navigated != null) Navigated(this, EventArgs.Empty);
         }
     }
 }
