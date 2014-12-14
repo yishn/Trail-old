@@ -22,15 +22,15 @@ namespace Trail {
 
             Persistence.LoadData();
             LoadPreferences();
-
-            sidebar.Load();
-            tabBar.LoadSession();
         }
 
         public void LoadPreferences() {
             List<int> size = Persistence.GetPreferenceList<int>("window.size");
             this.Size = new Size(size[0], size[1]);
             splitContainer.SplitterDistance = Persistence.GetPreference<int>("sidebar.width");
+
+            sidebar.Load();
+            tabBar.LoadSession();
         }
 
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
