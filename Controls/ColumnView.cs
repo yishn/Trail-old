@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Trail.Fx;
+using Trail.Modules;
 
 namespace Trail.Controls {
     public partial class ColumnView : UserControl {
@@ -23,7 +24,8 @@ namespace Trail.Controls {
             InitializeComponent();
 
             this.Columns = new ObservableCollection<ColumnControl>();
-            this.DefaultColumnWidth = 200;
+            this.DefaultColumnWidth = Persistence.GetPreference<int>("column.default_width");
+            this.ScrollAnimation = new IntAnimation();
 
             this.Columns.CollectionChanged += Columns_CollectionChanged;
         }
