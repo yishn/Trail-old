@@ -14,6 +14,14 @@ namespace Trail.Modules {
 
         public NavigatingTabBar() {
             this.CurrentTabChanged += NavigatingTabBar_CurrentTabChanged;
+
+            this.TabAdded += NavigatingTabBar_TabAddedClosedMoved;
+            this.TabClosed += NavigatingTabBar_TabAddedClosedMoved;
+            this.TabMoved += NavigatingTabBar_TabAddedClosedMoved;
+        }
+
+        private void NavigatingTabBar_TabAddedClosedMoved(object sender, Tab e) {
+            this.SaveSession();
         }
 
         public void LoadSession() {
