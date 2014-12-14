@@ -90,8 +90,10 @@ namespace Trail.Modules {
         }
 
         private static void createDefaultData() {
-            DirectoryColumn column = new DirectoryColumn(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
-            Session.Add(column.GetColumnData());
+            if (Session.Count == 0) {
+                DirectoryColumn column = new DirectoryColumn(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+                Session.Add(column.GetColumnData());
+            }
 
             CreatePreference("directorycolumn.directory_exclude_patterns", new List<object>(new object[] { 
                 "$RECYCLE.BIN", ".*", "System Volume Information"
