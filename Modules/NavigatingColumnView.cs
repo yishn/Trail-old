@@ -14,6 +14,8 @@ namespace Trail.Modules {
     public class NavigatingColumnView : ColumnView {
         private ItemsIconQueue iconQueue = new ItemsIconQueue();
 
+        public new ItemsColumn LastColumn { get { return base.LastColumn as ItemsColumn; } }
+
         public event EventHandler<ItemsColumn> SubColumnAdded;
         
         public NavigatingColumnView() {
