@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -17,11 +18,13 @@ namespace Trail {
     public partial class MainForm : Form {
         public MainForm() {
             InitializeComponent();
+            tabBar.Tabs.CollectionChanged += Tabs_CollectionChanged;
 
             Persistence.LoadData();
             LoadPreferences();
 
             sidebar.Load();
+            tabBar.LoadSession();
         }
 
         public void LoadPreferences() {
@@ -30,8 +33,20 @@ namespace Trail {
             splitContainer.SplitterDistance = Persistence.GetPreference<int>("sidebar.width");
         }
 
-        private void MainForm_Load(object sender, EventArgs e) {
-            tabBar_AddButtonClicked(tabBar, EventArgs.Empty);
+        private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+            if (e.Action != NotifyCollectionChangedAction.Add) return;
+
+            foreach (Tab t in e.NewItems) {
+                // Prepare tab.ColumnView
+
+                NavigatingTab tab = t as NavigatingTab;
+                tab.ColumnView.Dock = DockStyle.Fill;
+                tab.ColumnView.ImageList = itemsImages;
+                tab.ColumnView.SubColumnAdded += ColumnView_SubColumnAdded;
+
+                splitContainer.Panel2.Controls.Add(tab.ColumnView);
+                tab.ColumnView.BringToFront();
+            }
         }
 
         private void sidebar_AfterSelect(object sender, TreeViewEventArgs e) {
@@ -46,23 +61,12 @@ namespace Trail {
             sidebar.SelectedNode = null;
         }
 
-        private void columnView_SubColumnAdded(object sender, ItemsColumn column) {
+        private void ColumnView_SubColumnAdded(object sender, ItemsColumn column) {
             tabBar.CurrentTab.Text = column.HeaderText;
         }
 
         private void tabBar_AddButtonClicked(object sender, EventArgs e) {
-            NavigatingColumnView columnView = new NavigatingColumnView() {
-                Dock = DockStyle.Fill,
-                ImageList = itemsImages
-            };
-            columnView.SubColumnAdded += columnView_SubColumnAdded;
-            splitContainer.Panel2.Controls.Add(columnView);
-            columnView.BringToFront();
-
-            NavigatingTab t = new NavigatingTab() {
-                Text = "New Tab",
-                ColumnView = columnView
-            };
+            NavigatingTab t = new NavigatingTab("New Tab");
             tabBar.AddTab(t);
             tabBar.CurrentTab = t;
         }
