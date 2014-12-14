@@ -3,15 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Trail.Columns;
 using Trail.Controls;
 
 namespace Trail.Modules {
     public class NavigatingTab : Tab {
-        public NavigatingColumnView ColumnView { get; set; }
+        private NavigatingColumnView columnView;
+
+        public NavigatingColumnView ColumnView { 
+            get { return columnView; } 
+            set {
+                columnView = value;
+                value.Navigated += ColumnView_Navigated;
+            } 
+        }
+
+        private void ColumnView_Navigated(object sender, EventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        public event EventHandler Navigated;
 
         public NavigatingTab() {
             this.ColumnView = new NavigatingColumnView();
         }
-        public NavigatingTab(string text) : this() { this.Text = text; }
+        public NavigatingTab(ItemsColumn column) : this() {
+            this.ColumnView.NavigateTo(column.GetTrail());
+            this.Text = column.HeaderText;
+        }
     }
 }
