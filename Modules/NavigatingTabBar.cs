@@ -35,6 +35,8 @@ namespace Trail.Modules {
             int index =  Persistence.GetPreference<int>("tabbar.tab_index");
             index = Math.Min(Math.Max(0, index), this.Tabs.Count - 1);
             base.CurrentTab = this.Tabs[index];
+
+            this.CurrentTab.ColumnView.ScrollToLastColumn();
         }
 
         private void NavigatingTabBar_CurrentTabChanged(object sender, EventArgs e) {
