@@ -35,6 +35,7 @@ namespace Trail.Controls {
         public event EventHandler AddButtonClicked;
         public event EventHandler<Tab> TabAdded;
         public event EventHandler<Tab> TabClosed;
+        public event EventHandler<Tab> TabMoved;
 
         public TabBar() {
             InitializeComponent();
@@ -215,6 +216,7 @@ namespace Trail.Controls {
             };
             animation.Complete += (_, evt) => {
                 RearrangeTabs();
+                if (TabMoved != null) TabMoved(this, t);
             };
             (animation as IntAnimation).Start(t.Left, left);
 
