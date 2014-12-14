@@ -193,8 +193,9 @@ namespace Trail.Controls {
             }
             if (!currentAdded) newTabs.Add(t);
 
-            this.Tabs = newTabs;
-            newTabs.CollectionChanged += Tabs_CollectionChanged;
+            for (int i = 0; i < this.Tabs.Count; i++) {
+                this.Tabs[i] = newTabs[i];
+            }
         }
 
         private void Tab_MouseUp(object sender, MouseEventArgs e) {
