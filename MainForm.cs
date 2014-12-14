@@ -20,17 +20,22 @@ namespace Trail {
             InitializeComponent();
             tabBar.Tabs.CollectionChanged += Tabs_CollectionChanged;
 
-            Persistence.LoadData();
             LoadPreferences();
         }
 
         public void LoadPreferences() {
-            List<int> size = Persistence.GetPreferenceList<int>("window.size");
-            this.Size = new Size(size[0], size[1]);
-            splitContainer.SplitterDistance = Persistence.GetPreference<int>("sidebar.width");
+            try {
+                Persistence.LoadData();
 
-            sidebar.Load();
-            tabBar.LoadSession();
+                List<int> size = Persistence.GetPreferenceList<int>("window.size");
+                this.Size = new Size(size[0], size[1]);
+                splitContainer.SplitterDistance = Persistence.GetPreference<int>("sidebar.width");
+
+                sidebar.Load();
+                tabBar.LoadSession();
+            } catch (Exception) {
+                MessageBox.Show("An error occured while loading preferences.", "Trail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
