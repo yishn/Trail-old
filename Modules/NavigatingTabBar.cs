@@ -33,10 +33,20 @@ namespace Trail.Modules {
             }
 
             int index =  Persistence.GetPreference<int>("tabbar.tab_index");
-            index = Math.Min(Math.Max(0, index), this.Tabs.Count - 1);
+            index = Math.Max(0, Math.Min(index, this.Tabs.Count - 1));
             base.CurrentTab = this.Tabs[index];
 
             this.CurrentTab.ColumnView.ScrollToLastColumn();
+        }
+
+        public void SaveSession() {
+            Persistence.Session.Clear();
+
+            for (int i = 0; i < this.Tabs.Count; i++) {
+                Persistence.Session.Add((this.Tabs[i] as NavigatingTab).ColumnView.LastColumn.GetColumnData());
+            }
+
+            Persistence.SaveData();
         }
 
         private void NavigatingTabBar_CurrentTabChanged(object sender, EventArgs e) {
