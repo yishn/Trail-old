@@ -52,7 +52,7 @@ namespace Trail.Columns {
         }
 
         public ColumnData GetColumnData() {
-            return new ColumnData(this.GetType().FullName, this.Path);
+            return new ColumnData(this.GetType().FullName, this.ItemsPath);
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
