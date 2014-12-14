@@ -33,6 +33,7 @@ namespace Trail.Controls {
 
         public event EventHandler CurrentTabChanged;
         public event EventHandler AddButtonClicked;
+        public event EventHandler<Tab> TabAdded;
         public event EventHandler<Tab> TabClosed;
 
         public TabBar() {
@@ -126,6 +127,9 @@ namespace Trail.Controls {
                 btnAdd.Left = pnlTabs.Right;
                 tab.Left = width;
                 tab.Top = tab.Height - (int)(value * tab.Height);
+            };
+            animation.Complete += (_, e) => {
+                if (TabAdded != null) TabAdded(this, tab);
             };
             animation.Start();
         }
