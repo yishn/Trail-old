@@ -46,6 +46,7 @@ namespace Trail {
 
                 NavigatingTab tab = t as NavigatingTab;
                 tab.ColumnView.Dock = DockStyle.Fill;
+                tab.ColumnView.ItemsIconQueue = iconQueue;
                 tab.ColumnView.ImageList = itemsImages;
                 tab.ColumnView.SubColumnAdded += ColumnView_SubColumnAdded;
 

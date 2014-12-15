@@ -30,6 +30,7 @@
             this.sidebarImages = new System.Windows.Forms.ImageList(this.components);
             this.tabBar = new Trail.Modules.NavigatingTabBar();
             this.itemsImages = new System.Windows.Forms.ImageList(this.components);
+            this.iconQueue = new Trail.Modules.ItemsIconQueue();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -114,6 +115,11 @@
             this.itemsImages.Images.SetKeyName(0, ".folder");
             this.itemsImages.Images.SetKeyName(1, ".file");
             // 
+            // iconQueue
+            // 
+            this.iconQueue.ImageList = this.itemsImages;
+            this.iconQueue.WorkerReportsProgress = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -141,6 +147,7 @@
         private System.Windows.Forms.ImageList itemsImages;
         private Modules.Sidebar sidebar;
         private Trail.Modules.NavigatingTabBar tabBar;
+        private Modules.ItemsIconQueue iconQueue;
     }
 }
 

@@ -23,6 +23,7 @@ namespace Trail.Modules {
 
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             if (e.Action != NotifyCollectionChangedAction.Add) return;
+
             foreach (Tab t in e.NewItems) {
                 (t as NavigatingTab).Navigated += NavigatingTabBar_Navigated;
             }
