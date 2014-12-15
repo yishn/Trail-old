@@ -58,9 +58,6 @@ namespace Trail.Modules {
 
         private void ItemsColumn_LoadingCompleted(object sender, RunWorkerCompletedEventArgs e) {
             LoadIcons();
-            // Load icons
-            //ItemsIconQueue.ImageList = this.ImageList;
-            //ItemsIconQueue.Enqueue(sender as ItemsColumn);
         }
 
         private void ItemsColumn_SelectedIndexChanged(object sender, EventArgs e) {

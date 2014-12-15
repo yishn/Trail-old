@@ -50,7 +50,9 @@ namespace Trail.Modules {
             index = Math.Max(0, Math.Min(index, this.Tabs.Count - 1));
             base.CurrentTab = this.Tabs[index];
 
-            this.CurrentTab.ColumnView.ScrollToLastColumn();
+            this.CurrentTab.ColumnView.Load += (_, e) => {
+                this.CurrentTab.ColumnView.ScrollToLastColumn();
+            };
         }
 
         public void SaveSession() {
