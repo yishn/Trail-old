@@ -67,16 +67,11 @@ namespace Trail.Modules {
         }
 
         private void NavigatingTabBar_CurrentTabChanged(object sender, EventArgs e) {
-            foreach (NavigatingTab t in this.Tabs) {
-                t.ColumnView.Visible = false;
-            }
-
             if (this.CurrentTab == null) return;
-            this.CurrentTab.ColumnView.Visible = true;
-
             if (this.CurrentTab.ColumnView.LastColumn != null)
                 this.CurrentTab.ColumnView.LastColumn.Focus();
 
+            this.CurrentTab.ColumnView.BringToFront();
             SaveSession();
         }
     }
