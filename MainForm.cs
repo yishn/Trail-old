@@ -71,7 +71,7 @@ namespace Trail {
         }
 
         private void tabBar_AddButtonClicked(object sender, EventArgs e) {
-            NavigatingTab t = new NavigatingTab(tabBar.CurrentTab.ColumnView.LastColumn);
+            NavigatingTab t = new NavigatingTab(tabBar.CurrentTab.ColumnView.LastColumn.Duplicate());
             tabBar.AddTab(t);
             tabBar.CurrentTab = t;
         }

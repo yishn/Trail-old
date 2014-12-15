@@ -59,6 +59,7 @@ namespace Trail.Modules {
                 Persistence.Session.Add((this.Tabs[i] as NavigatingTab).ColumnView.LastColumn.GetColumnData());
             }
 
+            Persistence.SetPreference("tabbar.tab_index", this.Tabs.IndexOf(this.CurrentTab));
             Persistence.SaveData();
         }
 
@@ -72,6 +73,8 @@ namespace Trail.Modules {
 
             if (this.CurrentTab.ColumnView.LastColumn != null)
                 this.CurrentTab.ColumnView.LastColumn.Focus();
+
+            SaveSession();
         }
     }
 }
