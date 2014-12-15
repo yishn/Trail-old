@@ -197,6 +197,8 @@ namespace Trail.Controls {
             for (int i = 0; i < this.Tabs.Count; i++) {
                 this.Tabs[i] = newTabs[i];
             }
+
+            this.CurrentTab = t;
         }
 
         private void Tab_MouseUp(object sender, MouseEventArgs e) {
@@ -219,8 +221,6 @@ namespace Trail.Controls {
                 if (TabMoved != null) TabMoved(this, t);
             };
             (animation as IntAnimation).Start(t.Left, left);
-
-            this.CurrentTab = t;
         }
 
         #endregion
