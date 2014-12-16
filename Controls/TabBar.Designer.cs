@@ -84,8 +84,7 @@
             this.newTabToolStripMenuItem,
             this.restoreToolStripMenuItem});
             this.menu.Name = "menu";
-            this.menu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menu.Size = new System.Drawing.Size(297, 48);
+            this.menu.Size = new System.Drawing.Size(297, 70);
             // 
             // newTabToolStripMenuItem
             // 
@@ -97,7 +96,6 @@
             // 
             // restoreToolStripMenuItem
             // 
-            this.restoreToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("restoreToolStripMenuItem.Image")));
             this.restoreToolStripMenuItem.Name = "restoreToolStripMenuItem";
             this.restoreToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.T)));

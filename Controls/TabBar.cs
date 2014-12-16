@@ -258,6 +258,7 @@ namespace Trail.Controls {
 
         private void TabBar_Load(object sender, EventArgs e) {
             RearrangeTabs();
+            menu.Show(0, 0);
         }
 
         private void addButton_Click(object sender, EventArgs e) {
@@ -265,7 +266,6 @@ namespace Trail.Controls {
         }
 
         private void menuButton_Click(object sender, EventArgs e) {
-            menu.Refresh();
             menu.Show(menuButton, new Point(menuButton.Width - menu.Width, menuButton.Height));
         }
     }
