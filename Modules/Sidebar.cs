@@ -17,7 +17,7 @@ namespace Trail.Modules {
             this.BorderStyle = BorderStyle.None;
             this.Dock = DockStyle.Fill;
             this.FullRowSelect = true;
-            this.HideSelection = false;
+            this.HideSelection = true;
             this.ImageIndex = 0;
             this.Indent = 19;
             this.ItemHeight = 22;

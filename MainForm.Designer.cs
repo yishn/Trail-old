@@ -66,7 +66,6 @@
             this.sidebar.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sidebar.FullRowSelect = true;
-            this.sidebar.HideSelection = false;
             this.sidebar.HotTracking = true;
             this.sidebar.ImageIndex = 0;
             this.sidebar.ImageList = this.sidebarImages;

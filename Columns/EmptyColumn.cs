@@ -12,6 +12,7 @@ namespace Trail.Columns {
             this.ListViewControl.Visible = false;
             this.HeaderText = "New tab";
         }
+        public EmptyColumn(string itemsPath) : this() { }
 
         protected override List<ColumnListViewItem> loadData(DoWorkEventArgs e) {
             return new List<ColumnListViewItem>();
