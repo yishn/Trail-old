@@ -28,7 +28,7 @@ namespace Trail.Controls {
                 if (CurrentTabChanged != null) CurrentTabChanged(this, new EventArgs());
             }
         }
-        public bool ShowNewTabButton { get { return btnAdd.Visible; } set { btnAdd.Visible = value; } }
+        public bool ShowNewTabButton { get { return addButton.Visible; } set { addButton.Visible = value; } }
         public bool AllowNoTabs { get; set; }
 
         public event EventHandler CurrentTabChanged;
@@ -46,8 +46,8 @@ namespace Trail.Controls {
             this.AllowNoTabs = false;
             this.Tabs = new ObservableCollection<Tab>();
             this.AccentColor = Color.FromArgb(0, 122, 204);
-            btnAdd.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 0, 0, 0);
-            btnAdd.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);
+            addButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 0, 0, 0);
+            addButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);
 
             this.Tabs.CollectionChanged += Tabs_CollectionChanged;
         }
@@ -64,7 +64,7 @@ namespace Trail.Controls {
             }
 
             pnlTabs.Width = left;
-            btnAdd.Left = left;
+            addButton.Left = left;
             this.ResumeLayout();
         }
 
@@ -107,7 +107,7 @@ namespace Trail.Controls {
                 }
 
                 pnlTabs.Width = width - (int)(value * this.Tabs[i].Width);
-                btnAdd.Left = pnlTabs.Right;
+                addButton.Left = pnlTabs.Right;
             };
             animation.Complete += (_, evt) => {
                 this.Tabs.RemoveAt(i);
@@ -125,7 +125,7 @@ namespace Trail.Controls {
 
             animation.Tick += (_, value) => {
                 pnlTabs.Width = width + (int)(value * tab.Width);
-                btnAdd.Left = pnlTabs.Right;
+                addButton.Left = pnlTabs.Right;
                 tab.Left = width;
                 tab.Top = tab.Height - (int)(value * tab.Height);
             };
@@ -260,8 +260,13 @@ namespace Trail.Controls {
             RearrangeTabs();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e) {
+        private void addButton_Click(object sender, EventArgs e) {
             if (AddButtonClicked != null) AddButtonClicked(this, e);
+        }
+
+        private void menuButton_Click(object sender, EventArgs e) {
+            menu.Refresh();
+            menu.Show(menuButton, new Point(menuButton.Width - menu.Width, menuButton.Height));
         }
     }
 }
