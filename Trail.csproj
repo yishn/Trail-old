@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Columns\EmptyColumn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ColumnControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

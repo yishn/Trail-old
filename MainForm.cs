@@ -73,10 +73,12 @@ namespace Trail {
         }
 
         private void tabBar_AddButtonClicked(object sender, EventArgs e) {
-            NavigatingTab t = new NavigatingTab(tabBar.CurrentTab.ColumnView.LastColumn.Duplicate());
+            NavigatingTab t = new NavigatingTab(new EmptyColumn());
             tabBar.AddTab(t);
             tabBar.CurrentTab = t;
         }
+
+        #region Update preferences
 
         private void MainForm_ResizeEnd(object sender, EventArgs e) {
             if (!Persistence.GetPreference<bool>("window.remember_size")) return;
@@ -87,5 +89,7 @@ namespace Trail {
             if (!Persistence.GetPreference<bool>("sidebar.remember_width")) return;
             Persistence.SetPreference("sidebar.width", sidebar.Width);
         }
+
+        #endregion
     }
 }
