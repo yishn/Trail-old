@@ -10,7 +10,7 @@ namespace Trail.Columns {
     public class EmptyColumn : ItemsColumn {
         public EmptyColumn() : base("") {
             this.ListViewControl.Visible = false;
-            this.HeaderText = "New tab";
+            this.HeaderText = "New Tab";
         }
         public EmptyColumn(string itemsPath) : this() { }
 
