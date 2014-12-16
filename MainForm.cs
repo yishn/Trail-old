@@ -60,8 +60,9 @@ namespace Trail {
             if (node.SubColumn == null) return;
 
             ItemsColumn c = node.SubColumn.Duplicate();
-            tabBar.CurrentTab.ColumnView.NavigateTo(c.GetTrail());
             tabBar.CurrentTab.Text = c.HeaderText;
+            tabBar.CurrentTab.ColumnView.NavigateTo(c.GetTrail());
+            tabBar.CurrentTab.ColumnView.Columns[0].Focus();
             tabBar.CurrentTab.ColumnView.ScrollToLastColumn();
 
             sidebar.SelectedNode = null;
