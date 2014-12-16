@@ -93,6 +93,7 @@
             this.newTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
             this.newTabToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             this.newTabToolStripMenuItem.Text = "&New tab";
+            this.newTabToolStripMenuItem.Click += new System.EventHandler(this.newTabToolStripMenuItem_Click);
             // 
             // restoreToolStripMenuItem
             // 
