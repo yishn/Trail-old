@@ -260,18 +260,29 @@ namespace Trail.Controls {
 
         private void TabBar_Load(object sender, EventArgs e) {
             RearrangeTabs();
-            menu.Show(0, 0);
         }
 
         private void addButton_Click(object sender, EventArgs e) {
             if (AddButtonClicked != null) AddButtonClicked(this, e);
         }
 
+        #region Menu
+
         private void menuButton_Click(object sender, EventArgs e) {
+            // Create tab list
+            menu.Items.Clear();
+            menu.Items.Add(newTabToolStripMenuItem);
+
+            if (this.Tabs.Count != 0) menu.Items.Add(new ToolStripSeparator());
+
+            foreach (Tab t in this.Tabs) {
+                ToolStripMenuItem item = new ToolStripMenuItem(t.Text, null, (_, evt) => { this.CurrentTab = t; });
+                item.Checked = this.CurrentTab == t;
+                menu.Items.Add(item);
+            }
+
             menu.Show(menuButton, new Point(menuButton.Width - menu.Width, menuButton.Height));
         }
-
-        #region Menu
 
         private void newTabToolStripMenuItem_Click(object sender, EventArgs e) {
             addButton_Click(this, e);

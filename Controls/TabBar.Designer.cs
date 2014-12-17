@@ -31,7 +31,6 @@
             this.menuButton = new System.Windows.Forms.Button();
             this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,27 +80,17 @@
             // menu
             // 
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newTabToolStripMenuItem,
-            this.restoreToolStripMenuItem});
+            this.newTabToolStripMenuItem});
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(297, 70);
+            this.menu.Size = new System.Drawing.Size(153, 48);
             // 
             // newTabToolStripMenuItem
             // 
             this.newTabToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newTabToolStripMenuItem.Image")));
             this.newTabToolStripMenuItem.Name = "newTabToolStripMenuItem";
-            this.newTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.newTabToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
-            this.newTabToolStripMenuItem.Text = "&New tab";
+            this.newTabToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newTabToolStripMenuItem.Text = "&New Tab";
             this.newTabToolStripMenuItem.Click += new System.EventHandler(this.newTabToolStripMenuItem_Click);
-            // 
-            // restoreToolStripMenuItem
-            // 
-            this.restoreToolStripMenuItem.Name = "restoreToolStripMenuItem";
-            this.restoreToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.T)));
-            this.restoreToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
-            this.restoreToolStripMenuItem.Text = "&Restore closed tab";
             // 
             // TabBar
             // 
@@ -127,6 +116,5 @@
         private System.Windows.Forms.Button menuButton;
         private System.Windows.Forms.ContextMenuStrip menu;
         private System.Windows.Forms.ToolStripMenuItem newTabToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem restoreToolStripMenuItem;
     }
 }
