@@ -48,6 +48,8 @@ namespace Trail.Controls {
             this.AccentColor = Color.FromArgb(0, 122, 204);
             addButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 0, 0, 0);
             addButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);
+            menuButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 0, 0, 0);
+            menuButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);
 
             this.Tabs.CollectionChanged += Tabs_CollectionChanged;
         }
