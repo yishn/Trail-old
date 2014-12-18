@@ -58,6 +58,7 @@
             // 
             // controlBoxLabel
             // 
+            this.controlBoxLabel.AutoEllipsis = true;
             this.controlBoxLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.controlBoxLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.controlBoxLabel.Location = new System.Drawing.Point(0, 0);
