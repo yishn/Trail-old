@@ -75,12 +75,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 217);
+            this.ClientSize = new System.Drawing.Size(492, 212);
             this.ControlBoxText = "About Trail";
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.labelDescription);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.logo);
+            this.MaximumSize = new System.Drawing.Size(500, 220);
+            this.MinimumSize = new System.Drawing.Size(500, 220);
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Load += new System.EventHandler(this.AboutForm_Load);
