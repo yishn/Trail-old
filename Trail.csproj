@@ -59,11 +59,11 @@
     <Compile Include="Controls\FlatButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\HelperForm.cs">
+    <Compile Include="Controls\HudForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\HelperForm.Designer.cs">
-      <DependentUpon>HelperForm.cs</DependentUpon>
+    <Compile Include="Controls\HudForm.Designer.cs">
+      <DependentUpon>HudForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\SplitContainerModern.cs">
       <SubType>Component</SubType>
@@ -141,8 +141,8 @@
     <EmbeddedResource Include="Controls\ColumnView.resx">
       <DependentUpon>ColumnView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\HelperForm.resx">
-      <DependentUpon>HelperForm.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\HudForm.resx">
+      <DependentUpon>HudForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tab.resx">
       <DependentUpon>Tab.cs</DependentUpon>
