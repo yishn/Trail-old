@@ -56,11 +56,12 @@
             // labelDescription
             // 
             this.labelDescription.AutoSize = true;
-            this.labelDescription.Location = new System.Drawing.Point(167, 128);
+            this.labelDescription.Location = new System.Drawing.Point(170, 127);
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(298, 15);
+            this.labelDescription.Size = new System.Drawing.Size(304, 21);
             this.labelDescription.TabIndex = 3;
             this.labelDescription.Text = "An extendable column view file manager for Windows. ";
+            this.labelDescription.UseCompatibleTextRendering = true;
             // 
             // labelVersion
             // 
@@ -78,7 +79,7 @@
             this.labelCopyright.AutoSize = true;
             this.labelCopyright.LinkArea = new System.Windows.Forms.LinkArea(12, 12);
             this.labelCopyright.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.labelCopyright.Location = new System.Drawing.Point(169, 148);
+            this.labelCopyright.Location = new System.Drawing.Point(170, 148);
             this.labelCopyright.Name = "labelCopyright";
             this.labelCopyright.Size = new System.Drawing.Size(179, 21);
             this.labelCopyright.TabIndex = 5;
@@ -94,7 +95,7 @@
             this.labelGitHub.ForeColor = System.Drawing.Color.Gray;
             this.labelGitHub.LinkArea = new System.Windows.Forms.LinkArea(15, 6);
             this.labelGitHub.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.labelGitHub.Location = new System.Drawing.Point(169, 179);
+            this.labelGitHub.Location = new System.Drawing.Point(170, 180);
             this.labelGitHub.Name = "labelGitHub";
             this.labelGitHub.Size = new System.Drawing.Size(132, 21);
             this.labelGitHub.TabIndex = 6;
