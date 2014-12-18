@@ -30,18 +30,18 @@
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.trailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutTrailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nextTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.previousTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restoreClosedTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.goToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.packagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.goToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.nextTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.previousTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.restoreClosedTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new Trail.Controls.SplitContainerModern();
             this.sidebar = new Trail.Modules.Sidebar();
             this.tabBar = new Trail.Modules.NavigatingTabBar();
@@ -83,7 +83,8 @@
             this.extrasToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(842, 24);
+            this.mainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.mainMenu.Size = new System.Drawing.Size(826, 24);
             this.mainMenu.TabIndex = 2;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -103,11 +104,70 @@
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.preferencesToolStripMenuItem.Text = "&Preferences";
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(132, 6);
+            // 
             // aboutTrailToolStripMenuItem
             // 
             this.aboutTrailToolStripMenuItem.Name = "aboutTrailToolStripMenuItem";
             this.aboutTrailToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.aboutTrailToolStripMenuItem.Text = "&About Trail";
+            this.aboutTrailToolStripMenuItem.Click += new System.EventHandler(this.aboutTrailToolStripMenuItem_Click);
+            // 
+            // historyToolStripMenuItem
+            // 
+            this.historyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newTabToolStripMenuItem,
+            this.nextTabToolStripMenuItem,
+            this.previousTabToolStripMenuItem,
+            this.restoreClosedTabToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.goToToolStripMenuItem});
+            this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
+            this.historyToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.historyToolStripMenuItem.Text = "&Navigation";
+            // 
+            // newTabToolStripMenuItem
+            // 
+            this.newTabToolStripMenuItem.Name = "newTabToolStripMenuItem";
+            this.newTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.newTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.newTabToolStripMenuItem.Text = "New &Tab";
+            // 
+            // nextTabToolStripMenuItem
+            // 
+            this.nextTabToolStripMenuItem.Name = "nextTabToolStripMenuItem";
+            this.nextTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Tab)));
+            this.nextTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.nextTabToolStripMenuItem.Text = "&Next Tab";
+            // 
+            // previousTabToolStripMenuItem
+            // 
+            this.previousTabToolStripMenuItem.Name = "previousTabToolStripMenuItem";
+            this.previousTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Tab)));
+            this.previousTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.previousTabToolStripMenuItem.Text = "&Previous Tab";
+            // 
+            // restoreClosedTabToolStripMenuItem
+            // 
+            this.restoreClosedTabToolStripMenuItem.Name = "restoreClosedTabToolStripMenuItem";
+            this.restoreClosedTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.restoreClosedTabToolStripMenuItem.Text = "&Restore Closed Tab";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(278, 6);
+            // 
+            // goToToolStripMenuItem
+            // 
+            this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
+            this.goToToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.goToToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.goToToolStripMenuItem.Text = "Goto &Path...";
             // 
             // extrasToolStripMenuItem
             // 
@@ -134,64 +194,6 @@
             this.packagesToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
             this.packagesToolStripMenuItem.Text = "&Packages";
             // 
-            // historyToolStripMenuItem
-            // 
-            this.historyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newTabToolStripMenuItem,
-            this.nextTabToolStripMenuItem,
-            this.previousTabToolStripMenuItem,
-            this.restoreClosedTabToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.goToToolStripMenuItem});
-            this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
-            this.historyToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
-            this.historyToolStripMenuItem.Text = "&Navigation";
-            // 
-            // goToToolStripMenuItem
-            // 
-            this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
-            this.goToToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.goToToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
-            this.goToToolStripMenuItem.Text = "Goto &Path...";
-            // 
-            // newTabToolStripMenuItem
-            // 
-            this.newTabToolStripMenuItem.Name = "newTabToolStripMenuItem";
-            this.newTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.newTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
-            this.newTabToolStripMenuItem.Text = "New &Tab";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(278, 6);
-            // 
-            // nextTabToolStripMenuItem
-            // 
-            this.nextTabToolStripMenuItem.Name = "nextTabToolStripMenuItem";
-            this.nextTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Tab)));
-            this.nextTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
-            this.nextTabToolStripMenuItem.Text = "&Next Tab";
-            // 
-            // previousTabToolStripMenuItem
-            // 
-            this.previousTabToolStripMenuItem.Name = "previousTabToolStripMenuItem";
-            this.previousTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.Tab)));
-            this.previousTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
-            this.previousTabToolStripMenuItem.Text = "&Previous Tab";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(132, 6);
-            // 
-            // restoreClosedTabToolStripMenuItem
-            // 
-            this.restoreClosedTabToolStripMenuItem.Name = "restoreClosedTabToolStripMenuItem";
-            this.restoreClosedTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
-            this.restoreClosedTabToolStripMenuItem.Text = "&Restore Closed Tab";
-            // 
             // splitContainer
             // 
             this.splitContainer.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -209,7 +211,7 @@
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer.Panel2.Controls.Add(this.tabBar);
-            this.splitContainer.Size = new System.Drawing.Size(842, 337);
+            this.splitContainer.Size = new System.Drawing.Size(826, 359);
             this.splitContainer.SplitterDistance = 196;
             this.splitContainer.SplitterWidth = 2;
             this.splitContainer.TabIndex = 1;
@@ -232,7 +234,7 @@
             this.sidebar.SelectedImageIndex = 0;
             this.sidebar.ShowLines = false;
             this.sidebar.ShowNodeToolTips = true;
-            this.sidebar.Size = new System.Drawing.Size(196, 337);
+            this.sidebar.Size = new System.Drawing.Size(196, 359);
             this.sidebar.TabIndex = 0;
             this.sidebar.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.sidebar_AfterSelect);
             // 
@@ -242,10 +244,11 @@
             this.tabBar.AllowNoTabs = false;
             this.tabBar.CurrentTab = null;
             this.tabBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tabBar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabBar.Location = new System.Drawing.Point(0, 0);
             this.tabBar.Name = "tabBar";
             this.tabBar.ShowNewTabButton = true;
-            this.tabBar.Size = new System.Drawing.Size(644, 22);
+            this.tabBar.Size = new System.Drawing.Size(628, 22);
             this.tabBar.TabIndex = 2;
             this.tabBar.AddButtonClicked += new System.EventHandler(this.tabBar_AddButtonClicked);
             // 
@@ -256,13 +259,13 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(842, 361);
+            this.ClientSize = new System.Drawing.Size(826, 383);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.mainMenu);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
             this.Name = "MainForm";

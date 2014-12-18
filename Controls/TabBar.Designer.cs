@@ -36,7 +36,7 @@
             // pnlTabs
             // 
             this.pnlTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pnlTabs.Location = new System.Drawing.Point(0, 2);
+            this.pnlTabs.Location = new System.Drawing.Point(0, 0);
             this.pnlTabs.Name = "pnlTabs";
             this.pnlTabs.Size = new System.Drawing.Size(0, 20);
             this.pnlTabs.TabIndex = 0;
@@ -44,9 +44,9 @@
             // pnlAccent
             // 
             this.pnlAccent.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlAccent.Location = new System.Drawing.Point(0, 22);
+            this.pnlAccent.Location = new System.Drawing.Point(0, 20);
             this.pnlAccent.Name = "pnlAccent";
-            this.pnlAccent.Size = new System.Drawing.Size(578, 2);
+            this.pnlAccent.Size = new System.Drawing.Size(674, 2);
             this.pnlAccent.TabIndex = 1;
             // 
             // menu
@@ -69,9 +69,9 @@
             this.menuButton.FlatAppearance.BorderSize = 0;
             this.menuButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.menuButton.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menuButton.Location = new System.Drawing.Point(556, 0);
+            this.menuButton.Location = new System.Drawing.Point(654, 0);
             this.menuButton.Name = "menuButton";
-            this.menuButton.Size = new System.Drawing.Size(22, 22);
+            this.menuButton.Size = new System.Drawing.Size(20, 20);
             this.menuButton.TabIndex = 3;
             this.menuButton.Text = "";
             this.menuButton.UseVisualStyleBackColor = true;
@@ -84,7 +84,7 @@
             this.addButton.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addButton.Location = new System.Drawing.Point(3, 0);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(22, 20);
+            this.addButton.Size = new System.Drawing.Size(20, 20);
             this.addButton.TabIndex = 2;
             this.addButton.Text = "";
             this.addButton.UseVisualStyleBackColor = true;
@@ -92,14 +92,15 @@
             // 
             // TabBar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.menuButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.pnlTabs);
             this.Controls.Add(this.pnlAccent);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "TabBar";
-            this.Size = new System.Drawing.Size(578, 24);
+            this.Size = new System.Drawing.Size(674, 22);
             this.Load += new System.EventHandler(this.TabBar_Load);
             this.menu.ResumeLayout(false);
             this.ResumeLayout(false);

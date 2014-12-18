@@ -38,7 +38,7 @@
             this.ListViewControl.Location = new System.Drawing.Point(0, 0);
             this.ListViewControl.Name = "ListViewControl";
             this.ListViewControl.ShowItemToolTips = true;
-            this.ListViewControl.Size = new System.Drawing.Size(290, 381);
+            this.ListViewControl.Size = new System.Drawing.Size(200, 381);
             this.ListViewControl.TabIndex = 0;
             this.ListViewControl.UseCompatibleStateImageBehavior = false;
             this.ListViewControl.View = System.Windows.Forms.View.Details;
@@ -52,12 +52,11 @@
             // 
             // ColumnControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.ListViewControl);
             this.Name = "ColumnControl";
-            this.Size = new System.Drawing.Size(290, 381);
+            this.Size = new System.Drawing.Size(200, 381);
             this.ResumeLayout(false);
 
         }

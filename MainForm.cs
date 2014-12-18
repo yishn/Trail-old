@@ -91,5 +91,9 @@ namespace Trail {
         }
 
         #endregion
+
+        private void aboutTrailToolStripMenuItem_Click(object sender, EventArgs e) {
+            new AboutForm().ShowDialog();
+        }
     }
 }

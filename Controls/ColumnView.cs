@@ -34,7 +34,6 @@ namespace Trail.Controls {
             InitializeComponent();
 
             this.Columns = new ObservableCollection<ColumnControl>();
-            this.DefaultColumnWidth = Persistence.GetPreference<int>("column.default_width");
             this.ScrollAnimation = new IntAnimation();
 
             this.Columns.CollectionChanged += Columns_CollectionChanged;

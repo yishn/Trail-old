@@ -20,6 +20,7 @@ namespace Trail.Modules {
         
         public NavigatingColumnView() {
             this.BackColor = Color.White;
+            this.DefaultColumnWidth = Persistence.GetPreference<int>("column.default_width");
 
             this.SubColumnAdded += NavigatingColumnView_SubColumnAdded;
             this.Columns.CollectionChanged += Columns_CollectionChanged;

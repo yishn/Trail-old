@@ -140,6 +140,7 @@ namespace Trail.Controls {
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             if (e.Action == NotifyCollectionChangedAction.Add) {
                 foreach (Tab t in e.NewItems) {
+                    t.Height = pnlTabs.Height;
                     pnlTabs.Controls.Add(t);
 
                     t.MouseEnter += Tab_MouseEnter;

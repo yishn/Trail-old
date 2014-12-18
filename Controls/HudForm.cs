@@ -14,7 +14,7 @@ namespace Trail.Controls {
         private Animation animation = new Animation();
         private double opacity;
 
-        public new string Text { get { return controlBoxLabel.Text; } set { controlBoxLabel.Text = value; } }
+        public string ControlBoxText { get { return controlBoxLabel.Text; } set { controlBoxLabel.Text = value; } }
 
         public HudForm() {
             InitializeComponent();

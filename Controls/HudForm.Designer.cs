@@ -36,7 +36,7 @@
             this.controlBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.controlBox.Location = new System.Drawing.Point(0, 0);
             this.controlBox.Name = "controlBox";
-            this.controlBox.Size = new System.Drawing.Size(391, 27);
+            this.controlBox.Size = new System.Drawing.Size(456, 27);
             this.controlBox.TabIndex = 0;
             // 
             // closeButton
@@ -48,7 +48,7 @@
             this.closeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
             this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closeButton.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closeButton.Location = new System.Drawing.Point(346, 0);
+            this.closeButton.Location = new System.Drawing.Point(411, -1);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(45, 20);
             this.closeButton.TabIndex = 0;
@@ -62,7 +62,7 @@
             this.controlBoxLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.controlBoxLabel.Location = new System.Drawing.Point(0, 0);
             this.controlBoxLabel.Name = "controlBoxLabel";
-            this.controlBoxLabel.Size = new System.Drawing.Size(391, 27);
+            this.controlBoxLabel.Size = new System.Drawing.Size(456, 27);
             this.controlBoxLabel.TabIndex = 1;
             this.controlBoxLabel.Text = "HelperForm";
             this.controlBoxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -71,14 +71,14 @@
             // 
             // HudForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.ClientSize = new System.Drawing.Size(391, 276);
+            this.ClientSize = new System.Drawing.Size(456, 318);
             this.ControlBox = false;
             this.Controls.Add(this.controlBox);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;

@@ -24,16 +24,16 @@
         /// </summary>
         private void InitializeComponent() {
             this.lblText = new System.Windows.Forms.Label();
-            this.btnClose = new FlatButton();
+            this.btnClose = new Trail.Controls.FlatButton();
             this.SuspendLayout();
             // 
             // lblText
             // 
             this.lblText.AutoEllipsis = true;
             this.lblText.BackColor = System.Drawing.Color.Transparent;
-            this.lblText.Location = new System.Drawing.Point(3, 4);
+            this.lblText.Location = new System.Drawing.Point(3, 3);
             this.lblText.Name = "lblText";
-            this.lblText.Size = new System.Drawing.Size(47, 13);
+            this.lblText.Size = new System.Drawing.Size(55, 15);
             this.lblText.TabIndex = 0;
             this.lblText.Text = "TabText";
             this.lblText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -52,7 +52,7 @@
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(128, 0);
+            this.btnClose.Location = new System.Drawing.Point(153, 0);
             this.btnClose.Margin = new System.Windows.Forms.Padding(0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(20, 20);
@@ -66,13 +66,14 @@
             // 
             // Tab
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblText);
-            this.MaximumSize = new System.Drawing.Size(150, 200);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaximumSize = new System.Drawing.Size(175, 231);
             this.Name = "Tab";
-            this.Size = new System.Drawing.Size(150, 20);
+            this.Size = new System.Drawing.Size(175, 20);
             this.MouseEnter += new System.EventHandler(this.Tab_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.Tab_MouseLeave);
             this.ResumeLayout(false);
