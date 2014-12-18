@@ -56,6 +56,12 @@
     <Compile Include="Controls\ColumnControl.Designer.cs">
       <DependentUpon>ColumnControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\HelperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\HelperForm.Designer.cs">
+      <DependentUpon>HelperForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SplitContainerModern.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -131,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ColumnView.resx">
       <DependentUpon>ColumnView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\HelperForm.resx">
+      <DependentUpon>HelperForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tab.resx">
       <DependentUpon>Tab.cs</DependentUpon>
