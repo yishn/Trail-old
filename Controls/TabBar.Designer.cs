@@ -27,8 +27,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabBar));
             this.pnlTabs = new System.Windows.Forms.Panel();
             this.pnlAccent = new System.Windows.Forms.Panel();
-            this.addButton = new System.Windows.Forms.Button();
-            this.menuButton = new System.Windows.Forms.Button();
+            this.addButton = new FlatButton();
+            this.menuButton = new FlatButton();
             this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
@@ -112,8 +112,8 @@
 
         private System.Windows.Forms.Panel pnlTabs;
         private System.Windows.Forms.Panel pnlAccent;
-        private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.Button menuButton;
+        private FlatButton addButton;
+        private FlatButton menuButton;
         private System.Windows.Forms.ContextMenuStrip menu;
         private System.Windows.Forms.ToolStripMenuItem newTabToolStripMenuItem;
     }

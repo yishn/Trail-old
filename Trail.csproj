@@ -56,6 +56,9 @@
     <Compile Include="Controls\ColumnControl.Designer.cs">
       <DependentUpon>ColumnControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FlatButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\HelperForm.cs">
       <SubType>Form</SubType>
     </Compile>

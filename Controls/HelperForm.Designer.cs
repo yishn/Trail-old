@@ -24,8 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.controlBox = new System.Windows.Forms.Panel();
-            this.closeButton = new System.Windows.Forms.Button();
             this.controlBoxLabel = new System.Windows.Forms.Label();
+            this.closeButton = new Trail.Controls.FlatButton();
             this.controlBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -38,23 +38,6 @@
             this.controlBox.Name = "controlBox";
             this.controlBox.Size = new System.Drawing.Size(391, 27);
             this.controlBox.TabIndex = 0;
-            // 
-            // closeButton
-            // 
-            this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.closeButton.FlatAppearance.BorderSize = 0;
-            this.closeButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
-            this.closeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
-            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeButton.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closeButton.Location = new System.Drawing.Point(346, 0);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(45, 20);
-            this.closeButton.TabIndex = 0;
-            this.closeButton.Text = "";
-            this.closeButton.UseVisualStyleBackColor = false;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // controlBoxLabel
             // 
@@ -69,6 +52,22 @@
             this.controlBoxLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.controlBoxLabel_MouseDown);
             this.controlBoxLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.controlBoxLabel_MouseMove);
             // 
+            // closeButton
+            // 
+            this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.closeButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            this.closeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
+            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeButton.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.closeButton.Location = new System.Drawing.Point(346, 0);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(45, 20);
+            this.closeButton.TabIndex = 0;
+            this.closeButton.Text = "";
+            this.closeButton.UseVisualStyleBackColor = false;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
             // HelperForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -80,6 +79,7 @@
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HelperForm";
@@ -97,7 +97,7 @@
         #endregion
 
         private System.Windows.Forms.Panel controlBox;
-        private System.Windows.Forms.Button closeButton;
+        private FlatButton closeButton;
         private System.Windows.Forms.Label controlBoxLabel;
     }
 }

@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.lblText = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
+            this.btnClose = new FlatButton();
             this.SuspendLayout();
             // 
             // lblText
@@ -82,6 +82,6 @@
         #endregion
 
         private System.Windows.Forms.Label lblText;
-        private System.Windows.Forms.Button btnClose;
+        private FlatButton btnClose;
     }
 }

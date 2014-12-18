@@ -21,6 +21,7 @@ namespace Trail {
             tabBar.Tabs.CollectionChanged += Tabs_CollectionChanged;
 
             LoadPreferences();
+            new HelperForm() { TopMost = true }.Show();
         }
 
         public void LoadPreferences() {
