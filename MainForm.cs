@@ -92,8 +92,30 @@ namespace Trail {
 
         #endregion
 
+        #region Menu events
+
         private void aboutTrailToolStripMenuItem_Click(object sender, EventArgs e) {
             new AboutForm().ShowDialog();
         }
+
+        private void newTabToolStripMenuItem_Click(object sender, EventArgs e) {
+            tabBar_AddButtonClicked(sender, e);
+        }
+
+        private void nextTabToolStripMenuItem_Click(object sender, EventArgs e) {
+            int index = tabBar.Tabs.IndexOf(tabBar.CurrentTab);
+            tabBar.CurrentTab = tabBar.Tabs[(index + 1) % tabBar.Tabs.Count] as NavigatingTab;
+        }
+
+        private void previousTabToolStripMenuItem_Click(object sender, EventArgs e) {
+            int index = tabBar.Tabs.IndexOf(tabBar.CurrentTab);
+            tabBar.CurrentTab = tabBar.Tabs[(tabBar.Tabs.Count + index - 1) % tabBar.Tabs.Count] as NavigatingTab;
+        }
+
+        private void closeTabToolStripMenuItem_Click(object sender, EventArgs e) {
+            tabBar.CloseTab(tabBar.CurrentTab);
+        }
+
+        #endregion
     }
 }

@@ -46,6 +46,8 @@
             this.sidebar = new Trail.Modules.Sidebar();
             this.tabBar = new Trail.Modules.NavigatingTabBar();
             this.iconQueue = new Trail.Modules.ItemsIconQueue();
+            this.closeTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -83,7 +85,7 @@
             this.extrasToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.mainMenu.Padding = new System.Windows.Forms.Padding(2);
             this.mainMenu.Size = new System.Drawing.Size(826, 24);
             this.mainMenu.TabIndex = 2;
             this.mainMenu.Text = "menuStrip1";
@@ -120,9 +122,11 @@
             // 
             this.historyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newTabToolStripMenuItem,
+            this.closeTabToolStripMenuItem,
+            this.restoreClosedTabToolStripMenuItem,
+            this.toolStripMenuItem3,
             this.nextTabToolStripMenuItem,
             this.previousTabToolStripMenuItem,
-            this.restoreClosedTabToolStripMenuItem,
             this.toolStripMenuItem1,
             this.goToToolStripMenuItem});
             this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
@@ -133,40 +137,45 @@
             // 
             this.newTabToolStripMenuItem.Name = "newTabToolStripMenuItem";
             this.newTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.newTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.newTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
             this.newTabToolStripMenuItem.Text = "New &Tab";
+            this.newTabToolStripMenuItem.Click += new System.EventHandler(this.newTabToolStripMenuItem_Click);
             // 
             // nextTabToolStripMenuItem
             // 
             this.nextTabToolStripMenuItem.Name = "nextTabToolStripMenuItem";
             this.nextTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Tab)));
-            this.nextTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.nextTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
             this.nextTabToolStripMenuItem.Text = "&Next Tab";
+            this.nextTabToolStripMenuItem.Click += new System.EventHandler(this.nextTabToolStripMenuItem_Click);
             // 
             // previousTabToolStripMenuItem
             // 
             this.previousTabToolStripMenuItem.Name = "previousTabToolStripMenuItem";
             this.previousTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.Tab)));
-            this.previousTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.previousTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
             this.previousTabToolStripMenuItem.Text = "&Previous Tab";
+            this.previousTabToolStripMenuItem.Click += new System.EventHandler(this.previousTabToolStripMenuItem_Click);
             // 
             // restoreClosedTabToolStripMenuItem
             // 
             this.restoreClosedTabToolStripMenuItem.Name = "restoreClosedTabToolStripMenuItem";
-            this.restoreClosedTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.restoreClosedTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.T)));
+            this.restoreClosedTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
             this.restoreClosedTabToolStripMenuItem.Text = "&Restore Closed Tab";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(278, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(298, 6);
             // 
             // goToToolStripMenuItem
             // 
             this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
             this.goToToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.goToToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.goToToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
             this.goToToolStripMenuItem.Text = "Goto &Path...";
             // 
             // extrasToolStripMenuItem
@@ -257,6 +266,19 @@
             this.iconQueue.ImageList = this.itemsImages;
             this.iconQueue.WorkerReportsProgress = true;
             // 
+            // closeTabToolStripMenuItem
+            // 
+            this.closeTabToolStripMenuItem.Name = "closeTabToolStripMenuItem";
+            this.closeTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            this.closeTabToolStripMenuItem.Text = "&Close Tab";
+            this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.closeTabToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(298, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -305,6 +327,8 @@
         private System.Windows.Forms.ToolStripMenuItem restoreClosedTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem goToToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
     }
 }
 
