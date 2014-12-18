@@ -34,16 +34,16 @@
             this.aboutTrailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restoreClosedTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.nextTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.previousTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.restoreClosedTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.goToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.packagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainer = new Trail.Controls.SplitContainerModern();
             this.sidebar = new Trail.Modules.Sidebar();
             this.tabBar = new Trail.Modules.NavigatingTabBar();
@@ -103,18 +103,21 @@
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.preferencesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+,";
+            this.preferencesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Oemcomma)));
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.preferencesToolStripMenuItem.Text = "&Preferences";
+            this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(132, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(169, 6);
             // 
             // aboutTrailToolStripMenuItem
             // 
             this.aboutTrailToolStripMenuItem.Name = "aboutTrailToolStripMenuItem";
-            this.aboutTrailToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.aboutTrailToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.aboutTrailToolStripMenuItem.Text = "&About Trail";
             this.aboutTrailToolStripMenuItem.Click += new System.EventHandler(this.aboutTrailToolStripMenuItem_Click);
             // 
@@ -141,6 +144,27 @@
             this.newTabToolStripMenuItem.Text = "New &Tab";
             this.newTabToolStripMenuItem.Click += new System.EventHandler(this.newTabToolStripMenuItem_Click);
             // 
+            // closeTabToolStripMenuItem
+            // 
+            this.closeTabToolStripMenuItem.Name = "closeTabToolStripMenuItem";
+            this.closeTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            this.closeTabToolStripMenuItem.Text = "&Close Tab";
+            this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.closeTabToolStripMenuItem_Click);
+            // 
+            // restoreClosedTabToolStripMenuItem
+            // 
+            this.restoreClosedTabToolStripMenuItem.Name = "restoreClosedTabToolStripMenuItem";
+            this.restoreClosedTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.T)));
+            this.restoreClosedTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            this.restoreClosedTabToolStripMenuItem.Text = "&Restore Closed Tab";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(298, 6);
+            // 
             // nextTabToolStripMenuItem
             // 
             this.nextTabToolStripMenuItem.Name = "nextTabToolStripMenuItem";
@@ -157,14 +181,6 @@
             this.previousTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
             this.previousTabToolStripMenuItem.Text = "&Previous Tab";
             this.previousTabToolStripMenuItem.Click += new System.EventHandler(this.previousTabToolStripMenuItem_Click);
-            // 
-            // restoreClosedTabToolStripMenuItem
-            // 
-            this.restoreClosedTabToolStripMenuItem.Name = "restoreClosedTabToolStripMenuItem";
-            this.restoreClosedTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.T)));
-            this.restoreClosedTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-            this.restoreClosedTabToolStripMenuItem.Text = "&Restore Closed Tab";
             // 
             // toolStripMenuItem1
             // 
@@ -203,19 +219,6 @@
             this.packagesToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
             this.packagesToolStripMenuItem.Text = "&Packages";
             // 
-            // closeTabToolStripMenuItem
-            // 
-            this.closeTabToolStripMenuItem.Name = "closeTabToolStripMenuItem";
-            this.closeTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
-            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-            this.closeTabToolStripMenuItem.Text = "&Close Tab";
-            this.closeTabToolStripMenuItem.Click += new System.EventHandler(this.closeTabToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(298, 6);
-            // 
             // splitContainer
             // 
             this.splitContainer.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -242,6 +245,7 @@
             // 
             // sidebar
             // 
+            this.sidebar.BackColor = System.Drawing.SystemColors.Control;
             this.sidebar.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sidebar.FullRowSelect = true;
