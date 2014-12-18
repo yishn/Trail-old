@@ -87,6 +87,7 @@
             this.Opacity = 0.98D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HelperForm_FormClosing);
             this.Load += new System.EventHandler(this.HelperForm_Load);
             this.Shown += new System.EventHandler(this.HelperForm_Shown);
