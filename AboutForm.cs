@@ -14,5 +14,9 @@ namespace Trail {
         public AboutForm() {
             InitializeComponent();
         }
+
+        private void AboutForm_Load(object sender, EventArgs e) {
+            labelVersion.Text = "v" + Application.ProductVersion;
+        }
     }
 }

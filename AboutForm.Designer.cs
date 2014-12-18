@@ -24,40 +24,52 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.logo = new System.Windows.Forms.PictureBox();
+            this.labelName = new System.Windows.Forms.Label();
+            this.labelDescription = new System.Windows.Forms.Label();
+            this.labelVersion = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // logo
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(23, 54);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.logo.Image = ((System.Drawing.Image)(resources.GetObject("logo.Image")));
+            this.logo.Location = new System.Drawing.Point(23, 54);
+            this.logo.Name = "logo";
+            this.logo.Size = new System.Drawing.Size(128, 128);
+            this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.logo.TabIndex = 1;
+            this.logo.TabStop = false;
             // 
-            // label1
+            // labelName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Light", 42F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(157, 54);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 74);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Trail";
+            this.labelName.AutoSize = true;
+            this.labelName.Font = new System.Drawing.Font("Segoe UI Light", 42F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelName.Location = new System.Drawing.Point(157, 54);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(122, 74);
+            this.labelName.TabIndex = 2;
+            this.labelName.Text = "Trail";
             // 
-            // label2
+            // labelDescription
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(167, 128);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(301, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = " An extendable column view file manager for Windows. ";
+            this.labelDescription.AutoSize = true;
+            this.labelDescription.Location = new System.Drawing.Point(167, 128);
+            this.labelDescription.Name = "labelDescription";
+            this.labelDescription.Size = new System.Drawing.Size(301, 15);
+            this.labelDescription.TabIndex = 3;
+            this.labelDescription.Text = " An extendable column view file manager for Windows. ";
+            // 
+            // labelVersion
+            // 
+            this.labelVersion.AutoSize = true;
+            this.labelVersion.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVersion.ForeColor = System.Drawing.Color.Silver;
+            this.labelVersion.Location = new System.Drawing.Point(268, 84);
+            this.labelVersion.Name = "labelVersion";
+            this.labelVersion.Size = new System.Drawing.Size(45, 37);
+            this.labelVersion.TabIndex = 4;
+            this.labelVersion.Text = "v1";
             // 
             // AboutForm
             // 
@@ -65,16 +77,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(495, 217);
             this.ControlBoxText = "About Trail";
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.labelVersion);
+            this.Controls.Add(this.labelDescription);
+            this.Controls.Add(this.labelName);
+            this.Controls.Add(this.logo);
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.TopMost = true;
-            this.Controls.SetChildIndex(this.pictureBox1, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Load += new System.EventHandler(this.AboutForm_Load);
+            this.Controls.SetChildIndex(this.logo, 0);
+            this.Controls.SetChildIndex(this.labelName, 0);
+            this.Controls.SetChildIndex(this.labelDescription, 0);
+            this.Controls.SetChildIndex(this.labelVersion, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -82,8 +96,9 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox logo;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.Label labelDescription;
+        private System.Windows.Forms.Label labelVersion;
     }
 }
