@@ -1,5 +1,5 @@
 ﻿namespace Trail.Controls {
-    partial class HelperForm {
+    partial class HudForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>

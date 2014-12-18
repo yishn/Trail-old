@@ -10,13 +10,13 @@ using System.Windows.Forms;
 using Trail.Fx;
 
 namespace Trail.Controls {
-    public partial class HelperForm : Form {
+    public partial class HudForm : Form {
         private Animation animation = new Animation();
         private double opacity;
 
         public new string Text { get { return controlBoxLabel.Text; } set { controlBoxLabel.Text = value; } }
 
-        public HelperForm() {
+        public HudForm() {
             InitializeComponent();
         }
 
