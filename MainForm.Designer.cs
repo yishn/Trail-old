@@ -25,35 +25,191 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.sidebarImages = new System.Windows.Forms.ImageList(this.components);
+            this.itemsImages = new System.Windows.Forms.ImageList(this.components);
+            this.mainMenu = new System.Windows.Forms.MenuStrip();
+            this.trailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutTrailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.packagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.goToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.nextTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.previousTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.restoreClosedTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new Trail.Controls.SplitContainerModern();
             this.sidebar = new Trail.Modules.Sidebar();
-            this.sidebarImages = new System.Windows.Forms.ImageList(this.components);
             this.tabBar = new Trail.Modules.NavigatingTabBar();
-            this.itemsImages = new System.Windows.Forms.ImageList(this.components);
             this.iconQueue = new Trail.Modules.ItemsIconQueue();
+            this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
+            // sidebarImages
+            // 
+            this.sidebarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("sidebarImages.ImageStream")));
+            this.sidebarImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.sidebarImages.Images.SetKeyName(0, "folder");
+            this.sidebarImages.Images.SetKeyName(1, "bookmarks");
+            this.sidebarImages.Images.SetKeyName(2, "drives");
+            this.sidebarImages.Images.SetKeyName(3, "drive");
+            this.sidebarImages.Images.SetKeyName(4, "disc");
+            this.sidebarImages.Images.SetKeyName(5, "network");
+            this.sidebarImages.Images.SetKeyName(6, "removable");
+            this.sidebarImages.Images.SetKeyName(7, "unknown");
+            this.sidebarImages.Images.SetKeyName(8, "favorites");
+            // 
+            // itemsImages
+            // 
+            this.itemsImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("itemsImages.ImageStream")));
+            this.itemsImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.itemsImages.Images.SetKeyName(0, ".folder");
+            this.itemsImages.Images.SetKeyName(1, ".file");
+            // 
+            // mainMenu
+            // 
+            this.mainMenu.BackColor = System.Drawing.SystemColors.Control;
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.trailToolStripMenuItem,
+            this.historyToolStripMenuItem,
+            this.extrasToolStripMenuItem});
+            this.mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.mainMenu.Name = "mainMenu";
+            this.mainMenu.Size = new System.Drawing.Size(842, 24);
+            this.mainMenu.TabIndex = 2;
+            this.mainMenu.Text = "menuStrip1";
+            // 
+            // trailToolStripMenuItem
+            // 
+            this.trailToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.preferencesToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.aboutTrailToolStripMenuItem});
+            this.trailToolStripMenuItem.Name = "trailToolStripMenuItem";
+            this.trailToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
+            this.trailToolStripMenuItem.Text = "&Trail";
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.preferencesToolStripMenuItem.Text = "&Preferences";
+            // 
+            // aboutTrailToolStripMenuItem
+            // 
+            this.aboutTrailToolStripMenuItem.Name = "aboutTrailToolStripMenuItem";
+            this.aboutTrailToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.aboutTrailToolStripMenuItem.Text = "&About Trail";
+            // 
+            // extrasToolStripMenuItem
+            // 
+            this.extrasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manageAppsToolStripMenuItem,
+            this.packagesToolStripMenuItem});
+            this.extrasToolStripMenuItem.Name = "extrasToolStripMenuItem";
+            this.extrasToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.extrasToolStripMenuItem.Text = "&Extras";
+            // 
+            // manageAppsToolStripMenuItem
+            // 
+            this.manageAppsToolStripMenuItem.Name = "manageAppsToolStripMenuItem";
+            this.manageAppsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.A)));
+            this.manageAppsToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+            this.manageAppsToolStripMenuItem.Text = "Manage &Apps...";
+            // 
+            // packagesToolStripMenuItem
+            // 
+            this.packagesToolStripMenuItem.Name = "packagesToolStripMenuItem";
+            this.packagesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.P)));
+            this.packagesToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+            this.packagesToolStripMenuItem.Text = "&Packages";
+            // 
+            // historyToolStripMenuItem
+            // 
+            this.historyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newTabToolStripMenuItem,
+            this.nextTabToolStripMenuItem,
+            this.previousTabToolStripMenuItem,
+            this.restoreClosedTabToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.goToToolStripMenuItem});
+            this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
+            this.historyToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.historyToolStripMenuItem.Text = "&Navigation";
+            // 
+            // goToToolStripMenuItem
+            // 
+            this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
+            this.goToToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.goToToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.goToToolStripMenuItem.Text = "Goto &Path...";
+            // 
+            // newTabToolStripMenuItem
+            // 
+            this.newTabToolStripMenuItem.Name = "newTabToolStripMenuItem";
+            this.newTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.newTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.newTabToolStripMenuItem.Text = "New &Tab";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(278, 6);
+            // 
+            // nextTabToolStripMenuItem
+            // 
+            this.nextTabToolStripMenuItem.Name = "nextTabToolStripMenuItem";
+            this.nextTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Tab)));
+            this.nextTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.nextTabToolStripMenuItem.Text = "&Next Tab";
+            // 
+            // previousTabToolStripMenuItem
+            // 
+            this.previousTabToolStripMenuItem.Name = "previousTabToolStripMenuItem";
+            this.previousTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Tab)));
+            this.previousTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.previousTabToolStripMenuItem.Text = "&Previous Tab";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(132, 6);
+            // 
+            // restoreClosedTabToolStripMenuItem
+            // 
+            this.restoreClosedTabToolStripMenuItem.Name = "restoreClosedTabToolStripMenuItem";
+            this.restoreClosedTabToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.restoreClosedTabToolStripMenuItem.Text = "&Restore Closed Tab";
+            // 
             // splitContainer
             // 
             this.splitContainer.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer.Location = new System.Drawing.Point(0, 24);
             this.splitContainer.Name = "splitContainer";
             // 
             // splitContainer.Panel1
             // 
+            this.splitContainer.Panel1.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer.Panel1.Controls.Add(this.sidebar);
             // 
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer.Panel2.Controls.Add(this.tabBar);
-            this.splitContainer.Size = new System.Drawing.Size(842, 382);
+            this.splitContainer.Size = new System.Drawing.Size(842, 337);
             this.splitContainer.SplitterDistance = 196;
             this.splitContainer.SplitterWidth = 2;
             this.splitContainer.TabIndex = 1;
@@ -76,23 +232,9 @@
             this.sidebar.SelectedImageIndex = 0;
             this.sidebar.ShowLines = false;
             this.sidebar.ShowNodeToolTips = true;
-            this.sidebar.Size = new System.Drawing.Size(196, 382);
+            this.sidebar.Size = new System.Drawing.Size(196, 337);
             this.sidebar.TabIndex = 0;
             this.sidebar.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.sidebar_AfterSelect);
-            // 
-            // sidebarImages
-            // 
-            this.sidebarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("sidebarImages.ImageStream")));
-            this.sidebarImages.TransparentColor = System.Drawing.Color.Transparent;
-            this.sidebarImages.Images.SetKeyName(0, "folder");
-            this.sidebarImages.Images.SetKeyName(1, "bookmarks");
-            this.sidebarImages.Images.SetKeyName(2, "drives");
-            this.sidebarImages.Images.SetKeyName(3, "drive");
-            this.sidebarImages.Images.SetKeyName(4, "disc");
-            this.sidebarImages.Images.SetKeyName(5, "network");
-            this.sidebarImages.Images.SetKeyName(6, "removable");
-            this.sidebarImages.Images.SetKeyName(7, "unknown");
-            this.sidebarImages.Images.SetKeyName(8, "favorites");
             // 
             // tabBar
             // 
@@ -107,13 +249,6 @@
             this.tabBar.TabIndex = 2;
             this.tabBar.AddButtonClicked += new System.EventHandler(this.tabBar_AddButtonClicked);
             // 
-            // itemsImages
-            // 
-            this.itemsImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("itemsImages.ImageStream")));
-            this.itemsImages.TransparentColor = System.Drawing.Color.Transparent;
-            this.itemsImages.Images.SetKeyName(0, ".folder");
-            this.itemsImages.Images.SetKeyName(1, ".file");
-            // 
             // iconQueue
             // 
             this.iconQueue.ImageList = this.itemsImages;
@@ -123,19 +258,24 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(842, 382);
+            this.ClientSize = new System.Drawing.Size(842, 361);
             this.Controls.Add(this.splitContainer);
+            this.Controls.Add(this.mainMenu);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.mainMenu;
             this.Name = "MainForm";
             this.Text = "Trail";
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
+            this.mainMenu.ResumeLayout(false);
+            this.mainMenu.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -147,6 +287,21 @@
         private Modules.Sidebar sidebar;
         private Trail.Modules.NavigatingTabBar tabBar;
         private Modules.ItemsIconQueue iconQueue;
+        private System.Windows.Forms.MenuStrip mainMenu;
+        private System.Windows.Forms.ToolStripMenuItem trailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutTrailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem extrasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageAppsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem packagesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem historyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem newTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nextTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem previousTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem restoreClosedTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem goToToolStripMenuItem;
     }
 }
 

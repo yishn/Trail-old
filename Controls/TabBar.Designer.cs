@@ -24,13 +24,12 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabBar));
             this.pnlTabs = new System.Windows.Forms.Panel();
             this.pnlAccent = new System.Windows.Forms.Panel();
-            this.addButton = new FlatButton();
-            this.menuButton = new FlatButton();
             this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuButton = new Trail.Controls.FlatButton();
+            this.addButton = new Trail.Controls.FlatButton();
             this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,18 +49,19 @@
             this.pnlAccent.Size = new System.Drawing.Size(578, 2);
             this.pnlAccent.TabIndex = 1;
             // 
-            // addButton
+            // menu
             // 
-            this.addButton.FlatAppearance.BorderSize = 0;
-            this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addButton.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addButton.Location = new System.Drawing.Point(3, 0);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(22, 20);
-            this.addButton.TabIndex = 2;
-            this.addButton.Text = "";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newTabToolStripMenuItem});
+            this.menu.Name = "menu";
+            this.menu.Size = new System.Drawing.Size(122, 26);
+            // 
+            // newTabToolStripMenuItem
+            // 
+            this.newTabToolStripMenuItem.Name = "newTabToolStripMenuItem";
+            this.newTabToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.newTabToolStripMenuItem.Text = "&New Tab";
+            this.newTabToolStripMenuItem.Click += new System.EventHandler(this.newTabToolStripMenuItem_Click);
             // 
             // menuButton
             // 
@@ -77,20 +77,18 @@
             this.menuButton.UseVisualStyleBackColor = true;
             this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
             // 
-            // menu
+            // addButton
             // 
-            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newTabToolStripMenuItem});
-            this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(153, 48);
-            // 
-            // newTabToolStripMenuItem
-            // 
-            this.newTabToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newTabToolStripMenuItem.Image")));
-            this.newTabToolStripMenuItem.Name = "newTabToolStripMenuItem";
-            this.newTabToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.newTabToolStripMenuItem.Text = "&New Tab";
-            this.newTabToolStripMenuItem.Click += new System.EventHandler(this.newTabToolStripMenuItem_Click);
+            this.addButton.FlatAppearance.BorderSize = 0;
+            this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addButton.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addButton.Location = new System.Drawing.Point(3, 0);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(22, 20);
+            this.addButton.TabIndex = 2;
+            this.addButton.Text = "";
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // TabBar
             // 

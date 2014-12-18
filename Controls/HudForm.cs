@@ -24,7 +24,7 @@ namespace Trail.Controls {
             this.Close();
         }
 
-        #region Form Opacity Animations
+        #region Form opacity animations
 
         private void HelperForm_FormClosing(object sender, FormClosingEventArgs e) {
             if (animation.Enabled) return;
@@ -59,7 +59,7 @@ namespace Trail.Controls {
 
         #endregion
 
-        #region Move Form
+        #region Move form
 
         Point mouseOldPoint;
 
