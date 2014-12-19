@@ -128,7 +128,7 @@ namespace Trail {
             tabBar.CurrentTab = t;
         }
 
-        private void goToPathToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void goToLocationToolStripMenuItem_Click(object sender, EventArgs e) {
             GotoForm form = new GotoForm();
             form.ItemsPath = tabBar.CurrentTab.ColumnView.LastColumn.ItemsPath;
             form.Left = this.Left + this.Width / 2 - form.Width / 2;

@@ -41,7 +41,7 @@
             this.nextTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.previousTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.goToPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.goToLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.packagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,7 +133,7 @@
             this.nextTabToolStripMenuItem,
             this.previousTabToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.goToPathToolStripMenuItem});
+            this.goToLocationToolStripMenuItem});
             this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
             this.historyToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.historyToolStripMenuItem.Text = "&Navigation";
@@ -197,13 +197,13 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(298, 6);
             // 
-            // goToPathToolStripMenuItem
+            // goToLocationToolStripMenuItem
             // 
-            this.goToPathToolStripMenuItem.Name = "goToPathToolStripMenuItem";
-            this.goToPathToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.goToPathToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-            this.goToPathToolStripMenuItem.Text = "&Goto Path...";
-            this.goToPathToolStripMenuItem.Click += new System.EventHandler(this.goToPathToolStripMenuItem_Click);
+            this.goToLocationToolStripMenuItem.Name = "goToLocationToolStripMenuItem";
+            this.goToLocationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.goToLocationToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            this.goToLocationToolStripMenuItem.Text = "&Goto Location...";
+            this.goToLocationToolStripMenuItem.Click += new System.EventHandler(this.goToLocationToolStripMenuItem_Click);
             // 
             // extrasToolStripMenuItem
             // 
@@ -340,7 +340,7 @@
         private System.Windows.Forms.ToolStripMenuItem previousTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restoreClosedTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem goToPathToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem goToLocationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem duplicateTabToolStripMenuItem;
