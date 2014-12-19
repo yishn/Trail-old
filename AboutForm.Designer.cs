@@ -76,8 +76,10 @@
             // 
             // labelCopyright
             // 
+            this.labelCopyright.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.labelCopyright.AutoSize = true;
             this.labelCopyright.LinkArea = new System.Windows.Forms.LinkArea(12, 12);
+            this.labelCopyright.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.labelCopyright.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.labelCopyright.Location = new System.Drawing.Point(170, 148);
             this.labelCopyright.Name = "labelCopyright";
@@ -91,9 +93,11 @@
             // 
             // labelGitHub
             // 
+            this.labelGitHub.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.labelGitHub.AutoSize = true;
             this.labelGitHub.ForeColor = System.Drawing.Color.Gray;
             this.labelGitHub.LinkArea = new System.Windows.Forms.LinkArea(15, 6);
+            this.labelGitHub.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.labelGitHub.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.labelGitHub.Location = new System.Drawing.Point(170, 180);
             this.labelGitHub.Name = "labelGitHub";
