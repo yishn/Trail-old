@@ -123,6 +123,12 @@ namespace Trail {
             tabBar.CurrentTab = t;
         }
 
+        private void duplicateTabToolStripMenuItem_Click(object sender, EventArgs e) {
+            NavigatingTab t = new NavigatingTab(tabBar.CurrentTab.ColumnView.LastColumn.Duplicate());
+            tabBar.AddTab(t);
+            tabBar.CurrentTab = t;
+        }
+
         #endregion
     }
 }

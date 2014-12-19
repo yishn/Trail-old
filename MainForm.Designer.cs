@@ -48,6 +48,7 @@
             this.sidebar = new Trail.Modules.Sidebar();
             this.tabBar = new Trail.Modules.NavigatingTabBar();
             this.iconQueue = new Trail.Modules.ItemsIconQueue();
+            this.duplicateTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -125,6 +126,7 @@
             // 
             this.historyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newTabToolStripMenuItem,
+            this.duplicateTabToolStripMenuItem,
             this.closeTabToolStripMenuItem,
             this.restoreClosedTabToolStripMenuItem,
             this.toolStripMenuItem3,
@@ -192,7 +194,7 @@
             this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
             this.goToToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
             this.goToToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-            this.goToToolStripMenuItem.Text = "Goto &Path...";
+            this.goToToolStripMenuItem.Text = "&Goto Path...";
             // 
             // extrasToolStripMenuItem
             // 
@@ -282,6 +284,14 @@
             this.iconQueue.ImageList = this.itemsImages;
             this.iconQueue.WorkerReportsProgress = true;
             // 
+            // duplicateTabToolStripMenuItem
+            // 
+            this.duplicateTabToolStripMenuItem.Name = "duplicateTabToolStripMenuItem";
+            this.duplicateTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.duplicateTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            this.duplicateTabToolStripMenuItem.Text = "&Duplicate Tab";
+            this.duplicateTabToolStripMenuItem.Click += new System.EventHandler(this.duplicateTabToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -332,6 +342,7 @@
         private System.Windows.Forms.ToolStripMenuItem goToToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem duplicateTabToolStripMenuItem;
     }
 }
 
