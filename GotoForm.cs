@@ -16,8 +16,22 @@ namespace Trail {
             set { pathTextBox.Text = value; pathTextBox.SelectAll(); } 
         }
 
+        public event EventHandler AcceptButtonClicked;
+
         public GotoForm() {
             InitializeComponent();
+        }
+
+        private void okButton_Click(object sender, EventArgs e) {
+            if (AcceptButtonClicked != null) AcceptButtonClicked(this, e);
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+
+        private void GotoForm_Deactivate(object sender, EventArgs e) {
+            this.Close();
         }
     }
 }

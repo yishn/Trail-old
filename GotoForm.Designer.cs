@@ -32,7 +32,7 @@
             // 
             this.pathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pathTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.pathTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.pathTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.pathTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.pathTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -45,7 +45,6 @@
             // 
             // okButton
             // 
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.okButton.Location = new System.Drawing.Point(-75, -23);
             this.okButton.Name = "okButton";
@@ -54,6 +53,7 @@
             this.okButton.TabStop = false;
             this.okButton.Text = "&Goto";
             this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 
@@ -66,6 +66,7 @@
             this.cancelButton.TabStop = false;
             this.cancelButton.Text = "&Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // GotoForm
             // 
@@ -79,7 +80,9 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.pathTextBox);
             this.Name = "GotoForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.TopMost = true;
+            this.Deactivate += new System.EventHandler(this.GotoForm_Deactivate);
             this.Controls.SetChildIndex(this.pathTextBox, 0);
             this.Controls.SetChildIndex(this.cancelButton, 0);
             this.Controls.SetChildIndex(this.okButton, 0);

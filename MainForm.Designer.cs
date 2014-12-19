@@ -34,17 +34,17 @@
             this.aboutTrailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.duplicateTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restoreClosedTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.nextTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.previousTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.goToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.goToPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.packagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.duplicateTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new Trail.Controls.SplitContainerModern();
             this.sidebar = new Trail.Modules.Sidebar();
             this.tabBar = new Trail.Modules.NavigatingTabBar();
@@ -133,7 +133,7 @@
             this.nextTabToolStripMenuItem,
             this.previousTabToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.goToToolStripMenuItem});
+            this.goToPathToolStripMenuItem});
             this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
             this.historyToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.historyToolStripMenuItem.Text = "&Navigation";
@@ -145,6 +145,14 @@
             this.newTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
             this.newTabToolStripMenuItem.Text = "New &Tab";
             this.newTabToolStripMenuItem.Click += new System.EventHandler(this.newTabToolStripMenuItem_Click);
+            // 
+            // duplicateTabToolStripMenuItem
+            // 
+            this.duplicateTabToolStripMenuItem.Name = "duplicateTabToolStripMenuItem";
+            this.duplicateTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.duplicateTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            this.duplicateTabToolStripMenuItem.Text = "&Duplicate Tab";
+            this.duplicateTabToolStripMenuItem.Click += new System.EventHandler(this.duplicateTabToolStripMenuItem_Click);
             // 
             // closeTabToolStripMenuItem
             // 
@@ -189,13 +197,13 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(298, 6);
             // 
-            // goToToolStripMenuItem
+            // goToPathToolStripMenuItem
             // 
-            this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
-            this.goToToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.goToToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-            this.goToToolStripMenuItem.Text = "&Goto Path...";
-            this.goToToolStripMenuItem.Click += new System.EventHandler(this.goToToolStripMenuItem_Click);
+            this.goToPathToolStripMenuItem.Name = "goToPathToolStripMenuItem";
+            this.goToPathToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.goToPathToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            this.goToPathToolStripMenuItem.Text = "&Goto Path...";
+            this.goToPathToolStripMenuItem.Click += new System.EventHandler(this.goToPathToolStripMenuItem_Click);
             // 
             // extrasToolStripMenuItem
             // 
@@ -221,14 +229,6 @@
             | System.Windows.Forms.Keys.P)));
             this.packagesToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
             this.packagesToolStripMenuItem.Text = "&Packages";
-            // 
-            // duplicateTabToolStripMenuItem
-            // 
-            this.duplicateTabToolStripMenuItem.Name = "duplicateTabToolStripMenuItem";
-            this.duplicateTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.duplicateTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-            this.duplicateTabToolStripMenuItem.Text = "&Duplicate Tab";
-            this.duplicateTabToolStripMenuItem.Click += new System.EventHandler(this.duplicateTabToolStripMenuItem_Click);
             // 
             // splitContainer
             // 
@@ -340,7 +340,7 @@
         private System.Windows.Forms.ToolStripMenuItem previousTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restoreClosedTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem goToToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem goToPathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem duplicateTabToolStripMenuItem;
