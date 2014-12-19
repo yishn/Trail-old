@@ -79,6 +79,8 @@
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.pathTextBox);
+            this.MaximumSize = new System.Drawing.Size(385, 83);
+            this.MinimumSize = new System.Drawing.Size(385, 83);
             this.Name = "GotoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.TopMost = true;

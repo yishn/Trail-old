@@ -133,7 +133,7 @@ namespace Trail {
             GotoForm form = new GotoForm();
             form.ItemsPath = tabBar.CurrentTab.ColumnView.LastColumn.ItemsPath;
             form.Left = this.Left + this.Width / 2 - form.Width / 2;
-            form.Top = this.Top + this.Height / 2 - form.Height / 2;
+            form.Top = this.Top + this.Height / 4 - form.Height / 4;
             form.Show();
 
             form.AcceptButtonClicked += (_, evt) => {
