@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -114,6 +115,12 @@ namespace Trail {
 
         private void closeTabToolStripMenuItem_Click(object sender, EventArgs e) {
             tabBar.CloseTab(tabBar.CurrentTab);
+        }
+
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e) {
+            NavigatingTab t = new NavigatingTab(new DirectoryColumn(Persistence.PersistenceFolder));
+            tabBar.AddTab(t);
+            tabBar.CurrentTab = t;
         }
 
         #endregion

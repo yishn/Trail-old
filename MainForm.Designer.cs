@@ -105,18 +105,19 @@
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
             this.preferencesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+,";
             this.preferencesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Oemcomma)));
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.preferencesToolStripMenuItem.Text = "&Preferences";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.preferencesToolStripMenuItem.Text = "Browse &Preferences";
+            this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(169, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(210, 6);
             // 
             // aboutTrailToolStripMenuItem
             // 
             this.aboutTrailToolStripMenuItem.Name = "aboutTrailToolStripMenuItem";
-            this.aboutTrailToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.aboutTrailToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.aboutTrailToolStripMenuItem.Text = "&About Trail";
             this.aboutTrailToolStripMenuItem.Click += new System.EventHandler(this.aboutTrailToolStripMenuItem_Click);
             // 
