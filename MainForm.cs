@@ -129,6 +129,16 @@ namespace Trail {
             tabBar.CurrentTab = t;
         }
 
+        private void goToToolStripMenuItem_Click(object sender, EventArgs e) {
+            GotoForm form = new GotoForm();
+            form.ItemsPath = tabBar.CurrentTab.ColumnView.LastColumn.ItemsPath;
+
+            if (form.ShowDialog() != DialogResult.OK) return;
+            tabBar.CurrentTab.ColumnView.NavigateTo(new DirectoryColumn(form.ItemsPath));
+            tabBar.CurrentTab.ColumnView.Columns[0].Focus();
+            tabBar.CurrentTab.ColumnView.ScrollToLastColumn();
+        }
+
         #endregion
     }
 }

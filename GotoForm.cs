@@ -11,6 +11,11 @@ using Trail.Controls;
 
 namespace Trail {
     public partial class GotoForm : HudForm {
+        public string ItemsPath { 
+            get { return pathTextBox.Text; }
+            set { pathTextBox.Text = value; pathTextBox.SelectAll(); } 
+        }
+
         public GotoForm() {
             InitializeComponent();
         }

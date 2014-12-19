@@ -44,11 +44,11 @@
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.packagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.duplicateTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new Trail.Controls.SplitContainerModern();
             this.sidebar = new Trail.Modules.Sidebar();
             this.tabBar = new Trail.Modules.NavigatingTabBar();
             this.iconQueue = new Trail.Modules.ItemsIconQueue();
-            this.duplicateTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -195,6 +195,7 @@
             this.goToToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
             this.goToToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
             this.goToToolStripMenuItem.Text = "&Goto Path...";
+            this.goToToolStripMenuItem.Click += new System.EventHandler(this.goToToolStripMenuItem_Click);
             // 
             // extrasToolStripMenuItem
             // 
@@ -220,6 +221,14 @@
             | System.Windows.Forms.Keys.P)));
             this.packagesToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
             this.packagesToolStripMenuItem.Text = "&Packages";
+            // 
+            // duplicateTabToolStripMenuItem
+            // 
+            this.duplicateTabToolStripMenuItem.Name = "duplicateTabToolStripMenuItem";
+            this.duplicateTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.duplicateTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            this.duplicateTabToolStripMenuItem.Text = "&Duplicate Tab";
+            this.duplicateTabToolStripMenuItem.Click += new System.EventHandler(this.duplicateTabToolStripMenuItem_Click);
             // 
             // splitContainer
             // 
@@ -283,14 +292,6 @@
             // 
             this.iconQueue.ImageList = this.itemsImages;
             this.iconQueue.WorkerReportsProgress = true;
-            // 
-            // duplicateTabToolStripMenuItem
-            // 
-            this.duplicateTabToolStripMenuItem.Name = "duplicateTabToolStripMenuItem";
-            this.duplicateTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.duplicateTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-            this.duplicateTabToolStripMenuItem.Text = "&Duplicate Tab";
-            this.duplicateTabToolStripMenuItem.Click += new System.EventHandler(this.duplicateTabToolStripMenuItem_Click);
             // 
             // MainForm
             // 
