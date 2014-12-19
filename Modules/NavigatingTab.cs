@@ -21,6 +21,7 @@ namespace Trail.Modules {
         public event EventHandler Navigated;
 
         private void ColumnView_Navigated(object sender, EventArgs e) {
+            this.Text = ColumnView.LastColumn.HeaderText;
             if (Navigated != null) Navigated(this, EventArgs.Empty);
         }
 
