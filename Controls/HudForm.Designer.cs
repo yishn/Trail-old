@@ -86,7 +86,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HudForm";
-            this.Opacity = 0.98D;
+            this.Opacity = 0.97D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
