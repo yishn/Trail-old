@@ -45,6 +45,7 @@ namespace Trail.Modules {
 
             if (Navigated != null) Navigated(this, EventArgs.Empty);
         }
+        public void NavigateTo(ItemsColumn column) { NavigateTo(column.GetTrail()); }
 
         private void Columns_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             if (e.Action != NotifyCollectionChangedAction.Add) return;

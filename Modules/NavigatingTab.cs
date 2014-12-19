@@ -28,7 +28,7 @@ namespace Trail.Modules {
             this.ColumnView = new NavigatingColumnView();
         }
         public NavigatingTab(ItemsColumn column) : this() {
-            this.ColumnView.NavigateTo(column.GetTrail());
+            this.ColumnView.NavigateTo(column);
             this.Text = column.HeaderText;
         }
     }
