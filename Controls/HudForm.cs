@@ -30,6 +30,9 @@ namespace Trail.Controls {
             if (animation.Enabled) return;
             if (this.Opacity == 0) return;
 
+            // Remember DialogResult
+            DialogResult result = this.DialogResult;
+
             animation = new Animation();
             e.Cancel = true;
 
@@ -39,6 +42,7 @@ namespace Trail.Controls {
             };
             animation.Complete += (_, evt) => {
                 this.Close();
+                this.DialogResult = result;
             };
             animation.Start();
         }
