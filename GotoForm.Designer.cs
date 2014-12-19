@@ -51,6 +51,7 @@
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 4;
+            this.okButton.TabStop = false;
             this.okButton.Text = "&Goto";
             this.okButton.UseVisualStyleBackColor = true;
             // 
@@ -62,6 +63,7 @@
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 3;
+            this.cancelButton.TabStop = false;
             this.cancelButton.Text = "&Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
