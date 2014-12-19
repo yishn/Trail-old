@@ -83,11 +83,10 @@ namespace Trail.Columns {
         protected override List<ColumnListViewItem> loadData(DoWorkEventArgs e) {
             watcher.EnableRaisingEvents = true;
             List<ColumnListViewItem> result = new List<ColumnListViewItem>();
+            List<string> patterns = Persistence.GetPreferenceList("directorycolumn.directory_exclude_patterns");
 
             foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
                 if (e.Cancel) return null;
-
-                List<string> patterns = Persistence.GetPreferenceList("directorycolumn.directory_exclude_patterns");
                 if (patterns.Any(x => dI.Name.MatchesPattern(x))) continue;
 
                 result.Add(new ColumnListViewItem() {
@@ -100,8 +99,6 @@ namespace Trail.Columns {
 
             foreach (FileInfo fI in this.Directory.GetFiles()) {
                 if (e.Cancel) return null;
-
-                List<string> patterns = Persistence.GetPreferenceList("directorycolumn.file_exclude_patterns");
                 if (patterns.Any(x => fI.Name.MatchesPattern(x))) continue;
   
                 ColumnListViewItem item = new ColumnListViewItem() {
