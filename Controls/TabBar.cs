@@ -282,10 +282,6 @@ namespace Trail.Controls {
             menu.Show(menuButton, new Point(menuButton.Width - menu.Width, menuButton.Height));
         }
 
-        private void newTabToolStripMenuItem_Click(object sender, EventArgs e) {
-            addButton_Click(this, e);
-        }
-
         #endregion
     }
 }
