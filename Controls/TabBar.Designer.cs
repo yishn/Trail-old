@@ -27,7 +27,6 @@
             this.pnlTabs = new System.Windows.Forms.Panel();
             this.pnlAccent = new System.Windows.Forms.Panel();
             this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuButton = new Trail.Controls.FlatButton();
             this.addButton = new Trail.Controls.FlatButton();
             this.menu.SuspendLayout();
@@ -51,17 +50,8 @@
             // 
             // menu
             // 
-            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newTabToolStripMenuItem});
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(122, 26);
-            // 
-            // newTabToolStripMenuItem
-            // 
-            this.newTabToolStripMenuItem.Name = "newTabToolStripMenuItem";
-            this.newTabToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.newTabToolStripMenuItem.Text = "&New Tab";
-            this.newTabToolStripMenuItem.Click += new System.EventHandler(this.newTabToolStripMenuItem_Click);
             // 
             // menuButton
             // 
@@ -114,6 +104,5 @@
         private FlatButton addButton;
         private FlatButton menuButton;
         private System.Windows.Forms.ContextMenuStrip menu;
-        private System.Windows.Forms.ToolStripMenuItem newTabToolStripMenuItem;
     }
 }

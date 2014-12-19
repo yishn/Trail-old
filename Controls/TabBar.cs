@@ -272,9 +272,6 @@ namespace Trail.Controls {
         private void menuButton_Click(object sender, EventArgs e) {
             // Create tab list
             menu.Items.Clear();
-            menu.Items.Add(newTabToolStripMenuItem);
-
-            if (this.Tabs.Count != 0) menu.Items.Add(new ToolStripSeparator());
 
             foreach (Tab t in this.Tabs) {
                 ToolStripMenuItem item = new ToolStripMenuItem(t.Text, null, (_, evt) => { this.CurrentTab = t; });
