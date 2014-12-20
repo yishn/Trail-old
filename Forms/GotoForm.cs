@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Controls;
 
-namespace Trail {
+namespace Trail.Forms {
     public partial class GotoForm : HudForm {
         public string ItemsPath { 
             get { return pathTextBox.Text; }

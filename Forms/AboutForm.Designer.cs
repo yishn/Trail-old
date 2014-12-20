@@ -1,4 +1,4 @@
-﻿namespace Trail {
+﻿namespace Trail.Forms {
     partial class AboutForm {
         /// <summary>
         /// Required designer variable.

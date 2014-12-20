@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Controls;
 
-namespace Trail {
+namespace Trail.Forms {
     public partial class AboutForm : HudForm {
         public AboutForm() {
             InitializeComponent();

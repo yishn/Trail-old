@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Columns;
 using Trail.Controls;
+using Trail.Forms;
 using Trail.Modules;
 
 namespace Trail {
