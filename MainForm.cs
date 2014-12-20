@@ -32,6 +32,8 @@ namespace Trail {
                 List<int> size = Persistence.GetPreferenceList<int>("window.size");
                 this.Size = new Size(size[0], size[1]);
                 splitContainer.SplitterDistance = Persistence.GetPreference<int>("sidebar.width");
+                splitContainer.Panel1Collapsed = !Persistence.GetPreference<bool>("sidebar.visible");
+                tabBar.Visible = Persistence.GetPreference<bool>("tabbar.visible");
 
                 sidebar.Load();
                 tabBar.LoadSession();
@@ -142,6 +144,21 @@ namespace Trail {
 
         private void exitTrailToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
+        }
+
+        private void viewToolStripMenuItem_DropDownOpening(object sender, EventArgs e) {
+            sidebarToolStripMenuItem.Checked = !splitContainer.Panel1Collapsed;
+            tabBarToolStripMenuItem.Checked = tabBar.Visible;
+        }
+
+        private void sidebarToolStripMenuItem_Click(object sender, EventArgs e) {
+            splitContainer.Panel1Collapsed = !splitContainer.Panel1Collapsed;
+            Persistence.SetPreference("sidebar.visible", !splitContainer.Panel1Collapsed);
+        }
+
+        private void tabBarToolStripMenuItem_Click(object sender, EventArgs e) {
+            tabBar.Visible = !tabBar.Visible;
+            Persistence.SetPreference("tabbar.visible", tabBar.Visible);
         }
 
         #endregion
