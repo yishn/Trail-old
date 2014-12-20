@@ -76,7 +76,7 @@ namespace Trail.Columns {
             if (item.Tag is DirectoryInfo) return ".folder";
 
             FileInfo fI = item.Tag as FileInfo;
-            string ext = Path.GetExtension(fI.Name);
+            string ext = Path.GetExtension(fI.Name).Replace(".", "");
 
             if (ext == "") return fI.FullName;
 
