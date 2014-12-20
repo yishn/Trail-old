@@ -47,7 +47,7 @@
             // 
             this.labelName.AutoSize = true;
             this.labelName.Font = new System.Drawing.Font("Segoe UI Light", 42F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelName.Location = new System.Drawing.Point(157, 54);
+            this.labelName.Location = new System.Drawing.Point(157, 36);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(122, 74);
             this.labelName.TabIndex = 2;
@@ -56,7 +56,7 @@
             // labelDescription
             // 
             this.labelDescription.AutoSize = true;
-            this.labelDescription.Location = new System.Drawing.Point(170, 127);
+            this.labelDescription.Location = new System.Drawing.Point(170, 114);
             this.labelDescription.Name = "labelDescription";
             this.labelDescription.Size = new System.Drawing.Size(304, 21);
             this.labelDescription.TabIndex = 3;
@@ -68,7 +68,7 @@
             this.labelVersion.AutoSize = true;
             this.labelVersion.Font = new System.Drawing.Font("Segoe UI Light", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelVersion.ForeColor = System.Drawing.Color.Gray;
-            this.labelVersion.Location = new System.Drawing.Point(268, 84);
+            this.labelVersion.Location = new System.Drawing.Point(268, 66);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(39, 37);
             this.labelVersion.TabIndex = 4;
@@ -81,7 +81,7 @@
             this.labelCopyright.LinkArea = new System.Windows.Forms.LinkArea(12, 12);
             this.labelCopyright.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.labelCopyright.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.labelCopyright.Location = new System.Drawing.Point(170, 148);
+            this.labelCopyright.Location = new System.Drawing.Point(170, 140);
             this.labelCopyright.Name = "labelCopyright";
             this.labelCopyright.Size = new System.Drawing.Size(179, 21);
             this.labelCopyright.TabIndex = 5;
@@ -99,7 +99,7 @@
             this.labelGitHub.LinkArea = new System.Windows.Forms.LinkArea(15, 6);
             this.labelGitHub.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.labelGitHub.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.labelGitHub.Location = new System.Drawing.Point(170, 180);
+            this.labelGitHub.Location = new System.Drawing.Point(170, 167);
             this.labelGitHub.Name = "labelGitHub";
             this.labelGitHub.Size = new System.Drawing.Size(132, 21);
             this.labelGitHub.TabIndex = 6;
