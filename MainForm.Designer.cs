@@ -126,8 +126,8 @@
             // 
             this.historyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newTabToolStripMenuItem,
-            this.duplicateTabToolStripMenuItem,
             this.closeTabToolStripMenuItem,
+            this.duplicateTabToolStripMenuItem,
             this.restoreClosedTabToolStripMenuItem,
             this.toolStripMenuItem3,
             this.nextTabToolStripMenuItem,
@@ -149,7 +149,8 @@
             // duplicateTabToolStripMenuItem
             // 
             this.duplicateTabToolStripMenuItem.Name = "duplicateTabToolStripMenuItem";
-            this.duplicateTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.duplicateTabToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.D)));
             this.duplicateTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
             this.duplicateTabToolStripMenuItem.Text = "&Duplicate Tab";
             this.duplicateTabToolStripMenuItem.Click += new System.EventHandler(this.duplicateTabToolStripMenuItem_Click);
@@ -203,7 +204,7 @@
             this.goToLocationToolStripMenuItem.Name = "goToLocationToolStripMenuItem";
             this.goToLocationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
             this.goToLocationToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-            this.goToLocationToolStripMenuItem.Text = "&Goto Location...";
+            this.goToLocationToolStripMenuItem.Text = "Goto &Location...";
             this.goToLocationToolStripMenuItem.Click += new System.EventHandler(this.goToLocationToolStripMenuItem_Click);
             // 
             // extrasToolStripMenuItem
