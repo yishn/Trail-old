@@ -107,7 +107,7 @@ namespace Trail.Modules {
                 "desktop.ini", ".*"
             }));
             CreatePreference("directorycolumn.individual_icon_files", new List<object>(new object[] { 
-                "*.exe", "*.ico", "*.lnk", "*.msi"
+                "*.exe", "*.ico", "*.lnk", "*.msi", "*.cur", "*.ani"
             }));
             CreatePreference("column.default_width", 200);
             CreatePreference("sidebar.width", 196);
