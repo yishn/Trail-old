@@ -95,6 +95,11 @@ namespace Trail.Modules {
                 Session.Add(column.GetColumnData());
             }
 
+            if (FavoriteItems.Count == 0) {
+                DirectoryColumn column = new DirectoryColumn(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+                FavoriteItems.Add(column.GetColumnData());
+            }
+
             CreatePreference("directorycolumn.directory_exclude_patterns", new List<object>(new object[] { 
                 "$RECYCLE.BIN", ".*", "System Volume Information"
             }));
