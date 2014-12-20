@@ -50,7 +50,6 @@ namespace Trail {
                 tab.ColumnView.Dock = DockStyle.Fill;
                 tab.ColumnView.ItemsIconQueue = iconQueue;
                 tab.ColumnView.ImageList = itemsImages;
-                tab.ColumnView.SubColumnAdded += ColumnView_SubColumnAdded;
 
                 splitContainer.Panel2.Controls.Add(tab.ColumnView);
                 tab.ColumnView.BringToFront();
@@ -67,10 +66,6 @@ namespace Trail {
             tabBar.CurrentTab.ColumnView.ScrollToLastColumn();
 
             sidebar.SelectedNode = null;
-        }
-
-        private void ColumnView_SubColumnAdded(object sender, ItemsColumn column) {
-            tabBar.CurrentTab.Text = column.HeaderText;
         }
 
         private void tabBar_AddButtonClicked(object sender, EventArgs e) {
