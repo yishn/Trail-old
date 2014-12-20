@@ -63,7 +63,7 @@ namespace Trail.Columns {
                 this.ShowError = true;
 
                 if (result is UnauthorizedAccessException) {
-                    this.ErrorText = "Access denied";
+                    this.ErrorText = "Access denied.";
                 } else {
                     this.ErrorText = result.Message;
                 }
