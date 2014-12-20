@@ -101,10 +101,10 @@ namespace Trail.Modules {
             }
 
             CreatePreference("directorycolumn.directory_exclude_patterns", new List<object>(new object[] { 
-                "$RECYCLE.BIN", ".*", "System Volume Information"
+                "*\\$RECYCLE.BIN", "*\\.*", "*\\System Volume Information"
             }));
             CreatePreference("directorycolumn.file_exclude_patterns", new List<object>(new object[] { 
-                "desktop.ini", ".*"
+                "*\\desktop.ini", "*\\.*"
             }));
             CreatePreference("directorycolumn.individual_icon_files", new List<object>(new object[] { 
                 "*.exe", "*.ico", "*.lnk", "*.msi", "*.cur", "*.ani"

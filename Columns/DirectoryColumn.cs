@@ -92,7 +92,7 @@ namespace Trail.Columns {
 
             foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
                 if (e.Cancel) return null;
-                if (patterns.Any(x => dI.Name.MatchesPattern(x))) continue;
+                if (patterns.Any(x => dI.FullName.MatchesPattern(x))) continue;
 
                 result.Add(new ColumnListViewItem() {
                     SubColumn = new DirectoryColumn(dI),
@@ -102,9 +102,10 @@ namespace Trail.Columns {
                 });
             }
 
+            patterns = Persistence.GetPreferenceList("directorycolumn.file_exclude_patterns");
             foreach (FileInfo fI in this.Directory.GetFiles()) {
                 if (e.Cancel) return null;
-                if (patterns.Any(x => fI.Name.MatchesPattern(x))) continue;
+                if (patterns.Any(x => fI.FullName.MatchesPattern(x))) continue;
   
                 ColumnListViewItem item = new ColumnListViewItem() {
                     Text = fI.Name,

@@ -270,27 +270,27 @@
             // tabBarToolStripMenuItem
             // 
             this.tabBarToolStripMenuItem.Name = "tabBarToolStripMenuItem";
-            this.tabBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tabBarToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.tabBarToolStripMenuItem.Text = "&Tab Bar";
             this.tabBarToolStripMenuItem.Click += new System.EventHandler(this.tabBarToolStripMenuItem_Click);
             // 
             // sidebarToolStripMenuItem
             // 
             this.sidebarToolStripMenuItem.Name = "sidebarToolStripMenuItem";
-            this.sidebarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sidebarToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.sidebarToolStripMenuItem.Text = "&Sidebar";
             this.sidebarToolStripMenuItem.Click += new System.EventHandler(this.sidebarToolStripMenuItem_Click);
             // 
             // actionQueueToolStripMenuItem
             // 
             this.actionQueueToolStripMenuItem.Name = "actionQueueToolStripMenuItem";
-            this.actionQueueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.actionQueueToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.actionQueueToolStripMenuItem.Text = "&Action Queue";
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(144, 6);
             // 
             // splitContainer
             // 
