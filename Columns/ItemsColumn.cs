@@ -61,8 +61,12 @@ namespace Trail.Columns {
                 Exception result = e.Result as Exception;
 
                 this.ShowError = true;
-                Console.WriteLine(result.GetType());
-                this.ErrorText = result.Message;
+
+                if (result is UnauthorizedAccessException) {
+                    this.ErrorText = "Access denied";
+                } else {
+                    this.ErrorText = result.Message;
+                }
                 
             } else if (e.Result is List<ColumnListViewItem>) {
                 List<ColumnListViewItem> result = e.Result as List<ColumnListViewItem>;

@@ -80,9 +80,6 @@ namespace Trail.Columns {
         }
 
         protected override List<ColumnListViewItem> loadData(DoWorkEventArgs e) {
-            watcher.Path = Directory.FullName;
-            watcher.EnableRaisingEvents = true;
-
             List<ColumnListViewItem> result = new List<ColumnListViewItem>();
             List<string> patterns = Persistence.GetPreferenceList("directorycolumn.directory_exclude_patterns");
 
@@ -109,6 +106,9 @@ namespace Trail.Columns {
                 item.ImageKey = getImageKey(item);
                 result.Add(item);
             }
+
+            watcher.Path = Directory.FullName;
+            watcher.EnableRaisingEvents = true;
 
             return result;
         }
