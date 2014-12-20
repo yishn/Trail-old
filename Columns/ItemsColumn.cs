@@ -57,18 +57,32 @@ namespace Trail.Columns {
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
             if (e.Cancelled) return;
-            List<ColumnListViewItem> result = e.Result as List<ColumnListViewItem>;
+            if (e.Result is Exception) {
+                Exception result = e.Result as Exception;
 
-            ListViewControl.Items.Clear();
-            ListViewControl.Items.AddRange(result.ToArray());
-            ListViewControl.Sort();
-            UpdateColumnWidth();
+                this.ShowError = true;
+                Console.WriteLine(result.GetType());
+                this.ErrorText = result.Message;
+                
+            } else if (e.Result is List<ColumnListViewItem>) {
+                List<ColumnListViewItem> result = e.Result as List<ColumnListViewItem>;
 
-            if (LoadingCompleted != null) LoadingCompleted(this, e);
+                this.ShowError = false;
+                ListViewControl.Items.Clear();
+                ListViewControl.Items.AddRange(result.ToArray());
+                ListViewControl.Sort();
+                UpdateColumnWidth();
+
+                if (LoadingCompleted != null) LoadingCompleted(this, e);
+            }
         }
 
         private void worker_DoWork(object sender, DoWorkEventArgs e) {
-            e.Result = loadData(e);
+            try {
+                e.Result = loadData(e);
+            } catch (Exception ex) {
+                e.Result = ex;
+            }
         }
 
         protected virtual void OnLoadingCompleted(RunWorkerCompletedEventArgs e) {

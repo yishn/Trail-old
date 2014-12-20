@@ -14,23 +14,22 @@ using Trail.Helpers;
 
 namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
-        private FileSystemWatcher watcher;
+        private FileSystemWatcher watcher = new FileSystemWatcher();
 
         public DirectoryInfo Directory { get; private set; }
 
         public DirectoryColumn(string itemsPath) : this(new DirectoryInfo(itemsPath)) { }
         public DirectoryColumn(DirectoryInfo directory) : base(directory.FullName) {
-            watcher = new FileSystemWatcher(directory.FullName) {
-                IncludeSubdirectories = false,
-                EnableRaisingEvents = false,
-                SynchronizingObject = ListViewControl
-            };
+            this.Directory = directory;
+            this.HeaderText = directory.Name;
+
+            watcher.IncludeSubdirectories = false;
+            watcher.EnableRaisingEvents = false;
+            watcher.SynchronizingObject = ListViewControl;
+
             watcher.Created += watcher_Created;
             watcher.Deleted += watcher_Deleted;
             watcher.Renamed += watcher_Renamed;
-
-            this.Directory = directory;
-            this.HeaderText = directory.Name;
         }
 
         #region FileSystemWatcher methods
@@ -81,7 +80,9 @@ namespace Trail.Columns {
         }
 
         protected override List<ColumnListViewItem> loadData(DoWorkEventArgs e) {
+            watcher.Path = Directory.FullName;
             watcher.EnableRaisingEvents = true;
+
             List<ColumnListViewItem> result = new List<ColumnListViewItem>();
             List<string> patterns = Persistence.GetPreferenceList("directorycolumn.directory_exclude_patterns");
 
@@ -127,6 +128,8 @@ namespace Trail.Columns {
         }
 
         public override List<ItemsColumn> GetTrail() {
+            if (!Directory.Exists) return base.GetTrail();
+
             DirectoryInfo current = this.Directory;
             List<ItemsColumn> trail = new List<ItemsColumn>();
             trail.Add(this);
