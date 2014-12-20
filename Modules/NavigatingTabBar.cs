@@ -10,14 +10,16 @@ using Trail.DataTypes;
 
 namespace Trail.Modules {
     public class NavigatingTabBar : TabBar {
+        private Stack<NavigatingTab> closedTabs = new Stack<NavigatingTab>();
+
         public new NavigatingTab CurrentTab { get { return base.CurrentTab as NavigatingTab; } set { base.CurrentTab = value; } }
 
         public NavigatingTabBar() {
             this.CurrentTabChanged += NavigatingTabBar_CurrentTabChanged;
 
-            this.TabAdded += NavigatingTabBar_TabAddedClosedMoved;
-            this.TabClosed += NavigatingTabBar_TabAddedClosedMoved;
-            this.TabMoved += NavigatingTabBar_TabAddedClosedMoved;
+            this.TabAdded += NavigatingTabBar_TabAddedMoved;
+            this.TabMoved += NavigatingTabBar_TabAddedMoved;
+            this.TabClosed += NavigatingTabBar_TabClosed;
             this.Tabs.CollectionChanged += Tabs_CollectionChanged;
         }
 
@@ -33,7 +35,12 @@ namespace Trail.Modules {
             this.SaveSession();
         }
 
-        private void NavigatingTabBar_TabAddedClosedMoved(object sender, Tab e) {
+        private void NavigatingTabBar_TabAddedMoved(object sender, Tab e) {
+            this.SaveSession();
+        }
+
+        private void NavigatingTabBar_TabClosed(object sender, Tab e) {
+            closedTabs.Push(e as NavigatingTab);
             this.SaveSession();
         }
 
@@ -73,6 +80,12 @@ namespace Trail.Modules {
 
             this.CurrentTab.ColumnView.BringToFront();
             SaveSession();
+        }
+
+        public void RestoreClosedTab() {
+            if (closedTabs.Count == 0) return;
+            NavigatingTab tab = closedTabs.Peek();
+            if (this.AddTab(tab)) this.CurrentTab = closedTabs.Pop();
         }
     }
 }

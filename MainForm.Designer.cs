@@ -169,6 +169,7 @@
             | System.Windows.Forms.Keys.T)));
             this.restoreClosedTabToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
             this.restoreClosedTabToolStripMenuItem.Text = "&Restore Closed Tab";
+            this.restoreClosedTabToolStripMenuItem.Click += new System.EventHandler(this.restoreClosedTabToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 

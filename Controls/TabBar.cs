@@ -82,13 +82,13 @@ namespace Trail.Controls {
             this.ResumeLayout();
         }
 
-        public void CloseTab(Tab tab) {
-            if (!AllowNoTabs && this.Tabs.Count == 1) return;
+        public bool CloseTab(Tab tab) {
+            if (!AllowNoTabs && this.Tabs.Count == 1) return false;
             if (animation == null || !animation.Enabled) animation = new Animation();
-            else return;
+            else return false;
 
             int i = this.Tabs.IndexOf(tab);
-            if (i == -1) return;
+            if (i == -1) return false;
 
             if (this.Tabs.Count == 0) this.CurrentTab = null;
             else if (this.CurrentTab == tab) this.CurrentTab = this.Tabs[i == 0 ? i + 1 : i - 1];
@@ -116,11 +116,12 @@ namespace Trail.Controls {
                 if (TabClosed != null) TabClosed(this, tab);
             };
             animation.Start();
+            return true;
         }
 
-        public void AddTab(Tab tab) {
+        public bool AddTab(Tab tab) {
             if (animation == null || !animation.Enabled) animation = new Animation();
-            else return;
+            else return false;
 
             int width = pnlTabs.Width;
             this.Tabs.Add(tab);
@@ -135,6 +136,7 @@ namespace Trail.Controls {
                 if (TabAdded != null) TabAdded(this, tab);
             };
             animation.Start();
+            return true;
         }
 
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {

@@ -74,8 +74,7 @@ namespace Trail {
 
         private void tabBar_AddButtonClicked(object sender, EventArgs e) {
             NavigatingTab t = new NavigatingTab(new EmptyColumn());
-            tabBar.AddTab(t);
-            tabBar.CurrentTab = t;
+            if (tabBar.AddTab(t)) tabBar.CurrentTab = t;
         }
 
         #region Update preferences
@@ -118,19 +117,18 @@ namespace Trail {
 
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e) {
             NavigatingTab t = new NavigatingTab(new DirectoryColumn(Persistence.PersistenceFolder));
-            tabBar.AddTab(t);
-            tabBar.CurrentTab = t;
+            if (tabBar.AddTab(t)) tabBar.CurrentTab = t;
         }
 
         private void duplicateTabToolStripMenuItem_Click(object sender, EventArgs e) {
             NavigatingTab t = new NavigatingTab(tabBar.CurrentTab.ColumnView.LastColumn.Duplicate());
-            tabBar.AddTab(t);
-            tabBar.CurrentTab = t;
+            if (tabBar.AddTab(t)) tabBar.CurrentTab = t;
         }
 
         private void goToLocationToolStripMenuItem_Click(object sender, EventArgs e) {
             GotoForm form = new GotoForm();
-            form.ItemsPath = tabBar.CurrentTab.ColumnView.LastColumn.ItemsPath;
+            if (tabBar.CurrentTab.ColumnView.LastColumn is DirectoryColumn)
+                form.ItemsPath = tabBar.CurrentTab.ColumnView.LastColumn.ItemsPath;
             form.Left = this.Left + this.Width / 2 - form.Width / 2;
             form.Top = this.Top + this.Height / 4 - form.Height / 4;
             form.Show();
@@ -140,6 +138,10 @@ namespace Trail {
                 tabBar.CurrentTab.ColumnView.Columns[0].Focus();
                 tabBar.CurrentTab.ColumnView.ScrollToLastColumn();
             };
+        }
+
+        private void restoreClosedTabToolStripMenuItem_Click(object sender, EventArgs e) {
+            tabBar.RestoreClosedTab();
         }
 
         #endregion
