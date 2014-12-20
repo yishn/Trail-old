@@ -144,6 +144,10 @@ namespace Trail {
             tabBar.RestoreClosedTab();
         }
 
+        private void exitTrailToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
         #endregion
     }
 }

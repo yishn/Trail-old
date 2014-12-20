@@ -49,6 +49,8 @@
             this.sidebar = new Trail.Modules.Sidebar();
             this.tabBar = new Trail.Modules.NavigatingTabBar();
             this.iconQueue = new Trail.Modules.ItemsIconQueue();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitTrailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -94,9 +96,11 @@
             // trailToolStripMenuItem
             // 
             this.trailToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.preferencesToolStripMenuItem,
+            this.aboutTrailToolStripMenuItem,
             this.toolStripMenuItem2,
-            this.aboutTrailToolStripMenuItem});
+            this.preferencesToolStripMenuItem,
+            this.toolStripMenuItem4,
+            this.exitTrailToolStripMenuItem});
             this.trailToolStripMenuItem.Name = "trailToolStripMenuItem";
             this.trailToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.trailToolStripMenuItem.Text = "&Trail";
@@ -295,6 +299,19 @@
             this.iconQueue.ImageList = this.itemsImages;
             this.iconQueue.WorkerReportsProgress = true;
             // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(210, 6);
+            // 
+            // exitTrailToolStripMenuItem
+            // 
+            this.exitTrailToolStripMenuItem.Name = "exitTrailToolStripMenuItem";
+            this.exitTrailToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.exitTrailToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.exitTrailToolStripMenuItem.Text = "&Exit Trail";
+            this.exitTrailToolStripMenuItem.Click += new System.EventHandler(this.exitTrailToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -346,6 +363,8 @@
         private System.Windows.Forms.ToolStripMenuItem closeTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem duplicateTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem exitTrailToolStripMenuItem;
     }
 }
 
