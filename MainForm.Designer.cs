@@ -62,7 +62,7 @@
             this.sidebarImages.TransparentColor = System.Drawing.Color.Transparent;
             this.sidebarImages.Images.SetKeyName(0, "folder");
             this.sidebarImages.Images.SetKeyName(1, "bookmarks");
-            this.sidebarImages.Images.SetKeyName(2, "drives");
+            this.sidebarImages.Images.SetKeyName(2, "devices");
             this.sidebarImages.Images.SetKeyName(3, "drive");
             this.sidebarImages.Images.SetKeyName(4, "disc");
             this.sidebarImages.Images.SetKeyName(5, "network");

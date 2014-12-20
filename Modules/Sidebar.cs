@@ -36,10 +36,10 @@ namespace Trail.Modules {
                 SelectedImageKey = "favorites"
             };
             ColumnTreeNode node2 = new ColumnTreeNode() {
-                Text = "Drives",
-                Name = "drives",
-                ImageKey = "drives",
-                SelectedImageKey = "drives"
+                Text = "Devices",
+                Name = "devices",
+                ImageKey = "devices",
+                SelectedImageKey = "devices"
             };
 
             this.Nodes.Clear();
@@ -53,7 +53,7 @@ namespace Trail.Modules {
         }
 
         public void LoadDrives() {
-            TreeNode drives = this.Nodes["drives"];
+            TreeNode drives = this.Nodes["devices"];
             drives.Nodes.Clear();
 
             foreach (DriveInfo dI in DriveInfo.GetDrives()) {
