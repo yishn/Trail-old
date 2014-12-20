@@ -24,9 +24,9 @@
         /// </summary>
         private void InitializeComponent() {
             this.errorPanel = new System.Windows.Forms.Panel();
+            this.errorMessageLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.errorMessageLabel = new System.Windows.Forms.Label();
             this.ListViewControl = new Trail.Controls.ListViewModern();
             this.headerColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.errorPanel.SuspendLayout();
@@ -43,6 +43,17 @@
             this.errorPanel.Size = new System.Drawing.Size(200, 381);
             this.errorPanel.TabIndex = 2;
             this.errorPanel.Visible = false;
+            // 
+            // errorMessageLabel
+            // 
+            this.errorMessageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.errorMessageLabel.ForeColor = System.Drawing.Color.Gray;
+            this.errorMessageLabel.Location = new System.Drawing.Point(12, 216);
+            this.errorMessageLabel.Name = "errorMessageLabel";
+            this.errorMessageLabel.Size = new System.Drawing.Size(176, 47);
+            this.errorMessageLabel.TabIndex = 2;
+            this.errorMessageLabel.Text = "Error Message";
+            this.errorMessageLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label2
             // 
@@ -61,7 +72,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Symbol", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Silver;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(128)))), ((int)(((byte)(106)))));
             this.label1.Location = new System.Drawing.Point(63, 118);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 73);
@@ -69,17 +80,6 @@
             this.label1.Text = "";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.UseCompatibleTextRendering = true;
-            // 
-            // errorMessageLabel
-            // 
-            this.errorMessageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.errorMessageLabel.ForeColor = System.Drawing.Color.Gray;
-            this.errorMessageLabel.Location = new System.Drawing.Point(12, 216);
-            this.errorMessageLabel.Name = "errorMessageLabel";
-            this.errorMessageLabel.Size = new System.Drawing.Size(176, 47);
-            this.errorMessageLabel.TabIndex = 2;
-            this.errorMessageLabel.Text = "Error Message";
-            this.errorMessageLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // ListViewControl
             // 
