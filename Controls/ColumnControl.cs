@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace Trail.Controls {
     public partial class ColumnControl : UserControl {
-        public string HeaderText { get { return colHeader.Text; } set { colHeader.Text = value; } }
+        public string HeaderText { get { return headerColumn.Text; } set { headerColumn.Text = value; } }
         public bool Disabled { get { return !ListViewControl.Visible; } set { ListViewControl.Visible = !value; } }
 
         public ColumnControl() {
@@ -25,7 +25,7 @@ namespace Trail.Controls {
         }
 
         private void ListViewControl_ClientSizeChanged(object sender, EventArgs e) {
-            colHeader.Width = ListViewControl.ClientSize.Width - 3;
+            headerColumn.Width = ListViewControl.ClientSize.Width - 3;
         }
 
         public void UpdateColumnWidth() {

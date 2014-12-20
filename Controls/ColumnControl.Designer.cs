@@ -24,14 +24,14 @@
         /// </summary>
         private void InitializeComponent() {
             this.ListViewControl = new Trail.Controls.ListViewModern();
-            this.colHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.headerColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // ListViewControl
             // 
             this.ListViewControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ListViewControl.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colHeader});
+            this.headerColumn});
             this.ListViewControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ListViewControl.FullRowSelect = true;
             this.ListViewControl.HideSelection = false;
@@ -45,10 +45,10 @@
             this.ListViewControl.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.ListViewControl_ColumnWidthChanging);
             this.ListViewControl.ClientSizeChanged += new System.EventHandler(this.ListViewControl_ClientSizeChanged);
             // 
-            // colHeader
+            // headerColumn
             // 
-            this.colHeader.Text = "Header";
-            this.colHeader.Width = 150;
+            this.headerColumn.Text = "Header";
+            this.headerColumn.Width = 150;
             // 
             // ColumnControl
             // 
@@ -63,7 +63,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ColumnHeader colHeader;
+        private System.Windows.Forms.ColumnHeader headerColumn;
         public ListViewModern ListViewControl;
     }
 }
