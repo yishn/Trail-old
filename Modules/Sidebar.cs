@@ -60,7 +60,6 @@ namespace Trail.Modules {
                 if (!dI.IsReady) continue;
 
                 ColumnTreeNode node = new ColumnTreeNode() {
-                    Text = dI.VolumeLabel,
                     Tag = dI,
                     SubColumn = new DirectoryColumn(dI.RootDirectory),
                     ImageKey = dI.DriveType == DriveType.CDRom ? "disc" :
@@ -68,6 +67,7 @@ namespace Trail.Modules {
                         dI.DriveType == DriveType.Removable ? "removable" :
                         dI.DriveType == DriveType.Fixed ? "drive" : "unknown"
                 };
+                node.Text = node.SubColumn.HeaderText;
                 node.SelectedImageKey = node.ImageKey;
 
                 drives.Nodes.Add(node);

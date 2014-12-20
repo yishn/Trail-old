@@ -21,7 +21,14 @@ namespace Trail.Columns {
         public DirectoryColumn(string itemsPath) : this(new DirectoryInfo(itemsPath)) { }
         public DirectoryColumn(DirectoryInfo directory) : base(directory.FullName) {
             this.Directory = directory;
-            this.HeaderText = directory.Name;
+
+            if (directory.Root.FullName == directory.FullName) {
+                DriveInfo drive = new DriveInfo(directory.FullName);
+                if (!drive.IsReady || drive.VolumeLabel.Trim() == "") this.HeaderText = directory.Name;
+                else this.HeaderText = drive.VolumeLabel;
+            } else {
+                this.HeaderText = directory.Name;
+            }
 
             watcher.IncludeSubdirectories = false;
             watcher.EnableRaisingEvents = false;
