@@ -48,9 +48,9 @@
             this.closeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
             this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closeButton.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closeButton.Location = new System.Drawing.Point(411, 0);
+            this.closeButton.Location = new System.Drawing.Point(425, 0);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(45, 20);
+            this.closeButton.Size = new System.Drawing.Size(31, 20);
             this.closeButton.TabIndex = 0;
             this.closeButton.TabStop = false;
             this.closeButton.Text = "";
