@@ -75,6 +75,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataTypes\ColumnData.cs" />
+    <Compile Include="Forms\ActionQueueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ActionQueueForm.Designer.cs">
+      <DependentUpon>ActionQueueForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\GotoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TabBar.resx">
       <DependentUpon>TabBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ActionQueueForm.resx">
+      <DependentUpon>ActionQueueForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GotoForm.resx">
       <DependentUpon>GotoForm.cs</DependentUpon>
