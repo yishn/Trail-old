@@ -21,6 +21,7 @@ namespace Trail.Columns {
         public DirectoryColumn(string itemsPath) : this(new DirectoryInfo(itemsPath)) { }
         public DirectoryColumn(DirectoryInfo directory) : base(directory.FullName) {
             this.Directory = directory;
+            this.ListViewControl.AllowDrop = true;
 
             if (directory.Root.FullName == directory.FullName) {
                 DriveInfo drive = new DriveInfo(directory.FullName);
@@ -34,10 +35,31 @@ namespace Trail.Columns {
             watcher.EnableRaisingEvents = false;
             watcher.SynchronizingObject = ListViewControl;
 
+            this.ListViewControl.ItemDrag += ListViewControl_ItemDrag;
+
             watcher.Created += watcher_Created;
             watcher.Deleted += watcher_Deleted;
             watcher.Renamed += watcher_Renamed;
         }
+
+        #region Drag & Drop
+
+        private void ListViewControl_ItemDrag(object sender, ItemDragEventArgs e) {
+            string[] files = new string[ListViewControl.SelectedItems.Count];
+            int i = 0;
+
+            foreach (ColumnListViewItem item in ListViewControl.SelectedItems) {
+                string path;
+                if (item.Tag is DirectoryInfo) path = (item.Tag as DirectoryInfo).FullName;
+                else path = (item.Tag as FileInfo).FullName;
+
+                files[i++] = path;
+            }
+
+            ListViewControl.DoDragDrop(new DataObject(DataFormats.FileDrop, files), DragDropEffects.Copy);
+        }
+
+        #endregion
 
         #region FileSystemWatcher methods
 
