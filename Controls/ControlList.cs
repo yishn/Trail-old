@@ -18,6 +18,8 @@ namespace Trail.Controls {
         public ControlList() {
             alternateBackColor = this.BackColor;
 
+            this.AutoScroll = true;
+
             this.ControlAdded += ControlList_ControlAdded;
             this.ControlRemoved += ControlList_ControlRemoved;
         }
