@@ -18,6 +18,8 @@ using Trail.Modules;
 
 namespace Trail {
     public partial class MainForm : Form {
+        private ActionQueueForm ActionQueueForm = null;
+
         public MainForm() {
             InitializeComponent();
             tabBar.Tabs.CollectionChanged += Tabs_CollectionChanged;
@@ -159,6 +161,20 @@ namespace Trail {
         private void tabBarToolStripMenuItem_Click(object sender, EventArgs e) {
             tabBar.Visible = !tabBar.Visible;
             Persistence.SetPreference("tabbar.visible", tabBar.Visible);
+        }
+
+        private void actionQueueToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (ActionQueueForm == null) {
+                ActionQueueForm = new ActionQueueForm();
+                ActionQueueForm.FormClosed += (_, evt) => {
+                    ActionQueueForm = null;
+                    actionQueueToolStripMenuItem.Checked = false; 
+                };
+                ActionQueueForm.Show();
+                actionQueueToolStripMenuItem.Checked = true;
+            } else {
+                ActionQueueForm.Close();
+            }
         }
 
         #endregion
