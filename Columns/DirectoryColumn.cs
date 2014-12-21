@@ -26,7 +26,7 @@ namespace Trail.Columns {
             if (directory.Root.FullName == directory.FullName) {
                 DriveInfo drive = new DriveInfo(directory.FullName);
                 if (!drive.IsReady || drive.VolumeLabel.Trim() == "") this.HeaderText = directory.Name;
-                else this.HeaderText = drive.VolumeLabel;
+                else this.HeaderText = drive.VolumeLabel + " (" + directory.Name.Replace(Path.DirectorySeparatorChar, ')');
             } else {
                 this.HeaderText = directory.Name;
             }
