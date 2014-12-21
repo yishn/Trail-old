@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using Trail.Controls;
 
 namespace Trail.Forms {
-    public partial class AboutForm : HudForm {
+    public partial class AboutForm : Form {
         public AboutForm() {
             InitializeComponent();
         }
