@@ -28,18 +28,19 @@
             // 
             // actionsList
             // 
-            this.actionsList.AlternateBackColor = System.Drawing.Color.DimGray;
+            this.actionsList.AlternateBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(58)))));
+            this.actionsList.AutoScroll = true;
             this.actionsList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.actionsList.Location = new System.Drawing.Point(0, 27);
             this.actionsList.Name = "actionsList";
-            this.actionsList.Size = new System.Drawing.Size(275, 426);
+            this.actionsList.Size = new System.Drawing.Size(275, 289);
             this.actionsList.TabIndex = 1;
             // 
             // ActionQueueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 453);
+            this.ClientSize = new System.Drawing.Size(275, 316);
             this.ControlBoxText = "Action Queue";
             this.Controls.Add(this.actionsList);
             this.Name = "ActionQueueForm";
