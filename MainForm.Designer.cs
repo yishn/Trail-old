@@ -181,7 +181,6 @@
             this.actionQueueToolStripMenuItem.Name = "actionQueueToolStripMenuItem";
             this.actionQueueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.actionQueueToolStripMenuItem.Text = "&Action Queue";
-            this.actionQueueToolStripMenuItem.Click += new System.EventHandler(this.actionQueueToolStripMenuItem_Click);
             // 
             // historyToolStripMenuItem
             // 
