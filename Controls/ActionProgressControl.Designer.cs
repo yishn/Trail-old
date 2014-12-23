@@ -48,13 +48,15 @@
             this.progressBarValue.Dock = System.Windows.Forms.DockStyle.Left;
             this.progressBarValue.Location = new System.Drawing.Point(0, 0);
             this.progressBarValue.Name = "progressBarValue";
-            this.progressBarValue.Size = new System.Drawing.Size(150, 5);
+            this.progressBarValue.Size = new System.Drawing.Size(0, 5);
             this.progressBarValue.TabIndex = 0;
             this.progressBarValue.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             this.progressBarValue.MouseLeave += new System.EventHandler(this.Control_MouseLeave);
             // 
             // headerLabel
             // 
+            this.headerLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.headerLabel.AutoEllipsis = true;
             this.headerLabel.Location = new System.Drawing.Point(3, 8);
             this.headerLabel.Name = "headerLabel";
@@ -66,6 +68,8 @@
             // 
             // descriptionLabel
             // 
+            this.descriptionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.descriptionLabel.AutoEllipsis = true;
             this.descriptionLabel.ForeColor = System.Drawing.Color.Gray;
             this.descriptionLabel.Location = new System.Drawing.Point(3, 23);
@@ -78,7 +82,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
             this.cancelButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
@@ -109,6 +113,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.Name = "ActionProgressControl";
             this.Size = new System.Drawing.Size(200, 50);
+            this.SizeChanged += new System.EventHandler(this.ActionProgressControl_SizeChanged);
             this.MouseEnter += new System.EventHandler(this.ActionProgressControl_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.ActionProgressControl_MouseLeave);
             this.progressBar.ResumeLayout(false);
