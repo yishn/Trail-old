@@ -149,6 +149,7 @@ namespace Trail {
         private void viewToolStripMenuItem_DropDownOpening(object sender, EventArgs e) {
             sidebarToolStripMenuItem.Checked = !splitContainer.Panel1Collapsed;
             tabBarToolStripMenuItem.Checked = tabBar.Visible;
+            //actionQueueToolStripMenuItem.Checked = actionQueuePanel.Visible;
         }
 
         private void sidebarToolStripMenuItem_Click(object sender, EventArgs e) {
