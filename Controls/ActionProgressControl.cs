@@ -21,5 +21,29 @@ namespace Trail.Controls {
         public ActionProgressControl() {
             InitializeComponent();
         }
+
+        protected override void OnMouseLeave(EventArgs e) {
+            if (this.ClientRectangle.Contains(this.PointToClient(Control.MousePosition)))
+                return;
+            else {
+                base.OnMouseLeave(e);
+            }
+        }
+
+        private void ActionProgressControl_MouseEnter(object sender, EventArgs e) {
+            cancelButton.Visible = true;
+        }
+
+        private void ActionProgressControl_MouseLeave(object sender, EventArgs e) {
+            cancelButton.Visible = false;
+        }
+
+        private void Control_MouseEnter(object sender, EventArgs e) {
+            OnMouseEnter(e);
+        }
+
+        private void Control_MouseLeave(object sender, EventArgs e) {
+            OnMouseLeave(e);
+        }
     }
 }
