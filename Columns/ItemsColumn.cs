@@ -21,6 +21,8 @@ namespace Trail.Columns {
 
         public ItemsColumn(string itemsPath) {
             this.ItemsPath = itemsPath;
+            this.HeaderText = "";
+
             this.ListViewControl.ItemActivate += ListViewControl_ItemActivate;
             this.ListViewControl.ListViewItemSorter = new ItemsColumnListComparer();
         }
@@ -30,6 +32,7 @@ namespace Trail.Columns {
         }
 
         protected abstract List<ColumnListViewItem> loadData(DoWorkEventArgs e);
+        public abstract string GetHeaderText();
         public abstract void ItemActivated(ColumnListViewItem item);
         public abstract ItemsColumn Duplicate();
 
@@ -72,6 +75,8 @@ namespace Trail.Columns {
                 List<ColumnListViewItem> result = e.Result as List<ColumnListViewItem>;
 
                 this.ShowError = false;
+                this.HeaderText = GetHeaderText();
+
                 ListViewControl.Items.Clear();
                 ListViewControl.Items.AddRange(result.ToArray());
                 ListViewControl.Sort();

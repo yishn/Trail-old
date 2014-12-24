@@ -67,7 +67,7 @@ namespace Trail.Modules {
                         dI.DriveType == DriveType.Removable ? "removable" :
                         dI.DriveType == DriveType.Fixed ? "drive" : "unknown"
                 };
-                node.Text = node.SubColumn.HeaderText;
+                node.Text = node.SubColumn.GetHeaderText();
                 node.SelectedImageKey = node.ImageKey;
 
                 drives.Nodes.Add(node);
@@ -84,7 +84,7 @@ namespace Trail.Modules {
                 ItemsColumn column = item.Instantiation();
 
                 ColumnTreeNode node = new ColumnTreeNode() {
-                    Text = column.HeaderText,
+                    Text = column.GetHeaderText(),
                     Tag = item,
                     SubColumn = column,
                     ImageKey = "folder",

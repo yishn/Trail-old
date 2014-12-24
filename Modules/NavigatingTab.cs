@@ -21,7 +21,7 @@ namespace Trail.Modules {
         public event EventHandler Navigated;
 
         private void ColumnView_Navigated(object sender, EventArgs e) {
-            this.Text = ColumnView.LastColumn.HeaderText;
+            this.Text = ColumnView.LastColumn.GetHeaderText();
             if (Navigated != null) Navigated(this, EventArgs.Empty);
         }
 
@@ -30,7 +30,7 @@ namespace Trail.Modules {
         }
         public NavigatingTab(ItemsColumn column) : this() {
             this.ColumnView.NavigateTo(column);
-            this.Text = column.HeaderText;
+            this.Text = column.GetHeaderText();
         }
     }
 }

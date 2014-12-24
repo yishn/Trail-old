@@ -23,14 +23,6 @@ namespace Trail.Columns {
             this.Directory = directory;
             this.ListViewControl.AllowDrop = true;
 
-            if (directory.Root.FullName == directory.FullName) {
-                DriveInfo drive = new DriveInfo(directory.FullName);
-                if (!drive.IsReady || drive.VolumeLabel.Trim() == "") this.HeaderText = directory.Name;
-                else this.HeaderText = drive.VolumeLabel + " (" + directory.Name.Replace(Path.DirectorySeparatorChar, ')');
-            } else {
-                this.HeaderText = directory.Name;
-            }
-
             watcher.IncludeSubdirectories = false;
             watcher.EnableRaisingEvents = false;
             watcher.SynchronizingObject = ListViewControl;
@@ -40,6 +32,16 @@ namespace Trail.Columns {
             watcher.Created += watcher_Created;
             watcher.Deleted += watcher_Deleted;
             watcher.Renamed += watcher_Renamed;
+        }
+
+        public override string GetHeaderText() {
+            if (Directory.Root.FullName == Directory.FullName) {
+                DriveInfo drive = new DriveInfo(Directory.FullName);
+                if (!drive.IsReady || drive.VolumeLabel.Trim() == "") return Directory.Name;
+                return drive.VolumeLabel + " (" + Directory.Name.Replace(Path.DirectorySeparatorChar, ')');
+            }
+            
+            return Directory.Name;
         }
 
         #region Drag & Drop
