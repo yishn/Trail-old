@@ -8,7 +8,7 @@ using Trail.Controls;
 
 namespace Trail.Actions {
     public abstract class ItemsAction : ActionProgressControl {
-        BackgroundWorker worker;
+        private BackgroundWorker worker;
 
         public event RunWorkerCompletedEventHandler Completed;
 
@@ -20,7 +20,7 @@ namespace Trail.Actions {
             if (worker != null && worker.IsBusy) return;
 
             worker = new BackgroundWorker() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
-            worker.DoWork += DoWork;
+            worker.DoWork += worker_DoWork;
             worker.ProgressChanged += worker_ProgressChanged;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             worker.RunWorkerAsync();
@@ -30,7 +30,15 @@ namespace Trail.Actions {
             worker.CancelAsync();
         }
 
-        public abstract void DoWork(object sender, DoWorkEventArgs e);
+        public abstract void DoWork(DoWorkEventArgs e);
+
+        private void worker_DoWork(object sender, DoWorkEventArgs e) {
+            try {
+                DoWork(e);
+            } catch (Exception ex) {
+                e.Result = ex;
+            }
+        }
 
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e) {
             this.Progress = e.ProgressPercentage;
