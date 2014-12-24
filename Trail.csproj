@@ -93,6 +93,7 @@
     <Compile Include="Forms\GotoForm.Designer.cs">
       <DependentUpon>GotoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FileUtil.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\JsonParser.cs" />
     <Compile Include="Modules\ActionQueueList.cs">
