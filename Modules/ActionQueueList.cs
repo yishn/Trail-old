@@ -51,8 +51,8 @@ namespace Trail.Modules {
             int height = this.Height;
 
             animation.Start().Tick += (_, value) => {
-                item.Height = (int)(value * itemHeight);
-                this.Height = height - (int)(value * itemHeight + (1 - Math.Sign(Items.Count)) * headerLabel.Height);
+                item.Height = itemHeight - (int)(value * itemHeight);
+                this.Height = height - (int)(value * (itemHeight + (1 - Math.Sign(Items.Count - 1)) * headerLabel.Height));
             };
             animation.Complete += (_, e) => {
                 this.Items.Remove(item);
@@ -75,6 +75,8 @@ namespace Trail.Modules {
             if (e.Action == NotifyCollectionChangedAction.Add) {
                 foreach (ActionProgressControl c in e.NewItems) {
                     actionsList.Controls.Add(c);
+
+                    c.CancelButtonClicked += Item_CancelButtonClicked;
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Remove) {
                 foreach (ActionProgressControl c in e.OldItems) {
@@ -83,6 +85,10 @@ namespace Trail.Modules {
             } else if (e.Action == NotifyCollectionChangedAction.Reset) {
                 actionsList.Controls.Clear();
             }
+        }
+
+        private void Item_CancelButtonClicked(object sender, EventArgs e) {
+            this.RemoveItem(sender as ActionProgressControl);
         }
     }
 }
