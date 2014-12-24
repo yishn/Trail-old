@@ -13,7 +13,7 @@ using Trail.Modules;
 
 namespace Trail.Columns {
     public abstract class ItemsColumn : ColumnControl {
-        private BackgroundWorker _worker;
+        private BackgroundWorker worker;
 
         public string ItemsPath { get; private set; }
 
@@ -43,12 +43,12 @@ namespace Trail.Columns {
         }
 
         public void LoadItems() {
-            if (_worker != null && _worker.IsBusy) return;
+            if (worker != null && worker.IsBusy) return;
 
-            _worker = new BackgroundWorker() { WorkerSupportsCancellation = true };
-            _worker.DoWork += worker_DoWork;
-            _worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-            _worker.RunWorkerAsync();
+            worker = new BackgroundWorker() { WorkerSupportsCancellation = true };
+            worker.DoWork += worker_DoWork;
+            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            worker.RunWorkerAsync();
         }
 
         public ColumnData GetColumnData() {

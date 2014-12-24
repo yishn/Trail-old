@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Trail.Actions {
-    public partial class ActionControl : UserControl {
+namespace Trail.Controls {
+    public partial class ActionProgressControl : UserControl {
         private int progress = 0;
 
         public string HeaderText { get { return headerLabel.Text; } set { headerLabel.Text = value; } }
@@ -19,7 +19,7 @@ namespace Trail.Actions {
 
         public event EventHandler CancelButtonClicked;
 
-        public ActionControl() {
+        public ActionProgressControl() {
             InitializeComponent();
         }
 

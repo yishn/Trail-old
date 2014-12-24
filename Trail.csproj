@@ -47,11 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\ActionControl.cs">
+    <Compile Include="Actions\Action.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Actions\ActionControl.Designer.cs">
-      <DependentUpon>ActionControl.cs</DependentUpon>
+    <Compile Include="Controls\ActionProgressControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ActionProgressControl.Designer.cs">
+      <DependentUpon>ActionProgressControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ControlList.cs">
       <SubType>Component</SubType>
@@ -162,8 +165,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Actions\ActionControl.resx">
-      <DependentUpon>ActionControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ActionProgressControl.resx">
+      <DependentUpon>ActionProgressControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
@@ -217,6 +220,7 @@
   <ItemGroup>
     <Content Include="trail2.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
