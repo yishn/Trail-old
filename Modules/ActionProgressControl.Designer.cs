@@ -1,4 +1,5 @@
-﻿namespace Trail.Controls {
+﻿using Trail.Controls;
+namespace Trail.Modules {
     partial class ActionProgressControl {
         /// <summary> 
         /// Erforderliche Designervariable.

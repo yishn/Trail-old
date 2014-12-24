@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Trail.Controls {
+namespace Trail.Modules {
     public partial class ActionProgressControl : UserControl {
         private int progress = 0;
 
@@ -26,6 +26,8 @@ namespace Trail.Controls {
         public void UpdateProgress() {
             progressBarValue.Width = (int)(progressBar.Width * progress / 100.0);
         }
+
+        #region Mouse enter & leave
 
         protected override void OnMouseLeave(EventArgs e) {
             if (this.ClientRectangle.Contains(this.PointToClient(Control.MousePosition)))
@@ -50,6 +52,8 @@ namespace Trail.Controls {
         private void Control_MouseLeave(object sender, EventArgs e) {
             OnMouseLeave(e);
         }
+
+        #endregion
 
         private void ActionProgressControl_SizeChanged(object sender, EventArgs e) {
             UpdateProgress();
