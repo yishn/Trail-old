@@ -96,6 +96,7 @@
             this.cancelButton.Text = "";
             this.cancelButton.UseVisualStyleBackColor = false;
             this.cancelButton.Visible = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             this.cancelButton.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             this.cancelButton.MouseLeave += new System.EventHandler(this.Control_MouseLeave);
             // 

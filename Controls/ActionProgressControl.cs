@@ -17,6 +17,8 @@ namespace Trail.Controls {
         public Color AccentColor { get { return progressBarValue.BackColor; } set { progressBarValue.BackColor = value; } }
         public int Progress { get { return progress; } set { progress = value; UpdateProgress(); } }
 
+        public event EventHandler CancelButtonClicked;
+
         public ActionProgressControl() {
             InitializeComponent();
         }
@@ -51,6 +53,10 @@ namespace Trail.Controls {
 
         private void ActionProgressControl_SizeChanged(object sender, EventArgs e) {
             UpdateProgress();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e) {
+            if (CancelButtonClicked != null) CancelButtonClicked(this, e);
         }
     }
 }
