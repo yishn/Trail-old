@@ -15,6 +15,8 @@ namespace Trail.Controls {
         public bool ShowError { get { return errorPanel.Visible; } set { errorPanel.Visible = value; } }
         public string ErrorText { get { return errorMessageLabel.Text; } set { errorMessageLabel.Text = value; } }
 
+        public event EventHandler<ListViewItem> OneItemSelected;
+
         public ColumnControl() {
             InitializeComponent();
         }
@@ -37,5 +39,28 @@ namespace Trail.Controls {
             ListViewControl.EndUpdate();
             this.ResumeLayout();
         }
+
+        #region OneItemSelected event
+
+        private bool changedSelection = false;
+
+        private void ListViewControl_MouseUp(object sender, MouseEventArgs e) {
+            if (e.Button != MouseButtons.Left || !changedSelection) return;
+            if (ListViewControl.SelectedItems.Count != 1) return;
+
+            if (OneItemSelected != null) OneItemSelected(this, ListViewControl.SelectedItems[0]);
+            changedSelection = false;
+        }
+
+        private void ListViewControl_SelectedIndexChanged(object sender, EventArgs e) {
+            changedSelection = true;
+        }
+
+        private void ListViewControl_ItemActivate(object sender, EventArgs e) {
+            if (ListViewControl.SelectedItems.Count != 1) return;
+            if (OneItemSelected != null) OneItemSelected(this, ListViewControl.SelectedItems[0]);
+        }
+
+        #endregion
     }
 }

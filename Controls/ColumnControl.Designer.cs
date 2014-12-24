@@ -97,7 +97,10 @@
             this.ListViewControl.UseCompatibleStateImageBehavior = false;
             this.ListViewControl.View = System.Windows.Forms.View.Details;
             this.ListViewControl.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.ListViewControl_ColumnWidthChanging);
+            this.ListViewControl.ItemActivate += new System.EventHandler(this.ListViewControl_ItemActivate);
+            this.ListViewControl.SelectedIndexChanged += new System.EventHandler(this.ListViewControl_SelectedIndexChanged);
             this.ListViewControl.ClientSizeChanged += new System.EventHandler(this.ListViewControl_ClientSizeChanged);
+            this.ListViewControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ListViewControl_MouseUp);
             // 
             // headerColumn
             // 
