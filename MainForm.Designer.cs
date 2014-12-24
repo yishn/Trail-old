@@ -51,12 +51,7 @@
             this.manageAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.packagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new Trail.Controls.SplitContainerModern();
-            this.actionQueuePanel = new System.Windows.Forms.Panel();
-            this.actionQueueList = new Trail.Controls.ControlList();
-            this.actionProgressControl1 = new Trail.Controls.ActionProgressControl();
-            this.actionProgressControl2 = new Trail.Controls.ActionProgressControl();
-            this.actionProgressControl3 = new Trail.Controls.ActionProgressControl();
-            this.label1 = new System.Windows.Forms.Label();
+            this.actionQueueList = new Trail.Modules.ActionQueueList();
             this.sidebar = new Trail.Modules.Sidebar();
             this.tabBar = new Trail.Modules.NavigatingTabBar();
             this.iconQueue = new Trail.Modules.ItemsIconQueue();
@@ -65,8 +60,6 @@
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            this.actionQueuePanel.SuspendLayout();
-            this.actionQueueList.SuspendLayout();
             this.SuspendLayout();
             // 
             // sidebarImages
@@ -296,7 +289,7 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer.Panel1.Controls.Add(this.actionQueuePanel);
+            this.splitContainer.Panel1.Controls.Add(this.actionQueueList);
             this.splitContainer.Panel1.Controls.Add(this.sidebar);
             // 
             // splitContainer.Panel2
@@ -310,91 +303,16 @@
             this.splitContainer.TabStop = false;
             this.splitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer_SplitterMoved);
             // 
-            // actionQueuePanel
-            // 
-            this.actionQueuePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.actionQueuePanel.Controls.Add(this.actionQueueList);
-            this.actionQueuePanel.Controls.Add(this.label1);
-            this.actionQueuePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.actionQueuePanel.ForeColor = System.Drawing.Color.White;
-            this.actionQueuePanel.Location = new System.Drawing.Point(0, 170);
-            this.actionQueuePanel.Name = "actionQueuePanel";
-            this.actionQueuePanel.Size = new System.Drawing.Size(196, 175);
-            this.actionQueuePanel.TabIndex = 2;
-            // 
             // actionQueueList
             // 
-            this.actionQueueList.AlternateBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.actionQueueList.AutoScroll = true;
-            this.actionQueueList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
-            this.actionQueueList.Controls.Add(this.actionProgressControl3);
-            this.actionQueueList.Controls.Add(this.actionProgressControl2);
-            this.actionQueueList.Controls.Add(this.actionProgressControl1);
-            this.actionQueueList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.actionQueueList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.actionQueueList.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.actionQueueList.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.actionQueueList.ForeColor = System.Drawing.Color.White;
-            this.actionQueueList.Location = new System.Drawing.Point(0, 25);
+            this.actionQueueList.Location = new System.Drawing.Point(0, 202);
             this.actionQueueList.Name = "actionQueueList";
-            this.actionQueueList.Size = new System.Drawing.Size(196, 150);
-            this.actionQueueList.TabIndex = 2;
-            // 
-            // actionProgressControl1
-            // 
-            this.actionProgressControl1.AccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.actionProgressControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
-            this.actionProgressControl1.DescriptionText = "Description";
-            this.actionProgressControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.actionProgressControl1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.actionProgressControl1.ForeColor = System.Drawing.Color.White;
-            this.actionProgressControl1.HeaderText = "ActionProgressControl";
-            this.actionProgressControl1.Location = new System.Drawing.Point(0, 0);
-            this.actionProgressControl1.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.actionProgressControl1.Name = "actionProgressControl1";
-            this.actionProgressControl1.Progress = 11;
-            this.actionProgressControl1.Size = new System.Drawing.Size(196, 50);
-            this.actionProgressControl1.TabIndex = 0;
-            // 
-            // actionProgressControl2
-            // 
-            this.actionProgressControl2.AccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.actionProgressControl2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.actionProgressControl2.DescriptionText = "Description";
-            this.actionProgressControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.actionProgressControl2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.actionProgressControl2.ForeColor = System.Drawing.Color.White;
-            this.actionProgressControl2.HeaderText = "ActionProgressControl";
-            this.actionProgressControl2.Location = new System.Drawing.Point(0, 50);
-            this.actionProgressControl2.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.actionProgressControl2.Name = "actionProgressControl2";
-            this.actionProgressControl2.Progress = 11;
-            this.actionProgressControl2.Size = new System.Drawing.Size(196, 50);
-            this.actionProgressControl2.TabIndex = 1;
-            // 
-            // actionProgressControl3
-            // 
-            this.actionProgressControl3.AccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.actionProgressControl3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
-            this.actionProgressControl3.DescriptionText = "Description";
-            this.actionProgressControl3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.actionProgressControl3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.actionProgressControl3.ForeColor = System.Drawing.Color.White;
-            this.actionProgressControl3.HeaderText = "ActionProgressControl";
-            this.actionProgressControl3.Location = new System.Drawing.Point(0, 100);
-            this.actionProgressControl3.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.actionProgressControl3.Name = "actionProgressControl3";
-            this.actionProgressControl3.Progress = 11;
-            this.actionProgressControl3.Size = new System.Drawing.Size(196, 50);
-            this.actionProgressControl3.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(196, 25);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "ACTIONS";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.actionQueueList.Size = new System.Drawing.Size(196, 143);
+            this.actionQueueList.TabIndex = 1;
             // 
             // sidebar
             // 
@@ -448,6 +366,7 @@
             this.MainMenuStrip = this.mainMenu;
             this.Name = "MainForm";
             this.Text = "Trail";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
@@ -455,8 +374,6 @@
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
-            this.actionQueuePanel.ResumeLayout(false);
-            this.actionQueueList.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -493,12 +410,7 @@
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sidebarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tabBarToolStripMenuItem;
-        private System.Windows.Forms.Panel actionQueuePanel;
-        private System.Windows.Forms.Label label1;
-        private Controls.ControlList actionQueueList;
-        private Controls.ActionProgressControl actionProgressControl1;
-        private Controls.ActionProgressControl actionProgressControl2;
-        private Controls.ActionProgressControl actionProgressControl3;
+        private Modules.ActionQueueList actionQueueList;
     }
 }
 
