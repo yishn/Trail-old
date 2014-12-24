@@ -34,16 +34,6 @@ namespace Trail.Columns {
             watcher.Renamed += watcher_Renamed;
         }
 
-        public override string GetHeaderText() {
-            if (Directory.Root.FullName == Directory.FullName) {
-                DriveInfo drive = new DriveInfo(Directory.FullName);
-                if (!drive.IsReady || drive.VolumeLabel.Trim() == "") return Directory.Name;
-                return drive.VolumeLabel + " (" + Directory.Name.Replace(Path.DirectorySeparatorChar, ')');
-            }
-            
-            return Directory.Name;
-        }
-
         #region Drag & Drop
 
         private void ListViewControl_ItemDrag(object sender, ItemDragEventArgs e) {
@@ -143,6 +133,16 @@ namespace Trail.Columns {
             watcher.EnableRaisingEvents = true;
 
             return result;
+        }
+
+        public override string GetHeaderText() {
+            if (Directory.Root.FullName == Directory.FullName) {
+                DriveInfo drive = new DriveInfo(Directory.FullName);
+                if (!drive.IsReady || drive.VolumeLabel.Trim() == "") return Directory.Name;
+                return drive.VolumeLabel + " (" + Directory.Name.Replace(Path.DirectorySeparatorChar, ')');
+            }
+            
+            return Directory.Name;
         }
 
         public override void ItemActivated(ColumnListViewItem item) {
