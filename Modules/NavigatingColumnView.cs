@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Trail.Columns;
 using Trail.Controls;
 
@@ -52,9 +53,7 @@ namespace Trail.Modules {
             
             foreach (ItemsColumn c in e.NewItems) {
                 c.LoadingCompleted += ItemsColumn_LoadingCompleted;
-                c.ListViewControl.SelectedIndexChanged += (_, evt) => {
-                    ItemsColumn_SelectedIndexChanged(c, evt);
-                };
+                c.OneItemSelected += ItemsColumn_OneItemSelected;
             }
         }
 
@@ -62,10 +61,9 @@ namespace Trail.Modules {
             LoadIcons();
         }
 
-        private void ItemsColumn_SelectedIndexChanged(object sender, EventArgs e) {
+        private void ItemsColumn_OneItemSelected(object sender, ListViewItem e) {
             ColumnControl c = sender as ColumnControl;
-            if (c.ListViewControl.SelectedIndices.Count == 0) return;
-            ColumnListViewItem item = c.ListViewControl.SelectedItems[0] as ColumnListViewItem;
+            ColumnListViewItem item = e as ColumnListViewItem;
             if (item.SubColumn == null) return;
 
             // Don't add existing column
