@@ -23,6 +23,7 @@ namespace Trail.Actions {
 
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e) {
             this.Progress = e.ProgressPercentage;
+            this.DescriptionText = e.UserState.ToString();
         }
     }
 }
