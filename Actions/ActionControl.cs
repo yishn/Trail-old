@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Trail.Modules {
-    public partial class ActionProgressControl : UserControl {
+namespace Trail.Actions {
+    public partial class ActionControl : UserControl {
         private int progress = 0;
 
         public string HeaderText { get { return headerLabel.Text; } set { headerLabel.Text = value; } }
@@ -19,7 +19,7 @@ namespace Trail.Modules {
 
         public event EventHandler CancelButtonClicked;
 
-        public ActionProgressControl() {
+        public ActionControl() {
             InitializeComponent();
         }
 
@@ -27,7 +27,7 @@ namespace Trail.Modules {
             progressBarValue.Width = (int)(progressBar.Width * progress / 100.0);
         }
 
-        #region Mouse enter & leave
+        #region Mouse Enter & Leave
 
         protected override void OnMouseLeave(EventArgs e) {
             if (this.ClientRectangle.Contains(this.PointToClient(Control.MousePosition)))

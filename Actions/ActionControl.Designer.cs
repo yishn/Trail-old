@@ -1,6 +1,6 @@
 ﻿using Trail.Controls;
-namespace Trail.Modules {
-    partial class ActionProgressControl {
+namespace Trail.Actions {
+    partial class ActionControl {
         /// <summary> 
         /// Erforderliche Designervariable.
         /// </summary>

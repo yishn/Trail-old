@@ -47,10 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\ActionProgressControl.cs">
+    <Compile Include="Actions\ActionProgressControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Modules\ActionProgressControl.Designer.cs">
+    <Compile Include="Actions\ActionProgressControl.Designer.cs">
       <DependentUpon>ActionProgressControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ControlList.cs">
@@ -162,7 +162,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Modules\ActionProgressControl.resx">
+    <EmbeddedResource Include="Actions\ActionProgressControl.resx">
       <DependentUpon>ActionProgressControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutForm.resx">
