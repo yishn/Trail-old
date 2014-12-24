@@ -10,6 +10,7 @@ namespace Trail.Controls {
     public class ControlList : Panel {
         private Color alternateBackColor;
 
+        public bool NewItemsOnTop { get; set; }
         public Color AlternateBackColor {
             get { return alternateBackColor; }
             set { alternateBackColor = value; Recolor(); }
@@ -18,15 +19,14 @@ namespace Trail.Controls {
         public ControlList() {
             alternateBackColor = this.BackColor;
 
-            this.AutoScroll = true;
-
             this.ControlAdded += ControlList_ControlAdded;
             this.ControlRemoved += ControlList_ControlRemoved;
         }
 
         private void ControlList_ControlAdded(object sender, ControlEventArgs e) {
             this.SuspendLayout();
-            e.Control.BringToFront();
+            if (!NewItemsOnTop) e.Control.BringToFront();
+            else e.Control.SendToBack();
             Rearrange();
             Recolor();
             this.ResumeLayout();

@@ -37,8 +37,6 @@
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sidebarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabBarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-            this.actionQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +51,7 @@
             this.manageAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.packagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new Trail.Controls.SplitContainerModern();
+            this.actionQueueList = new Trail.Modules.ActionQueueList();
             this.sidebar = new Trail.Modules.Sidebar();
             this.tabBar = new Trail.Modules.NavigatingTabBar();
             this.iconQueue = new Trail.Modules.ItemsIconQueue();
@@ -149,9 +148,7 @@
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sidebarToolStripMenuItem,
-            this.tabBarToolStripMenuItem,
-            this.toolStripMenuItem5,
-            this.actionQueueToolStripMenuItem});
+            this.tabBarToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "&View";
@@ -160,28 +157,16 @@
             // sidebarToolStripMenuItem
             // 
             this.sidebarToolStripMenuItem.Name = "sidebarToolStripMenuItem";
-            this.sidebarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sidebarToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.sidebarToolStripMenuItem.Text = "&Sidebar";
             this.sidebarToolStripMenuItem.Click += new System.EventHandler(this.sidebarToolStripMenuItem_Click);
             // 
             // tabBarToolStripMenuItem
             // 
             this.tabBarToolStripMenuItem.Name = "tabBarToolStripMenuItem";
-            this.tabBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tabBarToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.tabBarToolStripMenuItem.Text = "&Tab Bar";
             this.tabBarToolStripMenuItem.Click += new System.EventHandler(this.tabBarToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(149, 6);
-            // 
-            // actionQueueToolStripMenuItem
-            // 
-            this.actionQueueToolStripMenuItem.Name = "actionQueueToolStripMenuItem";
-            this.actionQueueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.actionQueueToolStripMenuItem.Text = "&Action Queue";
-            this.actionQueueToolStripMenuItem.Click += new System.EventHandler(this.actionQueueToolStripMenuItem_Click);
             // 
             // historyToolStripMenuItem
             // 
@@ -304,18 +289,30 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer.Panel1.Controls.Add(this.actionQueueList);
             this.splitContainer.Panel1.Controls.Add(this.sidebar);
             // 
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer.Panel2.Controls.Add(this.tabBar);
-            this.splitContainer.Size = new System.Drawing.Size(826, 359);
+            this.splitContainer.Size = new System.Drawing.Size(826, 345);
             this.splitContainer.SplitterDistance = 196;
             this.splitContainer.SplitterWidth = 2;
             this.splitContainer.TabIndex = 1;
             this.splitContainer.TabStop = false;
             this.splitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer_SplitterMoved);
+            // 
+            // actionQueueList
+            // 
+            this.actionQueueList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.actionQueueList.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.actionQueueList.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.actionQueueList.ForeColor = System.Drawing.Color.White;
+            this.actionQueueList.Location = new System.Drawing.Point(0, 202);
+            this.actionQueueList.Name = "actionQueueList";
+            this.actionQueueList.Size = new System.Drawing.Size(196, 143);
+            this.actionQueueList.TabIndex = 1;
             // 
             // sidebar
             // 
@@ -333,7 +330,7 @@
             this.sidebar.SelectedImageIndex = 0;
             this.sidebar.ShowLines = false;
             this.sidebar.ShowNodeToolTips = true;
-            this.sidebar.Size = new System.Drawing.Size(196, 359);
+            this.sidebar.Size = new System.Drawing.Size(196, 345);
             this.sidebar.TabIndex = 0;
             this.sidebar.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.sidebar_AfterSelect);
             // 
@@ -360,7 +357,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(826, 383);
+            this.ClientSize = new System.Drawing.Size(826, 369);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.mainMenu);
             this.DoubleBuffered = true;
@@ -412,8 +409,7 @@
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sidebarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tabBarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem actionQueueToolStripMenuItem;
+        private Modules.ActionQueueList actionQueueList;
     }
 }
 

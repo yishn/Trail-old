@@ -24,7 +24,7 @@ namespace Trail.Controls {
             get { return autoHideClose; }
             set {
                 autoHideClose = value;
-                btnClose.Visible = !autoHideClose;
+                closeButton.Visible = !autoHideClose;
             }
         }
 
@@ -36,17 +36,17 @@ namespace Trail.Controls {
             var doubleBufferPropertyInfo = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
             doubleBufferPropertyInfo.SetValue(this, true, null);
 
-            btnClose.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 255, 255, 255);
-            btnClose.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);
+            closeButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 255, 255, 255);
+            closeButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);
 
             this.TextChanged += Tab_TextChanged;
         }
         public Tab(string text) : this() { this.Text = text; }
 
         private void Tab_TextChanged(object sender, EventArgs e) {
-            this.Width = lblText.PreferredWidth + btnClose.Width + 10;
-            lblText.Width = this.Width - btnClose.Width - 3;
-            btnClose.Left = this.Width - btnClose.Width - 3;
+            this.Width = lblText.PreferredWidth + closeButton.Width + 10;
+            lblText.Width = this.Width - closeButton.Width - 3;
+            closeButton.Left = this.Width - closeButton.Width - 3;
         }
 
         #region Mouse Enter & Leave
@@ -60,11 +60,11 @@ namespace Trail.Controls {
         }
 
         private void Tab_MouseEnter(object sender, EventArgs e) {
-            btnClose.Visible = true;
+            closeButton.Visible = true;
         }
 
         private void Tab_MouseLeave(object sender, EventArgs e) {
-            if (AutoHideClose) btnClose.Visible = false;
+            if (AutoHideClose) closeButton.Visible = false;
         }
 
         private void Control_MouseEnter(object sender, EventArgs e) {
@@ -77,7 +77,7 @@ namespace Trail.Controls {
 
         #endregion
 
-        private void btnClose_Click(object sender, EventArgs e) {
+        private void closeButton_Click(object sender, EventArgs e) {
             if (CloseButtonClick != null) CloseButtonClick(this, e);
         }
 

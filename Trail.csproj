@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ActionProgressControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ActionProgressControl.Designer.cs">
+      <DependentUpon>ActionProgressControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ControlList.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -78,12 +84,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataTypes\ColumnData.cs" />
-    <Compile Include="Forms\ActionQueueForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ActionQueueForm.Designer.cs">
-      <DependentUpon>ActionQueueForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\GotoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +92,12 @@
     </Compile>
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\JsonParser.cs" />
+    <Compile Include="Modules\ActionQueueList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\ActionQueueList.Designer.cs">
+      <DependentUpon>ActionQueueList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\ColumnListViewItem.cs" />
     <Compile Include="Modules\ColumnTreeNode.cs" />
     <Compile Include="Controls\ColumnView.cs">
@@ -156,6 +162,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\ActionProgressControl.resx">
+      <DependentUpon>ActionProgressControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -174,14 +183,14 @@
     <EmbeddedResource Include="Controls\TabBar.resx">
       <DependentUpon>TabBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ActionQueueForm.resx">
-      <DependentUpon>ActionQueueForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GotoForm.resx">
       <DependentUpon>GotoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ActionQueueList.resx">
+      <DependentUpon>ActionQueueList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
