@@ -366,7 +366,6 @@
             this.MainMenuStrip = this.mainMenu;
             this.Name = "MainForm";
             this.Text = "Trail";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
