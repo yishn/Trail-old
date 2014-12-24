@@ -46,7 +46,7 @@
             this.actionsList.ForeColor = System.Drawing.Color.White;
             this.actionsList.Location = new System.Drawing.Point(0, 25);
             this.actionsList.Name = "actionsList";
-            this.actionsList.NewItemsOnTop = false;
+            this.actionsList.NewItemsOnTop = true;
             this.actionsList.Size = new System.Drawing.Size(263, 264);
             this.actionsList.TabIndex = 4;
             // 
