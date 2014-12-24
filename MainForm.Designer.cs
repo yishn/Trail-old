@@ -289,8 +289,8 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer.Panel1.Controls.Add(this.actionQueueList);
             this.splitContainer.Panel1.Controls.Add(this.sidebar);
+            this.splitContainer.Panel1.Controls.Add(this.actionQueueList);
             // 
             // splitContainer.Panel2
             // 
@@ -309,9 +309,9 @@
             this.actionQueueList.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.actionQueueList.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.actionQueueList.ForeColor = System.Drawing.Color.White;
-            this.actionQueueList.Location = new System.Drawing.Point(0, 202);
+            this.actionQueueList.Location = new System.Drawing.Point(0, 345);
             this.actionQueueList.Name = "actionQueueList";
-            this.actionQueueList.Size = new System.Drawing.Size(196, 143);
+            this.actionQueueList.Size = new System.Drawing.Size(196, 0);
             this.actionQueueList.TabIndex = 1;
             // 
             // sidebar
