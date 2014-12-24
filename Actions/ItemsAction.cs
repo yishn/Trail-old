@@ -12,6 +12,10 @@ namespace Trail.Actions {
 
         public event RunWorkerCompletedEventHandler Completed;
 
+        public ItemsAction() {
+            this.CancelButtonClicked += ItemsAction_CancelButtonClicked;
+        }
+
         public void Start() {
             if (worker != null && worker.IsBusy) return;
 
@@ -35,6 +39,10 @@ namespace Trail.Actions {
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
             if (Completed != null) Completed(this, e);
+        }
+
+        private void ItemsAction_CancelButtonClicked(object sender, EventArgs e) {
+            this.Cancel();
         }
     }
 }

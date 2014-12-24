@@ -27,36 +27,39 @@ namespace Trail.Modules {
             Items.CollectionChanged += ActionProgressControls_CollectionChanged;
         }
 
-        public bool AddItem(ItemsAction item) {
+        public bool EnqueueAction(ItemsAction action) {
             if (animation.Enabled) return false;
             animation = new Animation();
 
-            int itemHeight = item.Height;
+            int itemHeight = action.Height;
             int height = this.Height;
-            item.Height = 0;
-            this.Items.Add(item);
+            action.Height = 0;
+            this.Items.Add(action);
 
             animation.Start().Tick += (_, value) => {
-                item.Height = (int)(value * itemHeight);
+                action.Height = (int)(value * itemHeight);
                 this.Height = height + (int)(value * (itemHeight + (1 - Math.Sign(height)) * headerLabel.Height));
+            };
+            animation.Complete += (_, e) => {
+                action.Start();
             };
 
             return true;
         }
 
-        public bool RemoveItem(ItemsAction item) {
-            if (animation.Enabled || !this.Items.Contains(item)) return false;
+        public bool RemoveAction(ItemsAction action) {
+            if (animation.Enabled || !this.Items.Contains(action)) return false;
             animation = new Animation();
 
-            int itemHeight = item.Height;
+            int itemHeight = action.Height;
             int height = this.Height;
 
             animation.Start().Tick += (_, value) => {
-                item.Height = itemHeight - (int)(value * itemHeight);
+                action.Height = itemHeight - (int)(value * itemHeight);
                 this.Height = height - (int)(value * (itemHeight + (1 - Math.Sign(Items.Count - 1)) * headerLabel.Height));
             };
             animation.Complete += (_, e) => {
-                this.Items.Remove(item);
+                this.Items.Remove(action);
             };
 
             return true;
@@ -77,7 +80,7 @@ namespace Trail.Modules {
                 foreach (ItemsAction c in e.NewItems) {
                     actionsList.Controls.Add(c);
 
-                    c.CancelButtonClicked += Item_CancelButtonClicked;
+                    c.Completed += Action_Completed;
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Remove) {
                 foreach (ItemsAction c in e.OldItems) {
@@ -88,8 +91,8 @@ namespace Trail.Modules {
             }
         }
 
-        private void Item_CancelButtonClicked(object sender, EventArgs e) {
-            this.RemoveItem(sender as ItemsAction);
+        private void Action_Completed(object sender, RunWorkerCompletedEventArgs e) {
+            this.RemoveAction(sender as ItemsAction);
         }
     }
 }
