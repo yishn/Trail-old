@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using Trail.Controls;
+using Trail.Actions;
 using System.Collections.Specialized;
 using Trail.Fx;
 
@@ -16,17 +17,17 @@ namespace Trail.Modules {
     public partial class ActionQueueList : UserControl {
         private Animation animation = new Animation();
 
-        public ObservableCollection<ActionProgressControl> Items { get; private set; }
+        public ObservableCollection<ItemsAction> Items { get; private set; }
 
         public ActionQueueList() {
             InitializeComponent();
             this.Height = 0;
-            this.Items = new ObservableCollection<ActionProgressControl>();
+            this.Items = new ObservableCollection<ItemsAction>();
 
             Items.CollectionChanged += ActionProgressControls_CollectionChanged;
         }
 
-        public bool AddItem(ActionProgressControl item) {
+        public bool AddItem(ItemsAction item) {
             if (animation.Enabled) return false;
             animation = new Animation();
 
@@ -43,7 +44,7 @@ namespace Trail.Modules {
             return true;
         }
 
-        public bool RemoveItem(ActionProgressControl item) {
+        public bool RemoveItem(ItemsAction item) {
             if (animation.Enabled || !this.Items.Contains(item)) return false;
             animation = new Animation();
 
@@ -73,13 +74,13 @@ namespace Trail.Modules {
 
         private void ActionProgressControls_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             if (e.Action == NotifyCollectionChangedAction.Add) {
-                foreach (ActionProgressControl c in e.NewItems) {
+                foreach (ItemsAction c in e.NewItems) {
                     actionsList.Controls.Add(c);
 
                     c.CancelButtonClicked += Item_CancelButtonClicked;
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Remove) {
-                foreach (ActionProgressControl c in e.OldItems) {
+                foreach (ItemsAction c in e.OldItems) {
                     actionsList.Controls.Remove(c);
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Reset) {
@@ -88,7 +89,7 @@ namespace Trail.Modules {
         }
 
         private void Item_CancelButtonClicked(object sender, EventArgs e) {
-            this.RemoveItem(sender as ActionProgressControl);
+            this.RemoveItem(sender as ItemsAction);
         }
     }
 }
