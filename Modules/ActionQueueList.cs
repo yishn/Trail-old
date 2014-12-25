@@ -15,7 +15,7 @@ using Trail.Fx;
 
 namespace Trail.Modules {
     public partial class ActionQueueList : UserControl {
-        private Animation animation = new Animation();
+        private IntAnimation animation = new IntAnimation();
 
         public ObservableCollection<ItemsAction> Items { get; private set; }
 
@@ -28,47 +28,25 @@ namespace Trail.Modules {
         }
 
         public bool EnqueueAction(ItemsAction action) {
-            if (animation.Enabled) return false;
-            animation = new Animation();
-
-            int itemHeight = action.Height;
-            int height = this.Height;
-            action.Height = 0;
             this.Items.Add(action);
-
-            animation.Start().Tick += (_, value) => {
-                action.Height = (int)(value * itemHeight);
-                this.Height = height + (int)(value * (itemHeight + (1 - Math.Sign(height)) * headerLabel.Height));
-            };
-            animation.Complete += (_, e) => {
-                action.Start();
-            };
-
             return true;
         }
 
         public bool RemoveAction(ItemsAction action) {
-            if (animation.Enabled || !this.Items.Contains(action)) return false;
-            animation = new Animation();
-
-            int itemHeight = action.Height;
-            int height = this.Height;
-
-            animation.Start().Tick += (_, value) => {
-                action.Height = itemHeight - (int)(value * itemHeight);
-                this.Height = height - (int)(value * (itemHeight + (1 - Math.Sign(Items.Count - 1)) * headerLabel.Height));
-            };
-            animation.Complete += (_, e) => {
-                this.Items.Remove(action);
-            };
-
+            this.Items.Remove(action);
             return true;
         }
 
         public void UpdateSize() {
+            if (animation.Enabled) animation.Stop();
+
             int end = Math.Min(this.Items.Count, 3) * new ActionProgressControl().Height;
             if (end != 0) end += headerLabel.Height;
-            this.Height = end;
+
+            animation = new IntAnimation();
+            animation.Start(this.Height, end).Tick += (_, value) => {
+                this.Height = value;
+            };
         }
 
         private void ActionQueueList_Load(object sender, EventArgs e) {
@@ -89,6 +67,8 @@ namespace Trail.Modules {
             } else if (e.Action == NotifyCollectionChangedAction.Reset) {
                 actionsList.Controls.Clear();
             }
+
+            UpdateSize();
         }
 
         private void Action_Completed(object sender, RunWorkerCompletedEventArgs e) {
