@@ -91,6 +91,8 @@ namespace Trail.Controls {
                     c.Dock = DockStyle.Left;
                     c.ListViewControl.SmallImageList = this.ImageList;
 
+                    c.ListViewControl.KeyUp += (_, evt) => { ColumnControl_KeyUp(c, evt); };
+
                     ScrollPanel.Controls.Add(c);
                     c.BringToFront();
                 }
@@ -100,6 +102,17 @@ namespace Trail.Controls {
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Reset) {
                 ScrollPanel.Controls.Clear();
+            }
+        }
+
+        private void ColumnControl_KeyUp(ColumnControl sender, KeyEventArgs e) {
+            int i = this.Columns.IndexOf(sender);
+            if (i == -1) return;
+
+            if (e.KeyCode == Keys.Left) {
+                this.Columns[Math.Max(i - 1, 0)].Focus();
+            } else if (e.KeyCode == Keys.Right) {
+                this.Columns[Math.Min(i + 1, this.Columns.Count - 1)].Focus();
             }
         }
     }
