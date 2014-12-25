@@ -59,6 +59,12 @@
     <Compile Include="Controls\ActionProgressControl.Designer.cs">
       <DependentUpon>ActionProgressControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ChoiceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ChoiceDialog.Designer.cs">
+      <DependentUpon>ChoiceDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ControlList.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -174,6 +180,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\ActionProgressControl.resx">
       <DependentUpon>ActionProgressControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ChoiceDialog.resx">
+      <DependentUpon>ChoiceDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
