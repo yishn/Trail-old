@@ -73,12 +73,13 @@ namespace Mischel.IO {
             IntPtr DestinationHandle,
             Object UserData);
 
-        [DllImport("kernel32.dll", SetLastError = true)]
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool CopyFileEx(
             string lpExistingFileName,
             string lpNewFileName,
             APICopyProgressRoutine lpProgressRoutine,
-            Object lpData,
+            IntPtr lpData,
             ref Int32 lpCancel,
             CopyFileOptions dwCopyFlags);
 
@@ -95,7 +96,7 @@ namespace Mischel.IO {
             string sourceFilename,
             string destinationFilename,
             CopyProgressDelegate progressHandler,
-            Object userData,
+            IntPtr userData,
             CopyFileOptions copyOptions,
             CancellationToken cancelToken) {
             // On error, throw IOException with the value from Marshal.GetLastWin32Error
@@ -134,7 +135,7 @@ namespace Mischel.IO {
             string sourceFilename,
             string destinationFilename,
             CopyProgressDelegate progressHandler,
-            Object userData,
+            IntPtr userData,
             CopyFileOptions copyOptions,
             CancellationToken cancelToken) {
             var rslt = CopyFileInternal(
@@ -154,7 +155,7 @@ namespace Mischel.IO {
             string sourceFilename,
             string destinationFilename,
             CopyProgressDelegate progressHandler,
-            Object userData,
+            IntPtr userData,
             CopyFileOptions copyOptions) {
             CopyFile(sourceFilename, destinationFilename, progressHandler, userData, copyOptions,
               CancellationToken.None);
@@ -163,20 +164,20 @@ namespace Mischel.IO {
         static public void CopyFile(
             string sourceFilename,
             string destinationFilename) {
-            CopyFile(sourceFilename, destinationFilename, null, null, CopyFileOptions.None);
+            CopyFile(sourceFilename, destinationFilename, null, IntPtr.Zero, CopyFileOptions.None);
         }
 
         static public void CopyFileNoBuffering(
             string sourceFilename,
             string destinationFilename) {
-            CopyFile(sourceFilename, destinationFilename, null, null, CopyFileOptions.NoBuffering);
+            CopyFile(sourceFilename, destinationFilename, null, IntPtr.Zero, CopyFileOptions.NoBuffering);
         }
 
         private delegate CopyFileResult CopyFileInvoker(
             string sourceFilename,
             string destinationFilename,
             CopyProgressDelegate progressHandler,
-            Object userData,
+            IntPtr userData,
             CopyFileOptions copyOptions,
             CancellationToken cancelToken);
 
@@ -184,7 +185,7 @@ namespace Mischel.IO {
             string sourceFilename,
             string destinationFilename,
             CopyProgressDelegate progressHandler,
-            Object userData,
+            IntPtr userData,
             CopyFileOptions copyOptions,
             CancellationToken cancelToken,
             AsyncCallback callback = null) {
