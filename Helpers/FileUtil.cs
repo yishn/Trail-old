@@ -146,8 +146,8 @@ namespace Mischel.IO {
                 copyOptions,
                 cancelToken);
             if (!rslt.ReturnValue) {
-                throw new IOException(string.Format("Error copying file. GetLastError returns {0}.",
-                  rslt.LastError));
+                throw new IOException(string.Format("Error copying file. GetLastError returns {0}.", rslt.LastError), 
+                    rslt.LastError);
             }
         }
 

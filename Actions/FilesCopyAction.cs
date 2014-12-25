@@ -55,16 +55,23 @@ namespace Trail.Actions {
             this.Count = queue.Count;
 
             while (queue.Count > 0) {
+                if (e.Cancel) break;
+
                 Tuple<string, string> order = queue.Dequeue();
                 int percentage = (this.Count - queue.Count - 1) * 100 / this.Count;
                 int endPercentage = (this.Count - queue.Count) * 100 / this.Count;
 
                 sender.ReportProgress(percentage, "Copy \"" + new FileInfo(order.Item1).Name + "\"...");
 
-                Mischel.IO.FileUtil.CopyFile(order.Item1, order.Item2, (evt) => {
-                    double p = (double)evt.TotalBytesTransferred / evt.TotalFileSize;
-                    sender.ReportProgress(percentage + (int)((endPercentage - percentage) * p), null);
-                }, IntPtr.Zero, Mischel.IO.CopyFileOptions.None, cts.Token);
+                try {
+                    Mischel.IO.FileUtil.CopyFile(order.Item1, order.Item2, (evt) => {
+                        double p = (double)evt.TotalBytesTransferred / evt.TotalFileSize;
+                        sender.ReportProgress(percentage + (int)((endPercentage - percentage) * p), null);
+                    }, IntPtr.Zero, Mischel.IO.CopyFileOptions.None, cts.Token);
+                } catch (IOException ex) {
+                    if (ex.HResult == 1235) e.Cancel = true;
+                    else throw ex;
+                }
             }
         }
     }
