@@ -29,11 +29,7 @@ namespace Trail.Modules {
 
         public bool EnqueueAction(ItemsAction action) {
             this.Items.Add(action);
-            return true;
-        }
-
-        public bool RemoveAction(ItemsAction action) {
-            this.Items.Remove(action);
+            if (this.Items.Count == 1) action.Start();
             return true;
         }
 
@@ -72,7 +68,8 @@ namespace Trail.Modules {
         }
 
         private void Action_Completed(object sender, RunWorkerCompletedEventArgs e) {
-            this.RemoveAction(sender as ItemsAction);
+            this.Items.Remove(sender as ItemsAction);
+            if (this.Items.Count > 0) this.Items[0].Start();
         }
     }
 }
