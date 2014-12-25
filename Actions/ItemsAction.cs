@@ -11,11 +11,12 @@ using Trail.Fx;
 namespace Trail.Actions {
     public abstract class ItemsAction : ActionProgressControl {
         private IntAnimation progressAnimation = new IntAnimation();
-        private BackgroundWorker worker;
+        private BackgroundWorker worker = new BackgroundWorker();
 
         public event RunWorkerCompletedEventHandler Completed;
 
         public ItemsAction() {
+            this.DescriptionText = "Waiting in queue...";
             this.CancelButtonClicked += ItemsAction_CancelButtonClicked;
         }
 
@@ -30,7 +31,11 @@ namespace Trail.Actions {
         }
 
         public void Cancel() {
-            worker.CancelAsync();
+            if (worker.IsBusy) {
+                worker.CancelAsync();
+            } else {
+                if (Completed != null) this.Completed(this, new RunWorkerCompletedEventArgs(null, null, true));
+            }
         }
 
         public abstract void DoWork(BackgroundWorker sender, DoWorkEventArgs e);
