@@ -49,12 +49,12 @@ namespace Trail.Actions {
         }
 
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e) {
-            if (progressAnimation.Enabled) progressAnimation.End();
-
-            progressAnimation = new IntAnimation();
-            progressAnimation.Start(this.Progress, e.ProgressPercentage).Tick += (_, value) => {
-                this.Progress = value;
-            };
+            if (!progressAnimation.Enabled || e.ProgressPercentage == 100 || e.ProgressPercentage == 0) {
+                progressAnimation = new IntAnimation();
+                progressAnimation.Start(this.Progress, e.ProgressPercentage).Tick += (_, value) => {
+                    this.Progress = value;
+                };
+            }
 
             if (e.UserState != null)
                 this.DescriptionText = e.UserState.ToString();

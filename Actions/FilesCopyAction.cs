@@ -19,7 +19,7 @@ namespace Trail.Actions {
         public FilesCopyAction(string[] items, DirectoryInfo destination) {
             this.Items = items;
             this.Destination = destination;
-            this.HeaderText = "Copy files to \"" + destination.Name + "\"...";
+            this.HeaderText = "Copy files to \"" + destination.Name + "\"";
 
             this.CancelButtonClicked += FilesCopyAction_CancelButtonClicked;
         }
@@ -74,7 +74,7 @@ namespace Trail.Actions {
                 int percentage = (this.Count - queue.Count - 1) * 100 / this.Count;
                 int endPercentage = (this.Count - queue.Count) * 100 / this.Count;
 
-                sender.ReportProgress(percentage, "Copy \"" + new FileInfo(order.Item1).Name + "\"...");
+                sender.ReportProgress(percentage, new FileInfo(order.Item1).Name);
 
                 try {
                     Mischel.IO.FileUtil.CopyFile(order.Item1, order.Item2, (evt) => {
