@@ -96,6 +96,9 @@
     <Compile Include="Forms\GotoForm.Designer.cs">
       <DependentUpon>GotoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fx\ColorAnimation.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Helpers\FileUtil.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\JsonParser.cs" />
