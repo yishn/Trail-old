@@ -146,7 +146,7 @@ namespace Trail.Columns {
         }
 
         public override void ItemActivated(ColumnListViewItem item) {
-            if (!(item.Tag is FileInfo)) return;
+            if (!(item.Tag is FileInfo) || item.SubColumn != null) return;
 
             ProcessStartInfo info = new ProcessStartInfo((item.Tag as FileInfo).FullName);
             info.WorkingDirectory = (item.Tag as FileInfo).DirectoryName;
