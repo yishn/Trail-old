@@ -28,34 +28,47 @@ namespace Trail.Actions {
             cts.Cancel();
         }
 
-        private void enqueueItem(string oldPath, string newPath) {
+        private void enqueueItem(string oldPath, string newPath, DoWorkEventArgs e) {
+            if (e.Cancel) return;
+
             if (File.Exists(oldPath)) {
                 queue.Enqueue(new Tuple<string, string>(oldPath, newPath));
             } else if (Directory.Exists(oldPath)) {
-                foreach (string path in Directory.GetFiles(oldPath)) {
-                    enqueueItem(path, Path.Combine(newPath, new FileInfo(path).Name));
+                if (!Directory.Exists(newPath)) Directory.CreateDirectory(newPath);
+
+                foreach (string p in Directory.GetFiles(oldPath)) {
+                    if (e.Cancel) return;
+
+                    enqueueItem(p, Path.Combine(newPath, new FileInfo(p).Name), e);
                 }
-                foreach (string path in Directory.GetDirectories(oldPath)) {
-                    enqueueItem(path, Path.Combine(newPath, new DirectoryInfo(path).Name));
+
+                foreach (string p in Directory.GetDirectories(oldPath)) {
+                    if (e.Cancel) return;
+
+                    string pp = Path.Combine(newPath, new DirectoryInfo(p).Name);
+                    enqueueItem(p, pp, e);
+                    if (!Directory.Exists(pp)) Directory.CreateDirectory(pp);
                 }
             }
         }
 
         public override void DoWork(BackgroundWorker sender, DoWorkEventArgs e) {
-            sender.ReportProgress(0, "Counting files...");
+            sender.ReportProgress(0, "Preparing...");
 
             foreach (string item in Items) {
+                if (e.Cancel) return;
+
                 if (File.Exists(item)) {
-                    enqueueItem(item, Path.Combine(Destination.FullName, new FileInfo(item).Name));
+                    enqueueItem(item, Path.Combine(Destination.FullName, new FileInfo(item).Name), e);
                 } else if (Directory.Exists(item)) {
-                    enqueueItem(item, Path.Combine(Destination.FullName, new DirectoryInfo(item).Name));
+                    enqueueItem(item, Path.Combine(Destination.FullName, new DirectoryInfo(item).Name), e);
                 }
             }
 
             this.Count = queue.Count;
 
             while (queue.Count > 0) {
-                if (e.Cancel) break;
+                if (e.Cancel) return;
 
                 Tuple<string, string> order = queue.Dequeue();
                 int percentage = (this.Count - queue.Count - 1) * 100 / this.Count;
