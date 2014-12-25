@@ -64,7 +64,7 @@ namespace Trail.Actions {
                 Mischel.IO.FileUtil.CopyFile(order.Item1, order.Item2, (evt) => {
                     double p = (double)evt.TotalBytesTransferred / evt.TotalFileSize;
                     sender.ReportProgress(percentage + (int)((endPercentage - percentage) * p), null);
-                }, null, Mischel.IO.CopyFileOptions.None, cts.Token);
+                }, IntPtr.Zero, Mischel.IO.CopyFileOptions.None, cts.Token);
             }
         }
     }
