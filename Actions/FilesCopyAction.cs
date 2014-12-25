@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Trail.Actions {
     public class FilesCopyAction : ItemsAction {
-        public override void DoWork(DoWorkEventArgs e) {
+        public override void DoWork(BackgroundWorker sender, DoWorkEventArgs e) {
             throw new NotImplementedException();
         }
     }

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Trail.Controls;
+using Trail.Fx;
 
 namespace Trail.Actions {
     public abstract class ItemsAction : ActionProgressControl {
+        private IntAnimation progressAnimation = new IntAnimation();
         private BackgroundWorker worker;
 
         public event RunWorkerCompletedEventHandler Completed;
@@ -30,18 +33,28 @@ namespace Trail.Actions {
             worker.CancelAsync();
         }
 
-        public abstract void DoWork(DoWorkEventArgs e);
+        public abstract void DoWork(BackgroundWorker sender, DoWorkEventArgs e);
 
         private void worker_DoWork(object sender, DoWorkEventArgs e) {
             try {
-                DoWork(e);
+                DoWork(sender as BackgroundWorker, e);
+                worker.ReportProgress(100, "Completed.");
             } catch (Exception ex) {
                 e.Result = ex;
+                worker.ReportProgress(100, "An error occurred.");
             }
+
+            Thread.Sleep(1000);
         }
 
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e) {
-            this.Progress = e.ProgressPercentage;
+            if (progressAnimation.Enabled) progressAnimation.Stop();
+
+            progressAnimation = new IntAnimation();
+            progressAnimation.Start(this.Progress, e.ProgressPercentage).Tick += (_, value) => {
+                this.Progress = value;
+            };
+
             this.DescriptionText = e.UserState.ToString();
         }
 
