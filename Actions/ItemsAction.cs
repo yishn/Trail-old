@@ -41,7 +41,7 @@ namespace Trail.Actions {
                 worker.ReportProgress(100, "Completed.");
             } catch (Exception ex) {
                 e.Result = ex;
-                worker.ReportProgress(100, "An error occurred.");
+                worker.ReportProgress(0, "An error occurred.");
             }
 
             Thread.Sleep(1000);
