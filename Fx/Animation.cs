@@ -56,5 +56,11 @@ namespace Trail.Fx {
             this.Enabled = false;
             return this;
         }
+
+        public Animation End() {
+            this.Stop();
+            if (Tick != null) Tick(this, 1.0);
+            return this;
+        }
     }
 }
