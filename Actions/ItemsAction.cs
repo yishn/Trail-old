@@ -38,7 +38,8 @@ namespace Trail.Actions {
         private void worker_DoWork(object sender, DoWorkEventArgs e) {
             try {
                 DoWork(sender as BackgroundWorker, e);
-                worker.ReportProgress(100, "Completed.");
+                if (!e.Cancel) worker.ReportProgress(100, "Completed.");
+                else worker.ReportProgress(100, "Cancelled.");
             } catch (Exception ex) {
                 e.Result = ex;
                 worker.ReportProgress(0, "An error occurred.");
@@ -55,7 +56,8 @@ namespace Trail.Actions {
                 this.Progress = value;
             };
 
-            this.DescriptionText = e.UserState.ToString();
+            if (e.UserState != null)
+                this.DescriptionText = e.UserState.ToString();
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
