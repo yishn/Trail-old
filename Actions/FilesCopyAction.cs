@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using Trail.Controls;
 
 namespace Trail.Actions {
     public class FilesCopyAction : IAction {
@@ -39,17 +41,7 @@ namespace Trail.Actions {
 
         public void DoWork(IProgress<Tuple<int, string>> progress, CancellationToken token) {
             progress.Report(new Tuple<int, string>(0, "Preparing..."));
-
-            foreach (string item in Items) {
-                token.ThrowIfCancellationRequested();
-
-                if (File.Exists(item)) {
-                    enqueueItem(item, Path.Combine(Destination.FullName, new FileInfo(item).Name), token);
-                } else if (Directory.Exists(item)) {
-                    enqueueItem(item, Path.Combine(Destination.FullName, new DirectoryInfo(item).Name), token);
-                }
-            }
-
+            preparation(token);
             this.Count = queue.Count;
 
             while (queue.Count > 0) {
@@ -72,6 +64,47 @@ namespace Trail.Actions {
                 } catch (IOException ex) {
                     if (ex.HResult == 1235) throw new OperationCanceledException();
                     else throw ex;
+                }
+            }
+        }
+
+        private void preparation(CancellationToken token) {
+            bool yesToAll = false;
+            ChoiceDialog dialog = new ChoiceDialog("Copy File", "Replace &All", "&Replace This File", "&Skip File", "&Cancel");
+
+            foreach (string item in Items) {
+                token.ThrowIfCancellationRequested();
+
+                if (File.Exists(item)) {
+                    string name = new FileInfo(item).Name;
+                    string newItem = Path.Combine(Destination.FullName, name);
+
+                    if (File.Exists(newItem) && !yesToAll) {
+                        DialogResult result = dialog.ShowDialog(
+                            "There is already a file named \"" + name + "\" at the destination."
+                        );
+
+                        if (result == DialogResult.No) continue;
+                        else if (result == DialogResult.Cancel) return;
+                        else if (result == DialogResult.OK) yesToAll = true;
+                    }
+
+                    enqueueItem(item, newItem, token);
+                } else if (Directory.Exists(item)) {
+                    string name = new DirectoryInfo(item).Name;
+                    string newItem = Path.Combine(Destination.FullName, name);
+
+                    if (Directory.Exists(newItem) && !yesToAll) {
+                        DialogResult result = dialog.ShowDialog(
+                            "There is already a directory named \"" + name + "\" at the destination."
+                        );
+
+                        if (result == DialogResult.No) continue;
+                        else if (result == DialogResult.Cancel) return;
+                        else if (result == DialogResult.OK) yesToAll = true;
+                    }
+
+                    enqueueItem(item, newItem, token);
                 }
             }
         }
