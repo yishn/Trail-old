@@ -149,7 +149,6 @@ namespace Trail {
         private void viewToolStripMenuItem_DropDownOpening(object sender, EventArgs e) {
             sidebarToolStripMenuItem.Checked = !splitContainer.Panel1Collapsed;
             tabBarToolStripMenuItem.Checked = tabBar.Visible;
-            //actionQueueToolStripMenuItem.Checked = actionQueuePanel.Visible;
         }
 
         private void sidebarToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -160,6 +159,10 @@ namespace Trail {
         private void tabBarToolStripMenuItem_Click(object sender, EventArgs e) {
             tabBar.Visible = !tabBar.Visible;
             Persistence.SetPreference("tabbar.visible", tabBar.Visible);
+        }
+
+        private void reloadPreferencesToolStripMenuItem_Click(object sender, EventArgs e) {
+            LoadPreferences();
         }
 
         #endregion

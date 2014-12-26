@@ -46,6 +46,7 @@ namespace Trail.Modules {
 
         public void LoadSession() {
             this.Tabs.Clear();
+            closedTabs.Clear();
 
             foreach (ColumnData data in Persistence.Session) {
                 ItemsColumn column = data.Instantiation();
