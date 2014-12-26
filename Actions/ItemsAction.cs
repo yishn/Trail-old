@@ -55,6 +55,7 @@ namespace Trail.Actions {
 
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e) {
             if (!progressAnimation.Enabled || e.ProgressPercentage == 100 || e.ProgressPercentage == 0) {
+                progressAnimation.Stop();
                 progressAnimation = new IntAnimation();
                 progressAnimation.Start(this.Progress, e.ProgressPercentage).Tick += (_, value) => {
                     this.Progress = value;
