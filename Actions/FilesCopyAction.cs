@@ -39,35 +39,6 @@ namespace Trail.Actions {
             }
         }
 
-        public void DoWork(IProgress<Tuple<int, string>> progress, CancellationToken token) {
-            progress.Report(new Tuple<int, string>(0, "Preparing..."));
-            preparation(token);
-            this.Count = queue.Count;
-
-            while (queue.Count > 0) {
-                token.ThrowIfCancellationRequested();
-
-                Tuple<string, string> order = queue.Dequeue();
-                int percentage = (this.Count - queue.Count - 1) * 100 / this.Count;
-                int endPercentage = (this.Count - queue.Count) * 100 / this.Count;
-
-                progress.Report(new Tuple<int, string>(percentage, new FileInfo(order.Item1).Name));
-
-                try {
-                    FileInfo file = new FileInfo(order.Item2);
-                    if (!file.Directory.Exists) file.Directory.Create();
-
-                    Mischel.IO.FileUtil.CopyFile(order.Item1, order.Item2, (status) => {
-                        double p = (double)status.TotalBytesTransferred / status.TotalFileSize;
-                        progress.Report(new Tuple<int, string>(percentage + (int)((endPercentage - percentage) * p), null));
-                    }, IntPtr.Zero, Mischel.IO.CopyFileOptions.None, token);
-                } catch (IOException ex) {
-                    if (ex.HResult == 1235) throw new OperationCanceledException();
-                    else throw ex;
-                }
-            }
-        }
-
         private void preparation(CancellationToken token) {
             bool yesToAll = false;
             ChoiceDialog dialog = new ChoiceDialog("Copy File", "Replace &All", "&Replace This File", "&Skip File", "&Cancel");
@@ -105,6 +76,35 @@ namespace Trail.Actions {
                     }
 
                     enqueueItem(item, newItem, token);
+                }
+            }
+        }
+
+        public void DoWork(IProgress<Tuple<int, string>> progress, CancellationToken token) {
+            progress.Report(new Tuple<int, string>(0, "Preparing..."));
+            preparation(token);
+            this.Count = queue.Count;
+
+            while (queue.Count > 0) {
+                token.ThrowIfCancellationRequested();
+
+                Tuple<string, string> order = queue.Dequeue();
+                int percentage = (this.Count - queue.Count - 1) * 100 / this.Count;
+                int endPercentage = (this.Count - queue.Count) * 100 / this.Count;
+
+                progress.Report(new Tuple<int, string>(percentage, new FileInfo(order.Item1).Name));
+
+                try {
+                    FileInfo file = new FileInfo(order.Item2);
+                    if (!file.Directory.Exists) file.Directory.Create();
+
+                    Mischel.IO.FileUtil.CopyFile(order.Item1, order.Item2, (status) => {
+                        double p = (double)status.TotalBytesTransferred / status.TotalFileSize;
+                        progress.Report(new Tuple<int, string>(percentage + (int)((endPercentage - percentage) * p), null));
+                    }, IntPtr.Zero, Mischel.IO.CopyFileOptions.None, token);
+                } catch (IOException ex) {
+                    if (ex.HResult == 1235) throw new OperationCanceledException();
+                    else throw ex;
                 }
             }
         }
