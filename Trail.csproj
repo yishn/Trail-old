@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="Actions\FilesCopyAction.cs" />
     <Compile Include="Actions\IAction.cs" />
-    <Compile Include="Modules\ItemsAction.cs">
+    <Compile Include="Modules\ItemsActionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ActionProgressControl.cs">
