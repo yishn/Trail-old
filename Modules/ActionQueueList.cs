@@ -67,7 +67,7 @@ namespace Trail.Modules {
             UpdateSize();
         }
 
-        private void Action_Completed(object sender, RunWorkerCompletedEventArgs e) {
+        private void Action_Completed(object sender, EventArgs e) {
             this.Items.Remove(sender as ItemsAction);
             if (this.Items.Count > 0) this.Items[0].Start();
         }

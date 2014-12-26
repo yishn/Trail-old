@@ -9,69 +9,57 @@ using Trail.Controls;
 using Trail.Fx;
 
 namespace Trail.Actions {
-    public abstract class ItemsAction : ActionProgressControl {
+    public class ItemsAction : ActionProgressControl {
         private IntAnimation progressAnimation = new IntAnimation();
-        private BackgroundWorker worker = new BackgroundWorker();
+        private CancellationTokenSource cancellation = new CancellationTokenSource();
 
-        public event RunWorkerCompletedEventHandler Completed;
+        public IAction Action { get; set; }
 
-        public ItemsAction() {
+        public event EventHandler Completed;
+
+        public ItemsAction(IAction action) {
+            this.Action = action;
+            this.HeaderText = action.HeaderText;
             this.DescriptionText = "Waiting in queue...";
+
             this.CancelButtonClicked += ItemsAction_CancelButtonClicked;
         }
 
-        public void Start() {
-            if (worker != null && worker.IsBusy) return;
+        public async void Start() {
+            IProgress<Tuple<int, string>> progress = new Progress<Tuple<int, string>>(t => {
+                if (!progressAnimation.Enabled || t.Item1 == 100 || t.Item1 == 0) {
+                    progressAnimation.Stop();
+                    progressAnimation = new IntAnimation();
+                    progressAnimation.Start(this.Progress, t.Item1).Tick += (_, value) => {
+                        this.Progress = value;
+                    };
+                }
 
-            worker = new BackgroundWorker() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
-            worker.DoWork += worker_DoWork;
-            worker.ProgressChanged += worker_ProgressChanged;
-            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-            worker.RunWorkerAsync();
+                if (t.Item2 != null) this.DescriptionText = t.Item2;
+            });
+
+            await Task.Run(() => {
+                try {
+                    this.Action.DoWork(progress, cancellation.Token);
+                    progress.Report(new Tuple<int, string>(100, "Completed."));
+                } catch (OperationCanceledException) {
+                    progress.Report(new Tuple<int, string>(100, "Cancelled."));
+                } catch (Exception) {
+                    progress.Report(new Tuple<int, string>(0, "An error occurred."));
+                }
+
+                Thread.Sleep(1000);
+            });
+
+            if (Completed != null) Completed(this, EventArgs.Empty);
         }
 
         public void Cancel() {
-            if (worker.IsBusy) {
-                worker.CancelAsync();
-            } else {
-                if (Completed != null) this.Completed(this, new RunWorkerCompletedEventArgs(null, null, true));
-            }
-        }
-
-        public abstract void DoWork(BackgroundWorker sender, DoWorkEventArgs e);
-
-        private void worker_DoWork(object sender, DoWorkEventArgs e) {
-            try {
-                DoWork(sender as BackgroundWorker, e);
-                if (!e.Cancel) worker.ReportProgress(100, "Completed.");
-                else worker.ReportProgress(100, "Cancelled.");
-            } catch (Exception ex) {
-                e.Result = ex;
-                worker.ReportProgress(0, "An error occurred.");
-            }
-
-            Thread.Sleep(1000);
-        }
-
-        private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e) {
-            if (!progressAnimation.Enabled || e.ProgressPercentage == 100 || e.ProgressPercentage == 0) {
-                progressAnimation.Stop();
-                progressAnimation = new IntAnimation();
-                progressAnimation.Start(this.Progress, e.ProgressPercentage).Tick += (_, value) => {
-                    this.Progress = value;
-                };
-            }
-
-            if (e.UserState != null)
-                this.DescriptionText = e.UserState.ToString();
-        }
-
-        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
-            if (Completed != null) Completed(this, e);
+            cancellation.Cancel();
         }
 
         private void ItemsAction_CancelButtonClicked(object sender, EventArgs e) {
-            this.Cancel();
+            Cancel();
         }
     }
 }
