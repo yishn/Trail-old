@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Trail.Actions;
 using Trail.Controls;
 using Trail.Fx;
 
-namespace Trail.Actions {
-    public class ItemsAction : ActionProgressControl {
+namespace Trail.Modules {
+    public class ItemsActionControl : ActionProgressControl {
         private IntAnimation progressAnimation = new IntAnimation();
         private CancellationTokenSource cancellation = new CancellationTokenSource();
 
@@ -17,7 +18,7 @@ namespace Trail.Actions {
 
         public event EventHandler Completed;
 
-        public ItemsAction(IAction action) {
+        public ItemsActionControl(IAction action) {
             this.Action = action;
             this.HeaderText = action.HeaderText;
             this.DescriptionText = "Waiting in queue...";

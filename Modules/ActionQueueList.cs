@@ -17,17 +17,17 @@ namespace Trail.Modules {
     public partial class ActionQueueList : UserControl {
         private IntAnimation animation = new IntAnimation();
 
-        public ObservableCollection<ItemsAction> Items { get; private set; }
+        public ObservableCollection<ItemsActionControl> Items { get; private set; }
 
         public ActionQueueList() {
             InitializeComponent();
             this.Height = 0;
-            this.Items = new ObservableCollection<ItemsAction>();
+            this.Items = new ObservableCollection<ItemsActionControl>();
 
             Items.CollectionChanged += ActionProgressControls_CollectionChanged;
         }
 
-        public bool EnqueueAction(ItemsAction action) {
+        public bool EnqueueAction(ItemsActionControl action) {
             this.Items.Add(action);
             if (this.Items.Count == 1) action.Start();
             return true;
@@ -51,13 +51,13 @@ namespace Trail.Modules {
 
         private void ActionProgressControls_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             if (e.Action == NotifyCollectionChangedAction.Add) {
-                foreach (ItemsAction c in e.NewItems) {
+                foreach (ItemsActionControl c in e.NewItems) {
                     actionsList.Controls.Add(c);
 
                     c.Completed += Action_Completed;
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Remove) {
-                foreach (ItemsAction c in e.OldItems) {
+                foreach (ItemsActionControl c in e.OldItems) {
                     actionsList.Controls.Remove(c);
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Reset) {
@@ -68,7 +68,7 @@ namespace Trail.Modules {
         }
 
         private void Action_Completed(object sender, EventArgs e) {
-            this.Items.Remove(sender as ItemsAction);
+            this.Items.Remove(sender as ItemsActionControl);
             if (this.Items.Count > 0) this.Items[0].Start();
         }
     }
