@@ -12,7 +12,7 @@ using Trail.Fx;
 namespace Trail.Modules {
     public class ItemsActionControl : ActionProgressControl {
         private IntAnimation progressAnimation = new IntAnimation();
-        private CancellationTokenSource cancellation = new CancellationTokenSource();
+        private CancellationTokenSource cancellation;
 
         public IAction Action { get; set; }
         public bool IsBusy { get; private set; }
@@ -43,6 +43,8 @@ namespace Trail.Modules {
                 if (t.Item2 != null) this.DescriptionText = t.Item2;
             });
 
+            cancellation = new CancellationTokenSource();
+
             await Task.Run(() => {
                 try {
                     this.Action.DoWork(progress, cancellation.Token);
@@ -61,7 +63,7 @@ namespace Trail.Modules {
         }
 
         public void Cancel() {
-            cancellation.Cancel();
+            if (cancellation != null) cancellation.Cancel();
         }
 
         private void ItemsAction_CancelButtonClicked(object sender, EventArgs e) {
