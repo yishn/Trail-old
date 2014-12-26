@@ -15,6 +15,7 @@ namespace Trail.Modules {
         private CancellationTokenSource cancellation = new CancellationTokenSource();
 
         public IAction Action { get; set; }
+        public bool IsBusy { get; private set; }
 
         public event EventHandler Completed;
 
@@ -27,6 +28,9 @@ namespace Trail.Modules {
         }
 
         public async void Start() {
+            if (this.IsBusy) return;
+            this.IsBusy = true;
+
             IProgress<Tuple<int, string>> progress = new Progress<Tuple<int, string>>(t => {
                 if (!progressAnimation.Enabled || t.Item1 == 100 || t.Item1 == 0) {
                     progressAnimation.Stop();
@@ -52,6 +56,7 @@ namespace Trail.Modules {
                 Thread.Sleep(1000);
             });
 
+            this.IsBusy = false;
             if (Completed != null) Completed(this, EventArgs.Empty);
         }
 
