@@ -162,6 +162,10 @@ namespace Trail {
             Persistence.SetPreference("tabbar.visible", tabBar.Visible);
         }
 
+        private void restartToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Restart();
+        }
+
         #endregion
     }
 }
