@@ -25,6 +25,7 @@ namespace Trail.Actions {
 
         private void enqueueItem(string oldPath, string newPath, CancellationToken token) {
             if (File.Exists(oldPath)) {
+                if (new FileInfo(oldPath).Directory.FullName == new FileInfo(newPath).Directory.FullName) return;
                 queue.Enqueue(new Tuple<string, string>(oldPath, newPath));
             } else if (Directory.Exists(oldPath)) {
                 foreach (string p in Directory.GetFiles(oldPath)) {
