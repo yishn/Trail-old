@@ -51,11 +51,10 @@
             this.manageAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.packagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new Trail.Controls.SplitContainerModern();
-            this.sidebar = new Trail.Modules.Sidebar();
             this.actionQueueList = new Trail.Modules.ActionQueueList();
+            this.sidebar = new Trail.Modules.Sidebar();
             this.tabBar = new Trail.Modules.NavigatingTabBar();
             this.iconQueue = new Trail.Modules.ItemsIconQueue();
-            this.reloadPreferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -104,7 +103,6 @@
             this.trailToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutTrailToolStripMenuItem,
             this.toolStripMenuItem2,
-            this.reloadPreferencesToolStripMenuItem,
             this.preferencesToolStripMenuItem,
             this.toolStripMenuItem4,
             this.exitTrailToolStripMenuItem});
@@ -305,6 +303,17 @@
             this.splitContainer.TabStop = false;
             this.splitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer_SplitterMoved);
             // 
+            // actionQueueList
+            // 
+            this.actionQueueList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.actionQueueList.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.actionQueueList.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.actionQueueList.ForeColor = System.Drawing.Color.White;
+            this.actionQueueList.Location = new System.Drawing.Point(0, 345);
+            this.actionQueueList.Name = "actionQueueList";
+            this.actionQueueList.Size = new System.Drawing.Size(196, 0);
+            this.actionQueueList.TabIndex = 1;
+            // 
             // sidebar
             // 
             this.sidebar.BackColor = System.Drawing.SystemColors.Control;
@@ -325,17 +334,6 @@
             this.sidebar.TabIndex = 0;
             this.sidebar.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.sidebar_AfterSelect);
             // 
-            // actionQueueList
-            // 
-            this.actionQueueList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.actionQueueList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.actionQueueList.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.actionQueueList.ForeColor = System.Drawing.Color.White;
-            this.actionQueueList.Location = new System.Drawing.Point(0, 345);
-            this.actionQueueList.Name = "actionQueueList";
-            this.actionQueueList.Size = new System.Drawing.Size(196, 0);
-            this.actionQueueList.TabIndex = 1;
-            // 
             // tabBar
             // 
             this.tabBar.AccentColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
@@ -354,13 +352,6 @@
             // 
             this.iconQueue.ImageList = this.itemsImages;
             this.iconQueue.WorkerReportsProgress = true;
-            // 
-            // reloadPreferencesToolStripMenuItem
-            // 
-            this.reloadPreferencesToolStripMenuItem.Name = "reloadPreferencesToolStripMenuItem";
-            this.reloadPreferencesToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.reloadPreferencesToolStripMenuItem.Text = "Re&load Preferences";
-            this.reloadPreferencesToolStripMenuItem.Click += new System.EventHandler(this.reloadPreferencesToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -419,7 +410,6 @@
         private System.Windows.Forms.ToolStripMenuItem sidebarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tabBarToolStripMenuItem;
         private Modules.ActionQueueList actionQueueList;
-        private System.Windows.Forms.ToolStripMenuItem reloadPreferencesToolStripMenuItem;
     }
 }
 
