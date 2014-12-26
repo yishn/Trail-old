@@ -24,7 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChoiceDialog));
-            this.descriptionLabel = new System.Windows.Forms.Label();
             this.headerLabel = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.noButton = new System.Windows.Forms.Button();
@@ -32,23 +31,12 @@
             this.yesButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // descriptionLabel
-            // 
-            this.descriptionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.descriptionLabel.AutoEllipsis = true;
-            this.descriptionLabel.Location = new System.Drawing.Point(17, 9);
-            this.descriptionLabel.Name = "descriptionLabel";
-            this.descriptionLabel.Size = new System.Drawing.Size(356, 18);
-            this.descriptionLabel.TabIndex = 0;
-            this.descriptionLabel.Text = "Description Text";
-            // 
             // headerLabel
             // 
             this.headerLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.headerLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.headerLabel.Location = new System.Drawing.Point(17, 33);
+            this.headerLabel.Location = new System.Drawing.Point(17, 9);
             this.headerLabel.Name = "headerLabel";
             this.headerLabel.Size = new System.Drawing.Size(356, 46);
             this.headerLabel.TabIndex = 1;
@@ -67,7 +55,7 @@
             this.okButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(28)))), ((int)(((byte)(85)))));
             this.okButton.Image = ((System.Drawing.Image)(resources.GetObject("okButton.Image")));
             this.okButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.okButton.Location = new System.Drawing.Point(17, 88);
+            this.okButton.Location = new System.Drawing.Point(17, 64);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(356, 41);
             this.okButton.TabIndex = 2;
@@ -89,7 +77,7 @@
             this.noButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(28)))), ((int)(((byte)(85)))));
             this.noButton.Image = ((System.Drawing.Image)(resources.GetObject("noButton.Image")));
             this.noButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.noButton.Location = new System.Drawing.Point(17, 182);
+            this.noButton.Location = new System.Drawing.Point(17, 158);
             this.noButton.Name = "noButton";
             this.noButton.Size = new System.Drawing.Size(356, 41);
             this.noButton.TabIndex = 4;
@@ -111,7 +99,7 @@
             this.cancelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(28)))), ((int)(((byte)(85)))));
             this.cancelButton.Image = ((System.Drawing.Image)(resources.GetObject("cancelButton.Image")));
             this.cancelButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cancelButton.Location = new System.Drawing.Point(17, 229);
+            this.cancelButton.Location = new System.Drawing.Point(17, 205);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(356, 41);
             this.cancelButton.TabIndex = 5;
@@ -133,7 +121,7 @@
             this.yesButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(28)))), ((int)(((byte)(85)))));
             this.yesButton.Image = ((System.Drawing.Image)(resources.GetObject("yesButton.Image")));
             this.yesButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.yesButton.Location = new System.Drawing.Point(17, 135);
+            this.yesButton.Location = new System.Drawing.Point(17, 111);
             this.yesButton.Name = "yesButton";
             this.yesButton.Size = new System.Drawing.Size(356, 41);
             this.yesButton.TabIndex = 3;
@@ -148,13 +136,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(390, 283);
+            this.ClientSize = new System.Drawing.Size(390, 258);
             this.Controls.Add(this.yesButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.noButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.headerLabel);
-            this.Controls.Add(this.descriptionLabel);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -170,7 +157,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label descriptionLabel;
         private System.Windows.Forms.Label headerLabel;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button noButton;
