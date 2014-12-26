@@ -25,8 +25,6 @@ namespace Trail.Actions {
             if (File.Exists(oldPath)) {
                 queue.Enqueue(new Tuple<string, string>(oldPath, newPath));
             } else if (Directory.Exists(oldPath)) {
-                if (!Directory.Exists(newPath)) Directory.CreateDirectory(newPath);
-
                 foreach (string p in Directory.GetFiles(oldPath)) {
                     token.ThrowIfCancellationRequested();
                     enqueueItem(p, Path.Combine(newPath, new FileInfo(p).Name), token);
@@ -64,6 +62,9 @@ namespace Trail.Actions {
                 progress.Report(new Tuple<int, string>(percentage, new FileInfo(order.Item1).Name));
 
                 try {
+                    FileInfo file = new FileInfo(order.Item2);
+                    if (!file.Directory.Exists) file.Directory.Create();
+
                     Mischel.IO.FileUtil.CopyFile(order.Item1, order.Item2, (status) => {
                         double p = (double)status.TotalBytesTransferred / status.TotalFileSize;
                         progress.Report(new Tuple<int, string>(percentage + (int)((endPercentage - percentage) * p), null));
