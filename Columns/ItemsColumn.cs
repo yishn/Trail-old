@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Controls;
@@ -13,11 +14,13 @@ using Trail.Modules;
 
 namespace Trail.Columns {
     public abstract class ItemsColumn : ColumnControl {
-        private BackgroundWorker worker;
+        private CancellationTokenSource cancellation;
 
         public string ItemsPath { get; private set; }
+        public bool IsBusy { get; private set; }
 
-        public event RunWorkerCompletedEventHandler LoadingCompleted;
+        public event EventHandler LoadingCompleted;
+        public event EventHandler<ColumnListViewItem> ItemActivate;
 
         public ItemsColumn(string itemsPath) {
             this.ItemsPath = itemsPath;
@@ -27,13 +30,8 @@ namespace Trail.Columns {
             this.ListViewControl.ListViewItemSorter = new ItemsColumnListComparer();
         }
 
-        private void ListViewControl_ItemActivate(object sender, EventArgs e) {
-            ItemActivated(ListViewControl.SelectedItems[0] as ColumnListViewItem);
-        }
-
-        protected abstract List<ColumnListViewItem> loadData(DoWorkEventArgs e);
+        protected abstract List<ColumnListViewItem> loadData(CancellationToken token);
         public abstract string GetHeaderText();
-        public abstract void ItemActivated(ColumnListViewItem item);
         public abstract ItemsColumn Duplicate();
 
         public virtual List<ItemsColumn> GetTrail() {
@@ -45,57 +43,53 @@ namespace Trail.Columns {
             return i.ToBitmap();
         }
 
-        public void LoadItems() {
-            if (worker != null && worker.IsBusy) return;
+        public async void LoadItems() {
+            if (this.IsBusy) return;
 
-            worker = new BackgroundWorker() { WorkerSupportsCancellation = true };
-            worker.DoWork += worker_DoWork;
-            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-            worker.RunWorkerAsync();
+            this.ShowError = false;
+            this.HeaderText = "";
+            ListViewControl.Items.Clear();
+
+            try {
+                cancellation = new CancellationTokenSource();
+
+                List<ColumnListViewItem> result = await Task.Run<List<ColumnListViewItem>>(() => {
+                    return loadData(cancellation.Token);
+                });
+
+                this.HeaderText = GetHeaderText();
+                ListViewControl.Items.AddRange(result.ToArray());
+                ListViewControl.Sort();
+                UpdateColumnWidth();
+            } catch(OperationCanceledException) {
+                // Do nothing
+            } catch (Exception ex) {
+                this.ShowError = true;
+                this.ErrorText = ex.Message;
+            }
+
+            this.IsBusy = false;
+            OnLoadingCompleted();
+        }
+
+        public void CancelLoading() {
+            if (cancellation != null) cancellation.Cancel();
         }
 
         public ColumnData GetColumnData() {
             return new ColumnData(this.GetType().FullName, this.ItemsPath);
         }
 
-        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
-            if (e.Cancelled) return;
-            if (e.Result is Exception) {
-                Exception result = e.Result as Exception;
-
-                this.ShowError = true;
-
-                if (result is UnauthorizedAccessException) {
-                    this.ErrorText = "Access denied.";
-                } else {
-                    this.ErrorText = result.Message;
-                }
-                
-            } else if (e.Result is List<ColumnListViewItem>) {
-                List<ColumnListViewItem> result = e.Result as List<ColumnListViewItem>;
-
-                this.ShowError = false;
-                this.HeaderText = GetHeaderText();
-
-                ListViewControl.Items.Clear();
-                ListViewControl.Items.AddRange(result.ToArray());
-                ListViewControl.Sort();
-                UpdateColumnWidth();
-
-                if (LoadingCompleted != null) LoadingCompleted(this, e);
-            }
+        private void ListViewControl_ItemActivate(object sender, EventArgs e) {
+            OnItemActivate(ListViewControl.SelectedItems[0] as ColumnListViewItem);
         }
 
-        private void worker_DoWork(object sender, DoWorkEventArgs e) {
-            try {
-                e.Result = loadData(e);
-            } catch (Exception ex) {
-                e.Result = ex;
-            }
+        protected virtual void OnLoadingCompleted() {
+            if (LoadingCompleted != null) LoadingCompleted(this, EventArgs.Empty);
         }
 
-        protected virtual void OnLoadingCompleted(RunWorkerCompletedEventArgs e) {
-            if (LoadingCompleted != null) LoadingCompleted(this, e);
+        protected virtual void OnItemActivate(ColumnListViewItem item) {
+            if (ItemActivate != null) ItemActivate(this, item);
         }
     }
 }

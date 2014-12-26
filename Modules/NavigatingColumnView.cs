@@ -57,7 +57,7 @@ namespace Trail.Modules {
             }
         }
 
-        private void ItemsColumn_LoadingCompleted(object sender, RunWorkerCompletedEventArgs e) {
+        private void ItemsColumn_LoadingCompleted(object sender, EventArgs e) {
             LoadIcons();
         }
 

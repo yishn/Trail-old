@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Trail.Controls;
 using Trail.Modules;
 using Trail.Helpers;
+using System.Threading;
 
 namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
@@ -27,6 +28,7 @@ namespace Trail.Columns {
             watcher.EnableRaisingEvents = false;
             watcher.SynchronizingObject = ListViewControl;
 
+            this.ItemActivate += DirectoryColumn_ItemActivate;
             this.ListViewControl.ItemDrag += ListViewControl_ItemDrag;
 
             watcher.Created += watcher_Created;
@@ -76,7 +78,7 @@ namespace Trail.Columns {
             ListViewControl.Items.Add(item);
             ListViewControl.Sort();
 
-            OnLoadingCompleted(new RunWorkerCompletedEventArgs(null, null, false));
+            OnLoadingCompleted();
         }
 
         private void watcher_Renamed(object sender, RenamedEventArgs e) {
@@ -85,6 +87,14 @@ namespace Trail.Columns {
         }
 
         #endregion
+
+        private void DirectoryColumn_ItemActivate(object sender, ColumnListViewItem item) {
+            if (!(item.Tag is FileInfo) || item.SubColumn != null) return;
+
+            ProcessStartInfo info = new ProcessStartInfo((item.Tag as FileInfo).FullName);
+            info.WorkingDirectory = (item.Tag as FileInfo).DirectoryName;
+            Process.Start(info);
+        }
 
         private string getImageKey(ColumnListViewItem item) {
             if (item.Tag is DirectoryInfo) return ".folder";
@@ -100,12 +110,12 @@ namespace Trail.Columns {
             return ext;
         }
 
-        protected override List<ColumnListViewItem> loadData(DoWorkEventArgs e) {
+        protected override List<ColumnListViewItem> loadData(CancellationToken token) {
             List<ColumnListViewItem> result = new List<ColumnListViewItem>();
             List<string> patterns = Persistence.GetPreferenceList("directorycolumn.directory_exclude_patterns");
 
             foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
-                if (e.Cancel) return null;
+                token.ThrowIfCancellationRequested();
                 if (patterns.Any(x => dI.FullName.MatchesPattern(x))) continue;
 
                 result.Add(new ColumnListViewItem() {
@@ -117,8 +127,9 @@ namespace Trail.Columns {
             }
 
             patterns = Persistence.GetPreferenceList("directorycolumn.file_exclude_patterns");
+
             foreach (FileInfo fI in this.Directory.GetFiles()) {
-                if (e.Cancel) return null;
+                token.ThrowIfCancellationRequested();
                 if (patterns.Any(x => fI.FullName.MatchesPattern(x))) continue;
   
                 ColumnListViewItem item = new ColumnListViewItem() {
@@ -143,14 +154,6 @@ namespace Trail.Columns {
             }
             
             return Directory.Name;
-        }
-
-        public override void ItemActivated(ColumnListViewItem item) {
-            if (!(item.Tag is FileInfo) || item.SubColumn != null) return;
-
-            ProcessStartInfo info = new ProcessStartInfo((item.Tag as FileInfo).FullName);
-            info.WorkingDirectory = (item.Tag as FileInfo).DirectoryName;
-            Process.Start(info);
         }
 
         public override Image GetIcon(ColumnListViewItem item) {
