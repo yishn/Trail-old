@@ -15,8 +15,8 @@ namespace Trail.Columns {
 
         public DirectoryInfo Directory { get; private set; }
 
-        public DirectoryColumn(string itemsPath, IPersistence persistence) : this(new DirectoryInfo(itemsPath), persistence) { }
-        public DirectoryColumn(DirectoryInfo directory, IPersistence persistence) : base(directory.FullName, persistence) {
+        public DirectoryColumn(string itemsPath, IHost host) : this(new DirectoryInfo(itemsPath), host) { }
+        public DirectoryColumn(DirectoryInfo directory, IHost host) : base(directory.FullName, host) {
             this.Directory = directory;
             this.ListViewControl.AllowDrop = true;
 
@@ -87,7 +87,7 @@ namespace Trail.Columns {
                 Tag = isDir ? new DirectoryInfo(e.FullPath) as object : new FileInfo(e.FullPath) as object
             };
             item.ImageKey = getImageKey(item);
-            if (isDir) item.SubColumn = new DirectoryColumn(item.Tag as DirectoryInfo, Persistence);
+            if (isDir) item.SubColumn = new ColumnData(this.GetType().FullName, (item.Tag as DirectoryInfo).FullName);
 
             ListViewControl.Items.Add(item);
             ListViewControl.Sort();
@@ -118,7 +118,7 @@ namespace Trail.Columns {
 
             if (ext == "") return fI.FullName;
 
-            List<string> patterns = Persistence.GetPreferenceList("directorycolumn.individual_icon_files");
+            List<string> patterns = Host.GetPreferenceList("directorycolumn.individual_icon_files");
             if (patterns.Any(x => fI.Name.MatchesPattern(x))) return fI.FullName;
 
             return ext;
@@ -127,21 +127,21 @@ namespace Trail.Columns {
         protected override List<ColumnListViewItem> loadData(CancellationToken token) {
             try {
                 List<ColumnListViewItem> result = new List<ColumnListViewItem>();
-                List<string> patterns = Persistence.GetPreferenceList("directorycolumn.directory_exclude_patterns");
+                List<string> patterns = Host.GetPreferenceList("directorycolumn.directory_exclude_patterns");
 
                 foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
                     token.ThrowIfCancellationRequested();
                     if (patterns.Any(x => dI.FullName.MatchesPattern(x))) continue;
 
                     result.Add(new ColumnListViewItem() {
-                        SubColumn = new DirectoryColumn(dI, Persistence),
+                        SubColumn = new ColumnData(this.GetType().FullName, dI.FullName),
                         Text = dI.Name,
                         Tag = dI,
                         ImageKey = ".folder"
                     });
                 }
 
-                patterns = Persistence.GetPreferenceList("directorycolumn.file_exclude_patterns");
+                patterns = Host.GetPreferenceList("directorycolumn.file_exclude_patterns");
 
                 foreach (FileInfo fI in this.Directory.GetFiles()) {
                     token.ThrowIfCancellationRequested();
@@ -193,15 +193,11 @@ namespace Trail.Columns {
 
             while (current.Root.FullName != current.FullName) {
                 current = current.Parent;
-                trail.Add(new DirectoryColumn(current, Persistence));
+                trail.Add(new DirectoryColumn(current, Host));
             }
 
             trail.Reverse();
             return trail;
-        }
-
-        public override ItemsColumn Duplicate() {
-            return new DirectoryColumn(this.Directory, Persistence);
         }
     }
 }

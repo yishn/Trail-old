@@ -61,13 +61,13 @@ namespace Trail.Modules {
 
                 ColumnTreeNode node = new ColumnTreeNode() {
                     Tag = dI,
-                    SubColumn = new DirectoryColumn(dI.RootDirectory, Persistence.GetInstance()),
+                    SubColumn = new ColumnData(typeof(DirectoryColumn).FullName, dI.RootDirectory.FullName),
                     ImageKey = dI.DriveType == DriveType.CDRom ? "disc" :
                         dI.DriveType == DriveType.Network ? "network" :
                         dI.DriveType == DriveType.Removable ? "removable" :
                         dI.DriveType == DriveType.Fixed ? "drive" : "unknown"
                 };
-                node.Text = node.SubColumn.GetHeaderText();
+                node.Text = node.SubColumn.Instantiation(null).GetHeaderText();
                 node.SelectedImageKey = node.ImageKey;
 
                 drives.Nodes.Add(node);
@@ -81,12 +81,9 @@ namespace Trail.Modules {
             favorites.Nodes.Clear();
 
             foreach (ColumnData item in Persistence.FavoriteItems) {
-                ItemsColumn column = item.Instantiation(Persistence.GetInstance());
-
                 ColumnTreeNode node = new ColumnTreeNode() {
-                    Text = column.GetHeaderText(),
-                    Tag = item,
-                    SubColumn = column,
+                    Text = item.Instantiation(null).GetHeaderText(),
+                    SubColumn = item,
                     ImageKey = "folder",
                     SelectedImageKey = "folder"
                 };

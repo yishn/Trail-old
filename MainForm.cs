@@ -13,11 +13,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Columns;
 using Trail.Controls;
+using Trail.DataTypes;
 using Trail.Forms;
 using Trail.Modules;
 
 namespace Trail {
-    public partial class MainForm : Form {
+    public partial class MainForm : Form, IHost {
         public MainForm() {
             InitializeComponent();
             tabBar.Tabs.CollectionChanged += Tabs_CollectionChanged;
@@ -62,7 +63,7 @@ namespace Trail {
             ColumnTreeNode node = e.Node as ColumnTreeNode;
             if (node.SubColumn == null) return;
 
-            ItemsColumn c = node.SubColumn.Duplicate();
+            ItemsColumn c = node.SubColumn.Instantiation(this);
             tabBar.CurrentTab.ColumnView.NavigateTo(c.GetTrail());
             tabBar.CurrentTab.ColumnView.Columns[0].Focus();
             tabBar.CurrentTab.ColumnView.ScrollToLastColumn();
@@ -71,7 +72,7 @@ namespace Trail {
         }
 
         private void tabBar_AddButtonClicked(object sender, EventArgs e) {
-            NavigatingTab t = new NavigatingTab(new EmptyColumn(Persistence.GetInstance()));
+            NavigatingTab t = new NavigatingTab(new EmptyColumn(this));
             if (tabBar.AddTab(t)) tabBar.CurrentTab = t;
         }
 
@@ -114,7 +115,7 @@ namespace Trail {
         }
 
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e) {
-            NavigatingTab t = new NavigatingTab(new DirectoryColumn(Persistence.PersistenceFolder, Persistence.GetInstance()));
+            NavigatingTab t = new NavigatingTab(new DirectoryColumn(Persistence.PersistenceFolder, this));
             if (tabBar.AddTab(t)) tabBar.CurrentTab = t;
         }
 
@@ -132,7 +133,7 @@ namespace Trail {
             form.Show();
 
             form.AcceptButtonClicked += (_, evt) => {
-                tabBar.CurrentTab.ColumnView.NavigateTo(new DirectoryColumn(form.ItemsPath, Persistence.GetInstance()));
+                tabBar.CurrentTab.ColumnView.NavigateTo(new DirectoryColumn(form.ItemsPath, this));
                 tabBar.CurrentTab.ColumnView.Columns[0].Focus();
                 tabBar.CurrentTab.ColumnView.ScrollToLastColumn();
             };
@@ -164,6 +165,30 @@ namespace Trail {
 
         private void restartToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Restart();
+        }
+
+        #endregion
+
+        #region IHost implementation
+
+        void IHost.SetPreference(string key, object value) {
+            Persistence.SetPreference(key, value);
+        }
+
+        string IHost.GetPreference(string key) {
+            return Persistence.GetPreference(key);
+        }
+
+        T IHost.GetPreference<T>(string key) {
+            return Persistence.GetPreference<T>(key);
+        }
+
+        List<string> IHost.GetPreferenceList(string key) {
+            return Persistence.GetPreferenceList(key);
+        }
+
+        List<T> IHost.GetPreferenceList<T>(string key) {
+            return Persistence.GetPreferenceList<T>(key);
         }
 
         #endregion

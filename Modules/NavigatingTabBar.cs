@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Trail.Columns;
 using Trail.Controls;
 using Trail.DataTypes;
@@ -48,7 +49,7 @@ namespace Trail.Modules {
             this.Tabs.Clear();
 
             foreach (ColumnData data in Persistence.Session) {
-                ItemsColumn column = data.Instantiation(Persistence.GetInstance());
+                ItemsColumn column = data.Instantiation(this.ParentForm as MainForm);
                 NavigatingTab tab = new NavigatingTab(column);
                 this.Tabs.Add(tab);
             }

@@ -15,17 +15,17 @@ namespace Trail.Columns {
     public abstract class ItemsColumn : ColumnControl {
         private CancellationTokenSource cancellation;
 
-        public IPersistence Persistence { get; private set; }
+        public IHost Host { get; private set; }
         public string ItemsPath { get; private set; }
         public bool IsBusy { get; private set; }
 
         public event EventHandler LoadingCompleted;
         public event EventHandler<ColumnListViewItem> ItemActivate;
 
-        public ItemsColumn(string itemsPath, IPersistence persistence) {
+        public ItemsColumn(string itemsPath, IHost host) {
             this.ItemsPath = itemsPath;
             this.HeaderText = "";
-            this.Persistence = persistence;
+            this.Host = host;
 
             this.ListViewControl.ItemActivate += ListViewControl_ItemActivate;
             this.ListViewControl.ListViewItemSorter = new ItemsColumnListComparer();
@@ -33,7 +33,6 @@ namespace Trail.Columns {
 
         protected abstract List<ColumnListViewItem> loadData(CancellationToken token);
         public abstract string GetHeaderText();
-        public abstract ItemsColumn Duplicate();
 
         public virtual List<ItemsColumn> GetTrail() {
             return new List<ItemsColumn>(new ItemsColumn[] { this });
@@ -79,6 +78,10 @@ namespace Trail.Columns {
 
         public ColumnData GetColumnData() {
             return new ColumnData(this.GetType().FullName, this.ItemsPath);
+        }
+
+        public ItemsColumn Duplicate() {
+            return GetColumnData().Instantiation(Host);
         }
 
         private void ListViewControl_ItemActivate(object sender, EventArgs e) {

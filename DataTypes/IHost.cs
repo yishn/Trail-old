@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Trail.DataTypes {
-    public interface IPersistence {
+    public interface IHost {
         void SetPreference(string key, object value);
         string GetPreference(string key);
         T GetPreference<T>(string key);

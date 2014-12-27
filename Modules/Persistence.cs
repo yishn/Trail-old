@@ -7,7 +7,7 @@ using Trail.Columns;
 using Trail.DataTypes;
 
 namespace Trail.Modules {
-    public class Persistence : IPersistence {
+    public class Persistence {
         public static DirectoryInfo PersistenceFolder
             = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TrailApp"));
         public static FileInfo PreferencesFile
@@ -91,19 +91,17 @@ namespace Trail.Modules {
 
         private static void createDefaultData() {
             if (Session.Count == 0) {
-                DirectoryColumn column = new DirectoryColumn(
-                    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-                    GetInstance()
-                );
-                Session.Add(column.GetColumnData());
+                Session.Add(new ColumnData(
+                    typeof(DirectoryColumn).FullName, 
+                    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+                ));
             }
 
             if (FavoriteItems.Count == 0) {
-                DirectoryColumn column = new DirectoryColumn(
-                    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-                    GetInstance()
-                );
-                FavoriteItems.Add(column.GetColumnData());
+                FavoriteItems.Add(new ColumnData(
+                    typeof(DirectoryColumn).FullName,
+                    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+                ));
             }
 
             CreatePreference("directorycolumn.directory_exclude_patterns", new List<object>(new object[] { 
@@ -126,33 +124,5 @@ namespace Trail.Modules {
 
             SaveData();
         }
-
-        public static IPersistence GetInstance() {
-            return new Persistence();
-        }
-
-        #region IPersistence implementation
-
-        void IPersistence.SetPreference(string key, object value) {
-            Persistence.SetPreference(key, value);
-        }
-
-        string IPersistence.GetPreference(string key) {
-            return Persistence.GetPreference(key);
-        }
-
-        T IPersistence.GetPreference<T>(string key) {
-            return Persistence.GetPreference<T>(key);
-        }
-
-        List<string> IPersistence.GetPreferenceList(string key) {
-            return Persistence.GetPreferenceList(key);
-        }
-
-        List<T> IPersistence.GetPreferenceList<T>(string key) {
-            return Persistence.GetPreferenceList<T>(key);
-        }
-
-        #endregion
     }
 }
