@@ -28,5 +28,9 @@ namespace Trail.Forms {
         private void labelGitHub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             Process.Start("https://github.com/yishn/Trail");
         }
+
+        private void labelIcons_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            Process.Start("http://p.yusukekamiyamane.com/");
+        }
     }
 }

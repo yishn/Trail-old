@@ -30,6 +30,7 @@
             this.labelVersion = new System.Windows.Forms.Label();
             this.labelCopyright = new System.Windows.Forms.LinkLabel();
             this.labelGitHub = new System.Windows.Forms.LinkLabel();
+            this.labelIcons = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,12 +110,31 @@
             this.labelGitHub.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.labelGitHub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labelGitHub_LinkClicked);
             // 
+            // labelIcons
+            // 
+            this.labelIcons.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.labelIcons.AutoSize = true;
+            this.labelIcons.ForeColor = System.Drawing.Color.Gray;
+            this.labelIcons.LinkArea = new System.Windows.Forms.LinkArea(15, 17);
+            this.labelIcons.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.labelIcons.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.labelIcons.Location = new System.Drawing.Point(21, 179);
+            this.labelIcons.Name = "labelIcons";
+            this.labelIcons.Size = new System.Drawing.Size(202, 21);
+            this.labelIcons.TabIndex = 7;
+            this.labelIcons.TabStop = true;
+            this.labelIcons.Text = "Fugue icons by Yusuke Kamiyamane";
+            this.labelIcons.UseCompatibleTextRendering = true;
+            this.labelIcons.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.labelIcons.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labelIcons_LinkClicked);
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(494, 211);
+            this.Controls.Add(this.labelIcons);
             this.Controls.Add(this.labelGitHub);
             this.Controls.Add(this.labelCopyright);
             this.Controls.Add(this.labelVersion);
@@ -145,5 +165,6 @@
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.LinkLabel labelCopyright;
         private System.Windows.Forms.LinkLabel labelGitHub;
+        private System.Windows.Forms.LinkLabel labelIcons;
     }
 }
