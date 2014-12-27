@@ -75,6 +75,14 @@ namespace Trail.Controls {
             OnMouseLeave(e);
         }
 
+        private void Tab_DragEnter(object sender, DragEventArgs e) {
+            OnMouseEnter(e);
+        }
+
+        private void Tab_DragLeave(object sender, EventArgs e) {
+            OnMouseLeave(e);
+        }
+
         #endregion
 
         private void closeButton_Click(object sender, EventArgs e) {

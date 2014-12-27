@@ -66,6 +66,7 @@
             // 
             // Tab
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.closeButton);
@@ -74,6 +75,8 @@
             this.MaximumSize = new System.Drawing.Size(175, 231);
             this.Name = "Tab";
             this.Size = new System.Drawing.Size(175, 20);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Tab_DragEnter);
+            this.DragLeave += new System.EventHandler(this.Tab_DragLeave);
             this.MouseEnter += new System.EventHandler(this.Tab_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.Tab_MouseLeave);
             this.ResumeLayout(false);

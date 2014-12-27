@@ -145,13 +145,15 @@ namespace Trail.Controls {
                     t.Height = pnlTabs.Height;
                     pnlTabs.Controls.Add(t);
 
+                    t.SizeChanged += Tab_SizeChanged;
                     t.MouseEnter += Tab_MouseEnter;
                     t.MouseLeave += Tab_MouseLeave;
-                    t.SizeChanged += Tab_SizeChanged;
                     t.MouseClick += Tab_MouseClick;
                     t.MouseDown += Tab_MouseDown;
                     t.MouseMove += Tab_MouseMove;
                     t.MouseUp += Tab_MouseUp;
+                    t.DragEnter += t_DragEnter;
+                    t.DragOver += t_DragOver;
                     t.CloseButtonClick += Tab_CloseButtonClick;
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Remove) {
@@ -162,6 +164,21 @@ namespace Trail.Controls {
                 pnlTabs.Controls.Clear();
             }
         }
+
+        #region Tab drag activation
+
+        private DateTime dragEnterTime;
+
+        private void t_DragEnter(object sender, DragEventArgs e) {
+            dragEnterTime = DateTime.Now;
+        }
+
+        private void t_DragOver(object sender, DragEventArgs e) {
+            if ((DateTime.Now - dragEnterTime).TotalMilliseconds < 500) return;
+            this.CurrentTab = sender as Tab;
+        }
+
+        #endregion
 
         #region Tab moving
 
