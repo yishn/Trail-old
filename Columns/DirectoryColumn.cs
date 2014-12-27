@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Threading;
 using Trail.Helpers;
 using Trail.DataTypes;
+using Trail.Actions;
 
 namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
@@ -52,12 +53,20 @@ namespace Trail.Columns {
         }
 
         private void ListViewControl_DragOver(object sender, DragEventArgs e) {
-            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) {
-                e.Effect = DragDropEffects.None;
-                return;
-            }
+            e.Effect = DragDropEffects.None;
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
 
-            // string[] items = e.Data.GetData(DataFormats.FileDrop) as string[];
+            string[] items = e.Data.GetData(DataFormats.FileDrop) as string[];
+            if (items.All(x => {
+                if (File.Exists(x)) {
+                    return new FileInfo(x).Directory.FullName == Directory.FullName;
+                } else if (System.IO.Directory.Exists(x)) {
+                    return new DirectoryInfo(x).Parent.FullName == Directory.FullName;
+                }
+
+                return true;
+            })) return;
+
             e.Effect = DragDropEffects.Copy;
         }
 
@@ -65,6 +74,7 @@ namespace Trail.Columns {
             if (e.Effect != DragDropEffects.Copy) return;
 
             string[] items = e.Data.GetData(DataFormats.FileDrop) as string[];
+            Host.EnqueueAction(new FilesCopyAction(items, this.Directory));
         }
 
         #endregion

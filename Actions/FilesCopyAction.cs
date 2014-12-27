@@ -38,42 +38,51 @@ namespace Trail.Actions {
 
         private void preparation(CancellationToken token) {
             bool yesToAll = false;
-            ChoiceDialog dialog = new ChoiceDialog("Copy File", "Replace &All", "&Replace This File", "&Skip File", "&Cancel");
+            ChoiceDialog dialog = new ChoiceDialog("Copy Items", "Replace &All", "&Replace This Item", "&Skip Item", "&Cancel");
 
             foreach (string item in Items) {
                 token.ThrowIfCancellationRequested();
 
+                string name = "", newItem = "";
+                bool isDir = false, exists = false, newItemFileExists = false, newItemDirectoryExists = false;
+
                 if (File.Exists(item)) {
-                    string name = new FileInfo(item).Name;
-                    string newItem = Path.Combine(Destination.FullName, name);
-
-                    if (File.Exists(newItem) && !yesToAll) {
-                        DialogResult result = dialog.ShowDialog(
-                            "There is already a file named \"" + name + "\" at the destination."
-                        );
-
-                        if (result == DialogResult.No) continue;
-                        else if (result == DialogResult.Cancel) return;
-                        else if (result == DialogResult.OK) yesToAll = true;
-                    }
-
-                    enqueueItem(item, newItem, token);
+                    exists = true;
+                    name = new FileInfo(item).Name;
+                    newItem = Path.Combine(Destination.FullName, name);
+                    isDir = false;
                 } else if (Directory.Exists(item)) {
-                    string name = new DirectoryInfo(item).Name;
-                    string newItem = Path.Combine(Destination.FullName, name);
-
-                    if (Directory.Exists(newItem) && !yesToAll) {
-                        DialogResult result = dialog.ShowDialog(
-                            "There is already a directory named \"" + name + "\" at the destination."
-                        );
-
-                        if (result == DialogResult.No) continue;
-                        else if (result == DialogResult.Cancel) return;
-                        else if (result == DialogResult.OK) yesToAll = true;
-                    }
-
-                    enqueueItem(item, newItem, token);
+                    exists = true;
+                    name = new DirectoryInfo(item).Name;
+                    newItem = Path.Combine(Destination.FullName, name);
+                    isDir = true;
                 }
+
+                if (!exists) continue;
+
+                newItemFileExists = File.Exists(newItem);
+                newItemDirectoryExists = Directory.Exists(newItem);
+
+                if (!isDir && newItemDirectoryExists || isDir && newItemFileExists) {
+                    // Something went really wrong, do something!
+                    continue;
+                }
+
+                if (item == newItem) continue;
+
+                if ((newItemFileExists || newItemDirectoryExists) && !yesToAll) {
+                    DialogResult result = dialog.ShowDialog(
+                        "There is already a " 
+                        + (newItemFileExists ? "file" : "directory") 
+                        + " named \"" + name + "\" at the destination."
+                    );
+
+                    if (result == DialogResult.No) continue;
+                    else if (result == DialogResult.Cancel) return;
+                    else if (result == DialogResult.OK) yesToAll = true;
+                }
+
+                enqueueItem(item, newItem, token);
             }
         }
 
