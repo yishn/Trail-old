@@ -56,6 +56,10 @@ namespace Trail.Controls {
             changedSelection = true;
         }
 
+        private void ListViewControl_MouseLeave(object sender, EventArgs e) {
+            changedSelection = false;
+        }
+
         private void ListViewControl_ItemActivate(object sender, EventArgs e) {
             if (ListViewControl.SelectedItems.Count != 1) return;
             if (OneItemSelected != null) OneItemSelected(this, ListViewControl.SelectedItems[0]);
