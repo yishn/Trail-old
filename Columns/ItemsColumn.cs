@@ -61,7 +61,7 @@ namespace Trail.Columns {
                 ListViewControl.Items.AddRange(result.ToArray());
                 ListViewControl.Sort();
                 UpdateColumnWidth();
-            } catch(OperationCanceledException) {
+            } catch (OperationCanceledException) {
                 // Do nothing
             } catch (ShowErrorException ex) {
                 this.ShowError = true;
