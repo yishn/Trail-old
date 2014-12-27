@@ -111,11 +111,15 @@ namespace Trail {
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e) {
             NavigatingTab t = new NavigatingTab(new DirectoryColumn(Persistence.PersistenceFolder, this));
             if (tabBar.AddTab(t)) tabBar.CurrentTab = t;
+            t.ColumnView.Columns[0].Focus();
+            t.ColumnView.ScrollToLastColumn();
         }
 
         private void duplicateTabToolStripMenuItem_Click(object sender, EventArgs e) {
             NavigatingTab t = new NavigatingTab(tabBar.CurrentTab.ColumnView.LastColumn.Duplicate());
             if (tabBar.AddTab(t)) tabBar.CurrentTab = t;
+            t.ColumnView.Columns[0].Focus();
+            t.ColumnView.ScrollToLastColumn();
         }
 
         private void goToLocationToolStripMenuItem_Click(object sender, EventArgs e) {
