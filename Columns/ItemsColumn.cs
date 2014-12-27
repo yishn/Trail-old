@@ -53,7 +53,7 @@ namespace Trail.Columns {
             try {
                 cancellation = new CancellationTokenSource();
 
-                List<ColumnListViewItem> result = await Task.Run<List<ColumnListViewItem>>(() => {
+                List<ColumnListViewItem> result = await Task<List<ColumnListViewItem>>.Run(() => {
                     return loadData(cancellation.Token);
                 });
 
@@ -63,7 +63,7 @@ namespace Trail.Columns {
                 UpdateColumnWidth();
             } catch(OperationCanceledException) {
                 // Do nothing
-            } catch (Exception ex) {
+            } catch (ShowErrorException ex) {
                 this.ShowError = true;
                 this.ErrorText = ex.Message;
             }

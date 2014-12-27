@@ -12,6 +12,7 @@ using Trail.Controls;
 using Trail.Modules;
 using Trail.Helpers;
 using System.Threading;
+using System.Security;
 
 namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
@@ -111,39 +112,47 @@ namespace Trail.Columns {
         }
 
         protected override List<ColumnListViewItem> loadData(CancellationToken token) {
-            List<ColumnListViewItem> result = new List<ColumnListViewItem>();
-            List<string> patterns = Persistence.GetPreferenceList("directorycolumn.directory_exclude_patterns");
+            try {
+                List<ColumnListViewItem> result = new List<ColumnListViewItem>();
+                List<string> patterns = Persistence.GetPreferenceList("directorycolumn.directory_exclude_patterns");
 
-            foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
-                token.ThrowIfCancellationRequested();
-                if (patterns.Any(x => dI.FullName.MatchesPattern(x))) continue;
+                foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
+                    token.ThrowIfCancellationRequested();
+                    if (patterns.Any(x => dI.FullName.MatchesPattern(x))) continue;
 
-                result.Add(new ColumnListViewItem() {
-                    SubColumn = new DirectoryColumn(dI),
-                    Text = dI.Name,
-                    Tag = dI,
-                    ImageKey = ".folder"
-                });
+                    result.Add(new ColumnListViewItem() {
+                        SubColumn = new DirectoryColumn(dI),
+                        Text = dI.Name,
+                        Tag = dI,
+                        ImageKey = ".folder"
+                    });
+                }
+
+                patterns = Persistence.GetPreferenceList("directorycolumn.file_exclude_patterns");
+
+                foreach (FileInfo fI in this.Directory.GetFiles()) {
+                    token.ThrowIfCancellationRequested();
+                    if (patterns.Any(x => fI.FullName.MatchesPattern(x))) continue;
+
+                    ColumnListViewItem item = new ColumnListViewItem() {
+                        Text = fI.Name,
+                        Tag = fI,
+                    };
+                    item.ImageKey = getImageKey(item);
+                    result.Add(item);
+                }
+
+                watcher.Path = Directory.FullName;
+                watcher.EnableRaisingEvents = true;
+
+                return result;
+            } catch (DirectoryNotFoundException) {
+                throw new ShowErrorException("Directory not found.");
+            } catch (UnauthorizedAccessException) {
+                throw new ShowErrorException("You have no permissions to access this directory.");
+            } catch (PathTooLongException) {
+                throw new ShowErrorException("Path is too long.");
             }
-
-            patterns = Persistence.GetPreferenceList("directorycolumn.file_exclude_patterns");
-
-            foreach (FileInfo fI in this.Directory.GetFiles()) {
-                token.ThrowIfCancellationRequested();
-                if (patterns.Any(x => fI.FullName.MatchesPattern(x))) continue;
-  
-                ColumnListViewItem item = new ColumnListViewItem() {
-                    Text = fI.Name,
-                    Tag = fI,
-                };
-                item.ImageKey = getImageKey(item);
-                result.Add(item);
-            }
-
-            watcher.Path = Directory.FullName;
-            watcher.EnableRaisingEvents = true;
-
-            return result;
         }
 
         public override string GetHeaderText() {

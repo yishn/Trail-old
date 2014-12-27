@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Actions\FilesCopyAction.cs" />
     <Compile Include="Actions\IAction.cs" />
+    <Compile Include="Columns\ShowErrorException.cs" />
     <Compile Include="Modules\ItemsActionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
