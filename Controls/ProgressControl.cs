@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Trail.Controls {
-    public partial class ActionProgressControl : UserControl {
+    public partial class ProgressControl : UserControl {
         private int progress = 0;
 
         public string HeaderText { get { return headerLabel.Text; } set { headerLabel.Text = value; } }
@@ -19,7 +19,7 @@ namespace Trail.Controls {
 
         public event EventHandler CancelButtonClicked;
 
-        public ActionProgressControl() {
+        public ProgressControl() {
             InitializeComponent();
         }
 

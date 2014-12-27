@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Controls;
 using Trail.DataTypes;
-using Trail.Modules;
 
 namespace Trail.Columns {
     public abstract class ItemsColumn : ColumnControl {

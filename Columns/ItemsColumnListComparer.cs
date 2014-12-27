@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Trail.Controls;
 
-namespace Trail.Modules {
+namespace Trail.Columns {
     public class ItemsColumnListComparer : IComparer {
         public int Compare(object x, object y) {
             ColumnListViewItem item1 = (ColumnListViewItem)x;

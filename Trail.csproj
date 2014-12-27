@@ -50,14 +50,14 @@
     <Compile Include="Actions\FilesCopyAction.cs" />
     <Compile Include="Actions\IAction.cs" />
     <Compile Include="Columns\ShowErrorException.cs" />
-    <Compile Include="Modules\ItemsActionControl.cs">
+    <Compile Include="Modules\ActionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ActionProgressControl.cs">
+    <Compile Include="Controls\ProgressControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ActionProgressControl.Designer.cs">
-      <DependentUpon>ActionProgressControl.cs</DependentUpon>
+    <Compile Include="Controls\ProgressControl.Designer.cs">
+      <DependentUpon>ProgressControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ChoiceDialog.cs">
       <SubType>Form</SubType>
@@ -114,7 +114,7 @@
     <Compile Include="Modules\ActionQueueList.Designer.cs">
       <DependentUpon>ActionQueueList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\ColumnListViewItem.cs" />
+    <Compile Include="Columns\ColumnListViewItem.cs" />
     <Compile Include="Modules\ColumnTreeNode.cs" />
     <Compile Include="Controls\ColumnView.cs">
       <SubType>UserControl</SubType>
@@ -140,7 +140,7 @@
     <Compile Include="Controls\TabBar.Designer.cs">
       <DependentUpon>TabBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\ItemsColumnListComparer.cs" />
+    <Compile Include="Columns\ItemsColumnListComparer.cs" />
     <Compile Include="Controls\ListViewModern.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -178,8 +178,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\ActionProgressControl.resx">
-      <DependentUpon>ActionProgressControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ProgressControl.resx">
+      <DependentUpon>ProgressControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ChoiceDialog.resx">
       <DependentUpon>ChoiceDialog.cs</DependentUpon>

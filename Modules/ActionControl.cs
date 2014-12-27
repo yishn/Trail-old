@@ -10,7 +10,7 @@ using Trail.Controls;
 using Trail.Fx;
 
 namespace Trail.Modules {
-    public class ItemsActionControl : ActionProgressControl {
+    public class ActionControl : ProgressControl {
         private IntAnimation progressAnimation = new IntAnimation();
         private CancellationTokenSource cancellation;
 
@@ -19,7 +19,7 @@ namespace Trail.Modules {
 
         public event EventHandler Completed;
 
-        public ItemsActionControl(IAction action) {
+        public ActionControl(IAction action) {
             this.Action = action;
             this.HeaderText = action.HeaderText;
             this.DescriptionText = "Waiting in queue...";

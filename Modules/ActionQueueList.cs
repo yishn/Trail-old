@@ -17,17 +17,17 @@ namespace Trail.Modules {
     public partial class ActionQueueList : UserControl {
         private IntAnimation animation = new IntAnimation();
 
-        public ObservableCollection<ItemsActionControl> Items { get; private set; }
+        public ObservableCollection<ActionControl> Items { get; private set; }
 
         public ActionQueueList() {
             InitializeComponent();
             this.Height = 0;
-            this.Items = new ObservableCollection<ItemsActionControl>();
+            this.Items = new ObservableCollection<ActionControl>();
 
             Items.CollectionChanged += ActionProgressControls_CollectionChanged;
         }
 
-        public bool EnqueueAction(ItemsActionControl action) {
+        public bool EnqueueAction(ActionControl action) {
             this.Items.Add(action);
             if (this.Items.Count == 1) action.Start();
             return true;
@@ -36,7 +36,7 @@ namespace Trail.Modules {
         public void UpdateSize() {
             if (animation.Enabled) animation.Stop();
 
-            int end = Math.Min(this.Items.Count, 3) * new ActionProgressControl().Height;
+            int end = Math.Min(this.Items.Count, 3) * new ProgressControl().Height;
             if (end != 0) end += headerLabel.Height;
 
             animation = new IntAnimation();
@@ -51,13 +51,13 @@ namespace Trail.Modules {
 
         private void ActionProgressControls_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             if (e.Action == NotifyCollectionChangedAction.Add) {
-                foreach (ItemsActionControl c in e.NewItems) {
+                foreach (ActionControl c in e.NewItems) {
                     actionsList.Controls.Add(c);
 
                     c.Completed += Action_Completed;
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Remove) {
-                foreach (ItemsActionControl c in e.OldItems) {
+                foreach (ActionControl c in e.OldItems) {
                     actionsList.Controls.Remove(c);
                 }
             } else if (e.Action == NotifyCollectionChangedAction.Reset) {
@@ -68,7 +68,7 @@ namespace Trail.Modules {
         }
 
         private void Action_Completed(object sender, EventArgs e) {
-            this.Items.Remove(sender as ItemsActionControl);
+            this.Items.Remove(sender as ActionControl);
             if (this.Items.Count > 0) this.Items[0].Start();
         }
     }
