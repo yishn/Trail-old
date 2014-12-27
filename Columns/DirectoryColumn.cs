@@ -27,7 +27,7 @@ namespace Trail.Columns {
 
             this.ItemActivate += DirectoryColumn_ItemActivate;
             this.ListViewControl.ItemDrag += ListViewControl_ItemDrag;
-            this.ListViewControl.DragOver += ListViewControl_DragOver;
+            this.ListViewControl.DragEnter += ListViewControl_DragEnter;
             this.ListViewControl.DragDrop += ListViewControl_DragDrop;
 
             watcher.Created += watcher_Created;
@@ -52,7 +52,7 @@ namespace Trail.Columns {
             ListViewControl.DoDragDrop(new DataObject(DataFormats.FileDrop, items), DragDropEffects.Copy);
         }
 
-        private void ListViewControl_DragOver(object sender, DragEventArgs e) {
+        private void ListViewControl_DragEnter(object sender, DragEventArgs e) {
             e.Effect = DragDropEffects.None;
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
 
