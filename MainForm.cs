@@ -71,7 +71,7 @@ namespace Trail {
         }
 
         private void tabBar_AddButtonClicked(object sender, EventArgs e) {
-            NavigatingTab t = new NavigatingTab(new EmptyColumn());
+            NavigatingTab t = new NavigatingTab(new EmptyColumn(Persistence.GetInstance()));
             if (tabBar.AddTab(t)) tabBar.CurrentTab = t;
         }
 
@@ -114,7 +114,7 @@ namespace Trail {
         }
 
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e) {
-            NavigatingTab t = new NavigatingTab(new DirectoryColumn(Persistence.PersistenceFolder));
+            NavigatingTab t = new NavigatingTab(new DirectoryColumn(Persistence.PersistenceFolder, Persistence.GetInstance()));
             if (tabBar.AddTab(t)) tabBar.CurrentTab = t;
         }
 
@@ -132,7 +132,7 @@ namespace Trail {
             form.Show();
 
             form.AcceptButtonClicked += (_, evt) => {
-                tabBar.CurrentTab.ColumnView.NavigateTo(new DirectoryColumn(form.ItemsPath));
+                tabBar.CurrentTab.ColumnView.NavigateTo(new DirectoryColumn(form.ItemsPath, Persistence.GetInstance()));
                 tabBar.CurrentTab.ColumnView.Columns[0].Focus();
                 tabBar.CurrentTab.ColumnView.ScrollToLastColumn();
             };

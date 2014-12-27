@@ -50,6 +50,7 @@
     <Compile Include="Actions\FilesCopyAction.cs" />
     <Compile Include="Actions\IAction.cs" />
     <Compile Include="Columns\ShowErrorException.cs" />
+    <Compile Include="DataTypes\IPersistence.cs" />
     <Compile Include="Modules\ActionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

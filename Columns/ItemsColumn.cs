@@ -15,15 +15,17 @@ namespace Trail.Columns {
     public abstract class ItemsColumn : ColumnControl {
         private CancellationTokenSource cancellation;
 
+        public IPersistence Persistence { get; private set; }
         public string ItemsPath { get; private set; }
         public bool IsBusy { get; private set; }
 
         public event EventHandler LoadingCompleted;
         public event EventHandler<ColumnListViewItem> ItemActivate;
 
-        public ItemsColumn(string itemsPath) {
+        public ItemsColumn(string itemsPath, IPersistence persistence) {
             this.ItemsPath = itemsPath;
             this.HeaderText = "";
+            this.Persistence = persistence;
 
             this.ListViewControl.ItemActivate += ListViewControl_ItemActivate;
             this.ListViewControl.ListViewItemSorter = new ItemsColumnListComparer();

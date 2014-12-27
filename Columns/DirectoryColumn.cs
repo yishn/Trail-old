@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Trail.Controls;
-using Trail.Modules;
-using Trail.Helpers;
 using System.Threading;
-using System.Security;
+using Trail.Helpers;
+using Trail.DataTypes;
 
 namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
@@ -20,8 +15,8 @@ namespace Trail.Columns {
 
         public DirectoryInfo Directory { get; private set; }
 
-        public DirectoryColumn(string itemsPath) : this(new DirectoryInfo(itemsPath)) { }
-        public DirectoryColumn(DirectoryInfo directory) : base(directory.FullName) {
+        public DirectoryColumn(string itemsPath, IPersistence persistence) : this(new DirectoryInfo(itemsPath), persistence) { }
+        public DirectoryColumn(DirectoryInfo directory, IPersistence persistence) : base(directory.FullName, persistence) {
             this.Directory = directory;
             this.ListViewControl.AllowDrop = true;
 
@@ -74,7 +69,7 @@ namespace Trail.Columns {
                 Tag = isDir ? new DirectoryInfo(e.FullPath) as object : new FileInfo(e.FullPath) as object
             };
             item.ImageKey = getImageKey(item);
-            if (isDir) item.SubColumn = new DirectoryColumn(item.Tag as DirectoryInfo);
+            if (isDir) item.SubColumn = new DirectoryColumn(item.Tag as DirectoryInfo, Persistence);
 
             ListViewControl.Items.Add(item);
             ListViewControl.Sort();
@@ -121,7 +116,7 @@ namespace Trail.Columns {
                     if (patterns.Any(x => dI.FullName.MatchesPattern(x))) continue;
 
                     result.Add(new ColumnListViewItem() {
-                        SubColumn = new DirectoryColumn(dI),
+                        SubColumn = new DirectoryColumn(dI, Persistence),
                         Text = dI.Name,
                         Tag = dI,
                         ImageKey = ".folder"
@@ -180,7 +175,7 @@ namespace Trail.Columns {
 
             while (current.Root.FullName != current.FullName) {
                 current = current.Parent;
-                trail.Add(new DirectoryColumn(current));
+                trail.Add(new DirectoryColumn(current, Persistence));
             }
 
             trail.Reverse();
@@ -188,7 +183,7 @@ namespace Trail.Columns {
         }
 
         public override ItemsColumn Duplicate() {
-            return new DirectoryColumn(this.Directory);
+            return new DirectoryColumn(this.Directory, Persistence);
         }
     }
 }

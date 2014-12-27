@@ -17,9 +17,9 @@ namespace Trail.DataTypes {
             this.Path = path;
         }
 
-        public ItemsColumn Instantiation() {
+        public ItemsColumn Instantiation(IPersistence persistence) {
             Type type = Type.GetType(this.ColumnType);
-            return Activator.CreateInstance(type, this.Path) as ItemsColumn;
+            return Activator.CreateInstance(type, this.Path, persistence) as ItemsColumn;
         }
     }
 }

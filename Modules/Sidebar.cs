@@ -48,11 +48,11 @@ namespace Trail.Modules {
                 node2
             });
 
-            LoadDrives();
+            LoadDevices();
             LoadFavorites();
         }
 
-        public void LoadDrives() {
+        public void LoadDevices() {
             TreeNode drives = this.Nodes["devices"];
             drives.Nodes.Clear();
 
@@ -61,7 +61,7 @@ namespace Trail.Modules {
 
                 ColumnTreeNode node = new ColumnTreeNode() {
                     Tag = dI,
-                    SubColumn = new DirectoryColumn(dI.RootDirectory),
+                    SubColumn = new DirectoryColumn(dI.RootDirectory, Persistence.GetInstance()),
                     ImageKey = dI.DriveType == DriveType.CDRom ? "disc" :
                         dI.DriveType == DriveType.Network ? "network" :
                         dI.DriveType == DriveType.Removable ? "removable" :
@@ -81,7 +81,7 @@ namespace Trail.Modules {
             favorites.Nodes.Clear();
 
             foreach (ColumnData item in Persistence.FavoriteItems) {
-                ItemsColumn column = item.Instantiation();
+                ItemsColumn column = item.Instantiation(Persistence.GetInstance());
 
                 ColumnTreeNode node = new ColumnTreeNode() {
                     Text = column.GetHeaderText(),

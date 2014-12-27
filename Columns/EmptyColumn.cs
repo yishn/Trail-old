@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
-using Trail.Modules;
+using Trail.DataTypes;
 
 namespace Trail.Columns {
     public class EmptyColumn : ItemsColumn {
-        public EmptyColumn() : base("") {
+        public EmptyColumn(IPersistence persistence) : base("", persistence) {
             this.ListViewControl.Visible = false;
         }
-        public EmptyColumn(string itemsPath) : this() { }
+        public EmptyColumn(string itemsPath, IPersistence persistence) : this(persistence) { }
 
         protected override List<ColumnListViewItem> loadData(CancellationToken token) {
             return new List<ColumnListViewItem>();
         }
 
         public override ItemsColumn Duplicate() {
-            return new EmptyColumn();
+            return new EmptyColumn(this.Persistence);
         }
 
         public override string GetHeaderText() {

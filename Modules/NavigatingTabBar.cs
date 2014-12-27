@@ -48,7 +48,7 @@ namespace Trail.Modules {
             this.Tabs.Clear();
 
             foreach (ColumnData data in Persistence.Session) {
-                ItemsColumn column = data.Instantiation();
+                ItemsColumn column = data.Instantiation(Persistence.GetInstance());
                 NavigatingTab tab = new NavigatingTab(column);
                 this.Tabs.Add(tab);
             }
