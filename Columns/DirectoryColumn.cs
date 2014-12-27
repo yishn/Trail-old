@@ -26,6 +26,8 @@ namespace Trail.Columns {
 
             this.ItemActivate += DirectoryColumn_ItemActivate;
             this.ListViewControl.ItemDrag += ListViewControl_ItemDrag;
+            this.ListViewControl.DragOver += ListViewControl_DragOver;
+            this.ListViewControl.DragDrop += ListViewControl_DragDrop;
 
             watcher.Created += watcher_Created;
             watcher.Deleted += watcher_Deleted;
@@ -35,7 +37,7 @@ namespace Trail.Columns {
         #region Drag & Drop
 
         private void ListViewControl_ItemDrag(object sender, ItemDragEventArgs e) {
-            string[] files = new string[ListViewControl.SelectedItems.Count];
+            string[] items = new string[ListViewControl.SelectedItems.Count];
             int i = 0;
 
             foreach (ColumnListViewItem item in ListViewControl.SelectedItems) {
@@ -43,10 +45,26 @@ namespace Trail.Columns {
                 if (item.Tag is DirectoryInfo) path = (item.Tag as DirectoryInfo).FullName;
                 else path = (item.Tag as FileInfo).FullName;
 
-                files[i++] = path;
+                items[i++] = path;
             }
 
-            ListViewControl.DoDragDrop(new DataObject(DataFormats.FileDrop, files), DragDropEffects.Copy);
+            ListViewControl.DoDragDrop(new DataObject(DataFormats.FileDrop, items), DragDropEffects.Copy);
+        }
+
+        private void ListViewControl_DragOver(object sender, DragEventArgs e) {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) {
+                e.Effect = DragDropEffects.None;
+                return;
+            }
+
+            // string[] items = e.Data.GetData(DataFormats.FileDrop) as string[];
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void ListViewControl_DragDrop(object sender, DragEventArgs e) {
+            if (e.Effect != DragDropEffects.Copy) return;
+
+            string[] items = e.Data.GetData(DataFormats.FileDrop) as string[];
         }
 
         #endregion
