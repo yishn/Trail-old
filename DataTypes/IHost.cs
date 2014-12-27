@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Trail.Actions;
 
 namespace Trail.DataTypes {
     public interface IHost {
@@ -11,5 +12,7 @@ namespace Trail.DataTypes {
         T GetPreference<T>(string key);
         List<string> GetPreferenceList(string key);
         List<T> GetPreferenceList<T>(string key);
+
+        void EnqueueAction(IAction action);
     }
 }

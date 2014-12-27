@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Drawing;
 using System.Windows.Forms;
+using Trail.Actions;
 using Trail.Columns;
 using Trail.Controls;
 using Trail.DataTypes;
@@ -71,6 +72,7 @@ namespace Trail {
         #region Update preferences
 
         private void MainForm_ResizeEnd(object sender, EventArgs e) {
+            if (this.WindowState != FormWindowState.Normal) return;
             if (!Persistence.GetPreference<bool>("window.remember_size")) return;
             Persistence.SetPreference("window.size", new List<object>(new object[] { this.Width, this.Height }));
         }
@@ -181,6 +183,10 @@ namespace Trail {
 
         List<T> IHost.GetPreferenceList<T>(string key) {
             return Persistence.GetPreferenceList<T>(key);
+        }
+
+        void IHost.EnqueueAction(IAction action) {
+            actionQueueList.EnqueueAction(new ActionControl(action));
         }
 
         #endregion
