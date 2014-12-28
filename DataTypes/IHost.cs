@@ -6,7 +6,8 @@ using Trail.Columns;
 namespace Trail.DataTypes {
     public interface IHost {
         Dictionary<Tuple<string, string>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> DragDropHandlers { get; }
-        
+
+        void CreatePreference(string key, object value);
         void SetPreference(string key, object value);
         string GetPreference(string key);
         T GetPreference<T>(string key);
