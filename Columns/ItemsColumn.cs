@@ -83,6 +83,8 @@ namespace Trail.Columns {
             return GetColumnData().Instantiation(Host);
         }
 
+        #region Drag & Drop
+
         private void ListViewControl_DragEnter(object sender, DragEventArgs e) {
             e.Effect = DragDropEffects.None;
             if (!e.Data.GetDataPresent(typeof(DragDropData))) return;
@@ -102,6 +104,10 @@ namespace Trail.Columns {
             Host.DragDropHandlers[data.GetDragDropHandlerKey()].Invoke(data.SourceColumn, this, data.Items);
         }
 
+        #endregion
+
+        #region Events
+
         private void ListViewControl_ItemActivate(object sender, EventArgs e) {
             OnItemActivate(ListViewControl.SelectedItems[0] as ColumnListViewItem);
         }
@@ -113,5 +119,7 @@ namespace Trail.Columns {
         protected virtual void OnItemActivate(ColumnListViewItem item) {
             if (ItemActivate != null) ItemActivate(this, item);
         }
+
+        #endregion
     }
 }
