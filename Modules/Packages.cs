@@ -7,7 +7,7 @@ using Trail.Columns;
 
 namespace Trail.Modules {
     public static class Packages {
-        public static Dictionary<Tuple<string, string>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> DragDropHandlers
-            = new Dictionary<Tuple<string, string>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>>();
+        public static Dictionary<Tuple<Type, Type>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> DragDropHandlers
+            = new Dictionary<Tuple<Type, Type>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>>();
     }
 }

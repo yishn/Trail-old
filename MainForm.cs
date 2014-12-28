@@ -169,7 +169,7 @@ namespace Trail {
 
         #region IHost implementation
 
-        Dictionary<Tuple<string, string>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> IHost.DragDropHandlers {
+        Dictionary<Tuple<Type, Type>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> IHost.DragDropHandlers {
             get { return Packages.DragDropHandlers; }
         }
 

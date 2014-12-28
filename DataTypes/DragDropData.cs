@@ -17,8 +17,8 @@ namespace Trail.DataTypes {
             this.Items = items;
         }
 
-        public Tuple<string, string> GetDragDropHandlerKey() {
-            return new Tuple<string, string>(SourceColumn.GetType().FullName, DestinationColumnType.FullName);
+        public Tuple<Type, Type> GetDragDropHandlerKey() {
+            return new Tuple<Type, Type>(SourceColumn.GetType(), DestinationColumnType);
         }
     }
 }
