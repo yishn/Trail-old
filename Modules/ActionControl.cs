@@ -31,18 +31,7 @@ namespace Trail.Modules {
             if (this.IsBusy) return;
             this.IsBusy = true;
 
-            IProgress<Tuple<int, string>> progress = new Progress<Tuple<int, string>>(t => {
-                if (!progressAnimation.Enabled || t.Item1 == 100 || t.Item1 == 0) {
-                    progressAnimation.Stop();
-                    progressAnimation = new IntAnimation();
-                    progressAnimation.Start(this.Progress, t.Item1).Tick += (_, value) => {
-                        this.Progress = value;
-                    };
-                }
-
-                if (t.Item2 != null) this.DescriptionText = t.Item2;
-            });
-
+            IProgress<Tuple<int, string>> progress = new Progress<Tuple<int, string>>(updateProgress);
             cancellation = new CancellationTokenSource();
 
             await Task.Run(() => {
@@ -64,6 +53,18 @@ namespace Trail.Modules {
 
         public void Cancel() {
             if (cancellation != null) cancellation.Cancel();
+        }
+
+        private void updateProgress(Tuple<int, string> t) {
+            if (!progressAnimation.Enabled || t.Item1 == 100 || t.Item1 == 0) {
+                progressAnimation.Stop();
+                progressAnimation = new IntAnimation();
+                progressAnimation.Start(this.Progress, t.Item1).Tick += (_, value) => {
+                    this.Progress = value;
+                };
+            }
+
+            if (t.Item2 != null) this.DescriptionText = t.Item2;
         }
 
         private void ItemsAction_CancelButtonClicked(object sender, EventArgs e) {
