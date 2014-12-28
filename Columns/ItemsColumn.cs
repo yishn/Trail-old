@@ -83,6 +83,18 @@ namespace Trail.Columns {
             return GetColumnData().Instantiation(Host);
         }
 
+        public void Filter(string filter) {
+            this.ListViewControl.BeginUpdate();
+
+            foreach(ListViewItem item in ListViewControl.Items) {
+                item.ForeColor = item.Text.Contains(filter) ? Color.Black : Color.Gray;
+            }
+            (ListViewControl.ListViewItemSorter as ItemsColumnListComparer).Filter = filter;
+            ListViewControl.Sort();
+
+            this.ListViewControl.EndUpdate();
+        }
+
         #region Drag & Drop
 
         private void ListViewControl_DragEnter(object sender, DragEventArgs e) {
