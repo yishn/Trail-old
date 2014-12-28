@@ -67,15 +67,15 @@
             // 
             this.sidebarImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("sidebarImages.ImageStream")));
             this.sidebarImages.TransparentColor = System.Drawing.Color.Transparent;
-            this.sidebarImages.Images.SetKeyName(0, "folder");
-            this.sidebarImages.Images.SetKeyName(1, "bookmarks");
-            this.sidebarImages.Images.SetKeyName(2, "devices");
-            this.sidebarImages.Images.SetKeyName(3, "drive");
-            this.sidebarImages.Images.SetKeyName(4, "disc");
-            this.sidebarImages.Images.SetKeyName(5, "network");
-            this.sidebarImages.Images.SetKeyName(6, "removable");
-            this.sidebarImages.Images.SetKeyName(7, "unknown");
-            this.sidebarImages.Images.SetKeyName(8, "favorites");
+            this.sidebarImages.Images.SetKeyName(0, "bookmarks");
+            this.sidebarImages.Images.SetKeyName(1, "devices");
+            this.sidebarImages.Images.SetKeyName(2, "favorites");
+            this.sidebarImages.Images.SetKeyName(3, "folder");
+            this.sidebarImages.Images.SetKeyName(4, "unknown");
+            this.sidebarImages.Images.SetKeyName(5, "drive");
+            this.sidebarImages.Images.SetKeyName(6, "disc");
+            this.sidebarImages.Images.SetKeyName(7, "network");
+            this.sidebarImages.Images.SetKeyName(8, "removable");
             // 
             // itemsImages
             // 
@@ -314,6 +314,7 @@
             // 
             // sidebar
             // 
+            this.sidebar.AllowDrop = true;
             this.sidebar.BackColor = System.Drawing.SystemColors.Control;
             this.sidebar.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Fill;
