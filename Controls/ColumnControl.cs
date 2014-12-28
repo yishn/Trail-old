@@ -48,7 +48,7 @@ namespace Trail.Controls {
             if (e.Button != MouseButtons.Left || !changedSelection) return;
             if (ListViewControl.SelectedItems.Count != 1) return;
 
-            if (OneItemSelected != null) OneItemSelected(this, ListViewControl.SelectedItems[0]);
+            OnOneItemSelected(ListViewControl.SelectedItems[0]);
             changedSelection = false;
         }
 
@@ -62,7 +62,11 @@ namespace Trail.Controls {
 
         private void ListViewControl_ItemActivate(object sender, EventArgs e) {
             if (ListViewControl.SelectedItems.Count != 1) return;
-            if (OneItemSelected != null) OneItemSelected(this, ListViewControl.SelectedItems[0]);
+            OnOneItemSelected(ListViewControl.SelectedItems[0]);
+        }
+
+        protected virtual void OnOneItemSelected(ListViewItem e) {
+            if (OneItemSelected != null) OneItemSelected(this, e);
         }
 
         #endregion
