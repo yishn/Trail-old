@@ -19,7 +19,6 @@ namespace Trail.Columns {
         public DirectoryColumn(string itemsPath, IHost host) : this(new DirectoryInfo(itemsPath), host) { }
         public DirectoryColumn(DirectoryInfo directory, IHost host) : base(directory.FullName, host) {
             this.Directory = directory;
-            this.ListViewControl.AllowDrop = true;
 
             watcher.IncludeSubdirectories = false;
             watcher.EnableRaisingEvents = false;

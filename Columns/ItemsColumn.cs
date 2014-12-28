@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Trail.Controls;
 using Trail.DataTypes;
 
@@ -21,9 +22,12 @@ namespace Trail.Columns {
             this.ItemsPath = itemsPath;
             this.HeaderText = "";
             this.Host = host;
+            this.ListViewControl.AllowDrop = true;
 
             this.ListViewControl.ItemActivate += ListViewControl_ItemActivate;
             this.ListViewControl.ListViewItemSorter = new ItemsColumnListComparer();
+            this.ListViewControl.DragEnter += ListViewControl_DragEnter;
+            this.ListViewControl.DragDrop += ListViewControl_DragDrop;
         }
 
         protected abstract List<ColumnListViewItem> loadData(CancellationToken token);
@@ -77,6 +81,25 @@ namespace Trail.Columns {
 
         public ItemsColumn Duplicate() {
             return GetColumnData().Instantiation(Host);
+        }
+
+        private void ListViewControl_DragEnter(object sender, DragEventArgs e) {
+            e.Effect = DragDropEffects.None;
+            if (!e.Data.GetDataPresent(typeof(DragDropData))) return;
+
+            DragDropData data = e.Data.GetData(typeof(DragDropData)) as DragDropData;
+            if (data.DestinationColumnType != this.GetType()) return;
+            if (!Host.DragDropHandlers.ContainsKey(data.GetDragDropHandlerKey())) return;
+
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void ListViewControl_DragDrop(object sender, DragEventArgs e) {
+            if (e.Effect != DragDropEffects.Copy) return;
+            if (!e.Data.GetDataPresent(typeof(DragDropData))) return;
+
+            DragDropData data = e.Data.GetData(typeof(DragDropData)) as DragDropData;
+            Host.DragDropHandlers[data.GetDragDropHandlerKey()].Invoke(data.SourceColumn, this, data.Items);
         }
 
         private void ListViewControl_ItemActivate(object sender, EventArgs e) {
