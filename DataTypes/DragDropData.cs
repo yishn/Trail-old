@@ -7,14 +7,18 @@ using Trail.Columns;
 
 namespace Trail.DataTypes {
     public class DragDropData {
-        public string SourceColumnType { get; set; }
-        public string DestinationColumnType { get; set; }
+        public ItemsColumn SourceColumn { get; set; }
+        public Type DestinationColumnType { get; set; }
         public ColumnListViewItem[] Items { get; set; }
 
-        public DragDropData(string srcColumnType, string destColumnType, ColumnListViewItem[] items) {
-            this.SourceColumnType = srcColumnType;
+        public DragDropData(ItemsColumn srcColumn, Type destColumnType, ColumnListViewItem[] items) {
+            this.SourceColumn = srcColumn;
             this.DestinationColumnType = destColumnType;
             this.Items = items;
+        }
+
+        public Tuple<string, string> GetDragDropHandlerKey() {
+            return new Tuple<string, string>(SourceColumn.GetType().FullName, DestinationColumnType.FullName);
         }
     }
 }
