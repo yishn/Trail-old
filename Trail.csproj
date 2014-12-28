@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="Actions\FilesCopyAction.cs" />
     <Compile Include="Actions\IAction.cs" />
-    <Compile Include="Columns\ShowErrorException.cs" />
+    <Compile Include="DataTypes\ShowErrorException.cs" />
     <Compile Include="DataTypes\DragDropData.cs" />
     <Compile Include="DataTypes\IHost.cs" />
     <Compile Include="Modules\ActionControl.cs">

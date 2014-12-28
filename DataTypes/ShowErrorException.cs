@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Trail.Columns {
+namespace Trail.DataTypes {
     public class ShowErrorException : Exception {
         public ShowErrorException(string message) : base(message) { }
     }
