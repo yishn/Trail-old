@@ -10,8 +10,6 @@ namespace Trail.DataTypes {
         public string ColumnType { get; set; }
         public string Path { get; set; }
 
-        public ColumnData() { }
-
         public ColumnData(string columnType, string path) {
             this.ColumnType = columnType;
             this.Path = path;
