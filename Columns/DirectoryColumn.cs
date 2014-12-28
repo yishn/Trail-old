@@ -52,7 +52,6 @@ namespace Trail.Columns {
         }
 
         private void ListViewControl_DragEnter(object sender, DragEventArgs e) {
-            e.Effect = DragDropEffects.None;
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
 
             string[] items = e.Data.GetData(DataFormats.FileDrop) as string[];
@@ -71,6 +70,7 @@ namespace Trail.Columns {
 
         private void ListViewControl_DragDrop(object sender, DragEventArgs e) {
             if (e.Effect != DragDropEffects.Copy) return;
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
 
             string[] items = e.Data.GetData(DataFormats.FileDrop) as string[];
             Host.EnqueueAction(new FilesCopyAction(items, this.Directory));
