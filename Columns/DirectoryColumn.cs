@@ -34,6 +34,82 @@ namespace Trail.Columns {
             watcher.Renamed += watcher_Renamed;
         }
 
+        protected override List<ColumnListViewItem> loadData(CancellationToken token) {
+            try {
+                List<ColumnListViewItem> result = new List<ColumnListViewItem>();
+                List<string> patterns = Host.GetPreferenceList("directorycolumn.directory_exclude_patterns");
+
+                foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
+                    token.ThrowIfCancellationRequested();
+                    if (patterns.Any(x => dI.FullName.MatchesPattern(x))) continue;
+
+                    result.Add(new ColumnListViewItem() {
+                        SubColumn = new ColumnData(this.GetType().FullName, dI.FullName),
+                        Text = dI.Name,
+                        Tag = dI,
+                        ImageKey = ".folder"
+                    });
+                }
+
+                patterns = Host.GetPreferenceList("directorycolumn.file_exclude_patterns");
+
+                foreach (FileInfo fI in this.Directory.GetFiles()) {
+                    token.ThrowIfCancellationRequested();
+                    if (patterns.Any(x => fI.FullName.MatchesPattern(x))) continue;
+
+                    ColumnListViewItem item = new ColumnListViewItem() {
+                        Text = fI.Name,
+                        Tag = fI,
+                    };
+                    item.ImageKey = getImageKey(item);
+                    result.Add(item);
+                }
+
+                watcher.Path = Directory.FullName;
+                watcher.EnableRaisingEvents = true;
+
+                return result;
+            } catch (DirectoryNotFoundException) {
+                throw new ShowErrorException("Directory not found.");
+            } catch (UnauthorizedAccessException) {
+                throw new ShowErrorException("You have no permissions to access this directory.");
+            } catch (PathTooLongException) {
+                throw new ShowErrorException("Path is too long.");
+            }
+        }
+
+        public override string GetHeaderText() {
+            if (Directory.Root.FullName == Directory.FullName) {
+                DriveInfo drive = new DriveInfo(Directory.FullName);
+                if (!drive.IsReady || drive.VolumeLabel.Trim() == "") return Directory.Name;
+                return drive.VolumeLabel + " (" + Directory.Name.Replace(Path.DirectorySeparatorChar, ')');
+            }
+            
+            return Directory.Name;
+        }
+
+        public override Image GetIcon(ColumnListViewItem item) {
+            if (item.Tag is DirectoryInfo) return base.GetIcon(item);
+            FileInfo fI = item.Tag as FileInfo;
+            return Etier.IconHelper.IconReader.GetFileIcon(fI.FullName, Etier.IconHelper.IconReader.IconSize.Small, false).ToBitmap();
+        }
+
+        public override List<ItemsColumn> GetTrail() {
+            if (!Directory.Exists) return base.GetTrail();
+
+            DirectoryInfo current = this.Directory;
+            List<ItemsColumn> trail = new List<ItemsColumn>();
+            trail.Add(this);
+
+            while (current.Root.FullName != current.FullName) {
+                current = current.Parent;
+                trail.Add(new DirectoryColumn(current, Host));
+            }
+
+            trail.Reverse();
+            return trail;
+        }
+
         #region Drag & Drop
 
         private void ListViewControl_ItemDrag(object sender, ItemDragEventArgs e) {
@@ -131,82 +207,6 @@ namespace Trail.Columns {
             if (patterns.Any(x => fI.Name.MatchesPattern(x))) return fI.FullName;
 
             return ext;
-        }
-
-        protected override List<ColumnListViewItem> loadData(CancellationToken token) {
-            try {
-                List<ColumnListViewItem> result = new List<ColumnListViewItem>();
-                List<string> patterns = Host.GetPreferenceList("directorycolumn.directory_exclude_patterns");
-
-                foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
-                    token.ThrowIfCancellationRequested();
-                    if (patterns.Any(x => dI.FullName.MatchesPattern(x))) continue;
-
-                    result.Add(new ColumnListViewItem() {
-                        SubColumn = new ColumnData(this.GetType().FullName, dI.FullName),
-                        Text = dI.Name,
-                        Tag = dI,
-                        ImageKey = ".folder"
-                    });
-                }
-
-                patterns = Host.GetPreferenceList("directorycolumn.file_exclude_patterns");
-
-                foreach (FileInfo fI in this.Directory.GetFiles()) {
-                    token.ThrowIfCancellationRequested();
-                    if (patterns.Any(x => fI.FullName.MatchesPattern(x))) continue;
-
-                    ColumnListViewItem item = new ColumnListViewItem() {
-                        Text = fI.Name,
-                        Tag = fI,
-                    };
-                    item.ImageKey = getImageKey(item);
-                    result.Add(item);
-                }
-
-                watcher.Path = Directory.FullName;
-                watcher.EnableRaisingEvents = true;
-
-                return result;
-            } catch (DirectoryNotFoundException) {
-                throw new ShowErrorException("Directory not found.");
-            } catch (UnauthorizedAccessException) {
-                throw new ShowErrorException("You have no permissions to access this directory.");
-            } catch (PathTooLongException) {
-                throw new ShowErrorException("Path is too long.");
-            }
-        }
-
-        public override string GetHeaderText() {
-            if (Directory.Root.FullName == Directory.FullName) {
-                DriveInfo drive = new DriveInfo(Directory.FullName);
-                if (!drive.IsReady || drive.VolumeLabel.Trim() == "") return Directory.Name;
-                return drive.VolumeLabel + " (" + Directory.Name.Replace(Path.DirectorySeparatorChar, ')');
-            }
-            
-            return Directory.Name;
-        }
-
-        public override Image GetIcon(ColumnListViewItem item) {
-            if (item.Tag is DirectoryInfo) return base.GetIcon(item);
-            FileInfo fI = item.Tag as FileInfo;
-            return Etier.IconHelper.IconReader.GetFileIcon(fI.FullName, Etier.IconHelper.IconReader.IconSize.Small, false).ToBitmap();
-        }
-
-        public override List<ItemsColumn> GetTrail() {
-            if (!Directory.Exists) return base.GetTrail();
-
-            DirectoryInfo current = this.Directory;
-            List<ItemsColumn> trail = new List<ItemsColumn>();
-            trail.Add(this);
-
-            while (current.Root.FullName != current.FullName) {
-                current = current.Parent;
-                trail.Add(new DirectoryColumn(current, Host));
-            }
-
-            trail.Reverse();
-            return trail;
         }
     }
 }
