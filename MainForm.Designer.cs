@@ -96,7 +96,7 @@
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Padding = new System.Windows.Forms.Padding(2);
             this.mainMenu.Size = new System.Drawing.Size(826, 24);
-            this.mainMenu.TabIndex = 2;
+            this.mainMenu.TabIndex = 0;
             this.mainMenu.Text = "menuStrip1";
             // 
             // trailToolStripMenuItem
@@ -329,7 +329,8 @@
             this.sidebar.ShowLines = false;
             this.sidebar.ShowNodeToolTips = true;
             this.sidebar.Size = new System.Drawing.Size(196, 345);
-            this.sidebar.TabIndex = 0;
+            this.sidebar.TabIndex = 1;
+            this.sidebar.TabStop = false;
             this.sidebar.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.sidebar_AfterSelect);
             // 
             // actionQueueList
@@ -354,7 +355,7 @@
             this.tabBar.Name = "tabBar";
             this.tabBar.ShowNewTabButton = true;
             this.tabBar.Size = new System.Drawing.Size(628, 22);
-            this.tabBar.TabIndex = 2;
+            this.tabBar.TabIndex = 0;
             this.tabBar.AddButtonClicked += new System.EventHandler(this.tabBar_AddButtonClicked);
             // 
             // iconQueue
