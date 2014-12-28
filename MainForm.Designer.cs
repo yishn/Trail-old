@@ -51,6 +51,7 @@
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.packagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new Trail.Controls.SplitContainerModern();
             this.sidebar = new Trail.Modules.Sidebar();
             this.actionQueueList = new Trail.Modules.ActionQueueList();
@@ -166,14 +167,14 @@
             // sidebarToolStripMenuItem
             // 
             this.sidebarToolStripMenuItem.Name = "sidebarToolStripMenuItem";
-            this.sidebarToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.sidebarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sidebarToolStripMenuItem.Text = "&Sidebar";
             this.sidebarToolStripMenuItem.Click += new System.EventHandler(this.sidebarToolStripMenuItem_Click);
             // 
             // tabBarToolStripMenuItem
             // 
             this.tabBarToolStripMenuItem.Name = "tabBarToolStripMenuItem";
-            this.tabBarToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.tabBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tabBarToolStripMenuItem.Text = "&Tab Bar";
             this.tabBarToolStripMenuItem.Click += new System.EventHandler(this.tabBarToolStripMenuItem_Click);
             // 
@@ -188,7 +189,8 @@
             this.nextTabToolStripMenuItem,
             this.previousTabToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.goToLocationToolStripMenuItem});
+            this.goToLocationToolStripMenuItem,
+            this.filterToolStripMenuItem});
             this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
             this.historyToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.historyToolStripMenuItem.Text = "&Navigation";
@@ -286,6 +288,13 @@
             | System.Windows.Forms.Keys.P)));
             this.packagesToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
             this.packagesToolStripMenuItem.Text = "&Packages";
+            // 
+            // filterToolStripMenuItem
+            // 
+            this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
+            this.filterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.filterToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            this.filterToolStripMenuItem.Text = "&Filter";
             // 
             // splitContainer
             // 
@@ -422,6 +431,7 @@
         private System.Windows.Forms.ToolStripMenuItem tabBarToolStripMenuItem;
         private Modules.ActionQueueList actionQueueList;
         private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem filterToolStripMenuItem;
     }
 }
 
