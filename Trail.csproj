@@ -173,6 +173,7 @@
     <Compile Include="Modules\NavigatingTabBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\Packages.cs" />
     <Compile Include="Modules\Persistence.cs" />
     <Compile Include="Modules\Sidebar.cs">
       <SubType>Component</SubType>

@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Trail.Actions;
+using Trail.Columns;
 
 namespace Trail.DataTypes {
     public interface IHost {
+        Dictionary<Tuple<string, string>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> DragDropHandlers { get; }
+        
         void SetPreference(string key, object value);
         string GetPreference(string key);
         T GetPreference<T>(string key);

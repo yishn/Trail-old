@@ -169,6 +169,10 @@ namespace Trail {
 
         #region IHost implementation
 
+        Dictionary<Tuple<string, string>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> IHost.DragDropHandlers {
+            get { return Packages.DragDropHandlers; }
+        }
+
         void IHost.SetPreference(string key, object value) {
             Persistence.SetPreference(key, value);
         }
