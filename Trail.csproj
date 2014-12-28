@@ -142,7 +142,7 @@
     <Compile Include="Controls\TabBar.Designer.cs">
       <DependentUpon>TabBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Columns\ItemsColumnListComparer.cs" />
+    <Compile Include="Columns\ItemsColumnFilterListComparer.cs" />
     <Compile Include="Controls\ListViewModern.cs">
       <SubType>Component</SubType>
     </Compile>

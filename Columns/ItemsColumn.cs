@@ -25,7 +25,7 @@ namespace Trail.Columns {
             this.ListViewControl.AllowDrop = true;
 
             this.ListViewControl.ItemActivate += ListViewControl_ItemActivate;
-            this.ListViewControl.ListViewItemSorter = new ItemsColumnListComparer();
+            this.ListViewControl.ListViewItemSorter = new FilterListComparer();
             this.ListViewControl.DragEnter += ListViewControl_DragEnter;
             this.ListViewControl.DragDrop += ListViewControl_DragDrop;
         }
@@ -86,10 +86,7 @@ namespace Trail.Columns {
         public void Filter(string filter) {
             this.ListViewControl.BeginUpdate();
 
-            foreach(ListViewItem item in ListViewControl.Items) {
-                item.ForeColor = item.Text.Contains(filter) ? Color.Black : Color.Gray;
-            }
-            (ListViewControl.ListViewItemSorter as ItemsColumnListComparer).Filter = filter;
+            (ListViewControl.ListViewItemSorter as FilterListComparer).Filter = filter;
             ListViewControl.Sort();
 
             this.ListViewControl.EndUpdate();
