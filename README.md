@@ -7,6 +7,12 @@ A column view file manager for Windows.
 
 ![Trail screenshot](screenshot.png)
 
+Requirements
+------------
+
+* .NET Framework 4.5
+* Segoe UI Symbols font
+
 Icons
 -----
 
