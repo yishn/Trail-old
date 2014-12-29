@@ -82,7 +82,7 @@ namespace Trail.Actions {
                     );
 
                     if (result == DialogResult.No) continue;
-                    else if (result == DialogResult.Cancel) return;
+                    else if (result == DialogResult.Cancel) throw new OperationCanceledException();
                     else if (result == DialogResult.OK) yesToAll = true;
                 }
 
