@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using Trail.Controls;
+using Trail.DataTypes;
 
 namespace Trail.Actions {
     public class FilesCopyAction : IAction {
@@ -13,10 +14,12 @@ namespace Trail.Actions {
         public string[] Items { get; private set; }
         public DirectoryInfo Destination { get; private set; }
         public int Count { get; private set; }
+        public IHost Host { get; private set; }
 
-        public FilesCopyAction(string[] items, DirectoryInfo destination) {
+        public FilesCopyAction(string[] items, DirectoryInfo destination, IHost host) {
             this.Items = items;
             this.Destination = destination;
+            this.Host = host;
         }
 
         private void enqueueItem(string oldPath, string newPath, CancellationToken token) {
@@ -71,6 +74,7 @@ namespace Trail.Actions {
                 if (item == newItem) continue;
 
                 if ((newItemFileExists || newItemDirectoryExists) && !yesToAll) {
+                    dialog.Owner = Host.MainForm;
                     DialogResult result = dialog.ShowDialog(
                         "There is already a " 
                         + (newItemFileExists ? "file" : "directory") 
