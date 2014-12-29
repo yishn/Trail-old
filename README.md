@@ -16,7 +16,7 @@ Requirements
 Icons
 -----
 
-Fugue icons by [Yusuke Kamiyamane](http://p.yusukekamiyamane.com/).
+Fugue icons by [Yusuke Kamiyamane](http://p.yusukekamiyamane.com/). They are licensed under a [Creative Commons license](http://creativecommons.org/licenses/by/3.0/).
 
 License
 -------
