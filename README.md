@@ -3,7 +3,7 @@ Trail
 
 ![Trail logo](logo.png)
 
-A column view file manager for Windows.
+An extendable column view file manager for Windows. This is a work in progress.
 
 ![Trail screenshot](screenshot.png)
 
