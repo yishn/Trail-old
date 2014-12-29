@@ -173,6 +173,10 @@ namespace Trail {
             get { return Packages.DragDropHandlers; }
         }
 
+        Form IHost.MainForm {
+            get { return this; }
+        }
+
         void IHost.CreatePreference(string key, object value) {
             Persistence.CreatePreference(key, value);
         }

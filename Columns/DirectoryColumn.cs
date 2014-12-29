@@ -149,7 +149,7 @@ namespace Trail.Columns {
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
 
             string[] items = e.Data.GetData(DataFormats.FileDrop) as string[];
-            Host.EnqueueAction(new FilesCopyAction(items, this.Directory));
+            Host.EnqueueAction(new FilesCopyAction(items, this.Directory, Host));
         }
 
         #endregion
