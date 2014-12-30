@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Trail.Actions;
 using Trail.Columns;
@@ -187,6 +188,10 @@ namespace Trail {
         #endregion
 
         #region IHost implementation
+
+        DirectoryInfo IHost.PersistenceFolder {
+            get { return Persistence.PersistenceFolder; }
+        }
 
         Dictionary<Tuple<Type, Type>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> IHost.DragDropHandlers {
             get { return Packages.DragDropHandlers; }

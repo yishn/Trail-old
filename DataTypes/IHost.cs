@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using Trail.Actions;
 using Trail.Columns;
 
 namespace Trail.DataTypes {
     public interface IHost {
+        DirectoryInfo PersistenceFolder { get; }
         Dictionary<Tuple<Type, Type>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> DragDropHandlers { get; }
         Form MainForm { get; }
 
