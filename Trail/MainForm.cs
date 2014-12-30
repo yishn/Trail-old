@@ -10,6 +10,7 @@ using Trail.Controls;
 using Trail.DataTypes;
 using Trail.Forms;
 using Trail.Modules;
+using Trail.Templates;
 
 namespace Trail {
     public partial class MainForm : Form, IHost {
@@ -57,7 +58,7 @@ namespace Trail {
             ColumnTreeNode node = e.Node as ColumnTreeNode;
             if (node.SubColumn == null) return;
 
-            ItemsColumn c = node.SubColumn.Instantiation(this);
+            ItemsColumn c = (this as IHost).InstantiateColumn(node.SubColumn);
             tabBar.CurrentTab.ColumnView.NavigateTo(c.GetTrail());
             tabBar.CurrentTab.ColumnView.Columns[0].Focus();
             tabBar.CurrentTab.ColumnView.ScrollToLastColumn();
@@ -225,8 +226,13 @@ namespace Trail {
             return Persistence.GetPreferenceList<T>(key);
         }
 
-        void IHost.EnqueueAction(IAction action) {
+        void IHost.EnqueueAction(ItemsAction action) {
             actionQueueList.EnqueueAction(new ActionControl(action));
+        }
+
+        ItemsColumn IHost.InstantiateColumn(ColumnData data) {
+            Type type = Type.GetType(data.ColumnType);
+            return Activator.CreateInstance(type, data.Path, this) as ItemsColumn;
         }
 
         #endregion

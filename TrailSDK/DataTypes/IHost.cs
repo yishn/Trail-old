@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using Trail.Columns;
+using Trail.Controls;
+using Trail.Templates;
 
 namespace Trail.DataTypes {
     public interface IHost {
@@ -17,6 +18,7 @@ namespace Trail.DataTypes {
         List<string> GetPreferenceList(string key);
         List<T> GetPreferenceList<T>(string key);
 
-        void EnqueueAction(IAction action);
+        ItemsColumn InstantiateColumn(ColumnData data);
+        void EnqueueAction(ItemsAction action);
     }
 }

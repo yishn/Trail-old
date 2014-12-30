@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTypes\IAction.cs" />
-    <Compile Include="Columns\ColumnListViewItem.cs" />
-    <Compile Include="Columns\ItemsColumn.cs">
+    <Compile Include="Templates\ItemsAction.cs" />
+    <Compile Include="Controls\ColumnListViewItem.cs" />
+    <Compile Include="Templates\ItemsColumn.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ChoiceDialog.cs">

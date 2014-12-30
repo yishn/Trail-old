@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Columns;
 using Trail.Controls;
+using Trail.Templates;
 
 namespace Trail.Modules {
     public class ItemsIconQueue : BackgroundWorker {

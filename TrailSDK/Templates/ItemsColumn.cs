@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using Trail.Controls;
 using Trail.DataTypes;
 
-namespace Trail.Columns {
+namespace Trail.Templates {
     public abstract class ItemsColumn : ColumnControl {
         private CancellationTokenSource cancellation;
 
@@ -88,7 +88,7 @@ namespace Trail.Columns {
         }
 
         public ItemsColumn Duplicate() {
-            return GetColumnData().Instantiation(Host);
+            return Host.InstantiateColumn(GetColumnData());
         }
 
         #region Drag & Drop

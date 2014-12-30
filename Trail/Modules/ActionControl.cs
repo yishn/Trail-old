@@ -6,23 +6,25 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Trail.Actions;
 using Trail.Controls;
 using Trail.DataTypes;
 using Trail.Fx;
+using Trail.Templates;
 
 namespace Trail.Modules {
     public class ActionControl : ProgressControl {
         private IntAnimation progressAnimation = new IntAnimation();
         private CancellationTokenSource cancellation;
 
-        public IAction Action { get; set; }
+        public ItemsAction Action { get; set; }
         public bool IsBusy { get; private set; }
 
         public event EventHandler Completed;
 
-        public ActionControl(IAction action) {
+        public ActionControl(ItemsAction action) {
             this.Action = action;
-            this.HeaderText = action.HeaderText;
+            this.HeaderText = action.HeaderText ?? "Action";
             this.DescriptionText = "Waiting in queue...";
 
             this.CancelButtonClicked += ItemsAction_CancelButtonClicked;

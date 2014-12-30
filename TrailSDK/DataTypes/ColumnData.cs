@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Trail.Columns;
+using Trail.Templates;
 
 namespace Trail.DataTypes {
     public class ColumnData {
@@ -15,11 +15,6 @@ namespace Trail.DataTypes {
         public ColumnData(string columnType, string path) {
             this.ColumnType = columnType;
             this.Path = path;
-        }
-
-        public ItemsColumn Instantiation(IHost host) {
-            Type type = Type.GetType(this.ColumnType);
-            return Activator.CreateInstance(type, this.Path, host) as ItemsColumn;
         }
     }
 }

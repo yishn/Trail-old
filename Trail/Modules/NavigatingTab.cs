@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Trail.Columns;
 using Trail.Controls;
+using Trail.Templates;
 
 namespace Trail.Modules {
     public class NavigatingTab : Tab {

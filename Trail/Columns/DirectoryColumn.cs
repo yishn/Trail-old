@@ -9,6 +9,8 @@ using System.Threading;
 using Trail.Helpers;
 using Trail.DataTypes;
 using Trail.Actions;
+using Trail.Controls;
+using Trail.Templates;
 
 namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {

@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trail.Columns;
 using Trail.Controls;
+using Trail.DataTypes;
+using Trail.Templates;
 
 namespace Trail.Modules {
     public class NavigatingColumnView : ColumnView {
@@ -94,7 +96,7 @@ namespace Trail.Modules {
 
             if (c.ListViewControl.SelectedItems.Count == 1) {
                 // Add new column
-                ItemsColumn column = item.SubColumn.Instantiation(this.ParentForm as MainForm);
+                ItemsColumn column = (this.ParentForm as IHost).InstantiateColumn(item.SubColumn);
 
                 this.Columns.Add(column);
                 column.Width = width;

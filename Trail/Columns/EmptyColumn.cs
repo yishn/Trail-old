@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
+using Trail.Controls;
 using Trail.DataTypes;
+using Trail.Templates;
 
 namespace Trail.Columns {
     public class EmptyColumn : ItemsColumn {

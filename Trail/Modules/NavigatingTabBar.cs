@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Trail.Columns;
 using Trail.Controls;
 using Trail.DataTypes;
+using Trail.Templates;
 
 namespace Trail.Modules {
     public class NavigatingTabBar : TabBar {
@@ -49,7 +50,7 @@ namespace Trail.Modules {
             this.Tabs.Clear();
 
             foreach (ColumnData data in Persistence.Session) {
-                ItemsColumn column = data.Instantiation(this.ParentForm as MainForm);
+                ItemsColumn column = (this.ParentForm as IHost).InstantiateColumn(data);
                 NavigatingTab tab = new NavigatingTab(column);
                 this.Tabs.Add(tab);
             }

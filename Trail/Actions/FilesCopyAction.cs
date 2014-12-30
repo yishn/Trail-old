@@ -5,21 +5,20 @@ using System.Threading;
 using System.Windows.Forms;
 using Trail.Controls;
 using Trail.DataTypes;
+using Trail.Templates;
 
 namespace Trail.Actions {
-    public class FilesCopyAction : IAction {
+    public class FilesCopyAction : ItemsAction {
         private Queue<Tuple<string, string>> queue = new Queue<Tuple<string, string>>();
 
-        public string HeaderText { get { return "Copy files to \"" + Destination.Name + "\""; } }
         public string[] Items { get; private set; }
         public DirectoryInfo Destination { get; private set; }
         public int Count { get; private set; }
-        public IHost Host { get; private set; }
 
-        public FilesCopyAction(string[] items, DirectoryInfo destination, IHost host) {
+        public FilesCopyAction(string[] items, DirectoryInfo destination, IHost host) : base(host) {
+            this.HeaderText = "Copy files to \"" + destination.Name + "\"";
             this.Items = items;
             this.Destination = destination;
-            this.Host = host;
         }
 
         private void enqueueItem(string oldPath, string newPath, CancellationToken token) {
@@ -90,7 +89,7 @@ namespace Trail.Actions {
             }
         }
 
-        public void DoWork(IProgress<Tuple<int, string>> progress, CancellationToken token) {
+        public override void DoWork(IProgress<Tuple<int, string>> progress, CancellationToken token) {
             progress.Report(new Tuple<int, string>(0, "Preparing..."));
             preparation(token);
             this.Count = queue.Count;
