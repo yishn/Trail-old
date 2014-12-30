@@ -32,6 +32,7 @@ namespace Trail.Templates {
 
         protected abstract List<ColumnListViewItem> loadData(CancellationToken token);
         public abstract string GetHeaderText();
+        public abstract ItemsColumn Duplicate();
 
         public virtual List<ItemsColumn> GetTrail() {
             return new List<ItemsColumn>(new ItemsColumn[] { this });
@@ -85,10 +86,6 @@ namespace Trail.Templates {
 
         public ColumnData GetColumnData() {
             return new ColumnData(this.GetType().FullName, this.ItemsPath);
-        }
-
-        public ItemsColumn Duplicate() {
-            return Host.InstantiateColumn(GetColumnData());
         }
 
         #region Drag & Drop

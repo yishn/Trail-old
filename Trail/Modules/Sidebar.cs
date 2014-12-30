@@ -64,7 +64,7 @@ namespace Trail.Modules {
                         dI.DriveType == DriveType.Removable ? "removable" :
                         dI.DriveType == DriveType.Fixed ? "drive" : "unknown"
                 };
-                node.Text = (this.FindForm() as IHost).InstantiateColumn(node.SubColumn).GetHeaderText();
+                node.Text = Packages.InstantiateColumn(node.SubColumn, null).GetHeaderText();
                 node.SelectedImageKey = node.ImageKey;
 
                 drives.Nodes.Add(node);
@@ -79,7 +79,7 @@ namespace Trail.Modules {
 
             foreach (ColumnData item in Persistence.FavoriteItems) {
                 ColumnTreeNode node = new ColumnTreeNode() {
-                    Text = (this.FindForm() as IHost).InstantiateColumn(item).GetHeaderText(),
+                    Text = Packages.InstantiateColumn(item, null).GetHeaderText(),
                     SubColumn = item,
                     ImageKey = "folder",
                     SelectedImageKey = "folder"

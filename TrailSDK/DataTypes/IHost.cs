@@ -18,7 +18,6 @@ namespace Trail.DataTypes {
         List<string> GetPreferenceList(string key);
         List<T> GetPreferenceList<T>(string key);
 
-        ItemsColumn InstantiateColumn(ColumnData data);
         void EnqueueAction(ItemsAction action);
     }
 }

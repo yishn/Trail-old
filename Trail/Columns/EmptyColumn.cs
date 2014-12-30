@@ -18,5 +18,9 @@ namespace Trail.Columns {
         public override string GetHeaderText() {
             return "New Tab";
         }
+
+        public override ItemsColumn Duplicate() {
+            return new EmptyColumn(Host);
+        }
     }
 }

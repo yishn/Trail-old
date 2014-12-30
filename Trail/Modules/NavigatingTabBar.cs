@@ -10,6 +10,7 @@ namespace Trail.Modules {
         private Stack<NavigatingTab> closedTabs = new Stack<NavigatingTab>();
 
         public new NavigatingTab CurrentTab { get { return base.CurrentTab as NavigatingTab; } set { base.CurrentTab = value; } }
+        public IHost Host { get { return this.ParentForm as IHost; } }
 
         public NavigatingTabBar() {
             this.CurrentTabChanged += NavigatingTabBar_CurrentTabChanged;
@@ -32,7 +33,7 @@ namespace Trail.Modules {
             this.Tabs.Clear();
 
             foreach (ColumnData data in Persistence.Session) {
-                ItemsColumn column = (this.ParentForm as IHost).InstantiateColumn(data);
+                ItemsColumn column = Packages.InstantiateColumn(data, Host);
                 NavigatingTab tab = new NavigatingTab(column);
                 this.Tabs.Add(tab);
             }

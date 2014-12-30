@@ -116,6 +116,10 @@ namespace Trail.Columns {
             return trail;
         }
 
+        public override ItemsColumn Duplicate() {
+            return new DirectoryColumn(this.Directory, this.Host);
+        }
+
         #region Drag & Drop
 
         private void ListViewControl_ItemDrag(object sender, ItemDragEventArgs e) {

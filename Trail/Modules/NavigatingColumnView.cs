@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Trail.Columns;
 using Trail.Controls;
 using Trail.DataTypes;
 using Trail.Templates;
@@ -17,6 +11,7 @@ namespace Trail.Modules {
     public class NavigatingColumnView : ColumnView {
         public ItemsIconQueue ItemsIconQueue { get; set; }
         public new ItemsColumn LastColumn { get { return base.LastColumn as ItemsColumn; } }
+        public IHost Host { get { return this.ParentForm as IHost; } }
 
         public event EventHandler<ItemsColumn> SubColumnAdded;
         public event EventHandler Navigated;
@@ -96,7 +91,7 @@ namespace Trail.Modules {
 
             if (c.ListViewControl.SelectedItems.Count == 1) {
                 // Add new column
-                ItemsColumn column = (this.ParentForm as IHost).InstantiateColumn(item.SubColumn);
+                ItemsColumn column = Packages.InstantiateColumn(item.SubColumn, Host);
 
                 this.Columns.Add(column);
                 column.Width = width;
