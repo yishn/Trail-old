@@ -137,9 +137,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="trail2.ico" />
   </ItemGroup>
   <ItemGroup>
