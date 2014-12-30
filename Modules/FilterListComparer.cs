@@ -3,13 +3,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using Trail.Helpers;
 
-namespace Trail.Columns {
+namespace Trail.Modules {
     public class FilterListComparer : IComparer {
-        public string Filter { get; set; }
-
-        public FilterListComparer(string filter = "") {
-            this.Filter = filter;
-        }
+        public static string Filter { get; set; }
 
         public int Compare(object x, object y) {
             ListViewItem item1 = (ListViewItem)x;

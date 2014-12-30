@@ -25,7 +25,6 @@ namespace Trail.Columns {
             this.ListViewControl.AllowDrop = true;
 
             this.ListViewControl.ItemActivate += ListViewControl_ItemActivate;
-            this.ListViewControl.ListViewItemSorter = new FilterListComparer();
             this.ListViewControl.DragEnter += ListViewControl_DragEnter;
             this.ListViewControl.DragDrop += ListViewControl_DragDrop;
         }
@@ -81,15 +80,6 @@ namespace Trail.Columns {
 
         public ItemsColumn Duplicate() {
             return GetColumnData().Instantiation(Host);
-        }
-
-        public void Filter(string filter) {
-            this.ListViewControl.BeginUpdate();
-
-            (ListViewControl.ListViewItemSorter as FilterListComparer).Filter = filter;
-            ListViewControl.Sort();
-
-            this.ListViewControl.EndUpdate();
         }
 
         #region Drag & Drop
