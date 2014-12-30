@@ -51,6 +51,9 @@ namespace Trail.Modules {
         public void SortAll() {
             foreach (ItemsColumn c in this.Columns) {
                 c.ListViewControl.Sort();
+
+                if (c.ListViewControl.Items.Count == 0) continue;
+                c.ListViewControl.Items[0].EnsureVisible();
             }
         }
 

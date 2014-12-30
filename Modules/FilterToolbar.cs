@@ -68,6 +68,7 @@ namespace Trail.Modules {
 
         private void FindToolbar_Enter(object sender, EventArgs e) {
             filterTextBox.Focus();
+            filterTextBox.SelectAll();
         }
 
         private void filterTextBox_TextChanged(object sender, EventArgs e) {

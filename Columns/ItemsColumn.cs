@@ -56,8 +56,11 @@ namespace Trail.Columns {
                 });
 
                 this.HeaderText = GetHeaderText();
+                ListViewControl.BeginUpdate();
                 ListViewControl.Items.AddRange(result.ToArray());
                 ListViewControl.Sort();
+                ListViewControl.EndUpdate();
+
                 UpdateColumnWidth();
             } catch (OperationCanceledException) {
                 // Do nothing
