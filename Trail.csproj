@@ -162,6 +162,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\FilterToolbar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\FilterToolbar.Designer.cs">
+      <DependentUpon>FilterToolbar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\ItemsIconQueue.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -213,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\ActionQueueList.resx">
       <DependentUpon>ActionQueueList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\FilterToolbar.resx">
+      <DependentUpon>FilterToolbar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

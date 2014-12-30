@@ -55,6 +55,7 @@
             this.splitContainer = new Trail.Controls.SplitContainerModern();
             this.sidebar = new Trail.Modules.Sidebar();
             this.actionQueueList = new Trail.Modules.ActionQueueList();
+            this.filterToolbar = new Trail.Modules.FilterToolbar();
             this.tabBar = new Trail.Modules.NavigatingTabBar();
             this.iconQueue = new Trail.Modules.ItemsIconQueue();
             this.mainMenu.SuspendLayout();
@@ -270,6 +271,7 @@
             this.filterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this.filterToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
             this.filterToolStripMenuItem.Text = "&Filter";
+            this.filterToolStripMenuItem.Click += new System.EventHandler(this.filterToolStripMenuItem_Click);
             // 
             // extrasToolStripMenuItem
             // 
@@ -313,6 +315,7 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer.Panel2.Controls.Add(this.filterToolbar);
             this.splitContainer.Panel2.Controls.Add(this.tabBar);
             this.splitContainer.Size = new System.Drawing.Size(826, 345);
             this.splitContainer.SplitterDistance = 196;
@@ -354,6 +357,18 @@
             this.actionQueueList.Name = "actionQueueList";
             this.actionQueueList.Size = new System.Drawing.Size(196, 0);
             this.actionQueueList.TabIndex = 1;
+            // 
+            // filterToolbar
+            // 
+            this.filterToolbar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.filterToolbar.FilterText = "";
+            this.filterToolbar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterToolbar.ForeColor = System.Drawing.Color.DimGray;
+            this.filterToolbar.Location = new System.Drawing.Point(0, 345);
+            this.filterToolbar.Name = "filterToolbar";
+            this.filterToolbar.Size = new System.Drawing.Size(628, 0);
+            this.filterToolbar.TabIndex = 1;
+            this.filterToolbar.CancelButtonClicked += new System.EventHandler(this.filterToolbar_CancelButtonClicked);
             // 
             // tabBar
             // 
@@ -433,6 +448,7 @@
         private Modules.ActionQueueList actionQueueList;
         private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem filterToolStripMenuItem;
+        private Modules.FilterToolbar filterToolbar;
     }
 }
 

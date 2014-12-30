@@ -67,6 +67,10 @@ namespace Trail {
             if (tabBar.AddTab(t)) tabBar.CurrentTab = t;
         }
 
+        private void filterToolbar_CancelButtonClicked(object sender, EventArgs e) {
+            filterToolbar.SlideClose();
+        }
+
         #region Update preferences
 
         private void MainForm_ResizeEnd(object sender, EventArgs e) {
@@ -161,6 +165,11 @@ namespace Trail {
 
         private void restartToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Restart();
+        }
+
+        private void filterToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (filterToolbar.Height == 0) filterToolbar.SlideOpen();
+            filterToolbar.Focus();
         }
 
         #endregion
