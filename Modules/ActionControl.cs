@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Trail.Actions;
 using Trail.Controls;
 using Trail.Fx;
@@ -36,7 +37,9 @@ namespace Trail.Modules {
 
             await Task.Run(() => {
                 try {
+                    Control.CheckForIllegalCrossThreadCalls = false;
                     this.Action.DoWork(progress, cancellation.Token);
+                    Control.CheckForIllegalCrossThreadCalls = true;
                     progress.Report(new Tuple<int, string>(100, "Completed."));
                 } catch (OperationCanceledException) {
                     progress.Report(new Tuple<int, string>(100, "Cancelled."));
