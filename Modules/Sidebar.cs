@@ -17,7 +17,6 @@ namespace Trail.Modules {
             this.BorderStyle = BorderStyle.None;
             this.Dock = DockStyle.Fill;
             this.FullRowSelect = true;
-            this.HideSelection = true;
             this.ImageIndex = 0;
             this.Indent = 19;
             this.ItemHeight = 22;
@@ -26,6 +25,8 @@ namespace Trail.Modules {
             this.ShowLines = false;
             this.ShowNodeToolTips = true;
             this.Size = new Size(196, 382);
+
+            this.LostFocus += Sidebar_LostFocus;
         }
 
         public void Load() {
@@ -92,6 +93,11 @@ namespace Trail.Modules {
             }
 
             favorites.Expand();
+        }
+
+        private void Sidebar_LostFocus(object sender, EventArgs e) {
+            if (this.SelectedNode == null) return;
+            this.SelectedNode = this.SelectedNode.Parent ?? this.SelectedNode;
         }
     }
 }

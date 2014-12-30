@@ -60,8 +60,6 @@ namespace Trail {
             tabBar.CurrentTab.ColumnView.NavigateTo(c.GetTrail());
             tabBar.CurrentTab.ColumnView.Columns[0].Focus();
             tabBar.CurrentTab.ColumnView.ScrollToLastColumn();
-
-            sidebar.SelectedNode = null;
         }
 
         private void tabBar_AddButtonClicked(object sender, EventArgs e) {

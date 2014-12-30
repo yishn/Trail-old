@@ -48,10 +48,10 @@
             this.previousTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.goToLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.packagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new Trail.Controls.SplitContainerModern();
             this.sidebar = new Trail.Modules.Sidebar();
             this.actionQueueList = new Trail.Modules.ActionQueueList();
@@ -167,14 +167,14 @@
             // sidebarToolStripMenuItem
             // 
             this.sidebarToolStripMenuItem.Name = "sidebarToolStripMenuItem";
-            this.sidebarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sidebarToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.sidebarToolStripMenuItem.Text = "&Sidebar";
             this.sidebarToolStripMenuItem.Click += new System.EventHandler(this.sidebarToolStripMenuItem_Click);
             // 
             // tabBarToolStripMenuItem
             // 
             this.tabBarToolStripMenuItem.Name = "tabBarToolStripMenuItem";
-            this.tabBarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tabBarToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.tabBarToolStripMenuItem.Text = "&Tab Bar";
             this.tabBarToolStripMenuItem.Click += new System.EventHandler(this.tabBarToolStripMenuItem_Click);
             // 
@@ -264,6 +264,13 @@
             this.goToLocationToolStripMenuItem.Text = "Goto &Location...";
             this.goToLocationToolStripMenuItem.Click += new System.EventHandler(this.goToLocationToolStripMenuItem_Click);
             // 
+            // filterToolStripMenuItem
+            // 
+            this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
+            this.filterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.filterToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
+            this.filterToolStripMenuItem.Text = "&Filter";
+            // 
             // extrasToolStripMenuItem
             // 
             this.extrasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -288,13 +295,6 @@
             | System.Windows.Forms.Keys.P)));
             this.packagesToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
             this.packagesToolStripMenuItem.Text = "&Packages";
-            // 
-            // filterToolStripMenuItem
-            // 
-            this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
-            this.filterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.filterToolStripMenuItem.Size = new System.Drawing.Size(301, 22);
-            this.filterToolStripMenuItem.Text = "&Filter";
             // 
             // splitContainer
             // 
@@ -328,6 +328,7 @@
             this.sidebar.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sidebar.FullRowSelect = true;
+            this.sidebar.HideSelection = false;
             this.sidebar.HotTracking = true;
             this.sidebar.ImageIndex = 0;
             this.sidebar.ImageList = this.sidebarImages;
