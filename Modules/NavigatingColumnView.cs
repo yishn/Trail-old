@@ -48,10 +48,18 @@ namespace Trail.Modules {
         }
         public void NavigateTo(ItemsColumn column) { NavigateTo(column.GetTrail()); }
 
+        public void SortAll() {
+            foreach (ItemsColumn c in this.Columns) {
+                c.ListViewControl.Sort();
+            }
+        }
+
         private void Columns_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             if (e.Action != NotifyCollectionChangedAction.Add) return;
             
             foreach (ItemsColumn c in e.NewItems) {
+                c.ListViewControl.ListViewItemSorter = new FilterListComparer();
+
                 c.LoadingCompleted += ItemsColumn_LoadingCompleted;
                 c.OneItemSelected += ItemsColumn_OneItemSelected;
             }
