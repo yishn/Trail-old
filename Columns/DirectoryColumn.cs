@@ -90,6 +90,10 @@ namespace Trail.Columns {
 
         public override Image GetIcon(ColumnListViewItem item) {
             if (item.Tag is DirectoryInfo) return base.GetIcon(item);
+
+            List<string> patterns = Host.GetPreferenceList("directorycolumn.individual_icon_files");
+            if (!patterns.Any(x => item.Text.MatchesPattern(x))) return base.GetIcon(item);
+
             FileInfo fI = item.Tag as FileInfo;
             return Etier.IconHelper.IconReader.GetFileIcon(fI.FullName, Etier.IconHelper.IconReader.IconSize.Small, false).ToBitmap();
         }

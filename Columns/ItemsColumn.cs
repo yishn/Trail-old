@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,6 +38,11 @@ namespace Trail.Columns {
         }
 
         public virtual Image GetIcon(ColumnListViewItem item) {
+            string ext = Path.GetExtension(item.Text).Replace(".", "");
+            string iconPath = Path.Combine(Host.PersistenceFolder.FullName, "icons", ext + ".png");
+
+            if (File.Exists(iconPath)) return Image.FromFile(iconPath);
+
             Icon i = Etier.IconHelper.IconReader.GetFileIcon(item.Text, Etier.IconHelper.IconReader.IconSize.Small, false);
             return i.ToBitmap();
         }
