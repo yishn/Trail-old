@@ -67,9 +67,9 @@
             this.cancelButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
             this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelButton.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(368, 5);
+            this.cancelButton.Location = new System.Drawing.Point(369, 5);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(22, 22);
+            this.cancelButton.Size = new System.Drawing.Size(20, 20);
             this.cancelButton.TabIndex = 4;
             this.cancelButton.TabStop = false;
             this.cancelButton.Text = "";
