@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Trail.Columns;
 using Trail.Controls;
 using Trail.DataTypes;
 using Trail.Templates;
@@ -31,19 +26,6 @@ namespace Trail.Modules {
             foreach (Tab t in e.NewItems) {
                 (t as NavigatingTab).Navigated += NavigatingTabBar_Navigated;
             }
-        }
-
-        private void NavigatingTabBar_Navigated(object sender, EventArgs e) {
-            this.SaveSession();
-        }
-
-        private void NavigatingTabBar_TabAddedMoved(object sender, Tab e) {
-            this.SaveSession();
-        }
-
-        private void NavigatingTabBar_TabClosed(object sender, Tab e) {
-            closedTabs.Push(e as NavigatingTab);
-            this.SaveSession();
         }
 
         public void LoadSession() {
@@ -75,6 +57,12 @@ namespace Trail.Modules {
             Persistence.SaveData();
         }
 
+        public void RestoreClosedTab() {
+            if (closedTabs.Count == 0) return;
+            NavigatingTab tab = closedTabs.Peek();
+            if (this.AddTab(tab)) this.CurrentTab = closedTabs.Pop();
+        }
+
         private void NavigatingTabBar_CurrentTabChanged(object sender, EventArgs e) {
             if (this.CurrentTab == null) return;
             if (this.CurrentTab.ColumnView.LastColumn != null)
@@ -84,10 +72,21 @@ namespace Trail.Modules {
             SaveSession();
         }
 
-        public void RestoreClosedTab() {
-            if (closedTabs.Count == 0) return;
-            NavigatingTab tab = closedTabs.Peek();
-            if (this.AddTab(tab)) this.CurrentTab = closedTabs.Pop();
+        #region Save session
+
+        private void NavigatingTabBar_Navigated(object sender, EventArgs e) {
+            this.SaveSession();
         }
+
+        private void NavigatingTabBar_TabAddedMoved(object sender, Tab e) {
+            this.SaveSession();
+        }
+
+        private void NavigatingTabBar_TabClosed(object sender, Tab e) {
+            closedTabs.Push(e as NavigatingTab);
+            this.SaveSession();
+        }
+
+        #endregion
     }
 }
