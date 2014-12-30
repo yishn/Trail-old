@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using Trail.Actions;
 using Trail.Columns;
 
 namespace Trail.DataTypes {

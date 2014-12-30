@@ -41,15 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\FilesCopyAction.cs" />
-    <Compile Include="Actions\IAction.cs" />
+    <Compile Include="DataTypes\IAction.cs" />
     <Compile Include="Columns\ColumnListViewItem.cs" />
-    <Compile Include="Columns\DirectoryColumn.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Columns\EmptyColumn.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Columns\ItemsColumn.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -152,6 +145,7 @@
       <DependentUpon>TabBar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

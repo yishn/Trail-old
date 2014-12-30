@@ -47,7 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\ActionControl.cs" />
+    <Compile Include="Actions\FilesCopyAction.cs" />
+    <Compile Include="Columns\DirectoryColumn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Columns\EmptyColumn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\ActionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>

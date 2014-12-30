@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading;
-using Trail.DataTypes;
 
-namespace Trail.Actions {
+namespace Trail.DataTypes {
     public interface IAction {
         string HeaderText { get; }
         IHost Host { get; }

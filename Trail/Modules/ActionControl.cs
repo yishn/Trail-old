@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Trail.Actions;
 using Trail.Controls;
+using Trail.DataTypes;
 using Trail.Fx;
 
 namespace Trail.Modules {
