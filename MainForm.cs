@@ -67,9 +67,22 @@ namespace Trail {
             if (tabBar.AddTab(t)) tabBar.CurrentTab = t;
         }
 
+        #region Filter toolbar
+
         private void filterToolbar_CancelButtonClicked(object sender, EventArgs e) {
             filterToolbar.SlideClose();
         }
+
+        private void filterToolbar_FilterTextChanged(object sender, EventArgs e) {
+            FilterListComparer.Filter = filterToolbar.FilterText;
+
+            foreach (Control cv in splitContainer.Panel2.Controls) {
+                if (cv is NavigatingColumnView)
+                    (cv as NavigatingColumnView).SortAll();
+            }
+        }
+
+        #endregion
 
         #region Update preferences
 

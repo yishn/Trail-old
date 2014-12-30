@@ -12,8 +12,8 @@ namespace Trail.Modules {
             ListViewItem item2 = (ListViewItem)y;
 
             // Check filter
-            bool filtered1 = item1.Text.Contains(Filter);
-            bool filtered2 = item2.Text.Contains(Filter);
+            bool filtered1 = item1.Text.Contains(Filter ?? "");
+            bool filtered2 = item2.Text.Contains(Filter ?? "");
             item1.ForeColor = filtered1 ? Color.Black : Color.Gray;
             item2.ForeColor = filtered2 ? Color.Black : Color.Gray;
 

@@ -369,6 +369,7 @@
             this.filterToolbar.Size = new System.Drawing.Size(628, 0);
             this.filterToolbar.TabIndex = 1;
             this.filterToolbar.CancelButtonClicked += new System.EventHandler(this.filterToolbar_CancelButtonClicked);
+            this.filterToolbar.FilterTextChanged += new System.EventHandler(this.filterToolbar_FilterTextChanged);
             // 
             // tabBar
             // 
