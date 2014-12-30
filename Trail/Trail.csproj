@@ -47,115 +47,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\FilesCopyAction.cs" />
-    <Compile Include="Actions\IAction.cs" />
-    <Compile Include="DataTypes\ShowErrorException.cs" />
-    <Compile Include="DataTypes\DragDropData.cs" />
-    <Compile Include="DataTypes\IHost.cs" />
-    <Compile Include="Modules\ActionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ProgressControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ProgressControl.Designer.cs">
-      <DependentUpon>ProgressControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ChoiceDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\ChoiceDialog.Designer.cs">
-      <DependentUpon>ChoiceDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ControlList.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Modules\ActionControl.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Columns\EmptyColumn.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ColumnControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ColumnControl.Designer.cs">
-      <DependentUpon>ColumnControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FlatButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\HudForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\HudForm.Designer.cs">
-      <DependentUpon>HudForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SplitContainerModern.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DataTypes\ColumnData.cs" />
-    <Compile Include="Forms\GotoForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\GotoForm.cs" />
     <Compile Include="Forms\GotoForm.Designer.cs">
       <DependentUpon>GotoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\ColorAnimation.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Helpers\FileUtil.cs" />
-    <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="Helpers\JsonParser.cs" />
     <Compile Include="Modules\ActionQueueList.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\ActionQueueList.Designer.cs">
       <DependentUpon>ActionQueueList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Columns\ColumnListViewItem.cs" />
     <Compile Include="Modules\ColumnTreeNode.cs" />
-    <Compile Include="Controls\ColumnView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ColumnView.Designer.cs">
-      <DependentUpon>ColumnView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Columns\DirectoryColumn.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Columns\ItemsColumn.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Tab.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Tab.Designer.cs">
-      <DependentUpon>Tab.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TabBar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TabBar.Designer.cs">
-      <DependentUpon>TabBar.cs</DependentUpon>
-    </Compile>
     <Compile Include="Modules\FilterListComparer.cs" />
-    <Compile Include="Controls\ListViewModern.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\TreeViewModern.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Fx\Animation.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Fx\IntAnimation.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,12 +81,8 @@
     <Compile Include="Modules\ItemsIconQueue.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Modules\NavigatingColumnView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\NavigatingTab.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Modules\NavigatingColumnView.cs" />
+    <Compile Include="Modules\NavigatingTab.cs" />
     <Compile Include="Modules\NavigatingTabBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -187,29 +93,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\ProgressControl.resx">
-      <DependentUpon>ProgressControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ChoiceDialog.resx">
-      <DependentUpon>ChoiceDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ColumnControl.resx">
-      <DependentUpon>ColumnControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ColumnView.resx">
-      <DependentUpon>ColumnView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\HudForm.resx">
-      <DependentUpon>HudForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Tab.resx">
-      <DependentUpon>Tab.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TabBar.resx">
-      <DependentUpon>TabBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GotoForm.resx">
       <DependentUpon>GotoForm.cs</DependentUpon>
@@ -248,7 +133,12 @@
   <ItemGroup>
     <Content Include="trail2.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\TrailSDK\TrailSDK.csproj">
+      <Project>{5f7b52b5-9b1f-43e9-a71f-4c2bad30c6f6}</Project>
+      <Name>TrailSDK</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
