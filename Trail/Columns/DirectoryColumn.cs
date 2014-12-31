@@ -121,6 +121,22 @@ namespace Trail.Columns {
             return new DirectoryColumn(this.Directory, this.Host);
         }
 
+        public string GetUniqueItemName(string draft) {
+            if (!draft.Contains("{c}")) draft += "{c}";
+
+            string newName = Path.Combine(ItemsPath, draft.Replace("{c}", ""));
+
+            if (!File.Exists(newName) && !System.IO.Directory.Exists(newName)) 
+                return draft.Replace("{c}", "");
+
+            int count = 2;
+            do {
+                newName = Path.Combine(ItemsPath, draft.Replace("{c}", " " + count++));
+            } while (File.Exists(newName) || System.IO.Directory.Exists(newName));
+
+            return newName;
+        }
+
         #region Drag & Drop
 
         private void ListViewControl_ItemDrag(object sender, ItemDragEventArgs e) {
@@ -205,16 +221,15 @@ namespace Trail.Columns {
             this.ListViewControl.ContextMenuStrip = contextMenu;
 
             ToolStripItem getInfo = new ToolStripMenuItem("Get &Info") { ShortcutKeys = Keys.Control | Keys.Space };
-
             ToolStripItem openWith = new ToolStripMenuItem("&Open With");
             ToolStripItem rename = new ToolStripMenuItem("Re&name") { ShortcutKeys = Keys.F2 };
             ToolStripItem recycle = new ToolStripMenuItem("&Recycle") { ShortcutKeys = Keys.Delete };
-            
             ToolStripItem selectAll = new ToolStripMenuItem("Select &All") { ShortcutKeys = Keys.Control | Keys.A };
             selectAll.Click += (_, __) => { foreach (ListViewItem item in ListViewControl.Items) item.Selected = true; };
             ToolStripItem newDirectory = new ToolStripMenuItem("New &Directory") { 
                 ShortcutKeys = Keys.Control | Keys.Shift | Keys.N 
             };
+            newDirectory.Click += newDirectory_Click;
             ToolStripItem newFile = new ToolStripMenuItem("New &File") { ShortcutKeys = Keys.Control | Keys.N };
 
             contextMenu.Items.AddRange(new ToolStripItem[] { 
@@ -229,6 +244,10 @@ namespace Trail.Columns {
                 newDirectory, 
                 newFile 
             });
+        }
+
+        private void newDirectory_Click(object sender, EventArgs e) {
+            throw new NotImplementedException();
         }
 
         #endregion
