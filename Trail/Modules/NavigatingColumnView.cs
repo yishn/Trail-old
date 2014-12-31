@@ -38,7 +38,7 @@ namespace Trail.Modules {
 
             foreach (ItemsColumn c in trail) {
                 this.Columns.Add(c);
-                c.LoadItems();
+                c.Load += (_, __) => { c.LoadItems(); };
             }
 
             if (Navigated != null) Navigated(this, EventArgs.Empty);
@@ -66,7 +66,9 @@ namespace Trail.Modules {
         }
 
         private void ItemsColumn_LoadingCompleted(object sender, EventArgs e) {
-            LoadIcons();
+            if (ItemsIconQueue == null) return;
+            ItemsIconQueue.ImageList = this.ImageList;
+            ItemsIconQueue.Enqueue(sender as ItemsColumn);
         }
 
         private void ItemsColumn_OneItemSelected(object sender, ListViewItem e) {
