@@ -31,5 +31,26 @@ namespace Trail.Controls {
             base.OnEnter(e);
             SendMessage(Handle, 0x127, 0x10001, 0);
         }
+
+        #region Override OnItemActivate
+
+        private bool shiftDown = false;
+
+        protected override void OnKeyDown(KeyEventArgs e) {
+            shiftDown = true;
+            base.OnKeyDown(e);
+        }
+
+        protected override void OnKeyUp(KeyEventArgs e) {
+            shiftDown = false;
+            base.OnKeyUp(e);
+        }
+
+        protected override void OnItemActivate(EventArgs e) {
+            if (shiftDown) return;
+            base.OnItemActivate(e);
+        }
+
+        #endregion
     }
 }
