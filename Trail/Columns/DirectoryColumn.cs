@@ -26,7 +26,6 @@ namespace Trail.Columns {
             watcher.EnableRaisingEvents = false;
             watcher.SynchronizingObject = ListViewControl;
 
-            this.ItemActivate += DirectoryColumn_ItemActivate;
             this.ListViewControl.ItemDrag += ListViewControl_ItemDrag;
             this.ListViewControl.DragEnter += ListViewControl_DragEnter;
             this.ListViewControl.DragDrop += ListViewControl_DragDrop;
@@ -197,12 +196,14 @@ namespace Trail.Columns {
 
         #endregion
 
-        private void DirectoryColumn_ItemActivate(object sender, ColumnListViewItem item) {
+        protected override void OnItemActivate(ColumnListViewItem item) {
             if (!(item.Tag is FileInfo) || item.SubColumn != null) return;
 
             ProcessStartInfo info = new ProcessStartInfo((item.Tag as FileInfo).FullName);
             info.WorkingDirectory = (item.Tag as FileInfo).DirectoryName;
             Process.Start(info);
+
+            base.OnItemActivate(item);
         }
 
         private string getImageKey(ColumnListViewItem item) {

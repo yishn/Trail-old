@@ -18,9 +18,6 @@ namespace Trail.Modules {
 
         public ItemsIconQueue() {
             this.WorkerReportsProgress = true;
-
-            this.DoWork += IconLoaderQueue_DoWork;
-            this.ProgressChanged += IconLoaderQueue_ProgressChanged;
         }
 
         public void Enqueue(ColumnListViewItem item) {
@@ -37,14 +34,15 @@ namespace Trail.Modules {
             }
         }
 
-        private void IconLoaderQueue_ProgressChanged(object sender, ProgressChangedEventArgs e) {
+        protected override void OnProgressChanged(ProgressChangedEventArgs e) {
             Tuple<ColumnListViewItem, Image> tuple = e.UserState as Tuple<ColumnListViewItem, Image>;
             if (ImageList != null) ImageList.Images.Add(tuple.Item1.ImageKey, tuple.Item2);
 
             tuple.Item1.ImageKey = tuple.Item1.ImageKey;
+            base.OnProgressChanged(e);
         }
 
-        private void IconLoaderQueue_DoWork(object sender, DoWorkEventArgs e) {
+        protected override void OnDoWork(DoWorkEventArgs e) {
             while (queue.Count > 0) {
                 ColumnListViewItem item = queue.Dequeue();
                 ListView listView = item.ListView;
@@ -61,6 +59,7 @@ namespace Trail.Modules {
                 g.Dispose();
                 image.Dispose();
             }
+            base.OnDoWork(e);
         }
     }
 }
