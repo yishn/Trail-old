@@ -15,11 +15,13 @@ using Trail.Templates;
 namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
         private FileSystemWatcher watcher = new FileSystemWatcher();
+        private ContextMenuStrip contextMenu;
 
         public DirectoryInfo Directory { get; private set; }
 
         public DirectoryColumn(string itemsPath, IHost host) : this(new DirectoryInfo(itemsPath), host) { }
         public DirectoryColumn(DirectoryInfo directory, IHost host) : base(directory.FullName, host) {
+            initializeContextMenu();
             this.Directory = directory;
 
             watcher.IncludeSubdirectories = false;
@@ -204,6 +206,22 @@ namespace Trail.Columns {
             Process.Start(info);
 
             base.OnItemActivate(item);
+        }
+
+        private void initializeContextMenu() {
+            contextMenu = new ContextMenuStrip();
+            this.ListViewControl.ContextMenuStrip = contextMenu;
+
+            ToolStripMenuItem selectAll = new ToolStripMenuItem("Select &All") { ShortcutKeys = Keys.Control | Keys.A };
+            selectAll.Click += (_, __) => { foreach (ListViewItem item in ListViewControl.Items) item.Selected = true; };
+            ToolStripItem newDirectory = new ToolStripMenuItem("New &Directory") { 
+                ShortcutKeys = Keys.Control | Keys.Shift | Keys.N 
+            };
+            newDirectory.Click += (_, __) => {
+                System.IO.Directory.CreateDirectory(Path.Combine(Directory.FullName, "New Directory"));
+            };
+
+            contextMenu.Items.AddRange(new ToolStripItem[] { selectAll, newDirectory });
         }
 
         private string getImageKey(ColumnListViewItem item) {
