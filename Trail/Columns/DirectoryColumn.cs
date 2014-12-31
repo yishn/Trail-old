@@ -198,6 +198,41 @@ namespace Trail.Columns {
 
         #endregion
 
+        #region Context menu
+
+        private void initializeContextMenu() {
+            contextMenu = new ContextMenuStrip();
+            this.ListViewControl.ContextMenuStrip = contextMenu;
+
+            ToolStripItem getInfo = new ToolStripMenuItem("Get &Info") { ShortcutKeys = Keys.Control | Keys.Space };
+
+            ToolStripItem openWith = new ToolStripMenuItem("&Open With");
+            ToolStripItem rename = new ToolStripMenuItem("Re&name") { ShortcutKeys = Keys.F2 };
+            ToolStripItem recycle = new ToolStripMenuItem("&Recycle") { ShortcutKeys = Keys.Delete };
+            
+            ToolStripItem selectAll = new ToolStripMenuItem("Select &All") { ShortcutKeys = Keys.Control | Keys.A };
+            selectAll.Click += (_, __) => { foreach (ListViewItem item in ListViewControl.Items) item.Selected = true; };
+            ToolStripItem newDirectory = new ToolStripMenuItem("New &Directory") { 
+                ShortcutKeys = Keys.Control | Keys.Shift | Keys.N 
+            };
+            ToolStripItem newFile = new ToolStripMenuItem("New &File") { ShortcutKeys = Keys.Control | Keys.N };
+
+            contextMenu.Items.AddRange(new ToolStripItem[] { 
+                getInfo,
+                new ToolStripSeparator(),
+                openWith,
+                rename,
+                recycle,
+                new ToolStripSeparator(),
+                selectAll, 
+                new ToolStripSeparator(),
+                newDirectory, 
+                newFile 
+            });
+        }
+
+        #endregion
+
         protected override void OnItemActivate(ColumnListViewItem item) {
             if (!(item.Tag is FileInfo) || item.SubColumn != null) return;
 
@@ -206,22 +241,6 @@ namespace Trail.Columns {
             Process.Start(info);
 
             base.OnItemActivate(item);
-        }
-
-        private void initializeContextMenu() {
-            contextMenu = new ContextMenuStrip();
-            this.ListViewControl.ContextMenuStrip = contextMenu;
-
-            ToolStripMenuItem selectAll = new ToolStripMenuItem("Select &All") { ShortcutKeys = Keys.Control | Keys.A };
-            selectAll.Click += (_, __) => { foreach (ListViewItem item in ListViewControl.Items) item.Selected = true; };
-            ToolStripItem newDirectory = new ToolStripMenuItem("New &Directory") { 
-                ShortcutKeys = Keys.Control | Keys.Shift | Keys.N 
-            };
-            newDirectory.Click += (_, __) => {
-                System.IO.Directory.CreateDirectory(Path.Combine(Directory.FullName, "New Directory"));
-            };
-
-            contextMenu.Items.AddRange(new ToolStripItem[] { selectAll, newDirectory });
         }
 
         private string getImageKey(ColumnListViewItem item) {
