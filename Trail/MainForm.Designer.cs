@@ -71,13 +71,13 @@
             this.sidebarImages.TransparentColor = System.Drawing.Color.Transparent;
             this.sidebarImages.Images.SetKeyName(0, "bookmarks");
             this.sidebarImages.Images.SetKeyName(1, "devices");
-            this.sidebarImages.Images.SetKeyName(2, "favorites");
-            this.sidebarImages.Images.SetKeyName(3, "folder");
-            this.sidebarImages.Images.SetKeyName(4, "unknown");
-            this.sidebarImages.Images.SetKeyName(5, "drive");
-            this.sidebarImages.Images.SetKeyName(6, "disc");
-            this.sidebarImages.Images.SetKeyName(7, "network");
-            this.sidebarImages.Images.SetKeyName(8, "removable");
+            this.sidebarImages.Images.SetKeyName(2, "folder");
+            this.sidebarImages.Images.SetKeyName(3, "unknown");
+            this.sidebarImages.Images.SetKeyName(4, "drive");
+            this.sidebarImages.Images.SetKeyName(5, "disc");
+            this.sidebarImages.Images.SetKeyName(6, "network");
+            this.sidebarImages.Images.SetKeyName(7, "removable");
+            this.sidebarImages.Images.SetKeyName(8, "favorites");
             // 
             // itemsImages
             // 
