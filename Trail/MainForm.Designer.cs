@@ -84,7 +84,6 @@
             this.itemsImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("itemsImages.ImageStream")));
             this.itemsImages.TransparentColor = System.Drawing.Color.Transparent;
             this.itemsImages.Images.SetKeyName(0, ".folder");
-            this.itemsImages.Images.SetKeyName(1, ".file");
             // 
             // mainMenu
             // 
