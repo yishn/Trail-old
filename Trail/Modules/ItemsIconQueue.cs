@@ -63,5 +63,11 @@ namespace Trail.Modules {
             }
             base.OnDoWork(e);
         }
+
+        protected override void OnRunWorkerCompleted(RunWorkerCompletedEventArgs e) {
+            base.OnRunWorkerCompleted(e);
+
+            if (queue.Count > 0) this.RunWorkerAsync();
+        }
     }
 }
