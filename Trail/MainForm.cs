@@ -73,6 +73,7 @@ namespace Trail {
 
         private void filterToolbar_CancelButtonClicked(object sender, EventArgs e) {
             filterToolbar.SlideClose();
+            (tabBar.CurrentTab.ColumnView.LastFocusedColumn ?? tabBar.CurrentTab.ColumnView.LastColumn).Focus();
         }
 
         private void filterToolbar_FilterTextChanged(object sender, EventArgs e) {

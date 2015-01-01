@@ -11,6 +11,10 @@ namespace Trail.Modules {
     public class NavigatingColumnView : ColumnView {
         public ItemsIconQueue ItemsIconQueue { get; set; }
         public new ItemsColumn LastColumn { get { return base.LastColumn as ItemsColumn; } }
+        public new ItemsColumn LastFocusedColumn { 
+            get { return base.LastFocusedColumn as ItemsColumn; }
+            set { base.LastFocusedColumn = value; }
+        }
         public IHost Host { get { return this.ParentForm as IHost; } }
 
         public event EventHandler<ItemsColumn> SubColumnAdded;
@@ -50,7 +54,9 @@ namespace Trail.Modules {
                 c.ListViewControl.Sort();
 
                 if (c.ListViewControl.Items.Count == 0) continue;
-                c.ListViewControl.Items[0].EnsureVisible();
+                if (FilterListComparer.Filter == "" && c.ListViewControl.SelectedItems.Count != 0)
+                    c.ListViewControl.SelectedItems[0].EnsureVisible();
+                else c.ListViewControl.Items[0].EnsureVisible();
             }
         }
 

@@ -11,6 +11,7 @@ namespace Trail.Controls {
 
         public ObservableCollection<ColumnControl> Columns { get; private set; }
         public ColumnControl LastColumn { get { return this.Columns.Count == 0 ? null : this.Columns[this.Columns.Count - 1]; } }
+        public ColumnControl LastFocusedColumn { get; set; }
         public int DefaultColumnWidth { get; set; }
         public IntAnimation ScrollAnimation { get; private set; }
         public ImageList ImageList {
@@ -85,6 +86,7 @@ namespace Trail.Controls {
                     c.ListViewControl.SmallImageList = this.ImageList;
 
                     c.ListViewControl.KeyUp += (_, evt) => { ColumnControl_KeyUp(c, evt); };
+                    c.ListViewControl.GotFocus += (_, evt) => { ColumnControl_GotFocus(c, evt); };
 
                     ScrollPanel.Controls.Add(c);
                     c.BringToFront();
@@ -96,6 +98,10 @@ namespace Trail.Controls {
             } else if (e.Action == NotifyCollectionChangedAction.Reset) {
                 ScrollPanel.Controls.Clear();
             }
+        }
+
+        private void ColumnControl_GotFocus(object sender, EventArgs e) {
+            this.LastFocusedColumn = sender as ColumnControl;
         }
 
         private void ColumnControl_KeyUp(ColumnControl sender, KeyEventArgs e) {
