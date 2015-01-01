@@ -18,7 +18,7 @@ namespace Trail.Modules {
         public static void LoadPackages(IHost host) {
             if (!Persistence.PackagesFolder.Exists) return;
 
-            foreach (FileInfo file in Persistence.PackagesFolder.EnumerateFiles("*.dll")) {
+            foreach (FileInfo file in Persistence.PackagesFolder.EnumerateFiles("*.dll", SearchOption.AllDirectories)) {
                 Assembly assembly = Assembly.LoadFrom(file.FullName);
 
                 foreach (Type type in assembly.GetTypes()) {
