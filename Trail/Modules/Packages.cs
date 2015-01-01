@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Trail.Columns;
@@ -12,6 +14,22 @@ namespace Trail.Modules {
     public static class Packages {
         public static Dictionary<Tuple<Type, Type>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> DragDropHandlers
             = new Dictionary<Tuple<Type, Type>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>>();
+
+        public static void LoadPackages(IHost host) {
+            if (!Persistence.PackagesFolder.Exists) return;
+
+            foreach (FileInfo file in Persistence.PackagesFolder.EnumerateFiles("*.dll")) {
+                Assembly assembly = Assembly.LoadFrom(file.FullName);
+
+                foreach (Type type in assembly.GetTypes()) {
+                    if (!type.IsPublic || type.IsAbstract) continue;
+                    if (type.GetInterface(typeof(IPackage).FullName) == null) continue;
+
+                    IPackage package = Activator.CreateInstance(type) as IPackage;
+                    package.Initialize(host);
+                }
+            }
+        }
 
         public static ItemsColumn InstantiateColumn(ColumnData data, IHost host) {
             Type type = Type.GetType(data.ColumnType);

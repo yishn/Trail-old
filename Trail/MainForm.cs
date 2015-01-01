@@ -22,6 +22,8 @@ namespace Trail {
         }
 
         public void LoadPreferences() {
+            Packages.LoadPackages(this);
+
             try {
                 Persistence.LoadData();
 

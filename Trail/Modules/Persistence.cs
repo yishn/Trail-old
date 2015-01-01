@@ -10,6 +10,10 @@ namespace Trail.Modules {
     public class Persistence {
         public static DirectoryInfo PersistenceFolder
             = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TrailApp"));
+        public static DirectoryInfo IconsFolder
+            = new DirectoryInfo(Path.Combine(PersistenceFolder.FullName, "icons"));
+        public static DirectoryInfo PackagesFolder
+            = new DirectoryInfo(Path.Combine(PersistenceFolder.FullName, "packages"));
         public static FileInfo PreferencesFile
             = new FileInfo(Path.Combine(PersistenceFolder.FullName, "preferences.json"));
         public static FileInfo FavoritesFile
