@@ -8,7 +8,7 @@ using Trail.Templates;
 namespace Trail.DataTypes {
     public interface IHost {
         DirectoryInfo PersistenceFolder { get; }
-        Dictionary<Tuple<Type, Type>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> DragDropHandlers { get; }
+        Dictionary<Tuple<Type, Type>, DragDropAction> DragDropHandlers { get; }
         Form MainForm { get; }
 
         void CreatePreference(string key, object value);

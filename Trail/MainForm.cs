@@ -196,7 +196,7 @@ namespace Trail {
             get { return Persistence.PersistenceFolder; }
         }
 
-        Dictionary<Tuple<Type, Type>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> IHost.DragDropHandlers {
+        Dictionary<Tuple<Type, Type>, DragDropAction> IHost.DragDropHandlers {
             get { return Packages.DragDropHandlers; }
         }
 

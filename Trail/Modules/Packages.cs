@@ -12,8 +12,7 @@ using Trail.Templates;
 
 namespace Trail.Modules {
     public static class Packages {
-        public static Dictionary<Tuple<Type, Type>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>> DragDropHandlers
-            = new Dictionary<Tuple<Type, Type>, Action<ItemsColumn, ItemsColumn, ColumnListViewItem[]>>();
+        public static Dictionary<Tuple<Type, Type>, DragDropAction> DragDropHandlers = new Dictionary<Tuple<Type, Type>, DragDropAction>();
 
         public static List<Assembly> PackageAssemblies { get; private set; }
 
