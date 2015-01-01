@@ -23,15 +23,20 @@ namespace Trail.Modules {
             foreach (FileInfo file in Persistence.PackagesFolder.EnumerateFiles("*.dll", SearchOption.AllDirectories)) {
                 Assembly assembly = Assembly.LoadFrom(file.FullName);
                 PackageAssemblies.Add(assembly);
-
-                foreach (Type type in assembly.GetTypes()) {
-                    if (!type.IsPublic || type.IsAbstract) continue;
-                    if (type.GetInterface(typeof(IPackage).FullName) == null) continue;
-
-                    IPackage package = Activator.CreateInstance(type) as IPackage;
-                    package.Initialize(host);
-                }
+                GetIPackage(assembly).Initialize(host);
             }
+        }
+
+        public static IPackage GetIPackage(Assembly assembly) {
+            foreach (Type type in assembly.GetTypes()) {
+                if (!type.IsPublic || type.IsAbstract) continue;
+                if (type.GetInterface(typeof(IPackage).FullName) == null) continue;
+
+                IPackage package = Activator.CreateInstance(type) as IPackage;
+                return package;
+            }
+
+            return null;
         }
 
         public static ItemsColumn InstantiateColumn(ColumnData data, IHost host) {
