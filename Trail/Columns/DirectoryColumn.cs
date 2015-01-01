@@ -233,6 +233,7 @@ namespace Trail.Columns {
             };
             newDirectory.Click += newDirectory_Click;
             ToolStripItem newFile = new ToolStripMenuItem("New &File") { ShortcutKeys = Keys.Control | Keys.N };
+            newFile.Click += newFile_Click;
 
             contextMenu.Items.AddRange(new ToolStripItem[] { 
                 getInfo,
@@ -259,7 +260,22 @@ namespace Trail.Columns {
                     "Trail", MessageBoxButtons.OK, MessageBoxIcon.Error
                 );
             } catch {
-                MessageBox.Show("A new directory can't be created.", "Trail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("A new directory can't be created here.", "Trail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void newFile_Click(object sender, EventArgs e) {
+            string fileName = GetUniqueItemName("New Text File{c}.txt");
+
+            try {
+                File.CreateText(Path.Combine(DirectoryData.FullName, fileName)).Close();
+            } catch (UnauthorizedAccessException) {
+                MessageBox.Show(
+                    "You have no authorization to create a new file here.",
+                    "Trail", MessageBoxButtons.OK, MessageBoxIcon.Error
+                );
+            } catch {
+                MessageBox.Show("A new file can't be created here.", "Trail", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
