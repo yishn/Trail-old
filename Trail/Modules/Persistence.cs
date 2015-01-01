@@ -27,6 +27,8 @@ namespace Trail.Modules {
 
         public static void LoadData() {
             if (!PersistenceFolder.Exists) PersistenceFolder.Create();
+            if (!IconsFolder.Exists) IconsFolder.Create();
+            if (!PackagesFolder.Exists) PackagesFolder.Create();
 
             string json = "{}";
             if (PreferencesFile.Exists) {
