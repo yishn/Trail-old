@@ -44,7 +44,7 @@ namespace Trail.Columns {
 
                 foreach (DirectoryInfo dI in this.DirectoryData.GetDirectories()) {
                     token.ThrowIfCancellationRequested();
-                    if (patterns.Any(x => dI.FullName.MatchesPattern(x))) continue;
+                    if (patterns.Any(x => StringHelper.MatchesPattern(dI.FullName, x))) continue;
 
                     result.Add(new ColumnListViewItem() {
                         SubColumn = new ColumnData(this.GetType().FullName, dI.FullName),
@@ -58,7 +58,7 @@ namespace Trail.Columns {
 
                 foreach (FileInfo fI in this.DirectoryData.GetFiles()) {
                     token.ThrowIfCancellationRequested();
-                    if (patterns.Any(x => fI.FullName.MatchesPattern(x))) continue;
+                    if (patterns.Any(x => StringHelper.MatchesPattern(fI.FullName, x))) continue;
 
                     ColumnListViewItem item = new ColumnListViewItem() {
                         Text = fI.Name,
@@ -97,7 +97,7 @@ namespace Trail.Columns {
             if (item.Tag is DirectoryInfo) return base.GetIcon(item);
 
             List<string> patterns = Host.GetPreferenceList("directorycolumn.individual_icon_files");
-            if (!patterns.Any(x => item.Text.MatchesPattern(x))) return base.GetIcon(item);
+            if (!patterns.Any(x => StringHelper.MatchesPattern(item.Text, x))) return base.GetIcon(item);
 
             FileInfo fI = item.Tag as FileInfo;
             return Etier.IconHelper.IconReader.GetFileIcon(fI.FullName, Etier.IconHelper.IconReader.IconSize.Small, false).ToBitmap();
@@ -300,7 +300,7 @@ namespace Trail.Columns {
             if (ext == "") return fI.FullName;
 
             List<string> patterns = Host.GetPreferenceList("directorycolumn.individual_icon_files");
-            if (patterns.Any(x => fI.Name.MatchesPattern(x))) return fI.FullName;
+            if (patterns.Any(x => StringHelper.MatchesPattern(fI.Name, x))) return fI.FullName;
 
             return ext;
         }
