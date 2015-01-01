@@ -37,12 +37,11 @@ namespace Trail.Modules {
 
         public static ItemsColumn InstantiateColumn(ColumnData data, IHost host) {
             Type type = Type.GetType(data.ColumnType);
+            List<Assembly>.Enumerator enumerable = PackageAssemblies.GetEnumerator();
 
-            if (type == null) {
-                foreach (Assembly a in PackageAssemblies) {
-                    type = a.GetType(data.ColumnType);
-                    if (type != null) break;
-                }
+            while (type == null) {
+                if (!enumerable.MoveNext()) return new EmptyColumn(host);
+                type = enumerable.Current.GetType(data.ColumnType);
             }
 
             return Activator.CreateInstance(type, data.Path, host) as ItemsColumn;
