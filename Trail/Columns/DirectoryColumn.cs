@@ -87,7 +87,7 @@ namespace Trail.Columns {
                 if (!drive.IsReady || drive.VolumeLabel.Trim() == "") return DirectoryData.Name;
                 return drive.VolumeLabel + " (" + DirectoryData.Name.Replace(Path.DirectorySeparatorChar, ')');
             }
-            
+
             return DirectoryData.Name;
         }
 
@@ -126,7 +126,7 @@ namespace Trail.Columns {
 
             string newName = Path.Combine(ItemsPath, draft.Replace("{c}", ""));
 
-            if (!File.Exists(newName) && !Directory.Exists(newName)) 
+            if (!File.Exists(newName) && !Directory.Exists(newName))
                 return draft.Replace("{c}", "");
 
             int count = 2;
@@ -226,8 +226,8 @@ namespace Trail.Columns {
             ToolStripItem recycle = new ToolStripMenuItem("&Recycle") { ShortcutKeys = Keys.Delete };
             ToolStripItem selectAll = new ToolStripMenuItem("Select &All") { ShortcutKeys = Keys.Control | Keys.A };
             selectAll.Click += (_, __) => { foreach (ListViewItem item in ListViewControl.Items) item.Selected = true; };
-            ToolStripItem newDirectory = new ToolStripMenuItem("New &Directory") { 
-                ShortcutKeys = Keys.Control | Keys.Shift | Keys.N 
+            ToolStripItem newDirectory = new ToolStripMenuItem("New &Directory") {
+                ShortcutKeys = Keys.Control | Keys.Shift | Keys.N
             };
             newDirectory.Click += newDirectory_Click;
             ToolStripItem newFile = new ToolStripMenuItem("New &File") { ShortcutKeys = Keys.Control | Keys.N };
@@ -248,12 +248,12 @@ namespace Trail.Columns {
 
         private void newDirectory_Click(object sender, EventArgs e) {
             string directoryName = GetUniqueItemName("New Directory");
-            
+
             try {
                 Directory.CreateDirectory(Path.Combine(DirectoryData.FullName, directoryName));
-            } catch (UnauthorizedAccessException){
+            } catch (UnauthorizedAccessException) {
                 MessageBox.Show(
-                    "You have no authorization to create a new directory here.", 
+                    "You have no authorization to create a new directory here.",
                     "Trail", MessageBoxButtons.OK, MessageBoxIcon.Error
                 );
             } catch {
