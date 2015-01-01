@@ -45,6 +45,8 @@ namespace Trail.Modules {
                     progress.Report(new Tuple<int, string>(100, "Completed."));
                 } catch (OperationCanceledException) {
                     progress.Report(new Tuple<int, string>(100, "Cancelled."));
+                } catch (ShowErrorException e) {
+                    progress.Report(new Tuple<int, string>(0, e.Message));
                 } catch {
                     progress.Report(new Tuple<int, string>(0, "An error occurred."));
                 }
