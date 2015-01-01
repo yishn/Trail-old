@@ -91,6 +91,7 @@ namespace Trail.Modules {
         public static void CreatePreference(string key, object value) {
             if (Preferences.ContainsKey(key)) return;
             Preferences[key] = value;
+            SaveData();
         }
 
         private static void createDefaultData() {
@@ -125,8 +126,6 @@ namespace Trail.Modules {
             CreatePreference("tabbar.visible", true);
             CreatePreference("window.size", new List<object>(new object[] { 850, 413 }));
             CreatePreference("window.remember_size", false);
-
-            SaveData();
         }
     }
 }

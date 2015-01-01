@@ -22,8 +22,6 @@ namespace Trail {
         }
 
         public void LoadPreferences() {
-            Packages.LoadPackages(this);
-
             try {
                 Persistence.LoadData();
 
@@ -38,6 +36,8 @@ namespace Trail {
             } catch (Exception) {
                 MessageBox.Show("An error occured while loading preferences.", "Trail", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            Packages.LoadPackages(this);
         }
 
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
