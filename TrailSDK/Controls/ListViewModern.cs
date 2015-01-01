@@ -37,12 +37,12 @@ namespace Trail.Controls {
         private bool shiftDown = false;
 
         protected override void OnKeyDown(KeyEventArgs e) {
-            shiftDown = true;
+            if (e.KeyCode == Keys.ShiftKey) shiftDown = true;
             base.OnKeyDown(e);
         }
 
         protected override void OnKeyUp(KeyEventArgs e) {
-            shiftDown = false;
+            if (e.KeyCode == Keys.ShiftKey) shiftDown = false;
             base.OnKeyUp(e);
         }
 
