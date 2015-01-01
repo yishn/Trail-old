@@ -5,9 +5,12 @@ using System.Windows.Forms;
 using Trail.Columns;
 using Trail.Controls;
 using Trail.DataTypes;
+using Trail.Templates;
 
 namespace Trail.Modules {
     public class Sidebar : TreeViewModern {
+        public IHost Host { get { return this.FindForm() as IHost; } }
+
         public Sidebar() {
             this.BackColor = SystemColors.Control;
             this.BorderStyle = BorderStyle.None;
@@ -64,7 +67,7 @@ namespace Trail.Modules {
                         dI.DriveType == DriveType.Removable ? "removable" :
                         dI.DriveType == DriveType.Fixed ? "drive" : "unknown"
                 };
-                node.Text = Packages.InstantiateColumn(node.SubColumn, null).GetHeaderText();
+                node.Text = Packages.InstantiateColumn(node.SubColumn, Host).GetHeaderText();
                 node.SelectedImageKey = node.ImageKey;
 
                 drives.Nodes.Add(node);
@@ -78,11 +81,15 @@ namespace Trail.Modules {
             favorites.Nodes.Clear();
 
             foreach (ColumnData item in Persistence.FavoriteItems) {
+                ItemsColumn column = Packages.InstantiateColumn(item, Host);
+                string key = Guid.NewGuid().ToString();
+
+                this.ImageList.Images.Add(key, column.GetIcon());
                 ColumnTreeNode node = new ColumnTreeNode() {
-                    Text = Packages.InstantiateColumn(item, null).GetHeaderText(),
+                    Text = column.GetHeaderText(),
                     SubColumn = item,
-                    ImageKey = "folder",
-                    SelectedImageKey = "folder"
+                    ImageKey = key,
+                    SelectedImageKey = key
                 };
 
                 favorites.Nodes.Add(node);
