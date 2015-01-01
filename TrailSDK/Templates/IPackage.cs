@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Trail.DataTypes;
 
-namespace TrailSDK.DataTypes {
+namespace TrailSDK.Templates {
     public interface IPackage {
         string Name { get; }
         string Author { get; }
         string Website { get; }
         string Description { get; }
 
-        void Initialization(IHost host);
+        void Initialize(IHost host);
     }
 }
