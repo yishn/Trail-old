@@ -17,12 +17,12 @@ namespace Trail.Columns {
         private FileSystemWatcher watcher = new FileSystemWatcher();
         private ContextMenuStrip contextMenu;
 
-        public DirectoryInfo Directory { get; private set; }
+        public DirectoryInfo DirectoryData { get; private set; }
 
         public DirectoryColumn(string itemsPath, IHost host) : this(new DirectoryInfo(itemsPath), host) { }
         public DirectoryColumn(DirectoryInfo directory, IHost host) : base(directory.FullName, host) {
             initializeContextMenu();
-            this.Directory = directory;
+            this.DirectoryData = directory;
 
             watcher.IncludeSubdirectories = false;
             watcher.EnableRaisingEvents = false;
@@ -42,7 +42,7 @@ namespace Trail.Columns {
                 List<ColumnListViewItem> result = new List<ColumnListViewItem>();
                 List<string> patterns = Host.GetPreferenceList("directorycolumn.directory_exclude_patterns");
 
-                foreach (DirectoryInfo dI in this.Directory.GetDirectories()) {
+                foreach (DirectoryInfo dI in this.DirectoryData.GetDirectories()) {
                     token.ThrowIfCancellationRequested();
                     if (patterns.Any(x => dI.FullName.MatchesPattern(x))) continue;
 
@@ -56,7 +56,7 @@ namespace Trail.Columns {
 
                 patterns = Host.GetPreferenceList("directorycolumn.file_exclude_patterns");
 
-                foreach (FileInfo fI in this.Directory.GetFiles()) {
+                foreach (FileInfo fI in this.DirectoryData.GetFiles()) {
                     token.ThrowIfCancellationRequested();
                     if (patterns.Any(x => fI.FullName.MatchesPattern(x))) continue;
 
@@ -68,7 +68,7 @@ namespace Trail.Columns {
                     result.Add(item);
                 }
 
-                watcher.Path = Directory.FullName;
+                watcher.Path = DirectoryData.FullName;
                 watcher.EnableRaisingEvents = true;
 
                 return result;
@@ -82,13 +82,13 @@ namespace Trail.Columns {
         }
 
         public override string GetHeaderText() {
-            if (Directory.Root.FullName == Directory.FullName) {
-                DriveInfo drive = new DriveInfo(Directory.FullName);
-                if (!drive.IsReady || drive.VolumeLabel.Trim() == "") return Directory.Name;
-                return drive.VolumeLabel + " (" + Directory.Name.Replace(Path.DirectorySeparatorChar, ')');
+            if (DirectoryData.Root.FullName == DirectoryData.FullName) {
+                DriveInfo drive = new DriveInfo(DirectoryData.FullName);
+                if (!drive.IsReady || drive.VolumeLabel.Trim() == "") return DirectoryData.Name;
+                return drive.VolumeLabel + " (" + DirectoryData.Name.Replace(Path.DirectorySeparatorChar, ')');
             }
             
-            return Directory.Name;
+            return DirectoryData.Name;
         }
 
         public override Image GetIcon(ColumnListViewItem item) {
@@ -102,9 +102,9 @@ namespace Trail.Columns {
         }
 
         public override List<ItemsColumn> GetTrail() {
-            if (!Directory.Exists) return base.GetTrail();
+            if (!DirectoryData.Exists) return base.GetTrail();
 
-            DirectoryInfo current = this.Directory;
+            DirectoryInfo current = this.DirectoryData;
             List<ItemsColumn> trail = new List<ItemsColumn>();
             trail.Add(this);
 
@@ -118,7 +118,7 @@ namespace Trail.Columns {
         }
 
         public override ItemsColumn Duplicate() {
-            return new DirectoryColumn(this.Directory, this.Host);
+            return new DirectoryColumn(this.DirectoryData, this.Host);
         }
 
         public string GetUniqueItemName(string draft) {
@@ -126,15 +126,15 @@ namespace Trail.Columns {
 
             string newName = Path.Combine(ItemsPath, draft.Replace("{c}", ""));
 
-            if (!File.Exists(newName) && !System.IO.Directory.Exists(newName)) 
+            if (!File.Exists(newName) && !Directory.Exists(newName)) 
                 return draft.Replace("{c}", "");
 
             int count = 2;
             do {
                 newName = Path.Combine(ItemsPath, draft.Replace("{c}", " " + count++));
-            } while (File.Exists(newName) || System.IO.Directory.Exists(newName));
+            } while (File.Exists(newName) || Directory.Exists(newName));
 
-            return newName;
+            return Path.GetFileName(newName);
         }
 
         #region Drag & Drop
@@ -160,9 +160,9 @@ namespace Trail.Columns {
             string[] items = e.Data.GetData(DataFormats.FileDrop) as string[];
             if (items.All(x => {
                 if (File.Exists(x)) {
-                    return new FileInfo(x).Directory.FullName == Directory.FullName;
-                } else if (System.IO.Directory.Exists(x)) {
-                    return new DirectoryInfo(x).Parent.FullName == Directory.FullName;
+                    return new FileInfo(x).Directory.FullName == DirectoryData.FullName;
+                } else if (Directory.Exists(x)) {
+                    return new DirectoryInfo(x).Parent.FullName == DirectoryData.FullName;
                 }
 
                 return true;
@@ -176,7 +176,7 @@ namespace Trail.Columns {
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
 
             string[] items = e.Data.GetData(DataFormats.FileDrop) as string[];
-            Host.EnqueueAction(new FilesCopyAction(items, this.Directory, Host));
+            Host.EnqueueAction(new FilesCopyAction(items, this.DirectoryData, Host));
         }
 
         #endregion
@@ -208,8 +208,8 @@ namespace Trail.Columns {
         }
 
         private void watcher_Renamed(object sender, RenamedEventArgs e) {
-            watcher_Deleted(sender, new FileSystemEventArgs(WatcherChangeTypes.Deleted, Directory.FullName, e.OldName));
-            watcher_Created(sender, new FileSystemEventArgs(WatcherChangeTypes.Created, Directory.FullName, e.Name));
+            watcher_Deleted(sender, new FileSystemEventArgs(WatcherChangeTypes.Deleted, DirectoryData.FullName, e.OldName));
+            watcher_Created(sender, new FileSystemEventArgs(WatcherChangeTypes.Created, DirectoryData.FullName, e.Name));
         }
 
         #endregion
@@ -247,7 +247,18 @@ namespace Trail.Columns {
         }
 
         private void newDirectory_Click(object sender, EventArgs e) {
-            throw new NotImplementedException();
+            string directoryName = GetUniqueItemName("New Directory");
+            
+            try {
+                Directory.CreateDirectory(Path.Combine(DirectoryData.FullName, directoryName));
+            } catch (UnauthorizedAccessException){
+                MessageBox.Show(
+                    "You have no authorization to create a new directory here.", 
+                    "Trail", MessageBoxButtons.OK, MessageBoxIcon.Error
+                );
+            } catch {
+                MessageBox.Show("A new directory can't be created.", "Trail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         #endregion
