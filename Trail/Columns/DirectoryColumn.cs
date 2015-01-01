@@ -83,9 +83,11 @@ namespace Trail.Columns {
 
         public override string GetHeaderText() {
             if (DirectoryData.Root.FullName == DirectoryData.FullName) {
-                DriveInfo drive = new DriveInfo(DirectoryData.FullName);
-                if (!drive.IsReady || drive.VolumeLabel.Trim() == "") return DirectoryData.Name;
-                return drive.VolumeLabel + " (" + DirectoryData.Name.Replace(Path.DirectorySeparatorChar, ')');
+                try {
+                    DriveInfo drive = new DriveInfo(DirectoryData.FullName);
+                    if (!drive.IsReady || drive.VolumeLabel.Trim() == "") return DirectoryData.Name;
+                    return drive.VolumeLabel + " (" + DirectoryData.Name.Replace(Path.DirectorySeparatorChar, ')');
+                } catch (ArgumentException) { }
             }
 
             return DirectoryData.Name;
