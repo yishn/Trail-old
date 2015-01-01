@@ -36,9 +36,11 @@ namespace Trail.Modules {
 
         protected override void OnProgressChanged(ProgressChangedEventArgs e) {
             Tuple<ColumnListViewItem, Image> tuple = e.UserState as Tuple<ColumnListViewItem, Image>;
-            if (ImageList != null) ImageList.Images.Add(tuple.Item1.ImageKey, tuple.Item2);
+            string imageKey = tuple.Item1.ImageKey;
 
-            tuple.Item1.ImageKey = tuple.Item1.ImageKey;
+            if (ImageList != null && !ImageList.Images.ContainsKey(imageKey)) ImageList.Images.Add(imageKey, tuple.Item2);
+            tuple.Item1.ImageKey = imageKey;
+
             base.OnProgressChanged(e);
         }
 
