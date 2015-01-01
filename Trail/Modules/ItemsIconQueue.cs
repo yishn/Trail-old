@@ -22,6 +22,7 @@ namespace Trail.Modules {
 
         public void Enqueue(ColumnListViewItem item) {
             if (ImageList == null) return;
+            if (item.ImageKey == "") item.ImageKey = Guid.NewGuid().ToString();
             if (ImageList.Images.Keys.Contains(item.ImageKey)) return;
 
             queue.Enqueue(item);

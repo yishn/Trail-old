@@ -76,10 +76,6 @@ namespace Trail.Templates {
                 this.ErrorText = ex.Message;
             }
 
-            foreach (ColumnListViewItem item in ListViewControl.Items) {
-                if (item.ImageKey == "") item.ImageKey = Guid.NewGuid().ToString();
-            }
-
             this.IsBusy = false;
             OnLoadingCompleted();
         }
