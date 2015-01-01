@@ -12,11 +12,11 @@ using Trail.Templates;
 
 namespace Trail.Modules {
     public static class Packages {
-        public static Dictionary<Tuple<Type, Type>, DragDropAction> DragDropHandlers { get; private set; }
+        public static Dictionary<DragDropKey, DragDropAction> DragDropHandlers { get; private set; }
         public static List<Assembly> PackageAssemblies { get; private set; }
 
         public static void LoadPackages(IHost host) {
-            DragDropHandlers = new Dictionary<Tuple<Type, Type>, DragDropAction>();
+            DragDropHandlers = new Dictionary<DragDropKey, DragDropAction>();
             PackageAssemblies = new List<Assembly>();
             if (!Persistence.PackagesFolder.Exists) return;
 

@@ -95,7 +95,8 @@ namespace Trail.Templates {
             if (!e.Data.GetDataPresent(typeof(DragDropData))) return;
 
             DragDropData data = e.Data.GetData(typeof(DragDropData)) as DragDropData;
-            if (!Host.DragDropHandlers.ContainsKey(new Tuple<Type, Type>(data.SourceColumn.GetType(), this.GetType()))) return;
+            DragDropKey key = new DragDropKey(data.SourceColumn.GetType().FullName, this.GetType().FullName);
+            if (!Host.DragDropHandlers.ContainsKey(key)) return;
 
             e.Effect = DragDropEffects.Copy;
         }
@@ -105,7 +106,8 @@ namespace Trail.Templates {
             if (!e.Data.GetDataPresent(typeof(DragDropData))) return;
 
             DragDropData data = e.Data.GetData(typeof(DragDropData)) as DragDropData;
-            DragDropAction action = Host.DragDropHandlers[new Tuple<Type, Type>(data.SourceColumn.GetType(), this.GetType())];
+            DragDropKey key = new DragDropKey(data.SourceColumn.GetType().FullName, this.GetType().FullName);
+            DragDropAction action = Host.DragDropHandlers[key];
             action.Invoke(data.SourceColumn, this, data.Items);
         }
 

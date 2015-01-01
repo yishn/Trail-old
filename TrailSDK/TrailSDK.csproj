@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTypes\DragDropAction.cs" />
+    <Compile Include="DataTypes\DragDropKey.cs" />
     <Compile Include="Templates\IPackage.cs" />
     <Compile Include="Templates\ItemsAction.cs" />
     <Compile Include="Controls\ColumnListViewItem.cs" />
