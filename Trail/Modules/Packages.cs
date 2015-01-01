@@ -23,7 +23,8 @@ namespace Trail.Modules {
             foreach (FileInfo file in Persistence.PackagesFolder.EnumerateFiles("*.dll", SearchOption.AllDirectories)) {
                 Assembly assembly = Assembly.LoadFrom(file.FullName);
                 PackageAssemblies.Add(assembly);
-                GetIPackage(assembly).Initialize(host);
+                IPackage package = GetIPackage(assembly);
+                if (package != null) package.Initialize(host);
             }
         }
 
