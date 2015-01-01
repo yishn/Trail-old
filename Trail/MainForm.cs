@@ -30,14 +30,13 @@ namespace Trail {
                 splitContainer.SplitterDistance = Persistence.GetPreference<int>("sidebar.width");
                 splitContainer.Panel1Collapsed = !Persistence.GetPreference<bool>("sidebar.visible");
                 tabBar.Visible = Persistence.GetPreference<bool>("tabbar.visible");
-
-                sidebar.Load();
-                tabBar.LoadSession();
             } catch (Exception) {
                 MessageBox.Show("An error occured while loading preferences.", "Trail", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             Packages.LoadPackages(this);
+            sidebar.Load();
+            tabBar.LoadSession();
         }
 
         private void Tabs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
