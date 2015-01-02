@@ -238,6 +238,13 @@ namespace Trail.Columns {
             ListViewControl.Items.Add(item);
             ListViewControl.Sort();
 
+            if (item.Text.StartsWith("New ")) {
+                ListViewControl.SelectedItems.Clear();
+                item.Selected = true;
+                item.EnsureVisible();
+                item.BeginEdit();
+            }
+
             OnLoadingCompleted();
         }
 
