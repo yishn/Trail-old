@@ -68,18 +68,8 @@ namespace Trail.Modules {
             foreach (DriveInfo dI in DriveInfo.GetDrives()) {
                 if (!dI.IsReady) continue;
 
-                ColumnTreeNode node = new ColumnTreeNode() {
-                    Tag = dI,
-                    SubColumn = new ColumnData(typeof(DirectoryColumn).FullName, dI.RootDirectory.FullName),
-                    ImageKey = dI.DriveType == DriveType.CDRom ? "disc" :
-                        dI.DriveType == DriveType.Network ? "network" :
-                        dI.DriveType == DriveType.Removable ? "removable" :
-                        dI.DriveType == DriveType.Fixed ? "drive" : "unknown"
-                };
-                node.Text = Packages.InstantiateColumn(node.SubColumn, Host).GetHeaderText();
-                node.SelectedImageKey = node.ImageKey;
-
-                drives.Nodes.Add(node);
+                ColumnData data = new ColumnData(typeof(DirectoryColumn).FullName, dI.RootDirectory.FullName);
+                drives.Nodes.Add(getNodeFrom(data));
             }
 
             drives.Expand();
@@ -89,22 +79,24 @@ namespace Trail.Modules {
             TreeNode favorites = this.Nodes["favorites"];
             favorites.Nodes.Clear();
 
-            foreach (ColumnData item in Persistence.FavoriteItems) {
-                ItemsColumn column = Packages.InstantiateColumn(item, Host);
-                string key = Guid.NewGuid().ToString();
-
-                this.ImageList.Images.Add(key, column.GetIcon());
-                ColumnTreeNode node = new ColumnTreeNode() {
-                    Text = column.GetHeaderText(),
-                    SubColumn = item,
-                    ImageKey = key,
-                    SelectedImageKey = key
-                };
-
-                favorites.Nodes.Add(node);
+            foreach (ColumnData data in Persistence.FavoriteItems) {
+                favorites.Nodes.Add(getNodeFrom(data));
             }
 
             favorites.Expand();
+        }
+
+        private ColumnTreeNode getNodeFrom(ColumnData data) {
+            ItemsColumn column = Packages.InstantiateColumn(data, Host);
+            string key = Guid.NewGuid().ToString();
+
+            this.ImageList.Images.Add(key, column.GetIcon());
+            return new ColumnTreeNode() {
+                Text = column.GetHeaderText(),
+                SubColumn = data,
+                ImageKey = key,
+                SelectedImageKey = key
+            };
         }
 
         private void Sidebar_LostFocus(object sender, EventArgs e) {

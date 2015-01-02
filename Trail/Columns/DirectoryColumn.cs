@@ -81,6 +81,17 @@ namespace Trail.Columns {
             }
         }
 
+        public DriveInfo IsDrive() {
+            if (DirectoryData.Root.FullName == DirectoryData.FullName) {
+                try {
+                    DriveInfo drive = new DriveInfo(DirectoryData.FullName);
+                    return drive;
+                } catch (ArgumentException) { }
+            }
+
+            return null;
+        }
+
         public override string GetHeaderText() {
             if (DirectoryData.Root.FullName == DirectoryData.FullName) {
                 try {
@@ -94,7 +105,21 @@ namespace Trail.Columns {
         }
 
         public override Image GetIcon() {
-            return FugueIcons.FolderOpen;
+            DriveInfo drive = IsDrive();
+            if (drive == null) return FugueIcons.FolderOpen;
+
+            switch (drive.DriveType) {
+                case DriveType.CDRom:
+                    return FugueIcons.DriveDiscBlue;
+                case DriveType.Fixed:
+                    return FugueIcons.Drive;
+                case DriveType.Network:
+                    return FugueIcons.DriveNetwork;
+                case DriveType.Removable:
+                    return FugueIcons.DriveArrow;
+                default:
+                    return FugueIcons.DriveExclamation;
+            }
         }
 
         public override Image GetIcon(ColumnListViewItem item) {
@@ -286,7 +311,7 @@ namespace Trail.Columns {
         #endregion
 
         protected override void OnItemActivate(ColumnListViewItem item) {
-            if (!(item.Tag is FileInfo) || item.SubColumn != null) return;
+            if (item.SubColumn != null) return;
 
             ProcessStartInfo info = new ProcessStartInfo((item.Tag as FileInfo).FullName);
             info.WorkingDirectory = (item.Tag as FileInfo).DirectoryName;
