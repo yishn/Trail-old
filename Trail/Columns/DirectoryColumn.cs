@@ -200,7 +200,7 @@ namespace Trail.Columns {
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
 
             string[] items = e.Data.GetData(DataFormats.FileDrop) as string[];
-            Host.EnqueueAction(new CopyFilesAction(items, this.DirectoryData, Host));
+            Host.EnqueueAction(new DirectoryCopyAction(items, this.DirectoryData, Host));
         }
 
         #endregion

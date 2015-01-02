@@ -8,14 +8,14 @@ using Trail.DataTypes;
 using Trail.Templates;
 
 namespace Trail.Actions {
-    public class CopyFilesAction : ItemsAction {
+    public class DirectoryCopyAction : ItemsAction {
         private Queue<Tuple<string, string>> queue = new Queue<Tuple<string, string>>();
 
         public string[] Items { get; private set; }
         public DirectoryInfo Destination { get; private set; }
         public int Count { get; private set; }
 
-        public CopyFilesAction(string[] items, DirectoryInfo destination, IHost host) : base(host) {
+        public DirectoryCopyAction(string[] items, DirectoryInfo destination, IHost host) : base(host) {
             this.HeaderText = "Copy files to \"" + destination.Name + "\"";
             this.Items = items;
             this.Destination = destination;
