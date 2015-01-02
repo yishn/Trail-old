@@ -164,17 +164,7 @@ namespace Trail.Columns {
         #region Drag & Drop
 
         private void ListViewControl_ItemDrag(object sender, ItemDragEventArgs e) {
-            string[] items = new string[ListViewControl.SelectedItems.Count];
-            int i = 0;
-
-            foreach (ColumnListViewItem item in ListViewControl.SelectedItems) {
-                string path;
-                if (item.Tag is DirectoryInfo) path = (item.Tag as DirectoryInfo).FullName;
-                else path = (item.Tag as FileInfo).FullName;
-
-                items[i++] = path;
-            }
-
+            string[] items = getSelectedPaths();
             ListViewControl.DoDragDrop(new DataObject(DataFormats.FileDrop, items), DragDropEffects.Copy);
         }
 
@@ -265,6 +255,7 @@ namespace Trail.Columns {
             ToolStripItem rename = new ToolStripMenuItem("Re&name") { ShortcutKeys = Keys.F2 };
             rename.Click += rename_Click;
             ToolStripItem recycle = new ToolStripMenuItem("&Recycle") { ShortcutKeys = Keys.Delete };
+            recycle.Click += recycle_Click;
             ToolStripItem separator2 = new ToolStripSeparator();
             ToolStripItem selectAll = new ToolStripMenuItem("Select &All") { ShortcutKeys = Keys.Control | Keys.A };
             selectAll.Click += (_, __) => { foreach (ListViewItem item in ListViewControl.Items) item.Selected = true; };
@@ -300,6 +291,12 @@ namespace Trail.Columns {
                     openWith.Visible = false;
                 }
             };
+        }
+
+        private void recycle_Click(object sender, EventArgs e) {
+            string[] items = getSelectedPaths();
+            DirectoryDeleteAction action = new DirectoryDeleteAction(items, Host, false);
+            Host.EnqueueAction(action);
         }
 
         private void rename_Click(object sender, EventArgs e) {
@@ -364,6 +361,21 @@ namespace Trail.Columns {
             Process.Start(info);
 
             base.OnItemActivate(item);
+        }
+
+        private string[] getSelectedPaths() {
+            string[] items = new string[ListViewControl.SelectedItems.Count];
+            int i = 0;
+
+            foreach (ColumnListViewItem item in ListViewControl.SelectedItems) {
+                string path;
+                if (item.Tag is DirectoryInfo) path = (item.Tag as DirectoryInfo).FullName;
+                else path = (item.Tag as FileInfo).FullName;
+
+                items[i++] = path;
+            }
+
+            return items;
         }
 
         private ColumnListViewItem getExistingItem(string path) {

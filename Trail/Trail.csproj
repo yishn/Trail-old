@@ -47,7 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\FilesCopyAction.cs" />
+    <Compile Include="Actions\DirectoryCopyAction.cs" />
+    <Compile Include="Actions\DirectoryDeleteAction.cs" />
     <Compile Include="Columns\DirectoryColumn.cs">
       <SubType>UserControl</SubType>
     </Compile>
