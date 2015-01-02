@@ -40,19 +40,6 @@ namespace Trail.Columns {
             watcher.Renamed += watcher_Renamed;
         }
 
-        private void ListViewControl_AfterLabelEdit(object sender, LabelEditEventArgs e) {
-            if (e.Label == null) return;
-            ColumnListViewItem item = ListViewControl.Items[e.Item] as ColumnListViewItem;
-
-            if (item.Tag is DirectoryInfo) {
-                Directory.Move(Path.Combine(ItemsPath, item.Text), Path.Combine(ItemsPath, e.Label));
-            } else if (item.Tag is FileInfo) {
-                File.Move(Path.Combine(ItemsPath, item.Text), Path.Combine(ItemsPath, e.Label));
-            }
-
-            e.CancelEdit = true;
-        }
-
         protected override List<ColumnListViewItem> loadData(CancellationToken token) {
             try {
                 List<ColumnListViewItem> result = new List<ColumnListViewItem>();
@@ -234,7 +221,7 @@ namespace Trail.Columns {
             foreach (ColumnListViewItem item in ListViewControl.Items) {
                 if (item.Text != e.Name) continue;
                 item.Remove();
-                break;
+                return;
             }
         }
 
@@ -255,8 +242,26 @@ namespace Trail.Columns {
         }
 
         private void watcher_Renamed(object sender, RenamedEventArgs e) {
-            watcher_Deleted(sender, new FileSystemEventArgs(WatcherChangeTypes.Deleted, DirectoryData.FullName, e.OldName));
+            ListViewControl.BeginUpdate();
+            bool selected = false;
+
+            foreach (ColumnListViewItem item in ListViewControl.Items) {
+                if (item.Text != e.OldName) continue;
+                selected = item.Selected;
+                item.Remove();
+                break;
+            }
+
             watcher_Created(sender, new FileSystemEventArgs(WatcherChangeTypes.Created, DirectoryData.FullName, e.Name));
+
+            if (selected) {
+                foreach (ColumnListViewItem item in ListViewControl.Items) {
+                    if (item.Text != e.Name) continue;
+                    item.Selected = true;
+                    break;
+                }
+            }
+            ListViewControl.EndUpdate();
         }
 
         #endregion
@@ -346,6 +351,19 @@ namespace Trail.Columns {
         }
 
         #endregion
+
+        private void ListViewControl_AfterLabelEdit(object sender, LabelEditEventArgs e) {
+            if (e.Label == null) return;
+            ColumnListViewItem item = ListViewControl.Items[e.Item] as ColumnListViewItem;
+
+            if (item.Tag is DirectoryInfo) {
+                Directory.Move(Path.Combine(ItemsPath, item.Text), Path.Combine(ItemsPath, e.Label));
+            } else if (item.Tag is FileInfo) {
+                File.Move(Path.Combine(ItemsPath, item.Text), Path.Combine(ItemsPath, e.Label));
+            }
+
+            e.CancelEdit = true;
+        }
 
         protected override void OnItemActivate(ColumnListViewItem item) {
             if (item.SubColumn != null) return;
