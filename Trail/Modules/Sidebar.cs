@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Trail.Columns;
 using Trail.Controls;
 using Trail.DataTypes;
+using Trail.Helpers;
 using Trail.Templates;
 
 namespace Trail.Modules {
@@ -29,6 +30,14 @@ namespace Trail.Modules {
         }
 
         public void Load() {
+            this.ImageList.Images.Add("favorites", FugueIcons.Star);
+            this.ImageList.Images.Add("devices", FugueIcons.Computer);
+            this.ImageList.Images.Add("drive", FugueIcons.Drive);
+            this.ImageList.Images.Add("unknown", FugueIcons.DriveExclamation);
+            this.ImageList.Images.Add("disc", FugueIcons.DriveDiscBlue);
+            this.ImageList.Images.Add("network", FugueIcons.DriveNetwork);
+            this.ImageList.Images.Add("removable", FugueIcons.DriveArrow);
+
             ColumnTreeNode node1 = new ColumnTreeNode() {
                 Text = "Favorites",
                 Name = "favorites",
