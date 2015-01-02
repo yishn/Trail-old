@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,14 +27,13 @@ namespace Trail.Actions {
                 int percentage = i * 100 / Items.Length;
                 progress.Report(new Tuple<int, string>(percentage, Path.GetFileName(Items[i])));
 
-                if (Recycle) return; // TODO: Recycle items
-
                 string path = Items[i];
-                if (Directory.Exists(path)) {
-                    Directory.Delete(path);
-                } else if (File.Exists(path)) {
-                    File.Delete(path);
-                }
+                RecycleOption option = Recycle ? RecycleOption.SendToRecycleBin : RecycleOption.DeletePermanently;
+
+                if (Directory.Exists(path))
+                    FileSystem.DeleteDirectory(path, UIOption.OnlyErrorDialogs, option);
+                else if (File.Exists(path))
+                    FileSystem.DeleteFile(path, UIOption.OnlyErrorDialogs, option);
             }
         }
     }

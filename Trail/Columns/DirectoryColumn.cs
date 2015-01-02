@@ -295,7 +295,7 @@ namespace Trail.Columns {
 
         private void recycle_Click(object sender, EventArgs e) {
             string[] items = getSelectedPaths();
-            DirectoryDeleteAction action = new DirectoryDeleteAction(items, Host, false);
+            DirectoryDeleteAction action = new DirectoryDeleteAction(items, Host, true);
             Host.EnqueueAction(action);
         }
 
