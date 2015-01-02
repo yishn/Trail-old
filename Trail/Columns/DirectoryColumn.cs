@@ -94,11 +94,11 @@ namespace Trail.Columns {
         }
 
         public override Image GetIcon() {
-            return StringHelper.Base64ToImage("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAilJREFUeNqMU89rE0EYfTuz1m790ZJoQeghaqulXoSIp568CQpePOit4EHw4D8gQkWo/0TxXFAIePEgxaMQBLXWH1VqW9NWC6HGkGyyOzPr901mN1lQcNjHzM5+7+173+541QXY4XmYo6mE/xsbSYLHvPATt0Mbp2auP7rXqn2CRzcjx04iGJuAkEN5qu+junjzYXZrTPZIHDo+hZHiaUTNPbR2P2P7wytMla/l+F4QgDgiI2my4CCMVjBRF/7BUYydmUWnE6HZ6kATIyFXFrTm2pQnNDlwkInWyKBITEVoNEPs7jX6AgSuTXk+1abDCrALa00ItMMuCi6jcbOgGrpk0usbfNXvgTQ6hlaxC+chVjojpjM3gDiSVmUSeD0YwTdMsNYZGoo2mTgI7sGleXOXHs0Z6yAXQfUjaGkdcObeZ3YzCTTCkMSti1wEchDDuAiGeqDooXHENIJH8367zTF8+6J3m2A1q8jWtQOvldZ/jXBrvWjrmSfuLwEsEisM2f+AGtmDsg5sqwc+IQvU621bzzz+o4IHT1D4HeJowk2zn7L3L3CTpJQ5eHRo7lQOP3uxgiXiBZxjmFB4u4GdyZdPm6XpC8OjxRMH+E1b39Z+vVmZX+WsxSOI0mat/8TO4jI+MpcF9hlffuD219Xq87X31cuF8Ymzk+culsjB5kIFN2anUb9aRjcVoNp+5wcPChEqFLuyXaud/75Vu0Imxmm7Tuj+61z/EWAAclGWg0KibYEAAAAASUVORK5CYII=");
+            return FugueIcons.FolderOpen;
         }
 
         public override Image GetIcon(ColumnListViewItem item) {
-            if (item.Tag is DirectoryInfo) return base.GetIcon(item);
+            if (item.Tag is DirectoryInfo) return FugueIcons.FolderOpen;
 
             List<string> patterns = Host.GetPreferenceList("directorycolumn.individual_icon_files");
             if (!patterns.Any(x => StringHelper.MatchesPattern(item.Text, x))) return base.GetIcon(item);

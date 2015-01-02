@@ -40,7 +40,7 @@ namespace Trail.Templates {
         }
 
         public virtual Image GetIcon() {
-            return StringHelper.Base64ToImage("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAPpJREFUeNqUU9sNgzAMdADxUdQBqs7UDfrfJZBgmG7QNVijYoBCJZ5tLqojY1IkLFkmvpw5O4kpy/JCRCfab3VRFA/K8/z2CVhVVYuo7cejZJomwgeczRjjc9IlDh4sGYbBzPMc3IA8R42D5wqM4+gKwNmiKCLOSZc4eKzA/0maVqBx8FyBvu+N3hBqQePg+RkA1BusRJfjqHE/g5AC9LilALhX0HXdqkAcx5sFgIP3V4EmhvCFAt0jr7VL3Cto29bgkshz5rWOEgfPFajrOsFQ0jRdXSQZNQ6eO5Esy642cd77FG3hZ9M0d8g4WD9iuDv4GMjLtvL+CjAAeliPvaTcIh8AAAAASUVORK5CYII=");
+            return FugueIcons.UiSplitPanel;
         }
 
         public virtual Image GetIcon(ColumnListViewItem item) {

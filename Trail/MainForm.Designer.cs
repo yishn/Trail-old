@@ -81,9 +81,9 @@
             // 
             // itemsImages
             // 
-            this.itemsImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("itemsImages.ImageStream")));
+            this.itemsImages.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.itemsImages.ImageSize = new System.Drawing.Size(20, 20);
             this.itemsImages.TransparentColor = System.Drawing.Color.Transparent;
-            this.itemsImages.Images.SetKeyName(0, ".folder");
             // 
             // mainMenu
             // 
