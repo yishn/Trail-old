@@ -33,6 +33,7 @@ namespace Trail.Columns {
             this.ListViewControl.ItemDrag += ListViewControl_ItemDrag;
             this.ListViewControl.DragEnter += ListViewControl_DragEnter;
             this.ListViewControl.DragDrop += ListViewControl_DragDrop;
+            this.ListViewControl.BeforeLabelEdit += ListViewControl_BeforeLabelEdit;
             this.ListViewControl.AfterLabelEdit += ListViewControl_AfterLabelEdit;
 
             watcher.Created += watcher_Created;
@@ -336,7 +337,14 @@ namespace Trail.Columns {
 
         #endregion
 
+        private void ListViewControl_BeforeLabelEdit(object sender, LabelEditEventArgs e) {
+            // Disable context menu
+            ListViewControl.ContextMenuStrip = null;
+        }
+
         private void ListViewControl_AfterLabelEdit(object sender, LabelEditEventArgs e) {
+            ListViewControl.ContextMenuStrip = contextMenu;
+
             if (e.Label == null) return;
             ColumnListViewItem item = ListViewControl.Items[e.Item] as ColumnListViewItem;
 
