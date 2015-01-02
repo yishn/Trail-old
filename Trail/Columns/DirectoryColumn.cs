@@ -11,6 +11,7 @@ using Trail.DataTypes;
 using Trail.Actions;
 using Trail.Controls;
 using Trail.Templates;
+using System.ComponentModel;
 
 namespace Trail.Columns {
     public class DirectoryColumn : ItemsColumn {
@@ -252,11 +253,14 @@ namespace Trail.Columns {
             this.ListViewControl.ContextMenuStrip = contextMenu;
 
             ToolStripItem getInfo = new ToolStripMenuItem("Get &Info") { ShortcutKeys = Keys.Control | Keys.Space };
+            ToolStripItem separator1 = new ToolStripSeparator();
             ToolStripItem openWith = new ToolStripMenuItem("&Open With");
             ToolStripItem rename = new ToolStripMenuItem("Re&name") { ShortcutKeys = Keys.F2 };
             ToolStripItem recycle = new ToolStripMenuItem("&Recycle") { ShortcutKeys = Keys.Delete };
+            ToolStripItem separator2 = new ToolStripSeparator();
             ToolStripItem selectAll = new ToolStripMenuItem("Select &All") { ShortcutKeys = Keys.Control | Keys.A };
             selectAll.Click += (_, __) => { foreach (ListViewItem item in ListViewControl.Items) item.Selected = true; };
+            ToolStripItem separator3 = new ToolStripSeparator();
             ToolStripItem newDirectory = new ToolStripMenuItem("New &Directory") {
                 ShortcutKeys = Keys.Control | Keys.Shift | Keys.N
             };
@@ -266,16 +270,28 @@ namespace Trail.Columns {
 
             contextMenu.Items.AddRange(new ToolStripItem[] { 
                 getInfo,
-                new ToolStripSeparator(),
+                separator1,
                 openWith,
                 rename,
                 recycle,
-                new ToolStripSeparator(),
+                separator2,
                 selectAll, 
-                new ToolStripSeparator(),
+                separator3,
                 newDirectory, 
                 newFile 
             });
+            contextMenu.Opening += (_, __) => {
+                foreach (ToolStripItem item in contextMenu.Items) item.Visible = true;
+
+                if (ListViewControl.SelectedItems.Count == 0) {
+                    getInfo.Visible = separator1.Visible = false;
+                    openWith.Visible = rename.Visible = recycle.Visible = separator2.Visible = false;
+                } else if (ListViewControl.SelectedItems.Count > 1) {
+                    openWith.Visible = rename.Visible = false;
+                } else if (ListViewControl.SelectedItems[0].Tag is DirectoryInfo) {
+                    openWith.Visible = false;
+                }
+            };
         }
 
         private void newDirectory_Click(object sender, EventArgs e) {
