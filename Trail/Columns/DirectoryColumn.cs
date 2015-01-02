@@ -48,13 +48,8 @@ namespace Trail.Columns {
                 foreach (DirectoryInfo dI in this.DirectoryData.GetDirectories()) {
                     token.ThrowIfCancellationRequested();
                     if (patterns.Any(x => StringHelper.MatchesPattern(dI.FullName, x))) continue;
-
-                    result.Add(new ColumnListViewItem() {
-                        SubColumn = new ColumnData(this.GetType().FullName, dI.FullName),
-                        Text = dI.Name,
-                        Tag = dI,
-                        ImageKey = ".folder"
-                    });
+                    
+                    result.Add(getExistingItem(dI.FullName));
                 }
 
                 patterns = Host.GetPreferenceList("directorycolumn.file_exclude_patterns");
@@ -63,12 +58,7 @@ namespace Trail.Columns {
                     token.ThrowIfCancellationRequested();
                     if (patterns.Any(x => StringHelper.MatchesPattern(fI.FullName, x))) continue;
 
-                    ColumnListViewItem item = new ColumnListViewItem() {
-                        Text = fI.Name,
-                        Tag = fI,
-                    };
-                    item.ImageKey = getImageKey(item);
-                    result.Add(item);
+                    result.Add(getExistingItem(fI.FullName));
                 }
 
                 watcher.Path = DirectoryData.FullName;
@@ -226,7 +216,7 @@ namespace Trail.Columns {
         }
 
         private void watcher_Created(object sender, FileSystemEventArgs e) {
-            ColumnListViewItem item = getItem(e.FullPath);
+            ColumnListViewItem item = getExistingItem(e.FullPath);
             ListViewControl.Items.Add(item);
             ListViewControl.Sort();
 
@@ -236,6 +226,8 @@ namespace Trail.Columns {
                 item.EnsureVisible();
                 item.BeginEdit();
             }
+
+            OnLoadingCompleted();
         }
 
         private void watcher_Renamed(object sender, RenamedEventArgs e) {
@@ -249,12 +241,14 @@ namespace Trail.Columns {
                 break;
             }
 
-            ColumnListViewItem item = getItem(e.FullPath);
+            ColumnListViewItem item = getExistingItem(e.FullPath);
             item.Selected = true;
 
             ListViewControl.Items.Add(item);
             ListViewControl.Sort();
             ListViewControl.EndUpdate();
+
+            OnLoadingCompleted();
         }
 
         #endregion
@@ -349,10 +343,14 @@ namespace Trail.Columns {
             if (e.Label == null) return;
             ColumnListViewItem item = ListViewControl.Items[e.Item] as ColumnListViewItem;
 
-            if (item.Tag is DirectoryInfo) {
-                Directory.Move(Path.Combine(ItemsPath, item.Text), Path.Combine(ItemsPath, e.Label));
-            } else if (item.Tag is FileInfo) {
-                File.Move(Path.Combine(ItemsPath, item.Text), Path.Combine(ItemsPath, e.Label));
+            try {
+                if (item.Tag is DirectoryInfo) {
+                    Directory.Move(Path.Combine(ItemsPath, item.Text), Path.Combine(ItemsPath, e.Label));
+                } else if (item.Tag is FileInfo) {
+                    File.Move(Path.Combine(ItemsPath, item.Text), Path.Combine(ItemsPath, e.Label));
+                }
+            } catch {
+                MessageBox.Show("There was an error renaming the item.", "Trail", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             e.CancelEdit = true;
@@ -368,7 +366,7 @@ namespace Trail.Columns {
             base.OnItemActivate(item);
         }
 
-        private ColumnListViewItem getItem(string path) {
+        private ColumnListViewItem getExistingItem(string path) {
             bool isDir = !File.Exists(path);
 
             ColumnListViewItem item = new ColumnListViewItem() {
@@ -378,7 +376,6 @@ namespace Trail.Columns {
             item.ImageKey = getImageKey(item);
             if (isDir) item.SubColumn = new ColumnData(this.GetType().FullName, (item.Tag as DirectoryInfo).FullName);
 
-            OnLoadingCompleted();
             return item;
         }
 
