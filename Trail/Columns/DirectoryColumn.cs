@@ -24,6 +24,7 @@ namespace Trail.Columns {
         public DirectoryColumn(DirectoryInfo directory, IHost host) : base(directory.FullName, host) {
             initializeContextMenu();
             this.DirectoryData = directory;
+            this.ListViewControl.LabelEdit = true;
 
             watcher.IncludeSubdirectories = false;
             watcher.EnableRaisingEvents = false;
@@ -32,10 +33,24 @@ namespace Trail.Columns {
             this.ListViewControl.ItemDrag += ListViewControl_ItemDrag;
             this.ListViewControl.DragEnter += ListViewControl_DragEnter;
             this.ListViewControl.DragDrop += ListViewControl_DragDrop;
+            this.ListViewControl.AfterLabelEdit += ListViewControl_AfterLabelEdit;
 
             watcher.Created += watcher_Created;
             watcher.Deleted += watcher_Deleted;
             watcher.Renamed += watcher_Renamed;
+        }
+
+        private void ListViewControl_AfterLabelEdit(object sender, LabelEditEventArgs e) {
+            if (e.Label == null) return;
+            ColumnListViewItem item = ListViewControl.Items[e.Item] as ColumnListViewItem;
+
+            if (item.Tag is DirectoryInfo) {
+                Directory.Move(Path.Combine(ItemsPath, item.Text), Path.Combine(ItemsPath, e.Label));
+            } else if (item.Tag is FileInfo) {
+                File.Move(Path.Combine(ItemsPath, item.Text), Path.Combine(ItemsPath, e.Label));
+            }
+
+            e.CancelEdit = true;
         }
 
         protected override List<ColumnListViewItem> loadData(CancellationToken token) {
@@ -256,6 +271,7 @@ namespace Trail.Columns {
             ToolStripItem separator1 = new ToolStripSeparator();
             ToolStripItem openWith = new ToolStripMenuItem("&Open With");
             ToolStripItem rename = new ToolStripMenuItem("Re&name") { ShortcutKeys = Keys.F2 };
+            rename.Click += rename_Click;
             ToolStripItem recycle = new ToolStripMenuItem("&Recycle") { ShortcutKeys = Keys.Delete };
             ToolStripItem separator2 = new ToolStripSeparator();
             ToolStripItem selectAll = new ToolStripMenuItem("Select &All") { ShortcutKeys = Keys.Control | Keys.A };
@@ -292,6 +308,11 @@ namespace Trail.Columns {
                     openWith.Visible = false;
                 }
             };
+        }
+
+        private void rename_Click(object sender, EventArgs e) {
+            if (ListViewControl.SelectedItems.Count != 1) return;
+            ListViewControl.SelectedItems[0].BeginEdit();
         }
 
         private void newDirectory_Click(object sender, EventArgs e) {
