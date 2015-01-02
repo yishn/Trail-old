@@ -15,8 +15,8 @@ namespace Trail.Actions {
         public bool Recycle { get; private set; }
 
         public DirectoryDeleteAction(string[] items, IHost host, bool recycle = true) : base(host) {
+            this.HeaderText = (recycle ? "Recycle" : "Delete") + " files";
             this.Items = items;
-            this.HeaderText = (recycle ? "Recycle " : "Delete ") + items.Length + " items";
             this.Recycle = recycle;
         }
 
