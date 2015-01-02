@@ -226,15 +226,7 @@ namespace Trail.Columns {
         }
 
         private void watcher_Created(object sender, FileSystemEventArgs e) {
-            bool isDir = !File.Exists(e.FullPath);
-
-            ColumnListViewItem item = new ColumnListViewItem() {
-                Text = e.Name,
-                Tag = isDir ? new DirectoryInfo(e.FullPath) as object : new FileInfo(e.FullPath) as object
-            };
-            item.ImageKey = getImageKey(item);
-            if (isDir) item.SubColumn = new ColumnData(this.GetType().FullName, (item.Tag as DirectoryInfo).FullName);
-
+            ColumnListViewItem item = getItem(e.FullPath);
             ListViewControl.Items.Add(item);
             ListViewControl.Sort();
 
@@ -244,30 +236,24 @@ namespace Trail.Columns {
                 item.EnsureVisible();
                 item.BeginEdit();
             }
-
-            OnLoadingCompleted();
         }
 
         private void watcher_Renamed(object sender, RenamedEventArgs e) {
             ListViewControl.BeginUpdate();
             bool selected = false;
 
-            foreach (ColumnListViewItem item in ListViewControl.Items) {
-                if (item.Text != e.OldName) continue;
-                selected = item.Selected;
-                item.Remove();
+            foreach (ColumnListViewItem i in ListViewControl.Items) {
+                if (i.Text != e.OldName) continue;
+                selected = i.Selected;
+                i.Remove();
                 break;
             }
 
-            watcher_Created(sender, new FileSystemEventArgs(WatcherChangeTypes.Created, DirectoryData.FullName, e.Name));
+            ColumnListViewItem item = getItem(e.FullPath);
+            item.Selected = true;
 
-            if (selected) {
-                foreach (ColumnListViewItem item in ListViewControl.Items) {
-                    if (item.Text != e.Name) continue;
-                    item.Selected = true;
-                    break;
-                }
-            }
+            ListViewControl.Items.Add(item);
+            ListViewControl.Sort();
             ListViewControl.EndUpdate();
         }
 
@@ -380,6 +366,20 @@ namespace Trail.Columns {
             Process.Start(info);
 
             base.OnItemActivate(item);
+        }
+
+        private ColumnListViewItem getItem(string path) {
+            bool isDir = !File.Exists(path);
+
+            ColumnListViewItem item = new ColumnListViewItem() {
+                Text = Path.GetFileName(path),
+                Tag = isDir ? new DirectoryInfo(path) as object : new FileInfo(path) as object
+            };
+            item.ImageKey = getImageKey(item);
+            if (isDir) item.SubColumn = new ColumnData(this.GetType().FullName, (item.Tag as DirectoryInfo).FullName);
+
+            OnLoadingCompleted();
+            return item;
         }
 
         private string getImageKey(ColumnListViewItem item) {
