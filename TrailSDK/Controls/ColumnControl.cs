@@ -22,9 +22,9 @@ namespace Trail.Controls {
         }
 
         private void ListViewControl_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e) {
-            int padding = this.Width - ListViewControl.ClientSize.Width;
-            this.Width = e.NewWidth + padding + 3;
-            (this.Parent.Parent as ColumnView).EnlargeScrollMinSize();
+            int padding = Width - ListViewControl.ClientSize.Width;
+            Width = e.NewWidth + padding + 3;
+            (Parent.Parent as ColumnView).EnlargeScrollMinSize();
         }
 
         private void ListViewControl_ClientSizeChanged(object sender, EventArgs e) {
@@ -32,12 +32,12 @@ namespace Trail.Controls {
         }
 
         public void UpdateColumnWidth() {
-            this.SuspendLayout();
+            SuspendLayout();
             ListViewControl.BeginUpdate();
             ListViewControl.Width++;
             ListViewControl.Width--;
             ListViewControl.EndUpdate();
-            this.ResumeLayout();
+            ResumeLayout();
         }
 
         #region OneItemSelected event

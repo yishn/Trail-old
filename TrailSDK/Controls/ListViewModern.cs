@@ -13,13 +13,13 @@ namespace Trail.Controls {
         public extern static int SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         public ListViewModern() {
-            var doubleBufferPropertyInfo = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            var doubleBufferPropertyInfo = GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
             doubleBufferPropertyInfo.SetValue(this, true, null);
         }
 
         protected override void CreateHandle() {
             base.CreateHandle();
-            SetWindowTheme(this.Handle, "explorer", null);
+            SetWindowTheme(Handle, "explorer", null);
         }
 
         protected override void OnSelectedIndexChanged(EventArgs e) {

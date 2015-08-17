@@ -4,52 +4,52 @@ using System.Windows.Forms;
 namespace Trail.Controls {
     public class SplitContainerModern : SplitContainer {
         public SplitContainerModern() {
-            this.MouseDown += SplitContainerModern_MouseDown;
-            this.MouseUp += SplitContainerModern_MouseUp;
-            this.MouseMove += SplitContainerModern_MouseMove;
+            MouseDown += SplitContainerModern_MouseDown;
+            MouseUp += SplitContainerModern_MouseUp;
+            MouseMove += SplitContainerModern_MouseMove;
 
-            var doubleBufferPropertyInfo = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            var doubleBufferPropertyInfo = GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
             doubleBufferPropertyInfo.SetValue(this, true, null);
         }
 
         private void SplitContainerModern_MouseDown(object sender, MouseEventArgs e) {
             // This disables the normal move behavior
-            this.IsSplitterFixed = true;
+            IsSplitterFixed = true;
         }
 
         private void SplitContainerModern_MouseUp(object sender, MouseEventArgs e) {
             // This allows the splitter to be moved normally again
-            this.IsSplitterFixed = false;
+            IsSplitterFixed = false;
         }
 
         private void SplitContainerModern_MouseMove(object sender, MouseEventArgs e) {
             // Check to make sure the splitter won't be updated by the
             // normal move behavior also
-            if (this.IsSplitterFixed) {
+            if (IsSplitterFixed) {
                 // Make sure that the button used to move the splitter
                 // is the left mouse button
                 if (e.Button.Equals(MouseButtons.Left)) {
                     // Checks to see if the splitter is aligned Vertically
-                    if (this.Orientation.Equals(Orientation.Vertical)) {
+                    if (Orientation.Equals(Orientation.Vertical)) {
                         // Only move the splitter if the mouse is within
                         // the appropriate bounds
-                        if (e.X > 0 && e.X < this.Width) {
+                        if (e.X > 0 && e.X < Width) {
                             // Move the splitter & force a visual refresh
-                            this.SplitterDistance = e.X;
-                            this.Refresh();
+                            SplitterDistance = e.X;
+                            Refresh();
                         }
                     } else {
                         // Only move the splitter if the mouse is within
                         // the appropriate bounds
-                        if (e.Y > 0 && e.Y < this.Height) {
+                        if (e.Y > 0 && e.Y < Height) {
                             // Move the splitter & force a visual refresh
-                            this.SplitterDistance = e.Y;
-                            this.Refresh();
+                            SplitterDistance = e.Y;
+                            Refresh();
                         }
                     }
                 } else {
                     // This allows the splitter to be moved normally again
-                    this.IsSplitterFixed = false;
+                    IsSplitterFixed = false;
                 }
             }
         }

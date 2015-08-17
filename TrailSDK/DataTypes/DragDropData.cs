@@ -12,8 +12,8 @@ namespace Trail.DataTypes {
         public ColumnListViewItem[] Items { get; set; }
 
         public DragDropData(ItemsColumn srcColumn, ColumnListViewItem[] items) {
-            this.SourceColumn = srcColumn;
-            this.Items = items;
+            SourceColumn = srcColumn;
+            Items = items;
         }
     }
 }

@@ -21,28 +21,28 @@ namespace Trail.Controls {
         }
 
         private void closeButton_Click(object sender, EventArgs e) {
-            this.Close();
+            Close();
         }
 
         #region Form opacity animations
 
         private void HelperForm_FormClosing(object sender, FormClosingEventArgs e) {
             if (animation.Enabled) return;
-            if (this.Opacity == 0) return;
+            if (Opacity == 0) return;
 
             // Remember DialogResult
-            DialogResult result = this.DialogResult;
+            DialogResult result = DialogResult;
 
             animation = new Animation();
             e.Cancel = true;
 
-            opacity = this.Opacity;
+            opacity = Opacity;
             animation.Tick += (_, value) => {
-                this.Opacity = opacity - (opacity * value);
+                Opacity = opacity - (opacity * value);
             };
             animation.Complete += (_, evt) => {
-                this.Close();
-                this.DialogResult = result;
+                Close();
+                DialogResult = result;
             };
             animation.Start();
         }
@@ -52,13 +52,13 @@ namespace Trail.Controls {
 
             animation = new Animation();
             animation.Start().Tick += (_, value) => {
-                this.Opacity = opacity * value;
+                Opacity = opacity * value;
             };
         }
 
         private void HelperForm_Load(object sender, EventArgs e) {
-            opacity = this.Opacity;
-            this.Opacity = 0;
+            opacity = Opacity;
+            Opacity = 0;
         }
 
         #endregion
@@ -69,7 +69,7 @@ namespace Trail.Controls {
 
         private void controlBoxLabel_MouseMove(object sender, MouseEventArgs e) {
             if (e.Button != MouseButtons.Left) return;
-            this.Location += new Size(e.Location - new Size(mouseOldPoint));
+            Location += new Size(e.Location - new Size(mouseOldPoint));
         }
 
         private void controlBoxLabel_MouseDown(object sender, MouseEventArgs e) {

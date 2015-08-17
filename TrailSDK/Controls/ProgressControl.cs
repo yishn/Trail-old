@@ -30,7 +30,7 @@ namespace Trail.Controls {
         #region Mouse Enter & Leave
 
         protected override void OnMouseLeave(EventArgs e) {
-            if (this.ClientRectangle.Contains(this.PointToClient(Control.MousePosition)))
+            if (ClientRectangle.Contains(PointToClient(Control.MousePosition)))
                 return;
             else {
                 base.OnMouseLeave(e);

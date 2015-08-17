@@ -33,26 +33,26 @@ namespace Trail.Controls {
         public Tab() {
             InitializeComponent();
 
-            var doubleBufferPropertyInfo = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            var doubleBufferPropertyInfo = GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
             doubleBufferPropertyInfo.SetValue(this, true, null);
 
             closeButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 255, 255, 255);
             closeButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);
 
-            this.TextChanged += Tab_TextChanged;
+            TextChanged += Tab_TextChanged;
         }
-        public Tab(string text) : this() { this.Text = text; }
+        public Tab(string text) : this() { Text = text; }
 
         private void Tab_TextChanged(object sender, EventArgs e) {
-            this.Width = lblText.PreferredWidth + closeButton.Width + 10;
-            lblText.Width = this.Width - closeButton.Width - 3;
-            closeButton.Left = this.Width - closeButton.Width - 3;
+            Width = lblText.PreferredWidth + closeButton.Width + 10;
+            lblText.Width = Width - closeButton.Width - 3;
+            closeButton.Left = Width - closeButton.Width - 3;
         }
 
         #region Mouse Enter & Leave
 
         protected override void OnMouseLeave(EventArgs e) {
-            if (this.ClientRectangle.Contains(this.PointToClient(Control.MousePosition)))
+            if (ClientRectangle.Contains(PointToClient(Control.MousePosition)))
                 return;
             else {
                 base.OnMouseLeave(e);

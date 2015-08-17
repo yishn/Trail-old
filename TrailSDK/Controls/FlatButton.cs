@@ -3,9 +3,9 @@
 namespace Trail.Controls {
     public class FlatButton : Button {
         public FlatButton() {
-            this.SetStyle(ControlStyles.Selectable, false);
-            this.FlatStyle = FlatStyle.Flat;
-            this.FlatAppearance.BorderSize = 0;
+            SetStyle(ControlStyles.Selectable, false);
+            FlatStyle = FlatStyle.Flat;
+            FlatAppearance.BorderSize = 0;
         }
     }
 }

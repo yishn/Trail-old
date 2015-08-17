@@ -14,7 +14,7 @@ namespace Trail.Controls {
             InitializeComponent();
         }
         public ChoiceDialog(string title, string okButton, string yesButton, string noButton, string cancelButton) : this() {
-            this.Text = title;
+            Text = title;
             this.okButton.Text = okButton;
             this.yesButton.Text = yesButton;
             this.noButton.Text = noButton;
@@ -22,7 +22,7 @@ namespace Trail.Controls {
         }
 
         public DialogResult ShowDialog(string headerText) {
-            this.headerLabel.Text = headerText;
+            headerLabel.Text = headerText;
             return base.ShowDialog();
         }
     }

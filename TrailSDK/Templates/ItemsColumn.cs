@@ -21,14 +21,14 @@ namespace Trail.Templates {
         public event EventHandler<ColumnListViewItem> ItemActivate;
 
         public ItemsColumn(string itemsPath, IHost host) {
-            this.ItemsPath = itemsPath;
-            this.HeaderText = "";
-            this.Host = host;
-            this.ListViewControl.AllowDrop = true;
+            ItemsPath = itemsPath;
+            HeaderText = "";
+            Host = host;
+            ListViewControl.AllowDrop = true;
 
-            this.ListViewControl.ItemActivate += ListViewControl_ItemActivate;
-            this.ListViewControl.DragEnter += ListViewControl_DragEnter;
-            this.ListViewControl.DragDrop += ListViewControl_DragDrop;
+            ListViewControl.ItemActivate += ListViewControl_ItemActivate;
+            ListViewControl.DragEnter += ListViewControl_DragEnter;
+            ListViewControl.DragDrop += ListViewControl_DragDrop;
         }
 
         protected abstract List<ColumnListViewItem> loadData(CancellationToken token);
@@ -54,10 +54,10 @@ namespace Trail.Templates {
         }
 
         public async void LoadItems() {
-            if (this.IsBusy) return;
+            if (IsBusy) return;
 
-            this.ShowError = false;
-            this.HeaderText = "";
+            ShowError = false;
+            HeaderText = "";
             ListViewControl.Items.Clear();
 
             try {
@@ -67,7 +67,7 @@ namespace Trail.Templates {
                     return loadData(cancellation.Token);
                 });
 
-                this.HeaderText = GetHeaderText();
+                HeaderText = GetHeaderText();
                 ListViewControl.BeginUpdate();
                 ListViewControl.Items.AddRange(result.ToArray());
                 ListViewControl.Sort();
@@ -77,11 +77,11 @@ namespace Trail.Templates {
             } catch (OperationCanceledException) {
                 // Do nothing
             } catch (ShowErrorException ex) {
-                this.ShowError = true;
-                this.ErrorText = ex.Message;
+                ShowError = true;
+                ErrorText = ex.Message;
             }
 
-            this.IsBusy = false;
+            IsBusy = false;
             OnLoadingCompleted();
         }
 
@@ -90,7 +90,7 @@ namespace Trail.Templates {
         }
 
         public ColumnData GetColumnData() {
-            return new ColumnData(this.GetType().FullName, this.ItemsPath);
+            return new ColumnData(GetType().FullName, ItemsPath);
         }
 
         #region Drag & Drop
@@ -100,7 +100,7 @@ namespace Trail.Templates {
             if (!e.Data.GetDataPresent(typeof(DragDropData))) return;
 
             DragDropData data = e.Data.GetData(typeof(DragDropData)) as DragDropData;
-            DragDropKey key = new DragDropKey(data.SourceColumn.GetType().FullName, this.GetType().FullName);
+            DragDropKey key = new DragDropKey(data.SourceColumn.GetType().FullName, GetType().FullName);
             if (!Host.DragDropHandlers.ContainsKey(key)) return;
 
             e.Effect = DragDropEffects.Copy;
@@ -111,7 +111,7 @@ namespace Trail.Templates {
             if (!e.Data.GetDataPresent(typeof(DragDropData))) return;
 
             DragDropData data = e.Data.GetData(typeof(DragDropData)) as DragDropData;
-            DragDropKey key = new DragDropKey(data.SourceColumn.GetType().FullName, this.GetType().FullName);
+            DragDropKey key = new DragDropKey(data.SourceColumn.GetType().FullName, GetType().FullName);
             DragDropAction action = Host.DragDropHandlers[key];
             action.Invoke(data.SourceColumn, this, data.Items);
         }

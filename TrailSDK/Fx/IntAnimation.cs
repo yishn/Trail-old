@@ -22,7 +22,7 @@ namespace Trail.Fx {
             if (Tick != null) Tick(this, value);
         }
 
-        public new IntAnimation Start() { return this.Start(0, 100); }
+        public new IntAnimation Start() { return Start(0, 100); }
         public IntAnimation Start(int start, int end) {
             this.start = start;
             this.end = end;

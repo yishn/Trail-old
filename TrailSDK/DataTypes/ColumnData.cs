@@ -13,8 +13,8 @@ namespace Trail.DataTypes {
         public ColumnData() { }
 
         public ColumnData(string columnType, string path) {
-            this.ColumnType = columnType;
-            this.Path = path;
+            ColumnType = columnType;
+            Path = path;
         }
     }
 }

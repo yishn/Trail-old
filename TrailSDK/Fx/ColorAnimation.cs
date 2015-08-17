@@ -28,7 +28,7 @@ namespace Trail.Fx {
             if (Tick != null) Tick(this, value);
         }
 
-        public new ColorAnimation Start() { return this.Start(Color.Black, Color.White); }
+        public new ColorAnimation Start() { return Start(Color.Black, Color.White); }
         public ColorAnimation Start(Color start, Color end) {
             this.start = start;
             this.end = end;

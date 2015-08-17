@@ -9,7 +9,7 @@ namespace Trail.Templates {
         public IHost Host { get; private set; }
 
         public ItemsAction(IHost host) {
-            this.Host = host;
+            Host = host;
         }
 
         public abstract void DoWork(IProgress<Tuple<int, string>> progress, CancellationToken token);

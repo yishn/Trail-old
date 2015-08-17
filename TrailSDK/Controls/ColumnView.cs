@@ -10,7 +10,7 @@ namespace Trail.Controls {
         private ImageList imageList;
 
         public ObservableCollection<ColumnControl> Columns { get; private set; }
-        public ColumnControl LastColumn { get { return this.Columns.Count == 0 ? null : this.Columns[this.Columns.Count - 1]; } }
+        public ColumnControl LastColumn { get { return Columns.Count == 0 ? null : Columns[Columns.Count - 1]; } }
         public ColumnControl LastFocusedColumn { get; set; }
         public int DefaultColumnWidth { get; set; }
         public IntAnimation ScrollAnimation { get; private set; }
@@ -18,7 +18,7 @@ namespace Trail.Controls {
             get { return imageList; }
             set { 
                 imageList = value;
-                foreach (ColumnControl c in this.Columns) {
+                foreach (ColumnControl c in Columns) {
                     c.ListViewControl.SmallImageList = value;
                 }
             }
@@ -27,43 +27,43 @@ namespace Trail.Controls {
         public ColumnView() {
             InitializeComponent();
 
-            this.Columns = new ObservableCollection<ColumnControl>();
-            this.ScrollAnimation = new IntAnimation();
+            Columns = new ObservableCollection<ColumnControl>();
+            ScrollAnimation = new IntAnimation();
 
-            this.Columns.CollectionChanged += Columns_CollectionChanged;
+            Columns.CollectionChanged += Columns_CollectionChanged;
         }
 
         public void ScrollToLastColumn() {
-            if (this.ScrollAnimation.Enabled) return;
-            if (this.Columns.Count == 0) return;
-               
-            this.ScrollAnimation = new IntAnimation();
+            if (ScrollAnimation.Enabled) return;
+            if (Columns.Count == 0) return;
+
+            ScrollAnimation = new IntAnimation();
 
             int start = ScrollPanel.HorizontalScroll.Value;
-            int end = this.LastColumn.Right + ScrollPanel.HorizontalScroll.Value - ScrollPanel.Width;
+            int end = LastColumn.Right + ScrollPanel.HorizontalScroll.Value - ScrollPanel.Width;
             end = Math.Max(Math.Min(end, ScrollPanel.HorizontalScroll.Maximum), start);
 
-            this.ScrollAnimation.Start(start, end).Tick += (_, value) => {
+            ScrollAnimation.Start(start, end).Tick += (_, value) => {
                 ScrollPanel.HorizontalScroll.Value = value;
             };
-            this.ScrollAnimation.Complete += (_, e) => {
+            ScrollAnimation.Complete += (_, e) => {
                 if (end != start) UpdateScrollMinSize();
             };
         }
 
         public void ScrollToFirstColumn() {
-            if (this.ScrollAnimation.Enabled) return;
-            if (this.Columns.Count == 0) return;
+            if (ScrollAnimation.Enabled) return;
+            if (Columns.Count == 0) return;
 
-            this.ScrollAnimation = new IntAnimation();
+            ScrollAnimation = new IntAnimation();
             int start = ScrollPanel.HorizontalScroll.Value;
             int end = 0;
 
-            this.ScrollAnimation.Start(start, end).Tick += (_, value) => {
+            ScrollAnimation.Start(start, end).Tick += (_, value) => {
                 ScrollPanel.HorizontalScroll.Value = value;
             };
-            this.ScrollAnimation.Complete += (_, e) => {
-                this.Columns[0].Focus();
+            ScrollAnimation.Complete += (_, e) => {
+                Columns[0].Focus();
                 UpdateScrollMinSize();
             };
         }
@@ -80,9 +80,9 @@ namespace Trail.Controls {
         private void Columns_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             if (e.Action == NotifyCollectionChangedAction.Add) {
                 foreach (ColumnControl c in e.NewItems) {
-                    c.Width = this.DefaultColumnWidth;
+                    c.Width = DefaultColumnWidth;
                     c.Dock = DockStyle.Left;
-                    c.ListViewControl.SmallImageList = this.ImageList;
+                    c.ListViewControl.SmallImageList = ImageList;
 
                     c.ListViewControl.KeyUp += (_, evt) => { ColumnControl_KeyUp(c, evt); };
                     c.ListViewControl.GotFocus += (_, evt) => { ColumnControl_GotFocus(c, evt); };
@@ -100,17 +100,17 @@ namespace Trail.Controls {
         }
 
         private void ColumnControl_GotFocus(object sender, EventArgs e) {
-            this.LastFocusedColumn = sender as ColumnControl;
+            LastFocusedColumn = sender as ColumnControl;
         }
 
         private void ColumnControl_KeyUp(ColumnControl sender, KeyEventArgs e) {
-            int i = this.Columns.IndexOf(sender);
+            int i = Columns.IndexOf(sender);
             if (i == -1) return;
 
             if (e.KeyCode == Keys.Left) {
-                this.Columns[Math.Max(i - 1, 0)].Focus();
+                Columns[Math.Max(i - 1, 0)].Focus();
             } else if (e.KeyCode == Keys.Right) {
-                this.Columns[Math.Min(i + 1, this.Columns.Count - 1)].Focus();
+                Columns[Math.Min(i + 1, Columns.Count - 1)].Focus();
             }
         }
     }

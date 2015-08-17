@@ -34,25 +34,25 @@ namespace Trail.Controls {
         public TabBar() {
             InitializeComponent();
 
-            var doubleBufferPropertyInfo = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            var doubleBufferPropertyInfo = GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
             doubleBufferPropertyInfo.SetValue(this, true, null);
 
-            this.AllowNoTabs = false;
-            this.Tabs = new ObservableCollection<Tab>();
-            this.AccentColor = Color.FromArgb(0, 122, 204);
+            AllowNoTabs = false;
+            Tabs = new ObservableCollection<Tab>();
+            AccentColor = Color.FromArgb(0, 122, 204);
             addButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 0, 0, 0);
             addButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);
             menuButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 0, 0, 0);
             menuButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(60, 0, 0, 0);
 
-            this.Tabs.CollectionChanged += Tabs_CollectionChanged;
+            Tabs.CollectionChanged += Tabs_CollectionChanged;
         }
 
         public void RearrangeTabs() {
-            this.SuspendLayout();
+            SuspendLayout();
             int left = 0;
 
-            foreach (Tab t in this.Tabs) {
+            foreach (Tab t in Tabs) {
                 t.Top = 0;
                 t.Left = left;
 
@@ -61,52 +61,54 @@ namespace Trail.Controls {
 
             pnlTabs.Width = left;
             addButton.Left = left;
-            this.ResumeLayout();
+            ResumeLayout();
         }
 
         public void RecolorTabs() {
-            this.SuspendLayout();
+            SuspendLayout();
 
-            foreach (Tab t in this.Tabs) {
-                t.BackColor = t == CurrentTab ? this.AccentColor : this.BackColor;
-                t.ForeColor = t == CurrentTab ? Color.White : this.ForeColor;
+            foreach (Tab t in Tabs) {
+                t.BackColor = t == CurrentTab ? AccentColor : BackColor;
+                t.ForeColor = t == CurrentTab ? Color.White : ForeColor;
                 t.AutoHideClose = t != CurrentTab;
             }
 
-            this.ResumeLayout();
+            ResumeLayout();
         }
 
         public bool CloseTab(Tab tab) {
-            if (!AllowNoTabs && this.Tabs.Count == 1) return false;
+            if (!AllowNoTabs && Tabs.Count == 1) return false;
             if (animation == null || !animation.Enabled) animation = new Animation();
             else return false;
 
-            int i = this.Tabs.IndexOf(tab);
+            int i = Tabs.IndexOf(tab);
             if (i == -1) return false;
 
-            if (this.Tabs.Count == 0) this.CurrentTab = null;
-            else if (this.CurrentTab == tab) this.CurrentTab = this.Tabs[i == 0 ? i + 1 : i - 1];
+            if (Tabs.Count == 0)
+                CurrentTab = null;
+            else if (CurrentTab == tab)
+                CurrentTab = Tabs[i == 0 ? i + 1 : i - 1];
 
             // Animation
-            this.Tabs[i].SendToBack();
-            this.CurrentTab.BringToFront();
+            Tabs[i].SendToBack();
+            CurrentTab.BringToFront();
             int width = pnlTabs.Width;
 
             animation.Tick += (_, value) => {
-                this.Tabs[i].Top = (int)(value * this.Tabs[i].Height);
+                Tabs[i].Top = (int)(value * Tabs[i].Height);
 
-                if (i + 1 < this.Tabs.Count)
-                    this.Tabs[i + 1].Left = this.Tabs[i].Right - (int)(value * this.Tabs[i].Width);
+                if (i + 1 < Tabs.Count)
+                    Tabs[i + 1].Left = Tabs[i].Right - (int)(value * Tabs[i].Width);
 
-                for (int j = i + 2; j < this.Tabs.Count; j++) {
-                    this.Tabs[j].Left = this.Tabs[j - 1].Right;
+                for (int j = i + 2; j < Tabs.Count; j++) {
+                    Tabs[j].Left = Tabs[j - 1].Right;
                 }
 
-                pnlTabs.Width = width - (int)(value * this.Tabs[i].Width);
+                pnlTabs.Width = width - (int)(value * Tabs[i].Width);
                 addButton.Left = pnlTabs.Right;
             };
             animation.Complete += (_, evt) => {
-                this.Tabs.RemoveAt(i);
+                Tabs.RemoveAt(i);
                 if (TabClosed != null) TabClosed(this, tab);
             };
             animation.Start();
@@ -118,7 +120,7 @@ namespace Trail.Controls {
             else return false;
 
             int width = pnlTabs.Width;
-            this.Tabs.Add(tab);
+            Tabs.Add(tab);
 
             animation.Tick += (_, value) => {
                 pnlTabs.Width = width + (int)(value * tab.Width);
@@ -169,7 +171,7 @@ namespace Trail.Controls {
 
         private void t_DragOver(object sender, DragEventArgs e) {
             if ((DateTime.Now - dragEnterTime).TotalMilliseconds < 500) return;
-            this.CurrentTab = sender as Tab;
+            CurrentTab = sender as Tab;
         }
 
         #endregion
@@ -195,37 +197,37 @@ namespace Trail.Controls {
 
             int left = 0;
             bool currentAdded = false;
-            for (int i = 0; i < this.Tabs.Count; i++) {
-                if (this.Tabs[i] == t) continue;
+            for (int i = 0; i < Tabs.Count; i++) {
+                if (Tabs[i] == t) continue;
 
-                if (!currentAdded && t.Left < left + this.Tabs[i].Width / 2) {
+                if (!currentAdded && t.Left < left + Tabs[i].Width / 2) {
                     left += t.Width;
                     newTabs.Add(t);
                     currentAdded = true;
                 }
 
-                newTabs.Add(this.Tabs[i]);
-                this.Tabs[i].Left = left;
-                left += this.Tabs[i].Width;
+                newTabs.Add(Tabs[i]);
+                Tabs[i].Left = left;
+                left += Tabs[i].Width;
             }
             if (!currentAdded) newTabs.Add(t);
 
-            for (int i = 0; i < this.Tabs.Count; i++) {
-                this.Tabs[i] = newTabs[i];
+            for (int i = 0; i < Tabs.Count; i++) {
+                Tabs[i] = newTabs[i];
             }
 
-            this.CurrentTab = t;
+            CurrentTab = t;
         }
 
         private void Tab_MouseUp(object sender, MouseEventArgs e) {
             if (e.Button != MouseButtons.Left) return;
 
             Tab t = sender as Tab;
-            int j = this.Tabs.IndexOf(t);
+            int j = Tabs.IndexOf(t);
             int left = 0;
 
             for (int i = 0; i < j; i++) {
-                left += this.Tabs[i].Width;
+                left += Tabs[i].Width;
             }
 
             animation = new IntAnimation();
@@ -248,7 +250,8 @@ namespace Trail.Controls {
         }
 
         private void Tab_MouseClick(object sender, MouseEventArgs e) {
-            if (e.Button == MouseButtons.Left) this.CurrentTab = sender as Tab; 
+            if (e.Button == MouseButtons.Left)
+                CurrentTab = sender as Tab; 
             if (e.Button == MouseButtons.Middle) CloseTab(sender as Tab);
         }
 
@@ -258,15 +261,15 @@ namespace Trail.Controls {
 
         private void Tab_MouseLeave(object sender, EventArgs e) {
             Tab t = sender as Tab;
-            if (this.CurrentTab == t) return;
-            t.BackColor = this.BackColor;
-            t.ForeColor = this.ForeColor;
+            if (CurrentTab == t) return;
+            t.BackColor = BackColor;
+            t.ForeColor = ForeColor;
         }
 
         private void Tab_MouseEnter(object sender, EventArgs e) {
             Tab t = sender as Tab;
-            if (this.CurrentTab == t) return;
-            t.BackColor = Color.FromArgb(200, this.AccentColor);
+            if (CurrentTab == t) return;
+            t.BackColor = Color.FromArgb(200, AccentColor);
             t.ForeColor = Color.White;
         }
 
@@ -286,9 +289,9 @@ namespace Trail.Controls {
             // Create tab list
             menu.Items.Clear();
 
-            foreach (Tab t in this.Tabs) {
-                ToolStripMenuItem item = new ToolStripMenuItem(t.Text, null, (_, evt) => { this.CurrentTab = t; });
-                item.Checked = this.CurrentTab == t;
+            foreach (Tab t in Tabs) {
+                ToolStripMenuItem item = new ToolStripMenuItem(t.Text, null, (_, evt) => { CurrentTab = t; });
+                item.Checked = CurrentTab == t;
                 menu.Items.Add(item);
             }
 

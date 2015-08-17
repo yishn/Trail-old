@@ -13,14 +13,14 @@ namespace Trail.Controls {
         public extern static int SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         public TreeViewModern() {
-            this.HotTracking = true;
-            var doubleBufferPropertyInfo = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            HotTracking = true;
+            var doubleBufferPropertyInfo = GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
             doubleBufferPropertyInfo.SetValue(this, true, null);
         }
 
         protected override void CreateHandle() {
             base.CreateHandle();
-            SetWindowTheme(this.Handle, "explorer", null);
+            SetWindowTheme(Handle, "explorer", null);
         }
 
         protected override void OnAfterSelect(TreeViewEventArgs e) {

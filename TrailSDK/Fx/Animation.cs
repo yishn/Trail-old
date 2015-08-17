@@ -16,11 +16,11 @@ namespace Trail.Fx {
 
         public Animation() : this(15) { }
         public Animation(int duration) {
-            this.AnimationFunction = (t) => Math.Pow(Math.Sin(Math.PI / 2 * t), 3);
+            AnimationFunction = t => Math.Pow(Math.Sin(Math.PI / 2 * t), 3);
 
-            this.Duration = duration;
-            this.Enabled = false;
-            this.Interval = 1;
+            Duration = duration;
+            Enabled = false;
+            Interval = 1;
             base.Tick += new EventHandler(Animation_Tick);
         }
 
@@ -35,7 +35,7 @@ namespace Trail.Fx {
             if (Tick != null) Tick(this, value);
 
             if (timeCounter == Duration) {
-                this.Enabled = false;
+                Enabled = false;
                 if (Complete != null) Complete(this, new EventArgs());
 
                 return;
@@ -45,20 +45,20 @@ namespace Trail.Fx {
         }
 
         public new Animation Start() {
-            if (this.Enabled) return this;
-            this.timeCounter = 0;
-            this.Enabled = true;
+            if (Enabled) return this;
+            timeCounter = 0;
+            Enabled = true;
 
             return this;
         }
 
         public new Animation Stop() {
-            this.Enabled = false;
+            Enabled = false;
             return this;
         }
 
         public Animation End() {
-            this.Stop();
+            Stop();
             if (Tick != null) Tick(this, 1.0);
             return this;
         }
