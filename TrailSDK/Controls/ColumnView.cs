@@ -47,7 +47,6 @@ namespace Trail.Controls {
                 ScrollPanel.HorizontalScroll.Value = value;
             };
             this.ScrollAnimation.Complete += (_, e) => {
-                this.LastColumn.Focus();
                 if (end != start) UpdateScrollMinSize();
             };
         }
