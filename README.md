@@ -1,8 +1,6 @@
 Trail
 =====
 
-[![Build status](https://ci.appveyor.com/api/projects/status/lj8gwu15xw2cecfu?svg=true)](https://ci.appveyor.com/project/yishn/trail)
-
 ![Trail logo](logo.png)
 
 An extendable column view file manager for Windows. This project no longer being developed.
