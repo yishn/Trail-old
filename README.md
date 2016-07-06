@@ -5,7 +5,7 @@ Trail
 
 ![Trail logo](logo.png)
 
-An extendable column view file manager for Windows. This is a work in progress.
+An extendable column view file manager for Windows. This project no longer being developed.
 
 ![Trail screenshot](screenshot.png)
 
